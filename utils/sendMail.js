@@ -16,7 +16,7 @@ const sendMail = async (email, title, otp) => {
         let info = await transporter.sendMail({
             from: "VV-Vikas",
             to:`${email}`,
-            subject:"Otp from Ed Tech Platform",
+            subject:`${title}`,
             html:  `<h1>OTP - ${otp}</h1>`
         })
         console.log(info)
@@ -24,7 +24,5 @@ const sendMail = async (email, title, otp) => {
         console.log("There is a error in sending Mail",error);
         
     }
-
-
-
 }
+module.exports=sendMail;

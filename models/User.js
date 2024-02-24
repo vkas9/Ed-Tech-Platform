@@ -44,6 +44,10 @@ const userModel = new mongoose.Schema({
     CoursesProgress: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "CourseProgress"
-    }]
+    }],
+    role:{
+        type:String,
+        enum:["Admin","Student","Instructor"]
+    }
 })
 module.exports = mongoose.model("User", userModel);
