@@ -18,7 +18,7 @@ exports.auth=async(req,res,next)=>{
             console.log(error);
             return res.status(501).json({
                 success:false,
-                message:"Invealid Token"
+                message:"Invalid Token"
             })
         }
         next();
