@@ -38,3 +38,24 @@ exports.createCourse = async (req, res) => {
 
     }
 }
+
+
+//get all course
+
+exports.getAllCourse=async(req,res)=>{
+    try {
+        const allCourse=await Course.find({});
+        console.log(allCourse);
+        return res.status(400).json({
+            success:true,
+            message:"Successfully received All Course",
+            course:allCourse
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success:false,
+            message:"Something went wrong while getting all Course"
+        })
+    }
+}
