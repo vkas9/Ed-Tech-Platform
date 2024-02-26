@@ -1,40 +1,40 @@
-const tag = require("../models/Tags");
+const catagory = require("../models/Catagory");
 
-exports.createTag = async (req, res) => {
+exports.createCatagory = async (req, res) => {
     try {
         const { name, description } = req.body;
         if (!name || !description) {
             return console.log("Please fill all detail")
         }
-        await tag.create({ Name: name, Description: description });
+        await catagory.create({ Name: name, Description: description });
         res.status(200).json({
             success: true,
-            message: "Successfully created Tag"
+            message: "Successfully created Catagory"
         })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
             success: false,
-            message: "something went wrong while creating tags"
+            message: "something went wrong while creating Catagory"
         })
     }
 }
 
-//get all tag
+//get all catagory
 
-exports.getAllTag = async (req, res) => {
+exports.getAllCatagory = async (req, res) => {
     try {
-        const allTags = await tag.find({}, { Name: true, Description: true });
+        const allCatagory= await catagory.find({}, { Name: true, Description: true });
         res.status(200).json({
             success: true,
-            allTags,
-            message: "Successfully Received all tags"
+            allCatagory,
+            message: "Successfully Received all catagory"
         })
     } catch (error) {
         console.log(error);
         return res.status(500).json({
             success: false,
-            message: "something went wrong while creating tags"
+            message: "something went wrong while creating catagory"
         })
 
     }

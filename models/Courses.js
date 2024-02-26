@@ -32,13 +32,17 @@ const CoursesSchema = new mongoose.Schema({
     Thumbnail:{
         type:String
     },
-    Tags:{
+    Catagory:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Tag",
+        ref:"Catagory",
     },
     StudentEntrolled:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"studentEntrolled",
+    }],
+    Section:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Section"
     }]
 
 
