@@ -44,7 +44,8 @@ exports.signup = async (req, res) => {
             contactNumber: null,
             Country: null,
             Gender: null,
-            about: null
+            about: null,
+            dateOfBirth:null
         })
         //creating entry in DB
 

@@ -32,10 +32,11 @@ const userModel = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Courses"
     }],
-    Profile: [{
+    Profile: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Profiles"
-    }],
+        ref: "Profiles",
+        required:true
+    },
     ProfilePicture: {
         type: String,
         required: true
