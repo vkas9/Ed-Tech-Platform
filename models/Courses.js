@@ -29,6 +29,11 @@ const CoursesSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    tag:{
+        type:String,
+        required:true
+    }
+    ,
     Thumbnail:{
         type:String
     },

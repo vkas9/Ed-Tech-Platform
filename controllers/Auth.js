@@ -122,7 +122,7 @@ exports.login=async(req,res)=>{
             })
         }
 
-        if(await bcrypt.compare(password,isregistredUser.Password)){
+        if(await bcrypt.compare(password,registredUser.Password)){
             const payload={
                 email:registredUser.Email,
                 role:registredUser.role,
