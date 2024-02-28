@@ -1,5 +1,6 @@
 const rr=require("../models/RatingReview");
 const course=require("../models/Courses");
+const { default: mongoose } = require("mongoose");
 
 
 exports.createRating=async(req,res)=>{
@@ -47,3 +48,36 @@ exports.createRating=async(req,res)=>{
 
 //get average rating
 
+exports.getAverageRating=async(req,res)=>{
+    try {
+        const{courseId}=req.body;
+        const courseDetail=await rr.aggregate([
+            {
+                $match:{
+                    course:new mongoose.Types.ObjectId(courseId),
+                },
+
+            },
+            {
+
+                $group:{
+                    _id:null,
+                    averageRating:{$avg:"$Rating"}
+                }
+            }
+        ]);
+        if(courseDetail>0){
+            return res.status(200).json({
+                success:false,
+                averageRating:courseDetail[0].averageRating
+            })
+        }
+        return res.status(200).json({
+            success:false,
+            message:"Average rating is 0, no rating givern till yet",
+            averageRating:0
+        })
+    } catch (error) {
+        
+    }
+}

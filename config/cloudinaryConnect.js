@@ -1,5 +1,5 @@
 const cloudinary=require("cloudinary");
-require("dotenv").config();
+
 
 exports.ConnectToCloudinary=()=>{
     try {
