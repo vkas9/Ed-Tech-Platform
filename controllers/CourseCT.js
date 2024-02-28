@@ -59,3 +59,46 @@ exports.getAllCourse = async (req, res) => {
         })
     }
 }
+
+
+exports.getAllCourseDetail = async (req, res) => {
+    try {
+        const { courseId } = req.body;
+        const courseDetail = await Course.findById(courseId).populate({
+            path: "Instructor",
+            populate: {
+                path: "Profile"
+            }
+        }).populate({
+            path: "Rating_N_Reviews",
+            populate: {
+                path: "user"
+            }
+        }).populate({
+            path: "Catagory",
+            populate: {
+                path: "Course"
+            }
+        }).populate("StudentEntrolled").populate("Section").exec();
+
+        if(!courseDetail){
+            return res.status(400).json({
+                success:false,
+                message:"Course not found"
+            })
+        }
+        return res.status(200).json({
+            success:true,
+            message:"Successfully Received all Course Detail",
+            courseDetail
+        })
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            success:false,
+            error:error,
+            message:"Something went wrong while getting all Course Detail"
+        })
+    }
+}

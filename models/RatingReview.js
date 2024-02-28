@@ -15,6 +15,12 @@ const RatingReviewSchema = new mongoose.Schema({
     review:{
         type:String,
         required:true
+    },
+    course:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Course",
+        required:true,
+        index:true
     }
 
 })

@@ -43,12 +43,17 @@ const CoursesSchema = new mongoose.Schema({
     },
     StudentEntrolled:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"studentEntrolled",
+        ref:"User",
+        require:true
     }],
     Section:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Section"
-    }]
+    }],
+    status:{
+        type:String,
+        enum:["Draft","Published"]
+    }
 
 
 

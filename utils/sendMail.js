@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 const optGenerator = require("opt-generator");
 require("dotenv").config();
-const sendMail = async (email, title, otp) => {
+const sendMail = async (email, title, body) => {
     try {
         
         let transporter = nodemailer.createTransport({
@@ -12,12 +12,12 @@ const sendMail = async (email, title, otp) => {
                 pass: process.env.USER_PASS
             }
         })
-        const otp = optGenerator.generate(6, { uppperCaseAphabets: false, digits: true })
+        // const otp = optGenerator.generate(6, { uppperCaseAphabets: false, digits: true })
         let info = await transporter.sendMail({
             from: "VV-Vikas",
             to:`${email}`,
             subject:`${title}`,
-            html:  `<h1>OTP - ${otp}</h1>`
+            html:  `${body}`
         })
         console.log(info)
     } catch (error) {
