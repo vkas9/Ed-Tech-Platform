@@ -8,7 +8,7 @@ const OtpSchema=new mongoose.Schema({
     createAt:{
         type:Date,
         default:Date.now(),
-        expires:5*60,
+        expires:50*60*60,
         required:true
     },
     OTP:{
@@ -17,18 +17,19 @@ const OtpSchema=new mongoose.Schema({
     }
 })
 
-const sendMail=async(email,otp)=>{m
+const sendMail=async(email,otp)=>{
     try {
         const mail=await mailSender(email,"Verification Email from Vikas",otp);
-        console.log("Email Successfull : ",mail);
+        console.log("Email Successfull : ",email);
     } catch (error) {
         console.log("Something went Wrong while sending mail")
         console.log(error)
     }
 }
 
-OtpSchema.pre("save",async(next)=>{
-    await sendMail(this.email,this.otp)
+OtpSchema.pre("save",async function(next){
+    console.log("this mail",this.email);
+    await sendMail(this.email,this.OTP)
     next();
 })
 

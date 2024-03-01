@@ -1,7 +1,7 @@
 const User = require("../models/User");
-const catagory = require("../models/Catagory");
+const Catagory = require("../models/Catagory");
 const Course = require("../models/Courses")
-const UploadImage = require("../utils/imageUploader");
+const {UploadFile} = require("../utils/fileUploader");
 
 exports.createCourse = async (req, res) => {
     try {
@@ -13,13 +13,14 @@ exports.createCourse = async (req, res) => {
                 message: "Please fill all detail of Course"
             })
         }
-        const uploadThumbnail = await UploadImage(thumbnail, { folder: "VikasFolder", resource_type: "auto" });
+        const uploadThumbnail = await UploadFile(thumbnail, { folder: "VikasFolder", resource_type: "auto" });
+        console.log("sldfkjsdlkfjsdf");
         const newCourse = await Course.create({
-            CourseName, CourseDescription, WhatYouWillLearn, Price, Catagory: catagory._id, Thumbnail: uploadThumbnail.secure_url, Instructor: req.user._id
+            CourseName, CourseDescription, WhatYouWillLearn, Price, Catagory: catagory, Thumbnail: uploadThumbnail.secure_url, Instructor: req.user.id
         })
-        const InstructorUser = await User.findByIdAndUpdate(req.user._id, { $push: { Courses: newCourse._id } }, { new: true });
+        const InstructorUser = await User.findByIdAndUpdate(req.user.id, { $push: { Courses: newCourse._id } }, { new: true });
         console.log("InstructorUser->", InstructorUser);
-        await catagory.findByIdAndUpdate({ _id: req.user._id }, { $push: { Course: newCourse._id } }, { new: true });
+        await Catagory.findByIdAndUpdate({ _id: catagory }, { $push: { Course: newCourse._id } }, { new: true });
         console.log("InstructorUser->", InstructorUser);
         res.status(200).json({
             success: true,
@@ -31,9 +32,11 @@ exports.createCourse = async (req, res) => {
 
 
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             success: false,
-            message: "somthing went wrong while creating course"
+            message: "somthing went wrong while creating course",
+            error
         })
 
     }
@@ -72,7 +75,7 @@ exports.getAllCourseDetail = async (req, res) => {
         }).populate({
             path: "Rating_N_Reviews",
             populate: {
-                path: "user"
+                path: "User"
             }
         }).populate({
             path: "Catagory",

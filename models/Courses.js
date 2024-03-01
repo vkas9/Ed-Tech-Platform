@@ -5,7 +5,7 @@ const CoursesSchema = new mongoose.Schema({
     CourseName:{
         type:String,
         required:true,
-        trim:trusted,
+        
     },
     CourseDescription:{
         type:String,
@@ -27,10 +27,6 @@ const CoursesSchema = new mongoose.Schema({
     }],
     Price:{
         type:Number,
-        required:true
-    },
-    tag:{
-        type:String,
         required:true
     }
     ,

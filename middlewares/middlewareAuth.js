@@ -1,9 +1,12 @@
 //auth
+
+const user=require("../models/User");
 const jwt=require("jsonwebtoken")
 require("dotenv").config();
 exports.auth=async(req,res,next)=>{
     try {
-        const{token}=req.cookie.token;
+        const token=req.cookies.ViToken ||req.body.token;
+        console.log("token-->",token);
         if(!token){
             return res.status(400).json({
                 success:false,
@@ -11,8 +14,8 @@ exports.auth=async(req,res,next)=>{
             })
         }
         try {
-            const decode=jwt.verify(token,process.env.SECRET_KEY);
-            console.log(decode);
+            const decode=jwt.verify(token,process.env.JWT_SECRET);
+            console.log("decode->",decode);
             req.user=decode;
         } catch (error) {
             console.log(error);
@@ -24,9 +27,11 @@ exports.auth=async(req,res,next)=>{
         next();
 
     } catch (error) {
+        console.log(error);
         return res.status(500).json({
             success:false,
-            message:"Something went wrong while verifing auth/jwt"
+            message:"Something went wrong while verifing auth/jwt",
+            error:error
         })
     }
 }
@@ -50,11 +55,12 @@ exports.isStudent=async(req,res,next)=>{
     }
 }
 
-//isIntructor
-exports.isIntructor=async(req,res,next)=>{
+//isInstructor
+exports.isInstructor=async(req,res,next)=>{
     try {
-        const {user}=req.body;
-        if(user.role!=="Instructor"){
+        const {role}=req.user;
+       
+        if(role!=="Instructor"){
             return res.status(400).json({
                 success:false,
                 message:"This is protected route for Instructor"
@@ -74,8 +80,10 @@ exports.isIntructor=async(req,res,next)=>{
 //isAdmin
 exports.isAdmin=async(req,res,next)=>{
     try {
-        const {user}=req.body;
-        if(user.role!=="Admin"){
+        const {role}=req.user;
+        console.log("role",role)
+       
+        if(role!=="Admin"){
             return res.status(400).json({
                 success:false,
                 message:"This is protected route for Admin"

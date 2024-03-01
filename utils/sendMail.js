@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const optGenerator = require("opt-generator");
+
 require("dotenv").config();
 const sendMail = async (email, title, body) => {
     try {
@@ -8,11 +8,11 @@ const sendMail = async (email, title, body) => {
         let transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
             auth: {
-                user: process.env.USER_MAIL,
-                pass: process.env.USER_PASS
+                user: "vikas.vishwakarma.cse@adgitmdelhi.ac.in",
+                pass: "eqlgvrujjhlcqjyh"
             }
         })
-        // const otp = optGenerator.generate(6, { uppperCaseAphabets: false, digits: true })
+        
         let info = await transporter.sendMail({
             from: "VV-Vikas",
             to:`${email}`,

@@ -11,8 +11,6 @@ exports.updateProfile=async(req,res)=>{
                 message:"Please fill all detail of Profile"
             })
         }
-        // const profileModel=await profile.create({City,contactNumber,Country,Gender,about,dateOfBirth});
-        // await user.findByIdAndUpdate(userId,{$push:{Profile:profileModel._id}},{new:true});
         const userDetail=await user.findById(userId);
         const profileId=userDetail.Profile;
         const profileDetail=await profile.findById(profileId);
@@ -22,11 +20,10 @@ exports.updateProfile=async(req,res)=>{
         profileDetail.Gender=Gender;
         profileDetail.about=about;
         profileDetail.City=City;
-        await profile.save(profileDetail)
+        await profileDetail.save();
         return res.status(200).json({
             success:true,
-            message:"successfully update user Profile",
-            Profile:profileModel
+            message:"successfully update user Profile"
         })
         
     } catch (error) {

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 
 const userModel = new mongoose.Schema({
+    
     FirstName: {
         type: String,
         required: true,
@@ -30,7 +31,7 @@ const userModel = new mongoose.Schema({
     },
     Courses: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Courses"
+        ref: "Course"
     }],
     Profile: {
         type: mongoose.Schema.Types.ObjectId,
@@ -49,6 +50,11 @@ const userModel = new mongoose.Schema({
     role:{
         type:String,
         enum:["Admin","Student","Instructor"]
+    },
+    Active: {
+        type: Boolean,
+        default:true
     }
+    
 })
 module.exports = mongoose.model("User", userModel);

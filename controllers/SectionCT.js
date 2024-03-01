@@ -9,14 +9,16 @@ exports.createSection=async(req,res)=>{
                 message:"Please fill all detail of Section"
             })
         }
+        
         const newSection=await section.create({SectionName:sectionName});
         await course.findByIdAndUpdate(courseId,{$push:{Section:newSection._id}},{new:true})
-        await course.
+       
         res.status(200).json({
             success:true,
             message:"Successfully created Section"
         })
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             success:false,
             message:"Something went wrong while creating Section"

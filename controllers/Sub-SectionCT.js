@@ -1,6 +1,6 @@
 const section=require("../models/Section");
 const subSection=require("../models/Sub-Section");
-const videoUpload=require("../utils/fileUploader");
+const {UploadFile}=require("../utils/fileUploader");
 exports.createSubSection=async(req,res)=>{
     try {
         const {title,timeDuration,description,sectionId}=req.body;
@@ -11,7 +11,7 @@ exports.createSubSection=async(req,res)=>{
                 message:"Please fill all detail of subSection"
             })
         }
-        const VideoFile=await videoUpload(video,{folder: "VikasFolder",resource_type:"auto"});
+        const VideoFile=await UploadFile(video,{folder: "VikasFolder",resource_type:"auto"});
         const subSectionObject=await subSection.create({title,timeDuration,description,videoURL:VideoFile.secure_url});
         await section.findByIdAndUpdate(sectionId,{$push:{subSection:subSectionObject._id}},{new:true});
         res.status(200).json({
