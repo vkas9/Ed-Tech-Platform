@@ -38,8 +38,8 @@ exports.auth=async(req,res,next)=>{
 //isStudent
 exports.isStudent=async(req,res,next)=>{
     try {
-        const {user}=req.body;
-        if(user.role!=="Student"){
+        
+        if(req.user.role!=="Student"){
             return res.status(400).json({
                 success:false,
                 message:"This is protected route for Student"

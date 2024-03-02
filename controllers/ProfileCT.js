@@ -67,7 +67,7 @@ exports.deleteAccount=async(req,res)=>{
         await profile.findByIdAndDelete({_id:userDetail.Profile});
         await user.findByIdAndDelete(id);
         return res.status(200).json({
-            success:true,
+            success:true, 
             message:"successfully Delete Account"
         })
        
