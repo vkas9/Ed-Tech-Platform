@@ -5,7 +5,7 @@ const {isAdmin,auth,isInstructor, isStudent}=require("../middlewares/middlewareA
 const {createCourse,getAllCourseDetail}=require("../controllers/CourseCT");
 const {createSection}=require("../controllers/SectionCT");
 const{createSubSection}=require("../controllers/Sub-SectionCT");
-const {createRating}=require("../controllers/RatingReviewCT");
+const {createRating,getAverageRating,getAllRating}=require("../controllers/RatingReviewCT");
 router.post("/createCatagory",auth,isAdmin,createCatagory);
 router.get("/getAllCatagory",auth,isAdmin,getAllCatagory);
 router.post("/createCourse",auth,isInstructor,createCourse);
@@ -13,5 +13,9 @@ router.get("/getAllCourseDetail",auth,isInstructor,getAllCourseDetail);
 router.post("/createSection",auth,isInstructor,createSection);
 router.post("/createSubSection",auth,isInstructor,createSubSection);
 
+
+
 router.post("/createRating",auth,isStudent,createRating);
+router.get("/getAverageRating",getAverageRating);
+router.get("/getAllRating",getAllRating);
 module.exports=router;

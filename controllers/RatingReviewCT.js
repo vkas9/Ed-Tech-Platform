@@ -51,6 +51,7 @@ exports.createRating = async (req, res) => {
 exports.getAverageRating = async (req, res) => {
     try {
         const { courseId } = req.body;
+
         const courseDetail = await rr.aggregate([
             {
                 $match: {

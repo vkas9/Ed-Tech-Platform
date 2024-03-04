@@ -8,8 +8,8 @@ const sendMail = async (email, title, body) => {
         let transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
             auth: {
-                user: "vikas.vishwakarma.cse@adgitmdelhi.ac.in",
-                pass: "eqlgvrujjhlcqjyh"
+                user: process.env.USER_MAIL,
+                pass: process.env.USER_PASS
             }
         })
         
@@ -25,4 +25,5 @@ const sendMail = async (email, title, body) => {
         
     }
 }
+
 module.exports=sendMail;

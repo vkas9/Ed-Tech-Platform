@@ -1,6 +1,14 @@
-FROM ubuntu
+FROM node
 
-RUN apt-get update
-RUN apt-get install -y curl
-RUN 
 
+
+COPY config config
+COPY controller controller
+COPY middlewares middlewares
+COPY models models
+COPY routes routes
+COPY utils utils
+COPY index.js index.js
+
+
+CMD ["node", "index.js"]
