@@ -2,41 +2,60 @@ import { useState } from "react";
 import image from "../../public/vikaslogo.png";
 import { navigation } from "../constants";
 import Button from "./Button";
-const Navbar = () => {
-  const [openNavigation, setOpenNavigation] = useState(true);
-  return (
-    <div
-      className={` justify-between flex items-center fixed top-0 left-0 backdrop-blur-sm border-b  border-gray-800  w-full`}
-    >
-      <div className="flex items-center justify-between mx-auto w-[95%] max-w-[1700px]  py-2 px-3 md:px-4 lg:px-5">
-            <a href="#" className="">
-            <img src={image} alt="VIKAS" width={150} />
-            </a>
+import { GiHamburgerMenu } from "react-icons/gi";
+import { ImCross } from "react-icons/im";
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 
-            <nav
-            className={`${
-                openNavigation ? "flex" : "hidden"
-            }  lg:flex text-xl gap-4  flex-col lg:mx-auto lg:flex-row uppercase text-gray-500 font-extrabold`}
-            >
-            {navigation.map((item) => (
-                <a
-                key={item.id}
-                href={item.url}
-                className={`${
-                    item.onlyMobile ? "hidden" : ""
-                } hover:text-white relative sm:px-1 xl:px-6 ease-in-out transition-colors duration-200`}
-                >
-                {item.title}
+
+const Navbar = () => {
+  const[openNavigation,setOpenNavigation]= useState(false);
+  const toggle=()=>{
+    if(!openNavigation){
+      enablePageScroll();
+      setOpenNavigation(true);
+    }
+    else{
+      disablePageScroll();
+      setOpenNavigation(false);
+
+    }
+  }
+  const handleClick=()=>{
+    if(!openNavigation)return;
+    enablePageScroll();
+    setOpenNavigation(!openNavigation);
+  }
+  return (
+    <div className="fixed top-0 left-0 border-b border-gray-200/20 z-10 backdrop-blur-sm w-full  ">
+      <div className="flex  items-center justify-between px-5 lg:px-7 bg-red-500  ">
+        <a href="#master" className="block w-[12rem ] xl:mr-8 ">
+          <img src={image} width={140} alt="MASTER" />
+        </a>
+        <nav className={`${openNavigation?"flex":"hidden"}  fixed top-[58px] left-0 right-0 bg-green-500  lg:static lg:flex lg:mx-auto lg:bg-transparent`}>
+          <div className=" z-2 flex flex-col items-center justify-center m-auto lg:flex-row ">
+            {
+              navigation.map((item)=>(
+                <a onClick={handleClick} className={`block relative text-md py-6 lg:px-4 px-7 uppercase lg:text-gray-500 font-bold lg:font-semibold lg:hover:text-white transition-colors duration-200 ${item.onlyMobile?"lg:hidden":""} lg:font-bold `} href={item.url} key={item.id}  >
+                  {item.title}
                 </a>
-            ))}
-            </nav>
-            <div className="flex gap-4">
-            <Button className={`hidden lg:flex`}>Sign Up</Button>
-            <Button className={`hidden lg:flex`}>Log In</Button>
-            </div>
+
+              ))
+            }
+          </div>
+          
+        </nav>
+            
+        <div className="flex gap-4 items-center py-3 ">
+          <Button className={`hidden lg:flex`}>Sign Up</Button>
+          <Button className={`hidden lg:flex`}>Log In</Button>
+          {openNavigation?<ImCross onClick={toggle} className="text-4xl hover:cursor-pointer  lg:hidden " />:<GiHamburgerMenu onClick={toggle} className="text-4xl hover:cursor-pointer  lg:hidden " />}
+        </div>
+
       </div>
+
     </div>
-  );
+    
+  )
 };
 
 export default Navbar;
