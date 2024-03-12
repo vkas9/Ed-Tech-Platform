@@ -1,15 +1,15 @@
-
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
+import Home from "./Pages/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <div className=" ">
-        <Navbar />
-        <Hero/>
-      </div>
-    </>
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
