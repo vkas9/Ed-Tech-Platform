@@ -27,11 +27,11 @@ const Navbar = () => {
   }
   return (
     <div className="fixed top-0 left-0 border-b border-gray-200/20 z-10 backdrop-blur-sm w-full  ">
-      <div className="flex  items-center justify-between px-5 lg:px-7 bg-red-500  ">
+      <div className="flex  items-center justify-between px-3 lg:px-6 lg:px-7   ">
         <a href="#master" className="block w-[12rem ] xl:mr-8 ">
           <img src={image} width={140} alt="MASTER" />
         </a>
-        <nav className={`${openNavigation?"flex":"hidden"}  fixed top-[58px] left-0 right-0 bg-green-500  lg:static lg:flex lg:mx-auto lg:bg-transparent`}>
+        <nav className={`${openNavigation?"flex":"hidden"}  fixed top-[58px] left-0 right-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}>
           <div className=" z-2 flex flex-col items-center justify-center m-auto lg:flex-row ">
             {
               navigation.map((item)=>(
@@ -48,7 +48,7 @@ const Navbar = () => {
         <div className="flex gap-4 items-center py-3 ">
           <Button className={`hidden lg:flex`}>Sign Up</Button>
           <Button className={`hidden lg:flex`}>Log In</Button>
-          {openNavigation?<ImCross onClick={toggle} className="text-4xl hover:cursor-pointer  lg:hidden " />:<GiHamburgerMenu onClick={toggle} className="text-4xl hover:cursor-pointer  lg:hidden " />}
+          {openNavigation?<ImCross onClick={toggle} className="text-3xl hover:cursor-pointer  lg:hidden " />:<GiHamburgerMenu onClick={toggle} className="text-3xl hover:cursor-pointer  lg:hidden " />}
         </div>
 
       </div>
