@@ -8,8 +8,8 @@ import Button from "../../components/Homepage/Button";
 const hero = () => {
   return (
     <div className="container mx-auto relative  text-center flex  lg:min-h-[52rem]  ">
-      <div className="  mx-auto  max-w-[85rem]  flex flex-col px-9 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[4rem]  ">
-        <h1 className="text-5xl lg:text-7xl font-bold  ">
+      <div className="  mx-auto  max-w-[85rem]  flex flex-col px-[1px] md:px-8 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[4rem]  ">
+        <h1 className="text-[45px] lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
           Empower Your Future with{" "}
           <HightlightText
             className={
@@ -24,7 +24,7 @@ const hero = () => {
             />{" "}
           </HightlightText>
         </h1>
-        <p className="max-w-[3xl] mx-auto    px-3  font-semibold lg:text-lg  ">
+        <p className="max-w-[3xl] mx-auto  text-sm text-gray-400  px-3  font-semibold lg:text-lg  ">
           Unleash the power of AI within Brainwave. Upgrade your productivity
           with Brainwave, the open AI chat app.{" "}
         </p>
@@ -32,7 +32,7 @@ const hero = () => {
           <div className=" hover:shadow-inner hover:shadow-black group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">
             <div className="flex gap-4 hover:scale-105 transition-all duration-200 items-center rounded-md px-5 py-3 ">
               <p>Become an Instructor</p>
-              <FaArrowRight size={20} />
+              <FaArrowRight size={20}  className="animate-pulse "/>
             </div>
           </div>
         </Link>
