@@ -30,8 +30,8 @@ const Navbar = () => {
         </a>
         <nav
           className={`${
-            openNavigation ? "flex" : "hidden"
-          }  fixed top-[58px] left-0  bg-black lg:static lg:flex lg:mx-auto lg:bg-transparent`}
+            openNavigation ? "flex overflow-scroll h-screen  bg-gradient-to-br from-blue-950 via-gray-950 to-black" : "hidden"
+          }  fixed top-[58px] left-0 right-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
           <div className=" z-2 flex flex-col items-center justify-center m-auto lg:flex-row ">
             {navigation.map((item) => (

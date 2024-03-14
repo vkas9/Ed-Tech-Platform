@@ -26,13 +26,13 @@ exports.signup = async (req, res) => {
         message: "All fields are required",
       });
     }
-    const existUser=await User.findOne({Email:Email});
-    console.log("existUser",existUser)
-    if(existUser){
-
-        if(existUser.Email===Email)return res.status(400).json({
-            message:"Already user Exist with this email"
-        })
+    const existUser = await User.findOne({ Email: Email });
+    console.log("existUser", existUser);
+    if (existUser) {
+      if (existUser.Email === Email)
+        return res.status(400).json({
+          message: "Already user Exist with this email",
+        });
     }
 
     if (Password !== ConfirmPassword) {
@@ -45,13 +45,12 @@ exports.signup = async (req, res) => {
       .sort({ createAt: -1 })
       .limit(1);
     console.log("recentOtp-->", recentOtp.length, otp);
-    if (recentOtp[0] === 0 || recentOtp.length===0) {
+    if (recentOtp[0] === 0 || recentOtp.length === 0) {
       return res.status(400).json({
         success: false,
         message: "OTP not found",
       });
     } else if (recentOtp[0].OTP !== otp) {
-      
       return res.status(400).json({
         success: false,
 
@@ -79,7 +78,6 @@ exports.signup = async (req, res) => {
       role,
       Profile: userProfile._id,
       ProfilePicture: `https://api.dicebear.com/5.x/initials/svg?seed=${FirstName} ${LastName}`,
-      
     });
     console.log(userDB);
     return res.status(200).json({
@@ -125,6 +123,7 @@ exports.otp = async (req, res) => {
   }
 };
 
+//log in
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -152,24 +151,21 @@ exports.login = async (req, res) => {
         expiresIn: "2hr",
       });
       const option = {
-        expires:new Date(Date.now()+3*24*60*60*1000),
-        httpOnly:true,
-        secure:true
-    }
+        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        httpOnly: true,
+        secure: true,
+      };
       res.cookie("ViToken", token, option).status(200).json({
         success: true,
         registredUser,
         token,
         message: "Successfully Logged in",
       });
-    }
-    else{
-        return res.status(403).json(
-            {
-                success: false,
-                message: "Password Incorrect"
-            }
-        )
+    } else {
+      return res.status(403).json({
+        success: false,
+        message: "Password Incorrect",
+      });
     }
   } catch (error) {
     console.log(error);
@@ -178,8 +174,10 @@ exports.login = async (req, res) => {
       message: "Something went wrong while logging",
     });
   }
-    
 };
+
+
+// change password
 exports.changePassword = async (req, res) => {
   try {
     const { oldpassword, password, ConfirmPassword } = req.body;
