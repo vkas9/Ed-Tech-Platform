@@ -7,8 +7,8 @@ import Button from "../../components/Homepage/Button";
 
 const hero = () => {
   return (
-    <div className="container mx-auto relative  text-center flex  lg:min-h-[52rem]  ">
-      <div className="  mx-auto  max-w-[85rem]  flex flex-col px-[1px] md:px-8 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[4rem]  ">
+    <div className="container mx-auto relative    text-center flex  select-none lg:min-h-[52rem]  ">
+      <div className="  mx-auto  max-w-[85rem] flex flex-col px-[1px] md:px-8 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[3rem] lg:gap-[4rem] ">
         <h1 className="text-[45px] lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
           Empower Your Future with{" "}
           <HightlightText
@@ -40,7 +40,7 @@ const hero = () => {
           <Button
             link={"/signup"}
             className={
-              " outline-none hover-none text-black bg-yellow-500 py-3 "
+              " outline-none animate-pulse shadow-xl shadow-yellow-500/30 hover-none text-black bg-yellow-500 py-3 "
             }
           >
             Learn More
@@ -48,7 +48,7 @@ const hero = () => {
           <Button
             link={"/signup"}
             className={
-              " outline-none animate-pulse bg-gray-800/40 hover:shadow-inner transition-all duration-400 hover:shadow-black  py-3"
+              " outline-none border-t border-yellow-500/30 animate-pulse bg-gray-800/40 hover:shadow-inner transition-all duration-400 hover:shadow-black  py-3"
             }
           >
             Book a Demo

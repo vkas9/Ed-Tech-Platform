@@ -16,7 +16,7 @@ const Home = () => {
       <Navbar />
       <Hero />
       <div className=" relative flex text-center flex-col gap-[4rem] mt-[8rem] lg:mt-[10em] items-center">
-        <p className="tracking-[5px] font-sans text-gray-400 font-bold text-md">
+        <p className="tracking-[5px] font-sans text-gray-400 select-none font-bold text-md">
           HELPING PEOPLE CREATE BEAUTIFUL CONTENT AT
         </p>
         <div className="flex item-center  flex-wrap flex-row gap-10 md:gap-20 justify-center  mb-5 relative text-6xl max-w-[900px]">
