@@ -47,9 +47,9 @@ const Navbar = () => {
           </div>
         </nav>
 
-        <div className="flex gap-4 items-center py-3 ">
-          <Button link={"/signup"} className={`hidden lg:flex outline-gray-800`}>Sign Up</Button>
-          <Button link={"/login"} className={`hidden lg:flex outline-gray-800`}>Log In</Button>
+        <div className="flex gap-4 font-bold items-center py-3 ">
+          <Button link={"/signup"} className={`hidden lg:flex outline-gray-800/40 py-2 `}>Sign Up</Button>
+          <Button link={"/login"} className={`hidden lg:flex outline-gray-800/40 py-2`}>Log In</Button>
           {openNavigation ? (
             <ImCross
               onClick={toggle}

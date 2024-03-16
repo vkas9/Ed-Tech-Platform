@@ -7,8 +7,8 @@ import Button from "../../components/Homepage/Button";
 
 const hero = () => {
   return (
-    <div className="container mx-auto relative    text-center flex  select-none lg:min-h-[52rem]  ">
-      <div className="  mx-auto  max-w-[85rem] flex flex-col px-[1px] md:px-8 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[3rem] lg:gap-[4rem] ">
+    <div className="container mx-auto relative text-center flex   lg:min-h-[52rem]  ">
+      <div className="  mx-auto  max-w-[85rem]  flex flex-col px-[1px] md:px-8 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[3rem] lg:gap-[4rem] ">
         <h1 className="text-[45px] lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
           Empower Your Future with{" "}
           <HightlightText
@@ -29,14 +29,14 @@ const hero = () => {
           with Brainwave, the open AI chat app.{" "}
         </p>
         <Link to={"/signup"}>
-          <div className=" hover:shadow-inner hover:shadow-black group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">
+          <div className="  group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">
             <div className="flex gap-4 hover:scale-105 transition-all duration-200 items-center rounded-md px-5 py-3 ">
               <p>Become an Instructor</p>
               <FaArrowRight size={20}  className="animate-pulse "/>
             </div>
           </div>
         </Link>
-        <div className="flex flex-col mx-auto sm:flex-row gap-5 ">
+        <div className="flex  select-none flex-col mx-auto sm:flex-row gap-5 ">
           <Button
             link={"/signup"}
             className={
@@ -48,7 +48,7 @@ const hero = () => {
           <Button
             link={"/signup"}
             className={
-              " outline-none border-t border-yellow-500/30 animate-pulse bg-gray-800/40 hover:shadow-inner transition-all duration-400 hover:shadow-black  py-3"
+              " outline-none  animate-pulse bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-3"
             }
           >
             Book a Demo

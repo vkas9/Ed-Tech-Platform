@@ -11,11 +11,11 @@ import ballon from "../../assets/baloon.png";
 
 const Home = () => {
   return (
-    <div className=" overflow-hidden bg-gradient-to-br from-blue-950 via-gray-950 to-black ">
+    <div className=" overflow-hidden bg-gradient-to-br from-blue-950 via-gray-950 to-black ">  
       {/* section 1 */}
       <Navbar />
       <Hero />
-      <div className=" relative flex text-center flex-col gap-[4rem] mt-[8rem] lg:mt-[10em] items-center">
+      <div className=" relative flex text-center  flex-col gap-[4rem] mt-[8rem] lg:mt-[10em] items-center">
         <p className="tracking-[5px] font-sans text-gray-400 select-none font-bold text-md">
           HELPING PEOPLE CREATE BEAUTIFUL CONTENT AT
         </p>
