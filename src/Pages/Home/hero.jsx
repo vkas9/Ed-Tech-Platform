@@ -13,13 +13,13 @@ const hero = () => {
           Empower Your Future with{" "}
           <HightlightText
             className={
-              "bg-gradient-to-r from-red-500 to-blue-500 text-transparent bg-clip-text relative  "
+              "bg-gradient-to-r from-red-500 via-purple-400 to-blue-500  text-transparent bg-clip-text relative  "
             }
           >
             Coding Skills{" "}
             <img
               src={curve1}
-              className=" absolute left-0 top-full lg:-mt-1 "
+              className=" absolute left-0 top-full lg:mt-1 "
               width="624"
             />{" "}
           </HightlightText>
