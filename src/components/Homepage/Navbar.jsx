@@ -23,10 +23,10 @@ const Navbar = () => {
     setOpenNavigation(!openNavigation);
   };
   return (
-    <div className="fixed  top-0  border-b border-gray-200/20 z-[100] backdrop-blur-sm w-full  ">
+    <div className="fixed  top-0 bg-gradient-to-r from-blue-950 via-blue-950/200 to-black border-b border-gray-200/20 z-[100] backdrop-blur-sm w-full  ">
       <div className="flex  mx-auto  items-center justify-between px-3  lg:px-7   ">
-        <a href="#master" className="block w-[12rem ] xl:mr-8 ">
-          <img src={image} className="lg:w-[200px] w-[140px] "  alt="MASTER" />
+        <a href="#master" className="block w-[12rem ] flex items-center  xl:mr-8 ">
+          <img src={image} className="lg:w-[200px]  w-[140px] "  alt="MASTER" />
         </a>
         <nav
           className={`${openNavigation ? "flex overflow-scroll h-screen  bg-gradient-to-br from-blue-950 via-gray-950 to-black" : "hidden"

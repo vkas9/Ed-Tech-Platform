@@ -40,7 +40,7 @@ const hero = () => {
           <Button
             link={"/signup"}
             className={
-              " outline-none animate-pulse shadow-xl shadow-yellow-500/30 hover-none text-black bg-yellow-500 py-3 "
+              " outline-none  shadow-xl shadow-yellow-500/30 hover-none text-black bg-yellow-500 py-3 "
             }
           >
             Learn More
@@ -48,7 +48,7 @@ const hero = () => {
           <Button
             link={"/signup"}
             className={
-              " outline-none  animate-pulse bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-3"
+              " outline-none   bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-3"
             }
           >
             Book a Demo
