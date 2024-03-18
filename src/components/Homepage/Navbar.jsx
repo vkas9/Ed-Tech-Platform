@@ -1,5 +1,5 @@
 import { useState } from "react";
-import image from "../../assets/vikaslogo.png";
+import image from "../../assets/master.png";
 import { navigation } from "../../constants";
 import Button from "./Button";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -26,7 +26,7 @@ const Navbar = () => {
     <div className="fixed  top-0  border-b border-gray-200/20 z-[100] backdrop-blur-sm w-full  ">
       <div className="flex  mx-auto  items-center justify-between px-3  lg:px-7   ">
         <a href="#master" className="block w-[12rem ] xl:mr-8 ">
-          <img src={image} width={140} alt="MASTER" />
+          <img src={image} className="lg:w-[200px] w-[140px] "  alt="MASTER" />
         </a>
         <nav
           className={`${openNavigation ? "flex overflow-scroll h-screen  bg-gradient-to-br from-blue-950 via-gray-950 to-black" : "hidden"

@@ -5,13 +5,18 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Poppins', 'sans-serif'],  // Add your font family here
+    etheme: {
+      extend: {
+        animation: {
+          'gradient': 'gradient 8s linear infinite',
+        },
+        keyframes: {
+          'gradient': {
+            to: { 'background-position': '200% center' },
+          }
+        }                    
       },
-    },
-  },
-  plugins: [],
+    },},
 }
 
 
