@@ -23,16 +23,16 @@ const Navbar = () => {
     setOpenNavigation(!openNavigation);
   };
   return (
-    <div className="fixed  top-0  border-b border-gray-200/20 z-[100] backdrop-blur-md w-full  ">
+    <div className="fixed h-full top-0  border-b border-gray-200/20 z-[100]  w-full  ">
       <div className="flex  mx-auto  items-center justify-between px-3  lg:px-7   ">
         <a href="#master" className="block w-[12rem ] flex items-center  xl:mr-8 ">
           <img src={image} className="lg:w-[200px]  w-[140px] "  alt="MASTER" />
         </a>
         <nav
-          className={`${openNavigation ? "flex overflow-scroll h-screen  bg-gradient-to-br from-blue-950 via-gray-950 to-black" : "hidden"
-            }  fixed top-[55px] left-0 right-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
+          className={`${openNavigation ? "flex  bg-gradient-to-br from-blue-950 via-gray-950 to-black" : "hidden"
+            }  fixed top-[55px] left-0 right-0 bottom-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
-          <div className=" z-2 flex flex-col items-center justify-center m-auto lg:flex-row ">
+          <div className=" z-2 flex flex-col text-2xl items-center justify-center m-auto lg:flex-row ">
             {navigation.map((item) => (
               <a
                 onClick={handleClick}
