@@ -23,7 +23,7 @@ const Navbar = () => {
     setOpenNavigation(!openNavigation);
   };
   return (
-    <div className={`fixed  lg:backdrop-blur-md top-0  lg:${()=>toggle()} border-b border-gray-200/20 z-[100]  w-full ${
+    <div className={`fixed  lg:backdrop-blur-md top-0   border-b border-gray-200/20 z-[100]  w-full ${
       openNavigation ? " bg-gradient-to-r from-blue-950  to-black" : " backdrop-blur-md"
     }  `}>
       <div className="flex  mx-auto  items-center justify-between px-3  lg:px-7   ">
@@ -59,7 +59,7 @@ const Navbar = () => {
                 key={item.id}
                 href={item.url}
                 onClick={handleClick}
-                className={`block relative font-bold text-2xl uppercase text-gray-500 transition-colors lg:hover:cursor-pointer ${
+                className={`block relative font-bold text-2xl uppercase text-white  transition-colors lg:hover:cursor-pointer ${
                   item.onlyMobile ? "lg:hidden" : ""
                 } px-6 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-12`}
               >

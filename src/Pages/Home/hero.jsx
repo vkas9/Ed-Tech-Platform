@@ -56,7 +56,7 @@ const hero = () => {
         </div>
       </div>
 
-      <div className=" hidden lg:flex  items-center rounded-xl overflow-hidden mx-auto absolute bottom-0 top-[73px] ">
+      <div className=" hidden lg:flex  items-center rounded-xl overflow-hidden mx-auto absolute bottom-0 top-[68px] ">
         <video
           src={video}
           muted
