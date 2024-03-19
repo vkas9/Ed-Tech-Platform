@@ -4,7 +4,7 @@ import { IoCodeSlashSharp } from "react-icons/io5";
 
 const CodeBlocks = () => {
   return (
-    <div className="container relative mx-auto  min-h-[900px] overflow-hidden  ">
+    <div className="container relative mx-auto  min-h-[900px]   ">
       <div className="tracking-[3px] max-w-[50rem] mx-auto  font-sans uppercase text-gray-400 select-none font-bold text-sm lg:text-lg mb-[5rem] lg:mb-[8rem] mt-[3rem]">
         <h2 className="text-center ">
           Unlock your coding potential with our online courses
@@ -32,7 +32,7 @@ const CodeBlocks = () => {
               />
             </p>
           </div>
-          <div className="flex mb-2  flex-col md:flex-row  items-center justify-between ">
+          <div className="flex mb-2    items-center justify-between ">
             <Button
               className={
                 "outline-none py-2 text-center text-black font-bold text-[1.4rem] bg-yellow-500"
@@ -42,7 +42,7 @@ const CodeBlocks = () => {
             </Button>
             <IoCodeSlashSharp className="   text-4xl" />
           </div>
-          <div className="h-[200px] w-[300px] bg-gradient-to-br from-blue-500 to-purple-700 rounded-full absolute -left-4 -z-10 blur-[120px] "></div>
+          <div className="h-[200px] w-[300px] bg-gradient-to-br from-blue-500 to-blue-700 rounded-full absolute -left-4 -z-10 blur-[120px] "></div>
         </div>
       </div>
     </div>
