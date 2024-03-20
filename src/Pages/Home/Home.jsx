@@ -8,6 +8,7 @@ import { SiMongodb } from "react-icons/si";
 import { IoLogoAngular } from "react-icons/io5";
 import Hero from "./hero";
 import CodeBlocks from "./CodeBlocks";
+import SkillSection from "./SkillSection";
 
 const Home = () => {
   return (
@@ -29,6 +30,7 @@ const Home = () => {
         </div>
       </div>
       <CodeBlocks />
+      <SkillSection/>
     </div>
   );
 };
