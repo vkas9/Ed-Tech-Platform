@@ -59,9 +59,9 @@ const Navbar = () => {
                 key={item.id}
                 href={item.url}
                 onClick={handleClick}
-                className={`block relative font-bold text-2xl uppercase text-white  transition-colors lg:hover:cursor-pointer ${
+                className={`block relative font-bold text-2xl uppercase text-gray-500  transition-colors lg:hover:cursor-pointer ${
                   item.onlyMobile ? "lg:hidden" : ""
-                } px-6 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-12`}
+                } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
               >
                 {item.title}
               </a>
