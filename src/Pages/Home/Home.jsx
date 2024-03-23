@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div className=" overflow-hidden bg-gradient-to-br from-blue-950 via-gray-950/100 to-black ">
       {/* section 1 */}
-      <Navbar />
+      {/* <Navbar /> */}
       <Hero />
       <div className=" relative flex text-center  flex-col gap-[4rem] mt-[8rem] lg:mt-[6em] items-center">
         <p className="tracking-[5px] font-sans uppercase text-gray-400 select-none font-bold text-lg">
