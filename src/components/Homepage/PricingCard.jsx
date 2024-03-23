@@ -5,7 +5,7 @@ const PricingCard = ({ title, price, description, className }) => {
 
         <div className="border-solid border p-4 border-gray-400/30 max-w-[25rem] rounded-2xl  ">
             <div className="flex flex-col gap-5 ">
-                <h3 className={`text-4xl text-center font-bold   ${className}`}>{title}</h3>
+                <h3 className={`text-4xl text-center font-bold  text-white ${className}`}>{title}</h3>
                 <p className=" text-md text-center text-gray-300 font-semibold ">{description}</p>
             </div>
 
