@@ -19,11 +19,11 @@ const Cards=({head})=>{
                 "outline-none py-2 text-center text-black font-bold text-[1.4rem] bg-yellow-500"
               }
             >
-              Expore More
+              Explore More
             </Button>
             <IoCodeSlashSharp className="   text-4xl" />
           </div>
-          <div className="h-[200px] w-[400px] rounded-full absolute -left-4 opacity-60 -top-4 -z-10 lg:blur-[70px] blur-[40px] "><img src={gradient} alt="" /></div>
+{/*           <div className="h-[200px] w-[400px] rounded-full absolute -left-4 opacity-60 -top-4 -z-10 lg:blur-[70px] blur-[40px] "><img src={gradient} alt="" /></div> */}
         </div>
     );
 }
