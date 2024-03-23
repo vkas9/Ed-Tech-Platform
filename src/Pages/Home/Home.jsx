@@ -9,6 +9,8 @@ import { IoLogoAngular } from "react-icons/io5";
 import Hero from "./hero";
 import CodeBlocks from "./CodeBlocks";
 import SkillSection from "./SkillSection";
+import Pricing from "./Pricing"
+
 
 const Home = () => {
   return (
@@ -31,6 +33,7 @@ const Home = () => {
       </div>
       <CodeBlocks />
       <SkillSection/>
+      <Pricing/>
     </div>
   );
 };
