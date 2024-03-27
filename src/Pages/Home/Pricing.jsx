@@ -1,9 +1,6 @@
 import PricingCard from "../../components/Homepage/PricingCard";
 import HightlightText from "../../components/Homepage/HightlightText";
 
-
-
-
 const Pricing = () => {
   return <div className="container relative mx-auto  mt-[6rem] px-2 mb-5 lg:px-4 lg:mt-[8rem] ">
         <div className="max-w-[1100px] w-full  mx-auto">
