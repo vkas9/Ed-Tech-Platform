@@ -24,12 +24,12 @@ const Home = () => {
           Learn new skills. Prove your potential.
         </p>
         <div className="flex item-center  flex-wrap flex-row gap-10 md:gap-20 justify-center  mb-5 relative  text-6xl lg:text-8xl max-w-[1200px]">
-          <IoLogoNodejs className="hover:scale-125 hover:text-[#80B307] transition-all duration-300" />
-          <FaReact className="hover:scale-125 hover:text-[#5CC5E1] transition-all duration-300" />
-          <SiTailwindcss className="hover:scale-125 hover:text-[#32AADF] transition-all duration-300" />
-          <SiMongodb className="hover:scale-125 hover:text-[#4C9B40] transition-all duration-300" />
-          <IoLogoAngular className="hover:scale-125 hover:text-[#C0002A] transition-all duration-300" />
-          <DiRedis className="hover:scale-125 hover:text-[#d13530] transition-all duration-300" />
+          <IoLogoNodejs className="active:scale-125 active:text-[#80B307] md:active:scale-125 md:active:text-[#80B307] transition-all duration-300" />
+          <FaReact className="active:scale-125 active:text-[#5CC5E1] md:active:scale-125 md:active:text-[#5CC5E1] transition-all duration-300" />
+          <SiTailwindcss className="active:scale-125 active:text-[#32AADF] md:active:scale-125 md:active:text-[#32AADF] transition-all duration-300" />
+          <SiMongodb className="active:scale-125 active:text-[#4C9B40] md:active:scale-125 md:active:text-[#4C9B40] transition-all duration-300" />
+          <IoLogoAngular className="active:scale-125 active:text-[#C0002A] md:active:scale-125 md:active:text-[#C0002A] transition-all duration-300" />
+          <DiRedis className="active:scale-125 active:text-[#d13530] md:active:scale-125 md:active:text-[#d13530] transition-all duration-300" />
         </div>
       </div>
       <CodeBlocks />
