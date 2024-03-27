@@ -50,7 +50,7 @@ const PricingCard = ({ title, price, description, className }) => {
             </div>
             <div className="mt-[4rem] ">
                 <div className=" text-5xl lg:text-6xl font-bold "><span className="text-4xl">₹</span>{price}</div>
-                <div className="w-full text-center text-black bg-white rounded-full py-3 mt-8 text-3xl font-bold hover:cursor-pointer active:text-green-950 hover:text-green-950 transition-all duration-200 active:bg-green-500 hover:bg-green-500 ">
+                <div className="w-full text-center text-black bg-white rounded-full py-3 mt-8 text-3xl font-bold hover:cursor-pointer active:text-green-900 active:bg-green-500 lg:hover:text-green-900 lg:hover:bg-green-500  transition-all duration-200  ">
                     <span>Enroll Now</span>
                 </div>
 
