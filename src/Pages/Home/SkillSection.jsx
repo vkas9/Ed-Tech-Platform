@@ -33,8 +33,9 @@ const SkillSection = () => {
                 <Button className={"outline-none bg-yellow-500 py-3 px-5 text-black font-semibold"} > Learn more</Button>
             </div>
             
-            <div className=" hidden md:flex rounded-md">
+            <div className=" hidden md:flex relative rounded-md">
                 <img src={techimage} className="rounded-md opacity-80 overflow-hidden absolute lg:static top-0 left-0 z-1   " alt="" />
+                <div className="h-full w-full absolute top-0 -left-[20px] bg-gradient-to-r from-[#030610] to-transparent"></div>
             </div>
         </div>
     );
