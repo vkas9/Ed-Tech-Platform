@@ -6,6 +6,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { Link, matchPath, useLocation } from "react-router-dom";
+import { IoIosArrowDown } from "react-icons/io";
+
 
 const Navbar = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
@@ -39,24 +41,7 @@ const Navbar = () => {
         <Link to="/" className="block w-[12rem ] flex items-center  xl:mr-8 ">
           <img src={image} className="lg:w-[200px]  w-[140px] " alt="MASTER" />
         </Link>
-        {/* <nav
-          className={`${openNavigation ? "flex  " : "hidden"
-            }  fixed top-[55px] left-0 right-0 bottom-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
-        >
-          <div className=" z-2 flex flex-col text-2xl items-center justify-center m-auto lg:flex-row ">
-            {navigation.map((item) => (
-              <a
-                onClick={handleClick}
-                className={`block relative text-md py-6 lg:px-4 px-7 uppercase lg:text-gray-500 font-bold lg:font-semibold lg:hover:text-white transition-colors duration-200 ${item.onlyMobile ? "lg:hidden" : ""
-                  } lg:font-bold `}
-                href={item.url}
-                key={item.id}
-              >
-                {item.title}
-              </a>
-            ))}
-          </div>
-        </nav> */}
+        
         <nav
           className={`${
             openNavigation
