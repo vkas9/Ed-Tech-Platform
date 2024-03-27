@@ -9,40 +9,40 @@ const PricingCard = ({ title, price, description, className }) => {
                 <p className=" text-md text-center text-gray-300 font-semibold ">{description}</p>
             </div>
 
-            <div className=" mt-9 flex flex-col gap-4 font-semibold bg-red px-1">
-                <div className="min-h-[2px] bg-gray-500/40 rounded-full  "> </div>
-                <div className=" flex items-center gap-3 ">
+            <div className=" mt-10 flex flex-col font-semibold bg-red px-1">
+                
+                <div className=" border-t-[1px] border-gray-300/30  min-h-[50px] py-4  flex items-center gap-3 ">
                     <GoCheckCircleFill className="min-w-[40px] text-2xl " />
                     <p>You will Learn Indepth Knowledge on fronted-Backend Technologies</p>
 
                 </div>
 
-                <div className="min-h-[2px] bg-gray-500/40 rounded-full  "> </div>
-                <div className=" flex items-center gap-3 ">
+                
+                <div className="  border-t-[1px] border-gray-300/30  min-h-[50px] py-4  flex items-center gap-3 ">
                     <GoCheckCircleFill className="min-w-[40px] text-2xl " />
                     <p>10+ Mega Projects</p>
 
                 </div>
-                <div className="min-h-[2px] bg-gray-500/40 rounded-full  "> </div>
-                <div className=" flex items-center gap-3 ">
+                
+                <div className="  border-t-[1px] border-gray-300/30  min-h-[50px] py-4  flex items-center gap-3 ">
                     <GoCheckCircleFill className="min-w-[40px] text-2xl " />
                     <p>Lifetime access</p>
 
                 </div>
-                <div className="min-h-[2px] bg-gray-500/40 rounded-full  "> </div>
-                <div className=" flex items-center gap-3 ">
+                
+                <div className=" border-t-[1px] border-gray-300/30  min-h-[50px] py-4  flex items-center gap-3 ">
                     <GoCheckCircleFill className="min-w-[40px] text-2xl " />
                     <p>30-day money-back guarantee</p>
 
                 </div>
-                <div className="min-h-[2px] bg-gray-500/40 rounded-full  "> </div>
-                <div className=" flex items-center gap-3 ">
+                
+                <div className=" border-t-[1px] border-gray-300/30  min-h-[50px] py-4  flex items-center gap-3 ">
                     <GoCheckCircleFill className="min-w-[40px] text-2xl " />
                     <p>Completion Certificate</p>
 
                 </div>
-                <div className="min-h-[2px] bg-gray-500/40 rounded-full  "> </div>
-                <div className=" flex items-center gap-3 ">
+                
+                <div className=" border-t-[1px] border-gray-300/30  min-h-[50px] py-4  flex items-center gap-3 ">
                     <GoCheckCircleFill className="min-w-[40px] text-2xl " />
                     <p>Access to GitHub Reposit</p>
 
