@@ -9,12 +9,13 @@ const hero = () => {
   return (
     <div className="container mx-auto relative text-center flex   lg:min-h-[52rem]  ">
       <div className="  mx-auto  max-w-[85rem]  flex flex-col px-[1px] md:px-8 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[3rem] lg:gap-[4rem] ">
-        <h1 className="text-[45px] lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
+        <h1 className="text-[45px] relative md:text-6xl  lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
           Empower Your Future with{" "}
           <HightlightText
             className={
               "bg-gradient-to-r from-red-500 via-purple-400 to-blue-500  text-transparent bg-clip-text relative  "
             }
+
           >
             Coding Skills{" "}
             <img
@@ -23,6 +24,8 @@ const hero = () => {
               width="624"
             />{" "}
           </HightlightText>
+
+          <div className="w-[300px] lg:hidden  absolute top-0 left-0 -z-[100] h-[120px] bg-gradient-to-br opacity-70 from-red-700 to-blue-700 rounded-full blur-2xl "></div>
         </h1>
         <p className="max-w-[3xl] mx-auto  text-sm text-gray-400  px-3  font-semibold lg:text-lg  ">
           Unleash the power of AI within Brainwave. Upgrade your productivity
