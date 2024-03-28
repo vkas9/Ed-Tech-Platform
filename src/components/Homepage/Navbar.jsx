@@ -11,16 +11,16 @@ import { useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
 import ProfileDropDown from "./ProfileDropDown";
 
-const subLinks=[
+const subLinks = [
   {
-    title:"Python",
-    link:"/learn/python"
+    title: "Python",
+    link: "/learn/python",
   },
   {
-    title:"Web Dev",
-    link:"/learn/web-dev"
-  }
-]
+    title: "Web Dev",
+    link: "/learn/web-dev",
+  },
+];
 
 const Navbar = () => {
   const { token } = useSelector((store) => store.auth);
@@ -68,45 +68,46 @@ const Navbar = () => {
           <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
             {navigation.map((item) => (
               <>
-
-              {
-                item.title==="Learn"?(
-                  <div className={`flex   items-center gap-2  relative font-bold text-2xl uppercase ${
-                    Route(item.url) ? "text-white" : "text-gray-500"
-                  }   transition-colors lg:hover:cursor-pointer ${
-                    item.onlyMobile ? "lg:hidden" : ""
-                  } px-2 py-6 md:py-4  lg:text-xl lg:font-bold group lg:leading-5 lg:hover:text-white xl:px-6  `}>
+                {item.title === "Learn" ? (
+                  <div
+                    className={`flex   items-center gap-2  relative font-bold text-2xl uppercase ${
+                      Route(item.url) ? "text-white" : "text-gray-500"
+                    }   transition-colors lg:hover:cursor-pointer ${
+                      item.onlyMobile ? "lg:hidden" : ""
+                    } px-2 py-6 md:py-4  lg:text-xl lg:font-bold group lg:leading-5 lg:hover:text-white xl:px-6  `}
+                  >
                     <p>{item.title}</p>
-                    <IoIosArrowDown/>
-                    <div className="z-[200] invisible group-hover:visible flex flex-col rounded-xl backdrop-blur-lg bg-white/80 -bottom-[85px] -right-[70px] transition-opacity opacity-0 group-hover:opacity-100 gap-4 py-4 duration-400  w-[200px]  absolute text-center ">
-                      {
-                        subLinks.length?(
-                          subLinks.map((item)=>(
-                            <Link key={item.title} to={item.link}  onClick={handleClick}>
+                    <IoIosArrowDown />
+                    <div className="z-[200] select-none invisible group-hover:visible flex flex-col rounded-xl backdrop-blur-lg bg-white/70 -bottom-[115px] -right-[40px] transition-opacity opacity-0 group-hover:opacity-100 gap-4 py-4 duration-400  w-[250px]  absolute text-center ">
+                      {subLinks.length
+                        ? subLinks.map((item) => (
+                            <Link
+                              key={item.title}
+                              to={item.link}
+                              className="bg-gray-500/30 hover:bg-gray-500 rounded-md py-2 mx-2"
+                              onClick={handleClick}
+                            >
                               <p className="text-black">{item.title}</p>
                             </Link>
-
                           ))
-                        ):null
-                      }
-
+                        : null}
                     </div>
                   </div>
-                ):(<Link
-                  key={item.id}
-                to={item.url}
-                onClick={handleClick}
-                className={`block relative font-bold text-2xl uppercase ${
-                  Route(item.url) ? "text-white" : "text-gray-500"
-                }   transition-colors lg:hover:cursor-pointer ${
-                  item.onlyMobile ? "lg:hidden" : ""
-                } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
-                >
-                {item.title}
-              </Link>)
-              }
+                ) : (
+                  <Link
+                    key={item.id}
+                    to={item.url}
+                    onClick={handleClick}
+                    className={`block relative font-bold text-2xl uppercase ${
+                      Route(item.url) ? "text-white" : "text-gray-500"
+                    }   transition-colors lg:hover:cursor-pointer ${
+                      item.onlyMobile ? "lg:hidden" : ""
+                    } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
+                  >
+                    {item.title}
+                  </Link>
+                )}
               </>
-              
             ))}
           </div>
         </nav>
