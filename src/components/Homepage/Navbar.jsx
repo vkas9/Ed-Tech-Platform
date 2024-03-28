@@ -82,7 +82,7 @@ const Navbar = () => {
                       {
                         subLinks.length?(
                           subLinks.map((item)=>(
-                            <Link key={item.title} to={item.link}>
+                            <Link key={item.title} to={item.link}  onClick={handleClick}>
                               <p className="text-black">{item.title}</p>
                             </Link>
 
