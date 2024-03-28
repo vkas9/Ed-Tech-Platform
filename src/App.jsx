@@ -5,7 +5,7 @@ import Footer from "./Pages/Home/Footer";
 
 function App() {
   return (
-    <div  >
+    <div  className="bg-gradient-to-br from-blue-950 via-gray-950/100 to-black ">
 
       <Router>
         <Navbar />

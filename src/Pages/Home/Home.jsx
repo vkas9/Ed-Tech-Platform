@@ -15,7 +15,7 @@ import Footer from "./Footer";
 
 const Home = () => {
   return (
-    <div className=" overflow-hidden bg-gradient-to-br from-blue-950 via-gray-950/100 to-black ">
+    <div className=" overflow-hidden  ">
       {/* section 1 */}
       {/* <Navbar /> */}
       <Hero />
