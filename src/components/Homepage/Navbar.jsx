@@ -7,14 +7,19 @@ import { ImCross } from "react-icons/im";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
-
+import { useSelector } from "react-redux";
+import { FaCartShopping } from "react-icons/fa6";
+import ProfileDropDown from "./ProfileDropDown";
 
 const Navbar = () => {
+  const { token } = useSelector((store) => store.auth);
+  const { user } = useSelector((store) => store.profile);
+  const { totalItems } = useSelector((store) => store.card);
   const [openNavigation, setOpenNavigation] = useState(false);
   const location = useLocation();
-  const Route=(route)=>{
-     return matchPath({path:route},location.pathname)
-  }
+  const Route = (route) => {
+    return matchPath({ path: route }, location.pathname);
+  };
   const toggle = () => {
     if (!openNavigation) {
       disablePageScroll();
@@ -37,11 +42,11 @@ const Navbar = () => {
           : " backdrop-blur-md"
       }  `}
     >
-      <div className="flex  mx-auto  items-center justify-between px-3  lg:px-7   ">
+      <div className="flex  mx-auto  items-center min-h-[68px] justify-between px-3  lg:px-7   ">
         <Link to="/" className="block w-[12rem ] flex items-center  xl:mr-8 ">
           <img src={image} className="lg:w-[200px]  w-[140px] " alt="MASTER" />
         </Link>
-        
+
         <nav
           className={`${
             openNavigation
@@ -55,7 +60,9 @@ const Navbar = () => {
                 key={item.id}
                 to={item.url}
                 onClick={handleClick}
-                className={`block relative font-bold text-2xl uppercase ${Route(item.url)?"text-white":"text-gray-500"}   transition-colors lg:hover:cursor-pointer ${
+                className={`block relative font-bold text-2xl uppercase ${
+                  Route(item.url) ? "text-white" : "text-gray-500"
+                }   transition-colors lg:hover:cursor-pointer ${
                   item.onlyMobile ? "lg:hidden" : ""
                 } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
               >
@@ -64,31 +71,45 @@ const Navbar = () => {
             ))}
           </div>
         </nav>
-
-        <div className="flex gap-4 font-bold items-center py-3 ">
-          <Button
-            link={"/signup"}
-            className={`hidden lg:flex outline-gray-800/40 py-2 `}
-          >
-            Sign Up
-          </Button>
-          <Button
-            link={"/login"}
-            className={`hidden lg:flex outline-gray-800/40 py-2`}
-          >
-            Log In
-          </Button>
-          {openNavigation ? (
-            <ImCross
-              onClick={toggle}
-              className="text-3xl hover:cursor-pointer  lg:hidden "
-            />
-          ) : (
-            <GiHamburgerMenu
-              onClick={toggle}
-              className="text-3xl hover:cursor-pointer  lg:hidden "
-            />
+        <div className="flex gap-6  items-center ">
+          {user && user?.accountType != "Instructor" && (
+            <Link to="/dashboard/card" className="relative ">
+              <FaCartShopping size={20} />
+              {totalItems > 0 ? (
+                <span className="absolute -top-[10px] -right-[10px] ">
+                  {totalItems}
+                </span>
+              ) : null}
+            </Link>
           )}
+          {token === null ? (
+            <div className="flex gap-4 font-bold items-center py-3 ">
+              <Button
+                link={"/signup"}
+                className={`hidden lg:flex outline-gray-800/40 py-2 `}
+              >
+                Sign Up
+              </Button>
+              <Button
+                link={"/login"}
+                className={`hidden lg:flex outline-gray-800/40 py-2`}
+              >
+                Log In
+              </Button>
+              {openNavigation ? (
+                <ImCross
+                  onClick={toggle}
+                  className="text-3xl hover:cursor-pointer  lg:hidden "
+                />
+              ) : (
+                <GiHamburgerMenu
+                  onClick={toggle}
+                  className="text-3xl hover:cursor-pointer  lg:hidden "
+                />
+              )}
+            </div>
+          ) : null}
+          {token !== null ? <ProfileDropDown /> : null}
         </div>
       </div>
     </div>
