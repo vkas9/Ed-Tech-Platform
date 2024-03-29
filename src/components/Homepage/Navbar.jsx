@@ -76,15 +76,15 @@ const Navbar = () => {
                       item.onlyMobile ? "lg:hidden" : ""
                     } px-2 py-6 md:py-4  lg:text-xl lg:font-bold group lg:leading-5 lg:hover:text-white xl:px-6  `}
                   >
-                    <p>{item.title}</p>
+                    <p className="select-none">{item.title}</p>
                     <IoIosArrowDown />
-                    <div className="z-[200] select-none invisible group-hover:visible flex flex-col rounded-xl backdrop-blur-lg bg-white/70 -bottom-[115px] -right-[40px] transition-opacity opacity-0 group-hover:opacity-100 gap-4 py-4 duration-400  w-[250px]  absolute text-center ">
+                    <div className="z-[200]  invisible group-hover:visible flex flex-col rounded-xl backdrop-blur-lg bg-white -bottom-[115px] -right-[40px] transition-opacity opacity-0 group-hover:opacity-100 gap-4 py-4 duration-400  w-[250px]  absolute text-center ">
                       {subLinks.length
                         ? subLinks.map((item) => (
                             <Link
                               key={item.title}
                               to={item.link}
-                              className="bg-gray-500/30 hover:bg-gray-500 rounded-md py-2 mx-2"
+                              className="bg-gray-500/30 hover:bg-gray-500/60 rounded-md py-2 mx-2"
                               onClick={handleClick}
                             >
                               <p className="text-black">{item.title}</p>
