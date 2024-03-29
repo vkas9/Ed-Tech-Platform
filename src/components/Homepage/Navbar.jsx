@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import image from "../../assets/master.png";
 import { navigation } from "../../constants";
 import Button from "./Button";
@@ -10,19 +10,23 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
 import ProfileDropDown from "./ProfileDropDown";
+import axios from "axios";
 
-const subLinks = [
-  {
-    title: "Python",
-    link: "/learn/python",
-  },
-  {
-    title: "Web Dev",
-    link: "/learn/web-dev",
-  },
-];
 
 const Navbar = () => {
+  const[catagory,setCatagory]=useState([]);
+  useEffect(()=>{
+    axios.get("/api/v1/course/getAllCatagory")
+    .then(res=>{
+      setCatagory(res.data.allCatagory);
+      console.log("catagory->",catagory[0].link);
+      
+      
+    }).catch(error=>{
+      console.log(error);
+    })
+  },[])
+
   const { token } = useSelector((store) => store.auth);
   const { user } = useSelector((store) => store.profile);
   const { totalItems } = useSelector((store) => store.card);
@@ -79,15 +83,15 @@ const Navbar = () => {
                     <p className="select-none">{item.title}</p>
                     <IoIosArrowDown />
                     <div className="z-[200]  invisible group-hover:visible flex flex-col rounded-xl backdrop-blur-lg bg-white -bottom-[115px] -right-[40px] transition-opacity opacity-0 group-hover:opacity-100 gap-4 py-4 duration-400  w-[250px]  absolute text-center ">
-                      {subLinks.length
-                        ? subLinks.map((item) => (
+                      {catagory.length
+                        ? catagory.map((item) => (
                             <Link
-                              key={item.title}
+                              key={item.name}
                               to={item.link}
                               className="bg-gray-500/30 hover:bg-gray-500/60 rounded-md py-2 mx-2"
                               onClick={handleClick}
                             >
-                              <p className="text-black">{item.title}</p>
+                              <p className="text-black">{item.name}</p>
                             </Link>
                           ))
                         : null}

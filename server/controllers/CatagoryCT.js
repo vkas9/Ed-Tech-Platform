@@ -2,14 +2,15 @@ const catagory = require("../models/Catagory");
 
 exports.createCatagory = async (req, res) => {
     try {
-        const { name, description } = req.body;
-        if (!name || !description) {
+        const { name, description,link } = req.body;
+        if (!name || !description|| !link) {
             return console.log("Please fill all detail")
         }
-        await catagory.create({ name,description });
+        await catagory.create({ name,description,link });
         res.status(200).json({
             success: true,
-            message: "Successfully created Catagory"
+            message: "Successfully created Catagory",
+
         })
     } catch (error) {
         console.log(error);
@@ -24,7 +25,7 @@ exports.createCatagory = async (req, res) => {
 
 exports.getAllCatagory = async (req, res) => {
     try {
-        const allCatagory= await catagory.find({}, { name: true, description: true });
+        const allCatagory= await catagory.find({}, { name: true, description: true ,link:true});
         res.status(200).json({
             success: true,
             allCatagory,

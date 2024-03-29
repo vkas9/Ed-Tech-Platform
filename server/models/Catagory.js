@@ -11,6 +11,10 @@ const CatagorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    link:{
+        type:String,
+        require:true
+    },
     Course: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Course"
