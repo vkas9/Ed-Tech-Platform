@@ -126,13 +126,13 @@ const Navbar = () => {
             <div className="flex gap-4 font-bold items-center py-3 ">
               <Button
                 link={"/signup"}
-                className={`hidden lg:flex outline-gray-800/40 py-2 `}
+                className={`hidden lg:flex border outline-none border-gray-500 lg:hover:bg-white lg:active:bg-gray-300  lg:hover:text-black py-2 `}
               >
                 Sign Up
               </Button>
               <Button
                 link={"/login"}
-                className={`hidden lg:flex outline-gray-800/40 py-2`}
+                className={`hidden lg:flex outline-none border border-gray-500 lg:hover:bg-white lg:active:bg-gray-300 lg:hover:text-black py-2`}
               >
                 Log In
               </Button>
