@@ -1,5 +1,6 @@
 import curve1 from "../../assets/curve1.png";
 import g2 from "../../assets/g2.png";
+import ud from "../../assets/UD.png";
 import video from "../../assets/video.mp4";
 import HightlightText from "../../components/Homepage/HightlightText";
 import { Link } from "react-router-dom";
@@ -27,7 +28,8 @@ const hero = () => {
             />{" "}
           </HightlightText>
 
-          <div className="max-w-[600px] lg:hidden  opacity-50 absolute top-0 right-0  -z-[100] h-[220px]   rounded-full blur-2xl "><img src={g2} alt="" /></div>
+          <div className="max-w-[600px] lg:hidden  opacity-100 absolute top-0 right-0  -z-[100] h-[220px]   rounded-full blur-2xl "><img src={ud} alt="" /></div>
+          <div className="max-w-[600px] lg:hidden  opacity-20 absolute top-0 right-0  -z-[100] h-[220px]   rounded-full blur-2xl "><img src={g2} alt="" /></div>
         </h1>
         <p className="max-w-[3xl] mx-auto  text-sm text-gray-400  px-3  font-semibold lg:text-lg  ">
           Unleash the power of AI within Brainwave. Upgrade your productivity
