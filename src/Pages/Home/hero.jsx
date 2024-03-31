@@ -28,7 +28,7 @@ const hero = () => {
             />{" "}
           </HightlightText>
 
-          <div className="max-w-[600px] lg:hidden  opacity-100 absolute top-0 right-0  -z-[100] h-[220px]   rounded-full blur-2xl "><img src={ud} alt="" /></div>
+          <div className="max-w-[600px] lg:hidden  opacity-100 absolute top-0 right-0  -z-[100] h-[220px]   rounded-full blur-xl "><img src={ud} alt="" /></div>
           <div className="max-w-[600px] lg:hidden  opacity-20 absolute top-0 right-0  -z-[100] h-[220px]   rounded-full blur-2xl "><img src={g2} alt="" /></div>
         </h1>
         <p className="max-w-[3xl] mx-auto  text-sm text-gray-400  px-3  font-semibold lg:text-lg  ">
