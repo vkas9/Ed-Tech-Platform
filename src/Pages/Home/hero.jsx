@@ -1,9 +1,11 @@
 import curve1 from "../../assets/curve1.png";
+import g2 from "../../assets/g2.png";
 import video from "../../assets/video.mp4";
 import HightlightText from "../../components/Homepage/HightlightText";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
 import Button from "../../components/Homepage/Button";
+
 
 const hero = () => {
   return (
@@ -25,7 +27,7 @@ const hero = () => {
             />{" "}
           </HightlightText>
 
-          <div className="w-[300px] lg:hidden  absolute top-0 left-0 -z-[100] h-[120px] bg-gradient-to-br opacity-70 from-red-700 to-blue-700 rounded-full blur-2xl "></div>
+          <div className="max-w-[600px] lg:hidden  opacity-50 absolute top-0 right-0  -z-[100] h-[220px]   rounded-full blur-2xl "><img src={g2} alt="" /></div>
         </h1>
         <p className="max-w-[3xl] mx-auto  text-sm text-gray-400  px-3  font-semibold lg:text-lg  ">
           Unleash the power of AI within Brainwave. Upgrade your productivity
