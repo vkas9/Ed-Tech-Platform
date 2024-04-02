@@ -3,7 +3,7 @@ import video from "../../assets/particle.mp4";
 import Button from "../../components/Homepage/Button";
 const AboutUs = () => {
   return (
-    <div className=" overflow-hidden relative py-[5rem] w-full  mx-auto ">
+    <div className=" overflow-hidden relative py-[5rem]  max-w-[2200px]  mx-auto ">
       <div className=" relative  z-[3] py-4 gap-2 flex flex-col text-center h-full ">
         <span className=" text-md md:text-2xl">Get Started Today</span>
         <h1 className=" text-4xl md:text-6xl font-bold">
