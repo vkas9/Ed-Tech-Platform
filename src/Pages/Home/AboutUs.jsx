@@ -6,7 +6,7 @@ const AboutUs = () => {
     <div className=" overflow-hidden relative py-[5rem]  w-screen  mx-auto ">
       <div className=" relative  z-[3] py-4 gap-2 flex flex-col text-center h-full ">
         <span className=" text-md md:text-2xl">Get Started Today</span>
-        <h1 className=" text-4xl md:text-6xl font-bold">
+        <h1 className=" text-6xl px-1 md:text-6xl font-bold">
           Learn. Grow. Succeed.
         </h1>
         <Link to={"/signup"} className=" mt-5">
