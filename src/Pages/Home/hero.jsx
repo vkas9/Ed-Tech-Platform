@@ -10,7 +10,7 @@ import Button from "../../components/Homepage/Button";
 
 const hero = () => {
   return (
-    <div className="container mx-auto relative text-center flex   lg:min-h-[52rem]  ">
+    <div className=" mx-auto relative text-center flex   lg:min-h-[52rem]  ">
       <div className="  mx-auto  max-w-[85rem]  flex flex-col px-[1px] md:px-8 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[3rem] lg:gap-[4rem] ">
         <h1 className="text-[45px] relative md:text-6xl  lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
           Empower Your Future with{" "}
@@ -63,13 +63,13 @@ const hero = () => {
         </div>
       </div>
 
-      <div className=" hidden lg:flex  items-center rounded-t-3xl overflow-hidden mx-auto absolute bottom-0 top-[68px] ">
+      <div className=" hidden  w-full h-full  lg:flex  items-center rounded-t-3xl overflow-hidden mx-auto absolute bottom-0 top-[68px] ">
         <video
           src={video}
           muted
           loop
           autoPlay
-          className="opacity-30   "
+          className="opacity-30 w-full  min-w-[1800px]  "
           type="mp4"
         ></video>
       </div>
