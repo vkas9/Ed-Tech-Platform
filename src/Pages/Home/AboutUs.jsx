@@ -3,7 +3,7 @@ import video from "../../assets/particle.mp4";
 import Button from "../../components/Homepage/Button";
 const AboutUs = () => {
   return (
-    <div className=" overflow-hidden relative py-[5rem]  max-w-[2200px]  mx-auto ">
+    <div className=" overflow-hidden relative py-[5rem]  w-screen  mx-auto ">
       <div className=" relative  z-[3] py-4 gap-2 flex flex-col text-center h-full ">
         <span className=" text-md md:text-2xl">Get Started Today</span>
         <h1 className=" text-4xl md:text-6xl font-bold">
@@ -21,10 +21,9 @@ const AboutUs = () => {
           muted
           loop
           autoPlay
-          className="  relative w-full min-w-[3200px]  "
+          className="  relative w-full min-w-[700px]  "
           type="mp4"
         ></video>
-        
       </div>
     </div>
   );
