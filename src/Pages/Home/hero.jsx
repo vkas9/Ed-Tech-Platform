@@ -10,7 +10,7 @@ import Button from "../../components/Homepage/Button";
 
 const hero = () => {
   return (
-    <div className=" mx-auto relative text-center flex   lg:min-h-[54rem]  ">
+    <div className=" mx-auto relative text-center flex   lg:min-h-[55em]  ">
       <div className="  mx-auto  max-w-[85rem]  flex flex-col px-[1px] md:px-8 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[3rem] lg:gap-[4rem] ">
         <h1 className="text-[45px] relative md:text-6xl  lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
           Empower Your Future with{" "}
