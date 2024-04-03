@@ -4,7 +4,7 @@ import { IoCodeSlashSharp } from "react-icons/io5";
 import gradient from "../../assets/gradient.jpg";
 const Cards=({head})=>{
     return (
-        <div className="relative bg-white/10 backdrop-blur-md overflow-visible border-solid border border-gray-400/10  outline-none max-h-[35rem] w-[28rem] gap-6 rounded-2xl px-4 mx-3 py-2  flex flex-col justify-between">
+        <div className="relative bg-white/10 backdrop-blur-md overflow-visible border-solid border border-gray-400/10 min-h-[17rem] outline-none max-h-[40rem] w-[30rem] gap-6 rounded-2xl px-4 mx-3 py-2  flex flex-col justify-between">
           <div className="flex  flex-col  gap-6 ">
             <h3 className="  overflow-hidden text-[1.7rem] md:text-[2.5rem] font-bold ">
               {head}
@@ -16,7 +16,7 @@ const Cards=({head})=>{
           <div className="flex mb-2    items-center justify-between ">
             <Button
               className={
-                "outline-none py-2 text-center text-black font-bold text-[1.4rem] bg-yellow-500 active:bg-yellow-600 lg:hover:bg-yellow-600"
+                "outline-none py-2 text-center text-black font-bold text-[1rem] lg:text-[1.4rem] bg-yellow-500 active:bg-yellow-400 lg:hover:bg-yellow-400"
               }
             >
               Explore More
