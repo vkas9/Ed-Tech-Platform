@@ -35,8 +35,8 @@ const hero = () => {
           Unleash the power of AI within Brainwave. Upgrade your productivity
           with Brainwave, the open AI chat app.{" "}
         </p>
-        <Link to={"/signup"}>
-          <div className="  group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">
+        <Link to={"/signup"} className=" mx-auto">
+          <div className="   group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">
             <div className="flex gap-4 hover:scale-105 transition-all duration-200 items-center rounded-md px-5 py-3 ">
               <p>Become an Instructor</p>
               <FaArrowRight size={20}  className="animate-pulse "/>
@@ -69,7 +69,7 @@ const hero = () => {
           muted
           loop
           autoPlay
-          className="opacity-30 w-full  min-w-[1800px]  "
+          className="opacity-30 w-full min-w-[1800px]  "
           type="mp4"
         ></video>
       </div>
