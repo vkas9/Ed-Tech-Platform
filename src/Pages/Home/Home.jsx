@@ -1,4 +1,4 @@
-import Navbar from "../../components/Homepage/Navbar";
+
 import { DiRedis } from "react-icons/di";
 
 import { IoLogoNodejs } from "react-icons/io5";
@@ -10,7 +10,6 @@ import Hero from "./hero";
 import CodeBlocks from "./CodeBlocks";
 import SkillSection from "./SkillSection";
 import Pricing from "./Pricing"
-import Footer from "./Footer";
 import AboutUs from "./AboutUs";
 
 
