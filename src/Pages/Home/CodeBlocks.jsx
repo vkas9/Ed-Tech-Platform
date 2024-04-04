@@ -3,7 +3,7 @@ import Cards from "../../components/Homepage/Cards";
 
 const CodeBlocks = () => {
   return (
-    <div className="container relative mx-auto      ">
+    <div className=" relative mx-auto      ">
       <div className="tracking-[3px] max-w-[50rem] mx-auto  font-sans uppercase text-gray-400 select-none font-bold text-sm lg:text-lg mb-[5rem] lg:mb-[6rem] mt-[5rem]">
         <h2 className="text-center ">
           Unlock your coding potential with our online courses
