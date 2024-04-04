@@ -5,7 +5,7 @@ const authSlice=createSlice({
     initialState: {token:localStorage.getItem("token")? JSON.parse(localStorage.getItem("token")):null},
     reducers:{
         setToken(state,action){
-            state.token=value.payload;
+            state.token=action.payload;
         }
     }
 })

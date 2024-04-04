@@ -5,7 +5,7 @@ const profileSlice=createSlice({
     initialState: {user:null},
     reducers:{
         setToken(state,action){
-            state.token=value.payload;
+            state.user=action.payload;
         }
     }
 })

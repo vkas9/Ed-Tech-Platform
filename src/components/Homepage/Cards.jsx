@@ -15,6 +15,7 @@ const Cards=({head})=>{
           </div>
           <div className="flex mb-2    items-center justify-between ">
             <Button
+            link={"/aboutus"}
               className={
                 "outline-none py-2 text-center text-black font-bold text-[1rem] lg:text-[1.4rem] bg-yellow-500 active:bg-yellow-400 lg:hover:bg-yellow-400"
               }
