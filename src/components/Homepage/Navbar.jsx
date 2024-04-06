@@ -28,7 +28,7 @@ const Navbar = () => {
   },[])
 
   const { token } = useSelector((store) => store.auth);
-  const { user } = useSelector((store) => store.profile);
+  const user=JSON.parse(localStorage.getItem("user"))
   const { totalItems } = useSelector((store) => store.card);
   const [openNavigation, setOpenNavigation] = useState(false);
   const location = useLocation();
@@ -115,7 +115,7 @@ const Navbar = () => {
             ))}
           </div>
         </nav>
-        <div className="flex gap-6  items-center ">
+        <div className={`flex ${user!=null?"gap-4 ml-[7vw]":"gap-6"}   items-center `}>
           {user && user?.accountType != "Instructor" && (
             <Link to="/dashboard/card" className="relative ">
               <FaCartShopping size={20} />
@@ -157,12 +157,12 @@ const Navbar = () => {
           {token !== null ? openNavigation ? (
                 <ImCross
                   onClick={toggle}
-                  className="text-3xl hover:cursor-pointer  lg:hidden "
+                  className="md:text-3xl text-2xl hover:cursor-pointer  lg:hidden "
                 />
               ) : (
                 <GiHamburgerMenu
                   onClick={toggle}
-                  className="text-3xl hover:cursor-pointer  lg:hidden "
+                  className="md:text-3xl text-2xl hover:cursor-pointer  lg:hidden "
                 />
               ) : null}
         </div>
