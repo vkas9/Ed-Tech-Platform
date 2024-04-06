@@ -24,7 +24,7 @@ const Cards=({head})=>{
             </Button>
             <IoCodeSlashSharp className="   text-4xl" />
           </div>
-          <div className="h-[200px] w-[400px]  absolute -left-4 opacity-40 -top-4 -z-10 lg:blur-[70px] blur-[50px] "><img src={gradient} alt="" /></div>
+          {/* <div className="h-[200px] w-[400px]  absolute -left-4 opacity-40 -top-4 -z-10 lg:blur-[70px] blur-[50px] "><img src={gradient} alt="" /></div> */}
         </div>
     );
 }
