@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import Store from "./store.jsx/store.js";
+import Store from "./store/store.js";
 import { Provider } from "react-redux";
 
 
