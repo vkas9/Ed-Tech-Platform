@@ -154,6 +154,17 @@ const Navbar = () => {
             </div>
           ) : null}
           {token !== null ? <ProfileDropDown /> : null}
+          {token !== null ? openNavigation ? (
+                <ImCross
+                  onClick={toggle}
+                  className="text-3xl hover:cursor-pointer  lg:hidden "
+                />
+              ) : (
+                <GiHamburgerMenu
+                  onClick={toggle}
+                  className="text-3xl hover:cursor-pointer  lg:hidden "
+                />
+              ) : null}
         </div>
       </div>
     </div>
