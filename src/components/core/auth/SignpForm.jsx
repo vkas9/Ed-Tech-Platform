@@ -18,7 +18,7 @@ const SignupForm = () => {
   };
   return (
     <div className="flex min-h-[calc(100vh-2.8rem)] flex-col gap-3 px-2 items-center justify-center">
-    <h1 className="text-[2rem]  overflow-hidden mx-2 mt-[4rem] md:mt-[0rem] md:text-[4em]  bg-gradient-to-br from-yellow-500 to-red-500 bg-clip-text text-transparent font-bold text-center ">Enter the MASTER World</h1>
+    <h1 className="text-[2.5rem]  overflow-hidden mx-2 mt-[4rem] xs:mt-[0rem] md:text-[4em]  bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center ">MASTER WORLD</h1>
       <Formik
         onSubmit={(values) => handleSubmit(values)}
         initialValues={{
