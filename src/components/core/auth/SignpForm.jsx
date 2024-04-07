@@ -56,7 +56,7 @@ const SignupForm = () => {
            
             <Field className=" bg-gray-700  outline-none p-3 w-full rounded-md font-semibold text-sm sm:text-xl" placeholder="Enter Contact Number" required name="Contact_Number" type="tel" max={10}></Field>
             </div>
-            <div className="flex flex-col xs:flex-row justify-center gap-2 xs:gap-2">
+            <div className="flex flex-col vm:flex-row justify-center gap-5 vm:gap-2">
               <div>
                 
                
