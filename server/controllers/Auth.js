@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 //sign up handler
 exports.signup = async (req, res) => {
+  
   try {
     const {
       FirstName,
@@ -16,11 +17,10 @@ exports.signup = async (req, res) => {
       Contact_Number,
       Password,
       ConfirmPassword,
-      otp,
       role,
     } = req.body;
 
-    if (!FirstName || !LastName || !Email || !Password || !Password || !otp) {
+    if (!FirstName || !LastName || !Email || !Password || !Password ) {
       return res.status(401).json({
         success: false,
         message: "All fields are required",
@@ -34,6 +34,7 @@ exports.signup = async (req, res) => {
           message: "Already user Exist with this email",
         });
     }
+    console.log("vik")
 
     if (Password !== ConfirmPassword) {
       return res.status(400).json({
@@ -41,24 +42,23 @@ exports.signup = async (req, res) => {
         message: "Password and confirm password not matching",
       });
     }
-    const recentOtp = await OTP.find({ email: Email })
-      .sort({ createAt: -1 })
-      .limit(1);
-    console.log("recentOtp-->", recentOtp.length, otp);
-    if (recentOtp[0] === 0 || recentOtp.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "OTP not found",
-      });
-    } else if (recentOtp[0].OTP !== otp) {
-      return res.status(400).json({
-        success: false,
+    // const recentOtp = await OTP.find({ email: Email })
+    //   .sort({ createAt: -1 })
+    //   .limit(1);
+    // console.log("recentOtp-->", recentOtp.length, otp);
+    // if (recentOtp[0] === 0 || recentOtp.length === 0) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "OTP not found",
+    //   });
+    // } else if (recentOtp[0].OTP !== otp) {
+    //   return res.status(400).json({
+    //     success: false,
 
-        message: "OTP not Matching",
-      });
-    }
+    //     message: "OTP not Matching",
+    //   });
+    // }
     const hashedPassword = await bcrypt.hash(Password, 10);
-
     const userProfile = await Profile.create({
       City: null,
       contactNumber: null,

@@ -6,6 +6,7 @@ import github from "../src/assets/github.png";
 import { Toaster } from "react-hot-toast";
 import LoginForm from "./components/core/auth/LoginForm";
 import OpenRoute from "./components/core/auth/OpenRoute";
+import SignupForm from "./components/core/auth/SignpForm";
 
 function App() {
   return (
@@ -26,6 +27,14 @@ function App() {
             element={
               <OpenRoute>
                 <LoginForm />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="signup"
+            element={
+              <OpenRoute>
+                <SignupForm />
               </OpenRoute>
             }
           />
