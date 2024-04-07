@@ -14,7 +14,7 @@ const LoginForm=()=>{
 
     
     return (
-        <div className=" h-screen flex flex-col overflow-x-hidden items-center justify-center w-fit     mx-auto ">
+        <div className=" min-h-[calc(100vh-2.8rem)] flex flex-col overflow-x-hidden items-center justify-center w-fit     mx-auto ">
 
             <h1 className="text-[3rem] overflow-hidden md:text-[4em] mb-[3rem] bg-gradient-to-br from-red-500 to-blue-500 bg-clip-text text-transparent font-bold text-center ">Welcome Back</h1>
             <Formik  onSubmit={(values)=>(handleSubmit(values))} initialValues={{email:"",password:""}} >

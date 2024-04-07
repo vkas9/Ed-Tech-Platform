@@ -1,16 +1,23 @@
 import { Formik, Field, Form } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signup } from "../../../Auth/Authapi";
+import { opt, signup } from "../../../Auth/Authapi";
+import toast from "react-hot-toast";
 const SignupForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (data) => {
-    console.log(data);
-    dispatch(signup(data, navigate));
+    
+    if(data.Password!==data.ConfirmPassword){
+        toast.error("Password Not Matching");
+        return;
+    }
+  
+    dispatch(opt(data,navigate))
+   
   };
   return (
-    <div className="flex h-screen gap-3 items-center justify-center">
+    <div className="flex min-h-[calc(100vh-2.8rem)]  gap-3 items-center justify-center">
       <Formik
         onSubmit={(values) => handleSubmit(values)}
         initialValues={{
@@ -24,8 +31,8 @@ const SignupForm = () => {
         }}
       >
         <Form>
-          <div className=" flex flex-col gap-3">
-            <div className="flex gap-3 ">
+          <div className=" flex flex-col px-2 gap-3">
+            <div className="flex flex-col md:flex-row justify-center gap-3">
               <div >
                 <label className="text-xl font-bold mb-1">First Name</label>
                 <br />
@@ -47,7 +54,7 @@ const SignupForm = () => {
             <label className="text-xl font-bold ">Contact Number</label>
             <Field className="outline-offset-0 text-black focus:outline-green-500 outline-none p-3 w-full rounded-md font-semibold text-xl" placeholder="Enter Contact Number" required name="Contact_Number" type="tel" max={10}></Field>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-col md:flex-row justify-center gap-3">
               <div>
                 <label className="text-xl font-bold mb-1">Password</label>
                 <br />
@@ -64,7 +71,7 @@ const SignupForm = () => {
                 <br />
                 <Field
                   required
-                  className="outline-offset-0 text-black focus:outline-green-500 outline-none p-3 w-full md:w-[20rem] rounded-md font-semibold text-xl" placeholder="Enter Confirm Password"
+                  className="truncate outline-offset-0 text-black focus:outline-green-500 outline-none p-3 w-full md:w-[20rem] rounded-md font-semibold text-xl" placeholder="Enter Confirm Password"
                   name="ConfirmPassword"
                   type="password"
                 ></Field>

@@ -19,11 +19,11 @@ const Navbar = () => {
     axios.get("/api/v1/course/getAllCatagory")
     .then(res=>{
       setCatagory(res.data.allCatagory);
-      console.log("catagory->",catagory[0].link);
+      
       
       
     }).catch(error=>{
-      console.log(error);
+      console.log("error",error);
     })
   },[])
 
@@ -82,13 +82,13 @@ const Navbar = () => {
                   >
                     <p className="select-none">{item.title}</p>
                     <IoIosArrowDown />
-                    <div className="z-[200]  invisible group-hover:visible flex flex-col rounded-xl backdrop-blur-md bg-gray-300 -bottom-[115px] -right-[40px] transition-opacity opacity-0 group-hover:opacity-100 gap-4 py-4 duration-400  w-[250px]  absolute text-center ">
+                    <div className="z-[200]  invisible group-hover:visible flex flex-col rounded-xl backdrop-blur-md bg-white -bottom-[115px] -right-[40px] transition-opacity opacity-0 group-hover:opacity-100 gap-4 py-4 duration-400  w-[250px]  absolute text-center ">
                       {catagory.length
                         ? catagory.map((item) => (
                             <Link
                               key={item.name}
                               to={item.link}
-                              className="bg-gray-500/20 hover:bg-gray-500/60 rounded-md py-2 mx-2"
+                              className="bg-gray-200 hover:bg-gray-500/60 rounded-md py-2 mx-2"
                               onClick={handleClick}
                             >
                               <p className="text-black">{item.name}</p>

@@ -51,18 +51,57 @@ export const signup=(data,navigate)=>{
                 Password:data.Password,
                 ConfirmPassword:data.ConfirmPassword,
                 role:"Student",
-            }).then((res)=>{
-                response=res;
+                otp:String(data.otp)
+            }).then(res=>{
+                response=res
             })
-            toast.success("Successfully Signup")
+            console.log("response",response);
+            
             navigate("/login")
+            toast.success("Successfully Signup")
            
         } catch (error) {
-            console.log("error",error)
+            
+            toast.error(error.response.data.message)
         }
+        dispatch(authAction.setLoading(false));
         toast.dismiss(toastId);
 
 
 
     }
+}
+export const opt=(data,navigate)=>{
+    return async(dispatch)=>{
+        const toastId=toast.loading("Loading");
+        dispatch(authAction.setLoading(true));
+        let response;
+        try {
+            await axios.post("/api/v1/auth/otp",{
+                email:data.Email
+            }).then(res=>{
+                response=res;
+            })
+        dispatch(authAction.setSignUpData(data))
+           toast.success(response.data.message);
+           navigate("/signup/verify-email")
+        } catch (error) {
+            toast.error(error.response.data.message)
+            
+        }
+        dispatch(authAction.setLoading(false));
+        toast.dismiss(toastId)
+
+    }
+}
+export const logout=(navigate)=>{
+    return (dispatch)=>{
+        dispatch(authAction.setToken(null));
+        dispatch(profileAction.setProfile(null));
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        toast.success("Logged Out Successfully")
+        navigate("/")
+    }
+    
 }

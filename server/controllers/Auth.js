@@ -17,10 +17,11 @@ exports.signup = async (req, res) => {
       Contact_Number,
       Password,
       ConfirmPassword,
+      otp,
       role,
     } = req.body;
 
-    if (!FirstName || !LastName || !Email || !Password || !Password ) {
+    if (!FirstName || !LastName || !Email || !Password || !Password||!otp ) {
       return res.status(401).json({
         success: false,
         message: "All fields are required",
@@ -34,30 +35,31 @@ exports.signup = async (req, res) => {
           message: "Already user Exist with this email",
         });
     }
-    console.log("vik")
+    
 
     if (Password !== ConfirmPassword) {
       return res.status(400).json({
         success: false,
-        message: "Password and confirm password not matching",
+        message: "Password and Confirm password not matching",
       });
     }
-    // const recentOtp = await OTP.find({ email: Email })
-    //   .sort({ createAt: -1 })
-    //   .limit(1);
-    // console.log("recentOtp-->", recentOtp.length, otp);
-    // if (recentOtp[0] === 0 || recentOtp.length === 0) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "OTP not found",
-    //   });
-    // } else if (recentOtp[0].OTP !== otp) {
-    //   return res.status(400).json({
-    //     success: false,
+    const recentOtp = await OTP.find({ email: Email })
+      .sort({ createAt: -1 })
+      .limit(1);
+    console.log("recentOtp-->", recentOtp);
+    if (recentOtp[0] === 0 || recentOtp.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "OTP Expired",
+      });
+    } else if (recentOtp[0].OTP !== otp) {
+      
+      return res.status(400).json({
+        success: false,
 
-    //     message: "OTP not Matching",
-    //   });
-    // }
+        message: "OTP not Matching",
+      });
+    }
     const hashedPassword = await bcrypt.hash(Password, 10);
     const userProfile = await Profile.create({
       City: null,
@@ -79,10 +81,11 @@ exports.signup = async (req, res) => {
       Profile: userProfile._id,
       ProfilePicture: `https://api.dicebear.com/5.x/initials/svg?seed=${FirstName} ${LastName}`,
     });
-    console.log(userDB);
+    console.log("userDB",userDB);
     return res.status(200).json({
       success: true,
       message: "Successfully user Created in DataBase",
+      userData:userDB
     });
   } catch (error) {
     console.log(error);
@@ -98,9 +101,14 @@ exports.signup = async (req, res) => {
 exports.otp = async (req, res) => {
   try {
     const { email } = req.body;
+   
     const user = await User.findOne({ Email: email });
     if (user) {
-      return console.log("Already User registered with this Email");
+      
+      return res.status(400).json({
+        success:false,
+        message:"Already User registered with this Email"
+      })
     }
 
     const generatedOtp = optgenerator.generate(6, {

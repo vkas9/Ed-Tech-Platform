@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import LoginForm from "./components/core/auth/LoginForm";
 import OpenRoute from "./components/core/auth/OpenRoute";
 import SignupForm from "./components/core/auth/SignpForm";
+import VerifyEmail from "./Pages/Form/VerifyEmail";
 
 function App() {
   return (
@@ -35,6 +36,22 @@ function App() {
             element={
               <OpenRoute>
                 <SignupForm />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="signup/verify-email"
+            element={
+              <OpenRoute>
+                <VerifyEmail />
+              </OpenRoute>
+            }
+          />
+          <Route
+            path="dashboard/my-profile"
+            element={
+              <OpenRoute>
+                <VerifyEmail />
               </OpenRoute>
             }
           />
