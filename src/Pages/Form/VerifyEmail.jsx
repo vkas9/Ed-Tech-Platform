@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../../components/Homepage/Button";
 import { useDispatch,useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { signup } from "../../Auth/Authapi";
+import { signup ,opt} from "../../Auth/Authapi";
 import {Link,useNavigate} from "react-router-dom"
 const VerifyEmail=()=>{
     const dispatch=useDispatch();
@@ -58,7 +58,11 @@ const VerifyEmail=()=>{
 
     }
     const { signupdata } = useSelector((store) => store.auth);
-    
+    useEffect(()=>{
+        if(!signupdata){
+            navigate("/signup")
+        }
+    },[])
     const handleSubmit2 = (e) => {
         e.preventDefault();
         console.log("fd")
@@ -76,16 +80,23 @@ const VerifyEmail=()=>{
            
             
         }
-        else toast.error("Please Fill all Inputs")
+        else toast.error("Please Fill all Inputs");
+
     }
+
     return <div className="flex flex-col min-h-[calc(100vh-2.8rem)] items-center justify-center ">
 
-        <div className="flex justify-center  gap-4 ">
+        <div className="flex  justify-center px-2 relative gap-2 md:gap-4 ">
             {arr.map((item, i) => {
-                return <input key={i} value={input[i]} type="text" ref={ref[i]} maxLength="1" className={`text-black border-solid  font-bold text-center rounded-md md:text-4xl border-2 sm:w-[50px]  md:w-[70px] sm:text-2xl md:h-[60px] outline-green-500   ${missing.includes(i)?'border-red-500 animate-pulse ':''}  max-w-[100px]`} onPaste={handlePaste} onChange={(e) => handleInput(e, i)} onKeyDown={(e) => handleOnKeyDown(e, i)} />
+                return <input key={i} value={input[i]} type="text" ref={ref[i]} maxLength="1" className={` bg-gray-700  font-bold text-center min-w-[20px] rounded-md w-full md:w-[50px] h-[40px] text-4xl  box-content overflow-hidden p-1 sm:p-3 outline-none   ${missing.includes(i)?' border-2 border-red-500 animate-pulse ':''}  max-w-[100px]`} onPaste={handlePaste} onChange={(e) => handleInput(e, i)} onKeyDown={(e) => handleOnKeyDown(e, i)} />
             })}
+            <div onClick={()=>{
+                 dispatch(opt(signupdata,navigate));
+            }} className="absolute right-2 -bottom-8 font-semibold text-lg">
+               <button>Resend OTP </button> 
+            </div>
         </div>
-        <button onClick={handleSubmit2} className=" sm:px-[30px] sm:text-2xl mt-10 md:px-[60px] py-[15px] text-4xl text-white hover:bg-purple-600 transition-all outline-none duration-200 rounded-md bg-purple-800 font-bold uppercase">Submit</button>
+        <button onClick={handleSubmit2} className="  sm:text-md mt-10 px-[30px] md:px-[60px] py-[15px] text-md text-white hover:bg-purple-600 transition-all outline-none duration-200 rounded-md bg-purple-800 font-bold uppercase">Submit</button>
 
     </div>
 }

@@ -58,7 +58,7 @@ export const signup=(data,navigate)=>{
             console.log("response",response);
             
             navigate("/login")
-            toast.success("Successfully Signup")
+            toast.success(response.data.message)
            
         } catch (error) {
             

@@ -84,14 +84,14 @@ exports.signup = async (req, res) => {
     console.log("userDB",userDB);
     return res.status(200).json({
       success: true,
-      message: "Successfully user Created in DataBase",
+      message: "Successfully Account Created",
       userData:userDB
     });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
       success: false,
-      message: "Something went wrong while creating User DB",
+      message: "Something went wrong while creating Account",
     });
   }
 };
