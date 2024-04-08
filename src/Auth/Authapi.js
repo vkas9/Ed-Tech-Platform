@@ -27,8 +27,8 @@ export const login=(data,navigate)=>{
             navigate("/dashboard/my-profile")
 
         } catch (error) {
-            console.log("Login api error",error);
-            toast.error("Login Faild");
+            console.log("Login api error",error.response.data.message);
+            toast.error(error.response.data.message);
         }
         dispatch(authAction.setLoading(false));
         toast.dismiss(toastId)

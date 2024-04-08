@@ -38,7 +38,7 @@ const hero = () => {
         <Link to={"/signup"} className=" mx-auto">
           <div className="   group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">
             <div className="flex gap-4 hover:scale-105 transition-all duration-200 items-center rounded-md px-5 py-3 ">
-              <p>Become an Instructor</p>
+              <p>Teach on MASTER</p>
               <FaArrowRight size={20}  className="animate-pulse "/>
             </div>
           </div>
@@ -47,7 +47,7 @@ const hero = () => {
           <Button
             link={"/signup"}
             className={
-              " outline-none  shadow-xl shadow-yellow-500/30 hover-none text-black bg-yellow-500 py-3 "
+              " outline-none  font-semibold hover-none text-black bg-yellow-500 py-3 "
             }
           >
             Learn More

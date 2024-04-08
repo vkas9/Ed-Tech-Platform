@@ -145,7 +145,7 @@ exports.login = async (req, res) => {
     if (!registredUser) {
       return res.status(401).json({
         success: false,
-        message: "User not registered With this Email",
+        message: "User not registered with this Email",
       });
     }
 

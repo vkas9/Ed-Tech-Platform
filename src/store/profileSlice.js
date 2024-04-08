@@ -6,7 +6,8 @@ const profileSlice=createSlice({
     reducers:{
         setProfile(state,action){
             state.user=action.payload;
-        }
+        },
+        
     }
 })
 export const profileAction=profileSlice.actions;
