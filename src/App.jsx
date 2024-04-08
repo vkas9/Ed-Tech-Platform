@@ -8,6 +8,7 @@ import LoginForm from "./components/core/auth/LoginForm";
 import OpenRoute from "./components/core/auth/OpenRoute";
 import SignupForm from "./components/core/auth/SignpForm";
 import VerifyEmail from "./Pages/Form/VerifyEmail";
+import Dashboard from "./Pages/Dashboard";
 
 function App() {
   return (
@@ -51,7 +52,7 @@ function App() {
             path="dashboard/my-profile"
             element={
               <OpenRoute>
-                <VerifyEmail />
+                <Dashboard/>
               </OpenRoute>
             }
           />

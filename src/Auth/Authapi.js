@@ -28,7 +28,13 @@ export const login=(data,navigate)=>{
 
         } catch (error) {
             console.log("Login api error",error.response.data.message);
-            toast.error(error.response.data.message);
+            if(error.response.data.message){
+
+                toast.error(error.response.data.message);
+            }
+            else{
+                toast.error("Something went wrong or Server Offline")
+            }
         }
         dispatch(authAction.setLoading(false));
         toast.dismiss(toastId)
