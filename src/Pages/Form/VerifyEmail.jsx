@@ -55,7 +55,6 @@ const VerifyEmail=()=>{
                 }
             }, 10);
         }
-
     }
     const { signupdata } = useSelector((store) => store.auth);
     useEffect(()=>{
