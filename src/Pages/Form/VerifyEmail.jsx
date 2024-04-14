@@ -57,6 +57,7 @@ const VerifyEmail=()=>{
         }
     }
     const { signupdata } = useSelector((store) => store.auth);
+    console.log("signupdata")
     useEffect(()=>{
         if(!signupdata){
             navigate("/signup")
@@ -64,7 +65,7 @@ const VerifyEmail=()=>{
     },[])
     const handleSubmit2 = (e) => {
         e.preventDefault();
-        console.log("fd")
+    
         const missed=input.map((item,i)=>{
             if(item==='')return i;
         }).filter(item=>(item||item===0));

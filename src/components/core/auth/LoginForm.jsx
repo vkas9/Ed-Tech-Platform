@@ -1,11 +1,19 @@
 import { Formik,Field,Form } from "formik";
 import toast from "react-hot-toast";
 import {Link,useNavigate} from "react-router-dom"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {login} from "../../../Auth/Authapi"
+import { useEffect } from "react";
 const LoginForm=()=>{
     const navigate = useNavigate()
     const dispatch=useDispatch();
+    // const token=localStorage.getItem("token");
+    // console.log("token");
+    // useEffect(()=>{
+    //     if(token){
+    //         navigate("/dashboard/my-profile");
+    //     }
+    // },[])
     const handleSubmit=(data)=>{
       
         dispatch(login(data,navigate));

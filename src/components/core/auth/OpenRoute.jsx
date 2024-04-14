@@ -3,6 +3,6 @@ import { Navigate } from "react-router-dom"
 const OpenRoute=({children})=>{
     const {token}=useSelector((store)=>store.auth)
     if(token===null)return children;
-    else <Navigate to="/dashboard/my-profile"/>
+    else return <Navigate to="/dashboard/my-profile"/>
 }
 export default OpenRoute;

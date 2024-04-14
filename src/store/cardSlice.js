@@ -5,7 +5,7 @@ const cardSlice = createSlice({
   initialState: {
     totalItems: localStorage.getItem("totalItems")
       ? JSON.parse(localStorage.getItem("totalItems"))
-      : 5,
+      : 0,
   },
   reducers: {
     setTotalItems(state, action) {
