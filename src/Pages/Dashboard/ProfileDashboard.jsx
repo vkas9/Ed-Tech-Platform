@@ -1,10 +1,12 @@
 import { MdOutlineEdit } from "react-icons/md";
+import { Navigate } from "react-router-dom";
 const ProfileDashboard = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   console.log("user", user);
-  return (
+  if(user) return (
+
     <div className="w-[85%]">
-      <div className=" text-lg flex flex-col gap-4 ml-5 ">
+      <div className=" text-lg flex flex-col gap-4 mt-2 ml-5 ">
         <div className="flex font-semibold gap-2 ">
           <span>Home</span>
           <span>/</span>
@@ -71,5 +73,6 @@ const ProfileDashboard = () => {
       </div>
     </div>
   );
+  else return <Navigate to="/login"/>
 };
 export default ProfileDashboard;

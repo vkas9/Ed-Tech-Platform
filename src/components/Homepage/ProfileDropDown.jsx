@@ -1,13 +1,13 @@
 import { useSelector,useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { logout } from "../../Auth/Authapi";
 const ProfileDropDown=()=>{
-    const navigation=useNavigate()
+    const navigate=useNavigate()
     const dispatch=useDispatch();
     const user=JSON.parse(localStorage.getItem("user"));
     const handleSubmit=(e)=>{
         e.preventDefault();
-        dispatch(logout(navigation));
+        navigate("/dashboard/my-profile")
 
     }
     
