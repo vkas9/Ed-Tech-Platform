@@ -4,6 +4,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 const sendMail = async (email, title, body) => {
     try {
+        console.log("here is otp")
         
         let transporter = nodemailer.createTransport({
             host: process.env.MAIL_HOST,
@@ -19,7 +20,7 @@ const sendMail = async (email, title, body) => {
             subject:`${title}`,
             html:  `${body}`
         })
-        console.log(info)
+        console.log("info",info)
     } catch (error) {
         console.log("There is a error in sending Mail",error);
         

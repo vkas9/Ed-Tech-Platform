@@ -100,6 +100,7 @@ exports.signup = async (req, res) => {
 
 exports.otp = async (req, res) => {
   try {
+    console.log("get otp")
     const { email } = req.body;
    
     const user = await User.findOne({ Email: email });

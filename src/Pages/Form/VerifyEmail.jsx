@@ -50,14 +50,14 @@ const VerifyEmail=()=>{
             setInput(copyInput);
             
             setTimeout(() => {
-                if (index > 0) {
+                if (index >= 0) {
                     ref[index - 1].current.focus();
                 }
             }, 10);
         }
     }
     const { signupdata } = useSelector((store) => store.auth);
-    console.log("signupdata")
+    
     useEffect(()=>{
         if(!signupdata){
             navigate("/signup")

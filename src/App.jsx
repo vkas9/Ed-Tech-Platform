@@ -48,12 +48,7 @@ function App() {
               </OpenRoute>
             }
           />
-          <Route
-            path="dashboard/my-profile"
-            element={
-                <Dashboard/>
-            }
-          />
+          <Route path="dashboard/my-profile" element={<Dashboard />} />
         </Routes>
         {/* <Footer /> */}
       </Router>

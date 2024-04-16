@@ -82,15 +82,18 @@ export const opt=(data,navigate)=>{
         const toastId=toast.loading("Loading");
         dispatch(authAction.setLoading(true));
         let response;
+        
         try {
             await axios.post("/api/v1/auth/otp",{
                 email:data.Email
             }).then(res=>{
                 response=res;
             })
+            console.log("data",data.Email)
+    
         dispatch(authAction.setSignUpData(data))
-           toast.success(response.data.message);
-           navigate("/signup/verify-email")
+        toast.success(response.data.message);
+        navigate("/signup/verify-email")
         } catch (error) {
             if(error.response.data.message){
 
