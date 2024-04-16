@@ -37,7 +37,7 @@ const ProfileDashboard = () => {
         </div>
       </div>
       <div className="mt-8  ">
-        <div className=" p-2  flex flex-col items-center  bg-gray-500/30 rounded-md pt-2 pb-6 gap-9 max-w-[55%] ml-5">
+        <div className=" p-4 flex flex-col items-center  bg-gray-500/30 rounded-md pt-2 pb-6 gap-9 max-w-[55%] ml-5">
           <div className="flex items-center mx-3 w-full justify-between  ">
             <div className="flex text-xl font-semibold flex-col ">
               <span>Personal Details</span>
@@ -47,7 +47,7 @@ const ProfileDashboard = () => {
               <span>Edit</span>
             </div>
           </div>
-          <div className=" w-full  mx-3 flex justify-between  gap-3">
+          <div className=" w-full bg-gray-600/20 p-4 py-6 rounded-xl  mx-3 flex justify-between  gap-3">
             <div className="flex flex-col gap-4 ">
               <div className="flex flex-col ">
                 <span className="text-gray-400">First Name</span>
