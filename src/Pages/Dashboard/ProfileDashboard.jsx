@@ -19,7 +19,7 @@ const ProfileDashboard = () => {
         <h1 className="text-[2.5rem] font-semibold ">My Profile</h1>
       </div>
       <div className="mt-8  ">
-        <div className=" p-2 flex items-center  bg-gray-500/30 rounded-md py-6 gap-1 max-w-[55%] ml-5">
+        <div className=" p-4 flex items-center  bg-gray-500/30 rounded-md py-6 gap-1 max-w-[55%] ml-5">
           <div className="min-h-[70px] min-w-[70px]  rounded-full ">
             <img src={user.ProfilePicture} className="rounded-full" alt="" />
           </div>
