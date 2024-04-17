@@ -6,11 +6,11 @@ import HightlightText from "../../components/Homepage/HightlightText";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
 import Button from "../../components/Homepage/Button";
-
+import { motion } from "framer-motion";
 
 const hero = () => {
   return (
-    <div className=" mx-auto relative text-center flex   lg:min-h-[55em]  ">
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.6,delay:.2,ease:[0,.71,.2,1.01]}} className=" mx-auto relative text-center flex   lg:min-h-[55em]  ">
       <div className="  mx-auto  max-w-[85rem]  flex flex-col px-[1px] md:px-8 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[3rem] lg:gap-[4rem] ">
         <h1 className="text-[45px] relative md:text-6xl  lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
           Empower Your Future with{" "}
@@ -73,7 +73,7 @@ const hero = () => {
           type="mp4"
         ></video>
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default hero;
