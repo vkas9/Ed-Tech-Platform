@@ -15,7 +15,7 @@ const Dashboard = () => {
     }
   }, []);
   return (
-    <div className="text-white flex relative top-[68px]  min-h-[calc(100vh-(68px))] ">
+    <div className="text-white flex relative pt-[68px]  min-h-[calc(100vh-(68px))] ">
       <div className="top-[68px]   min-h-[calc(100vh-(68px))]  w-[15%] bg-gray-500/20 ">
         <div className="flex flex-col font-semibold text-blue-1
         00 lg:text-lg ">
