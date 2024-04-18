@@ -9,7 +9,7 @@ export const login=(data,navigate)=>{
         let response;
         try {
             console.log(data.email)
-           await axios.post("/api/v1/auth/login",{
+           await axios.post("https://edback-dsur.onrender.com/api/v1/auth/login",{
                 email:data.email,password:data.password
             }).then(res=>{
                 console.log("response",res.data);
