@@ -84,7 +84,7 @@ export const opt=(data,navigate)=>{
         let response;
         
         try {
-            await axios.post("/api/v1/auth/otp",{
+            await axios.post("https://edback-dsur.onrender.com/api/v1/auth/otp",{
                 email:data.Email
             }).then(res=>{
                 response=res;
