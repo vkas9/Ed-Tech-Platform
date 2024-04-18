@@ -49,7 +49,7 @@ export const signup=(data,navigate)=>{
         let response;
         try {
             
-            await axios.post("/api/v1/auth/signup",{
+            await axios.post("https://edback-dsur.onrender.com/api/v1/auth/signup",{
                 FirstName:data.FirstName,
                 LastName:data.LastName,
                 Email:data.Email,
