@@ -16,7 +16,7 @@ import axios from "axios";
 const Navbar = () => {
   const[catagory,setCatagory]=useState([]);
   useEffect(()=>{
-    axios.get("/api/v1/course/getAllCatagory")
+    axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getAllCatagory")
     .then(res=>{
       setCatagory(res.data.allCatagory);
       
