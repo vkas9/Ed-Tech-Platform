@@ -9,7 +9,7 @@ export const login=(data,navigate)=>{
         let response;
         try {
             console.log(data.email)
-           await axios.post("/api/v1/auth/login",{
+           await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/login",{
                 email:data.email,password:data.password
             }).then(res=>{
                 console.log("response",res.data);
@@ -49,7 +49,7 @@ export const signup=(data,navigate)=>{
         let response;
         try {
             
-            await axios.post("/api/v1/auth/signup",{
+            await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/signup",{
                 FirstName:data.FirstName,
                 LastName:data.LastName,
                 Email:data.Email,
@@ -84,7 +84,7 @@ export const opt=(data,navigate)=>{
         let response;
         
         try {
-            await axios.post("/api/v1/auth/otp",{
+            await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/otp",{
                 email:data.Email
             }).then(res=>{
                 response=res;

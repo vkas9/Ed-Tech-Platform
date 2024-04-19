@@ -7,7 +7,7 @@ const Settings=()=>{
           <span>/</span>
           <span>Dashboard</span>
           <span>/</span>
-          <span className="text-yellow-500 ">Setting</span>
+          <span className="text-yellow-500 ">Settings</span>
         </motion.div>
     )
 }
