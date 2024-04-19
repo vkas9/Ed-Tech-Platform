@@ -79,7 +79,7 @@ exports.signup = async (req, res) => {
       Contact_Number,
       role,
       Profile: userProfile._id,
-      ProfilePicture: `https://api.dicebear.com/5.x/initials/svg?seed=${FirstName} ${LastName}`,
+      ProfilePicture: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${FirstName}`,
     });
     console.log("userDB",userDB);
     return res.status(200).json({
