@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api/v1": {
-        target:"https://edback-dsur.onrender.com",
+        target:"https://ed-tech-platform-1-n5ez.onrender.com",
         changeOrigin: true,
         secure: false
       }

@@ -16,8 +16,8 @@ export const login=(data,navigate)=>{
                 response=res.data;
             })
             
-           
-            toast.success("Login Successful");
+           console.log("response->",response.registredUser.FirstName)
+            toast.success(`Welcome ${response.registredUser.FirstName}`);
             dispatch(authAction.setToken(response.token));
             dispatch(profileAction.setProfile(response.registredUser.ProfilePicture))
             console.log( response.registredUser.ProfilePicture);

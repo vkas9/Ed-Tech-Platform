@@ -41,16 +41,16 @@ export const Profile = [
     url: "/dashboard/courses",
     icon:PiGraduationCap
   },
-  {
-    id: "5",
-    title: "Settings",
-    url: "/dashboard/settings",
-    icon:CiSettings
-  },
-  {
-    id: "6",
-    title: "Log out",
-    url: "/",
-    icon:CiLogout
-  },
+  // {
+  //   id: "5",
+  //   title: "Settings",
+  //   url: "/dashboard/settings",
+  //   icon:CiSettings
+  // },
+  // {
+  //   id: "6",
+  //   title: "Log out",
+  //   url: "/",
+  //   icon:CiLogout
+  // },
 ];
