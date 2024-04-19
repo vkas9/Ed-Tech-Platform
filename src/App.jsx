@@ -9,6 +9,8 @@ import OpenRoute from "./components/core/auth/OpenRoute";
 import SignupForm from "./components/core/auth/SignpForm";
 import VerifyEmail from "./Pages/Form/VerifyEmail";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import ProfileDashboard from "./Pages/Dashboard/ProfileDashboard";
+import EnrolledCourse from "./Pages/Dashboard/EnrolledCourse";
 
 
 function App() {
@@ -48,8 +50,17 @@ function App() {
                 <VerifyEmail />
               </OpenRoute>
             }
+
           />
-          <Route path="dashboard/my-profile" element={<Dashboard />} />
+          
+              
+          <Route path="/dashboard" element={<Dashboard />} >
+              <Route
+                path="my-profile"
+                element={<ProfileDashboard/>}
+              />
+              <Route path="enrolled-courses" element={<EnrolledCourse/>} />
+          </Route>
         </Routes>
         {/* <Footer /> */}
       </Router>

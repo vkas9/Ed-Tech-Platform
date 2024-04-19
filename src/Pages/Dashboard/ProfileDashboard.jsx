@@ -6,7 +6,7 @@ const ProfileDashboard = () => {
   console.log("user", user);
   if(user) return (
 
-    <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="w-full">
+    <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="w-full">
       <div className=" text-lg flex flex-col gap-4 mt-2 ml-5 ">
         <div className="flex font-semibold gap-2 ">
           <span>Home</span>
@@ -20,8 +20,8 @@ const ProfileDashboard = () => {
       </div>
       <div className="mt-8 px-3 sm:px-0  ">
         <div className=" p-4 flex flex-col sm:flex-row items-center  bg-gray-500/30 rounded-md py-6 gap-1 w-full lg:max-w-[55%] sm:ml-5">
-          <div className="min-h-[70px] min-w-[70px]  rounded-full ">
-            <img src={user.ProfilePicture} className="rounded-full" alt="" />
+          <div className="min-h-[70px] min-w-[70px]   ">
+            <img src={user.ProfilePicture} className="" alt="" />
           </div>
           <div className="flex items-center flex-col sm:flex-row text-center sm:text-start ml-3 w-full justify-between ">
             <div className="flex flex-col ">

@@ -17,7 +17,7 @@ const Dashboard = () => {
       <Sidebar/>
       
       <div className="w-full md:w-[85%]">
-        <ProfileDashboard />
+        <Outlet/>
       </div>
     </div>
   );

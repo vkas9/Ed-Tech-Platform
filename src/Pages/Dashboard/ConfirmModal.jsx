@@ -12,9 +12,9 @@ const ConfirmModal=({modalData})=>{
                    <IconBtn   
                     onClick={modalData?.btn1Handler}
                     text={modalData?.btn1Text}
-                    className={"bg-gray-400/20 text-4xl text-white/90 py-2  px-2 transition-all duration-100 hover:bg-white/20 rounded-md"}
+                    className={"bg-gray-400/20 text-2xl text-white/90 py-2  px-2 transition-all duration-100 hover:bg-white/20 rounded-md"}
                    />
-                   <button onClick={modalData?.btn2Handler} className="bg-gray-400/20 text-white/90 text-4xl py-2 px-2 transition-all duration-100 hover:bg-white/20 rounded-md">
+                   <button onClick={modalData?.btn2Handler} className="bg-gray-400/20 text-white/90 text-2xl py-2 px-2 transition-all duration-100 hover:bg-white/20 rounded-md">
                     {modalData?.btn2Text}
                     
 
