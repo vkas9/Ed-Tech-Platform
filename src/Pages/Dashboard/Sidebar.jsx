@@ -2,8 +2,9 @@ import { CiLogout } from "react-icons/ci";
 import { CiSettings } from "react-icons/ci";
 import { Profile } from "../../constants/Profile";
 import SidebarLink from "./SidebarLink";
+import { useLocation } from "react-router-dom";
 const Sidebar = () => {
-
+  const location=useLocation();
   return (
     <div className="top-[68px] hidden sm:flex flex-col   min-h-[calc(100vh-(68px))]  min-w-[15%] bg-gray-500/20 ">
       <div

@@ -11,6 +11,10 @@ import VerifyEmail from "./Pages/Form/VerifyEmail";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ProfileDashboard from "./Pages/Dashboard/ProfileDashboard";
 import EnrolledCourse from "./Pages/Dashboard/EnrolledCourse";
+import Wishlist from "./Pages/Dashboard/Wishlist";
+import PurchaseHistory from "./Pages/Dashboard/PurchaseHistory";
+import Courses from "./Pages/Dashboard/Courses";
+import Settings from "./Pages/Dashboard/Settings";
 
 
 function App() {
@@ -60,6 +64,11 @@ function App() {
                 element={<ProfileDashboard/>}
               />
               <Route path="enrolled-courses" element={<EnrolledCourse/>} />
+              <Route path="wishlist" element={<Wishlist/>} />
+              <Route path="purchase-history" element={<PurchaseHistory/>} />
+              <Route path="Courses" element={<Courses/>} />
+              <Route path="Settings" element={<Settings/>} />
+            
           </Route>
         </Routes>
         {/* <Footer /> */}
