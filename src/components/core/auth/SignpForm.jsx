@@ -15,7 +15,7 @@ const SignupForm = () => {
     dispatch(opt(data, navigate));
   };
   return (
-    <div className="flex  min-h-[calc(100vh-2.8rem)]  pt-[3rem] sm:pt-[5rem]   flex-col gap-1 xs:gap-3 px-2 items-center ">
+    <div className="flex  h-screen  pt-[3rem] sm:pt-[5rem]   flex-col gap-1 xs:gap-3 px-2 items-center ">
       <h1 className="text-[2.5rem]  overflow-hidden mt-[1rem] mx-2  md:text-[4em]  bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center ">
         Create Student Account
       </h1>
@@ -32,7 +32,7 @@ const SignupForm = () => {
         }}
       >
         <Form className=" ">
-          <div className="   border  border-white/10  w-screen xs:w-full p-6 rounded-3xl flex flex-col  gap-2 xs:gap-5">
+          <div className="     w-screen xs:w-full p-6 rounded-3xl flex flex-col  gap-2 xs:gap-5">
             <div className="flex w-full flex-col xs:flex-row justify-center gap-2 xs:gap-2">
               <div>
                 <Field
@@ -94,7 +94,7 @@ const SignupForm = () => {
             </div>
             <button
               type="submit"
-              className="bg-yellow-600  hover:bg-yellow-500 text-black w-full  transition-all duration-150 font-bold text-3xl  active:bg-yellow-500 p-2 rounded-md mt-3  "
+              className="bg-yellow-600  hover:bg-yellow-500 text-black w-full  transition-all duration-150 font-bold text-2xl  active:bg-yellow-500 p-2 rounded-md mt-3  "
             >
               Sign Up
             </button>
