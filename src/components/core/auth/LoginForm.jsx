@@ -29,11 +29,11 @@ const LoginForm=()=>{
                 <Form className="mt-8 px-2 overflow-hidden ">
                  <div className="flex flex-col gap-8">
 
-                    <Field  required className="outline-offset-0 bg-gray-700  outline-none p-3 w-full md:w-[25rem] rounded-md font-semibold text-xl" placeholder="Enter email address" name="email" type="email" />
+                    <Field  required className="outline-offset-0 bg-white/10  outline-none p-3 w-full md:w-[25rem] rounded-md font-semibold text-xl" placeholder="Enter email address" name="email" type="email" />
                     
-                    <Field required className="bg-gray-700 p-3 outline-offset-0   w-full md:w-[25rem] outline-none rounded-md text-xl font-semibold" placeholder="Enter password" name="password" type="password" />
+                    <Field required className="bg-white/10 p-3 outline-offset-0   w-full md:w-[25rem] outline-none rounded-md text-xl font-semibold" placeholder="Enter password" name="password" type="password" />
                  </div>
-                    <Link to={"/reset-password"} className="block  text-end ">
+                    <Link to={"/reset-password"} className="block mt-1 text-gray-400 hover:text-white font-semibold  text-end ">
                         <span>Forgot Password?</span>
                     </Link>
                     <button   className="bg-purple-700 w-full font-bold text-xl active:bg-purple-600 p-2 rounded-md mt-3  " type="submit">Login</button>

@@ -18,7 +18,7 @@ const fileUpload=require("express-fileupload");
 const cors = require('cors');
 
 app.use(cors({
-  origin: 'https://master-ed-new.netlify.app', 
+  origin: ['https://master-ed-new.netlify.app', 'http://localhost:5173'], 
   credentials: true 
 }));
 
