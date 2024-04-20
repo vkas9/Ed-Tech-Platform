@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
 import Button from "../../components/Homepage/Button";
 import { motion } from "framer-motion";
-
+//
 const hero = () => {
   return (
-    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.6,delay:.2,ease:[0,.71,.2,1.01]}} className=" mx-auto relative text-center flex   lg:min-h-[55em]  ">
-      <div className="  mx-auto  max-w-[85rem]  flex flex-col px-[1px] md:px-8 mt-[6rem] lg:mt-[14rem]   relative z-10 gap-[3rem] lg:gap-[4rem] ">
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.6,delay:.2,ease:[0,.71,.2,1.01]}} className=" mx-auto  relative lg:h-[calc(100vh-68px)]  md:pt-[15vh] text-center flex mt-[68px]   lg:min-h-[55em]  ">
+     <div className="  mx-auto h-fit  flex flex-col px-[1px] md:px-8  mt-[calc(6rem-68px)]    z-10 gap-[3rem] lg:gap-[4rem] ">
         <h1 className="text-[45px] relative md:text-6xl  lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
           Empower Your Future with{" "}
           <HightlightText
@@ -63,13 +63,13 @@ const hero = () => {
         </div>
       </div>
 
-      <div className=" hidden  w-full h-full  lg:flex  items-center rounded-t-[3rem] overflow-hidden mx-auto absolute bottom-0 top-[68px] ">
+      <div className=" hidden  w-full   lg:flex   items-center rounded-t-[3rem] overflow-hidden mx-auto absolute bottom-0 top-0 ">
         <video
           src={video}
           muted
           loop
           autoPlay
-          className="opacity-30 w-full min-w-[1800px]  "
+          className="opacity-30 min-w-full min-h-full object-cover  "
           type="mp4"
         ></video>
       </div>
