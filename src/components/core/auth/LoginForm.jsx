@@ -4,7 +4,6 @@ import {Link,useNavigate} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import {login} from "../../../Auth/Authapi"
 import { useEffect } from "react";
-import IMG from "../../../assets/IMG.jpeg"
 const LoginForm=()=>{
     const navigate = useNavigate()
     const dispatch=useDispatch();
