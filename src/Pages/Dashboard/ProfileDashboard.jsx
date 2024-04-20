@@ -19,8 +19,8 @@ const ProfileDashboard = () => {
         <h1 className="text-[2.5rem] font-semibold ">My Profile</h1>
       </div>
       <div className="mt-8 px-3 sm:px-0  ">
-        <div className=" p-4 flex flex-col sm:flex-row items-center  bg-gray-500/30 rounded-md py-6 gap-1 w-full lg:max-w-[55%] sm:ml-5">
-          <div className="min-h-[70px] min-w-[70px]   ">
+        <div className=" p-4 flex flex-col sm:flex-row items-center  bg-gray-500/30 rounded-md py-6 gap-1 w-full sm:w-[95%] lg:max-w-[55%] sm:ml-5">
+          <div className="min-h-[70px] min-w-[70px] max-h-[70px] max-w-[70px]   ">
             <img src={user.ProfilePicture} className="" alt="" />
           </div>
           <div className="flex items-center flex-col sm:flex-row text-center sm:text-start ml-3 w-full justify-between ">
@@ -38,7 +38,7 @@ const ProfileDashboard = () => {
         </div>
       </div>
       <div className="mt-8 px-3 sm:px-0">
-        <div className=" p-4 flex flex-col items-center  bg-gray-500/30 rounded-md pt-2 pb-6 gap-9 w-full lg:max-w-[55%] sm:ml-5 ">
+        <div className=" p-4 flex flex-col items-center  bg-gray-500/30 rounded-md pt-2 pb-6 gap-9 sm:w-[95%] w-full  lg:max-w-[55%] sm:ml-5 ">
           <div className="flex mt-2 items-center mx-3 w-full justify-between  ">
             <div className="flex text-2xl font-semibold flex-col ">
               <span>Personal Details</span>

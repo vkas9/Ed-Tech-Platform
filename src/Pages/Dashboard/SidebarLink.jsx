@@ -31,7 +31,7 @@ const SidebarLink = ({ name, link, icon:Icon }) => {
       btn2Handler: () => setConfirmationModal(null),
     }):null}
     to={link!=""?link:null}
-    className={`py-4 px-5 ${name=='Log out'?'hover:bg-red-900/30  transition-all duration-200 hover:border-r-4 border-red-900':'hover:bg-blue-900/30 transition-all duration-200 hover:border-r-4 border-blue-900'}   ${
+    className={`py-4 px-5 ${name=='Log out'?'hover:bg-red-900/30  transition-all duration-200 hover:border-r-4 border-red-900':'sm:hover:bg-blue-900/30 active:bg-blue-900/30 transition-all duration-200 hover:border-r-4 border-blue-900'}   ${
         Route(link) ? "bg-gradient-to-l from-blue-900/30 to-transparent border-r-4 border-blue-900 " : ""
       } `}
       >
