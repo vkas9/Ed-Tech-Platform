@@ -69,7 +69,7 @@ const Navbar = () => {
               : "hidden"
           } fixed top-[56px]  left-0 right-0 bottom-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
-          <div className="relative lg:border border-gray-500/10 rounded-full z-2 flex flex-col select-none lg:select-text items-center justify-center m-auto lg:flex-row">
+          <div className="relative lg:border-r lg:border-l border-gray-500/20 rounded-full  z-2 flex flex-col select-none lg:select-text items-center justify-center m-auto lg:flex-row">
             {navigation.map((item) => (
               <>
                 {item.title === "Learn" ? (
@@ -130,13 +130,13 @@ const Navbar = () => {
             <div className="flex gap-4 font-bold items-center py-3 ">
               <Button
                 link={"/signup"}
-                className={`hidden lg:flex border outline-none hover:border-white border-gray-500 lg:hover:bg-white lg:active:bg-gray-300  lg:hover:text-black py-2 `}
+                className={`hidden rounded-full lg:flex border outline-none hover:border-white border-gray-500/60 lg:hover:bg-white lg:active:bg-gray-300  lg:hover:text-black py-2 `}
               >
                 Sign Up
               </Button>
               <Button
                 link={"/login"}
-                className={`hidden lg:flex outline-none border hover:border-white border-gray-500 lg:hover:bg-white lg:active:bg-gray-300 lg:hover:text-black py-2`}
+                className={`hidden rounded-full lg:flex outline-none border hover:border-white border-gray-500/60 lg:hover:bg-white lg:active:bg-gray-300 lg:hover:text-black py-2`}
               >
                 Log In
               </Button>

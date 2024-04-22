@@ -12,7 +12,7 @@ const AboutUs = () => {
           Learn. Grow. Succeed.
         </h1>
         <Link to={"/signup"}  className=" mt-5">
-          <Button className={"mx-auto bg-yellow-500 outline-none py-2"}>
+          <Button className={"mx-auto rounded-md bg-yellow-500 outline-none py-2"}>
             Explore More
           </Button>
         </Link>
@@ -23,9 +23,13 @@ const AboutUs = () => {
           muted
           loop
           autoPlay
-          className="  relative mx-auto min-w-[1200px] "
+          className="  relative    mx-auto min-w-[1200px] "
           type="mp4"
-        ></video>
+        >
+        </video>
+          <div className="w-screen absolute  top-0  h-screen  bg-gradient-to-br from-[#020512]/80 to-transparent">
+
+          </div>
       </div>
     </div>
   );

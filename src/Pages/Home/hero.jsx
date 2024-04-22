@@ -47,7 +47,7 @@ const hero = () => {
           <Button
             link={"/signup"}
             className={
-              " outline-none  font-semibold hover-none text-black bg-yellow-500 py-3 "
+              " outline-none rounded-md  font-semibold hover-none text-black bg-yellow-500 py-3 "
             }
           >
             Learn More
@@ -55,7 +55,7 @@ const hero = () => {
           <Button
             link={"/signup"}
             className={
-              " outline-none   bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-3"
+              " outline-none  rounded-md bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-3"
             }
           >
             Book a Demo

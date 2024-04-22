@@ -30,7 +30,7 @@ const SkillSection = () => {
                     </li>
                     
                 </ul>
-                <Button className={"outline-none mx-auto bg-yellow-500 py-3 px-5 text-black font-semibold"} > Learn more</Button>
+                <Button className={"outline-none rounded-md mx-auto bg-yellow-500 py-3 px-5 text-black font-semibold"} > Learn more</Button>
             </div>
             
             <div className=" overflow-hidden hidden md:flex relative rounded-3xl ">
