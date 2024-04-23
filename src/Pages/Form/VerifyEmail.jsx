@@ -18,7 +18,7 @@ const VerifyEmail=()=>{
 
     const handleInput = (e, index) => {
         const val = e.target.value;
-        if (!Number(val)) return;
+        if (val===0&&!Number(val)) return;
         const newInput = [...input];
         newInput[index] = val;
         setInput(newInput);
