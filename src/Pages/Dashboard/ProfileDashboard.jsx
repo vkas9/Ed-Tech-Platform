@@ -25,7 +25,7 @@ const ProfileDashboard = () => {
           </div>
           <div className="flex items-center flex-col sm:flex-row text-center sm:text-start ml-3 w-full justify-between ">
             <div className="flex flex-col ">
-              <span>
+              <span className="capitalize ">
                 {user.FirstName} {user.LastName}
               </span>
               <span className="text-gray-200/50 ">{user.Email}</span>
@@ -52,7 +52,7 @@ const ProfileDashboard = () => {
             <div className="flex flex-col gap-4 ">
               <div className="flex flex-col ">
                 <span className="text-gray-400">First Name</span>
-                <span>{user.FirstName}</span>
+                <span className="capitalize ">{user.FirstName}</span>
               </div>
               <div className="flex flex-col ">
                 <span className="text-gray-400">Email</span>
@@ -62,7 +62,7 @@ const ProfileDashboard = () => {
             <div className="flex flex-col gap-4">
               <div className="flex  flex-col ">
                 <span className="text-gray-400">Last Name</span>
-                <span>{user.LastName}</span>
+                <span className="capitalize ">{user.LastName}</span>
               </div>
               <div className="flex flex-col ">
                 <span className="text-gray-400">Phone Number</span>
