@@ -8,7 +8,6 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 //sign up handler
 exports.signup = async (req, res) => {
-  
   try {
     const {
       FirstName,
@@ -21,7 +20,7 @@ exports.signup = async (req, res) => {
       role,
     } = req.body;
 
-    if (!FirstName || !LastName || !Email || !Password || !Password||!otp ) {
+    if (!FirstName || !LastName || !Email || !Password || !Password || !otp) {
       return res.status(401).json({
         success: false,
         message: "All fields are required",
@@ -35,7 +34,6 @@ exports.signup = async (req, res) => {
           message: "Already user Exist with this email",
         });
     }
-    
 
     if (Password !== ConfirmPassword) {
       return res.status(400).json({
@@ -53,7 +51,6 @@ exports.signup = async (req, res) => {
         message: "OTP Expired",
       });
     } else if (recentOtp[0].OTP !== otp) {
-      
       return res.status(400).json({
         success: false,
 
@@ -81,11 +78,11 @@ exports.signup = async (req, res) => {
       Profile: userProfile._id,
       ProfilePicture: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${FirstName}`,
     });
-    console.log("userDB",userDB);
+    console.log("userDB", userDB);
     return res.status(200).json({
       success: true,
       message: "Successfully Account Created",
-      userData:userDB
+      userData: userDB,
     });
   } catch (error) {
     console.log(error);
@@ -100,16 +97,15 @@ exports.signup = async (req, res) => {
 
 exports.otp = async (req, res) => {
   try {
-    console.log("get otp")
+    console.log("get otp");
     const { email } = req.body;
-   
+
     const user = await User.findOne({ Email: email });
     if (user) {
-      
       return res.status(400).json({
-        success:false,
-        message:"Already User registered with this Email"
-      })
+        success: false,
+        message: "Already User registered with this Email",
+      });
     }
 
     const generatedOtp = optgenerator.generate(6, {
@@ -185,10 +181,44 @@ exports.login = async (req, res) => {
   }
 };
 
-
 // change password
 exports.changePassword = async (req, res) => {
   try {
     const { oldpassword, password, ConfirmPassword } = req.body;
-  } catch (error) {}
+    console.log(req.body);
+    if (password !== ConfirmPassword)
+      return res.status(400).json({
+        success: false,
+        message: "Password do not matching!",
+      });
+    const registredUser = await User.findById({ _id: req.user.id });
+    const isOldPasswordCorrect = await bcrypt.compare(
+      oldpassword,
+      registredUser.Password
+    );
+    if (!isOldPasswordCorrect) {
+      return res.status(400).json({
+        success: false,
+        message: "Old password is incorrect",
+      });
+    }
+    const newPassHash = await bcrypt.hash(oldpassword, 10);
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { Password: newPassHash },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      success:true,
+      message: "Password successfully Changed",
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while changing password"
+    });
+  }
 };
