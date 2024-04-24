@@ -11,6 +11,7 @@ import CodeBlocks from "./CodeBlocks";
 import SkillSection from "./SkillSection";
 import Pricing from "./Pricing"
 import AboutUs from "./AboutUs";
+import Footer from "../../components/Homepage/Footer";
 
 
 const Home = () => {
@@ -36,6 +37,7 @@ const Home = () => {
       <SkillSection/>
       <Pricing/>
       <AboutUs/>
+      <Footer />
     </div>
   );
 };
