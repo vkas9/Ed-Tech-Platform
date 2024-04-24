@@ -22,6 +22,7 @@ const hero = () => {
           >
             Coding Skills{" "}
             <img
+              loading="lazy"
               src={curve1}
               className=" absolute left-0 top-full lg:mt-1 "
               width="624"
@@ -66,6 +67,7 @@ const hero = () => {
       <div className=" hidden  w-full   lg:flex   items-center rounded-t-[3rem] overflow-hidden mx-auto absolute bottom-0 top-0 ">
         <video
           src={video}
+          preload="auto"
           muted
           loop
           autoPlay

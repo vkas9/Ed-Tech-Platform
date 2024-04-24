@@ -34,7 +34,7 @@ const SkillSection = () => {
             </div>
             
             <div className=" overflow-hidden hidden md:flex relative rounded-3xl ">
-                <img src={techimage} className="rounded-md opacity-80  absolute lg:static top-0 left-0 object-cover " alt="" />
+                <img src={techimage} loading="lazy" className="rounded-md opacity-80  absolute lg:static top-0 left-0 object-cover " alt="" />
                 <div className="h-full w-full  absolute top-0 left-0 bg-gradient-to-br from-blue-950/40 to-transparent"></div>
             </div>
         </div>
