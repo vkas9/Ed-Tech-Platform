@@ -120,3 +120,32 @@ export const logout=(navigate)=>{
     }
     
 }
+
+export const resetPassword=(data,navigate)=>{
+    return async(dispatch)=>{
+        const toastId=toast.loading("Loading");
+        try{
+            await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/changepassword",{
+                oldpassword:data.oldPassword,
+                password:data.password,
+                ConfirmPassword:data.confirmPassword
+            })
+            toast.success("Successfully Password Changed")
+
+
+
+
+        }catch(error){
+            if(error.response.data.message){
+                toast.error(error.response.data.message)
+            }
+            else{
+                toast.error("Something went wrong")
+            }
+
+        }
+        toast.dismiss(toastId);
+
+    }
+    
+}

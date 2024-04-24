@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import ResetPassword from "./ResetPassword";
 const Settings = () => {
   return (
     <motion.div
@@ -15,7 +16,7 @@ const Settings = () => {
         <span className="text-yellow-500 ">Settings</span>
       </div>
 
-      <div>Coming Soon...</div>
+      <ResetPassword/>
     </motion.div>
   );
 };

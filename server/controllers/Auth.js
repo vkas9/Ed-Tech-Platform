@@ -191,7 +191,7 @@ exports.changePassword = async (req, res) => {
         success: false,
         message: "Password do not matching!",
       });
-    const registredUser = await User.findById({ _id: req.user.id });
+    const registredUser = await User.findById(req.user.id );
     const isOldPasswordCorrect = await bcrypt.compare(
       oldpassword,
       registredUser.Password
@@ -202,7 +202,7 @@ exports.changePassword = async (req, res) => {
         message: "Old password is incorrect",
       });
     }
-    const newPassHash = await bcrypt.hash(oldpassword, 10);
+    const newPassHash = await bcrypt.hash(password, 10);
 
     const updatedUser = await User.findByIdAndUpdate(
       req.user.id,
