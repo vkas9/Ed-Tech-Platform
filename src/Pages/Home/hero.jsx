@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 //
 const hero = () => {
   return (
-    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.6,delay:.2,ease:[0,.71,.2,1.01]}} className=" mx-auto  relative lg:h-[calc(100vh-68px)]  md:pt-[15vh] text-center flex mt-[68px]   lg:min-h-[55em]  ">
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.6,delay:.2,ease:[0,.71,.2,1.01]}} className=" mx-auto  relative lg:h-[calc(100vh-68px)]  md:pt-[15vh] text-center flex mt-[84px]   lg:min-h-[55em]  ">
      <div className="  mx-auto h-fit  flex flex-col px-[1px] md:px-8  mt-[calc(6rem-68px)]    z-10 gap-[3rem] lg:gap-[4rem] ">
         <h1 className="text-[45px] relative md:text-6xl  lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
           Empower Your Future with{" "}

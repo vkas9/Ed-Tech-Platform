@@ -13,7 +13,7 @@ const Dashboard = () => {
     }
   }, []);
   return (
-    <div className="text-white flex relative top-0 pt-[68px]  min-h-[calc(100vh-(68px))] ">
+    <div className="text-white flex relative  pt-[84px]  min-h-[calc(100vh-(85px))] ">
       <Sidebar/>
       
       <div className="w-full md:w-[85%]">
