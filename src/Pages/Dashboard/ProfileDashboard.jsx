@@ -46,7 +46,7 @@ const ProfileDashboard = () => {
             <div className="flex text-xl select-none gap-2 items-center p-2 border hover:bg-gray-100/10 hover:cursor-pointer border-gray-400/50 rounded-lg font-semibold ">
               <MdOutlineEdit className="text-lg" />
               <span>Edit</span>
-            </div>``
+            </div>
           </div>
           <div className=" w-full bg-gray-500/10 flex-col sm:flex-row p-4 py-6 rounded-xl  mx-3 flex justify-between  gap-3">
             <div className="flex flex-col gap-4 ">
