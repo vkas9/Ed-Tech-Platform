@@ -47,7 +47,7 @@ const ResetPassword=()=>{
                         </Field>
                     </div>
                     </div>
-                    <button type="submit" className="mt-4 bg-yellow-500 p-1 rounded-lg w-[130px] text-black text-2xl ">Change</button>
+                    <button type="submit" className="mt-4 md:hover:bg-yellow-600 active:bg-yellow-600 shadow-inner active:shadow-yellow-700 md:hover:shadow-yellow-700  transition-all duration-200 bg-yellow-500 p-1 rounded-lg w-[130px] text-black text-2xl ">Change</button>
                     
                     
 

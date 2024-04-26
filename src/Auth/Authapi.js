@@ -12,9 +12,10 @@ export const login=(data,navigate)=>{
            await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/login",{
                 email:data.email,password:data.password
             }).then(res=>{
-                console.log("response",res.data);
+                console.log("response",res.data.token);
                 response=res.data;
             })
+            document.cookie=`ViToken= ${response.token}`
             
            console.log("response->",response.registredUser.FirstName)
             toast.success(`Welcome ${response.registredUser.FirstName}`);
@@ -129,6 +130,8 @@ export const resetPassword=(data,navigate)=>{
                 oldpassword:data.oldPassword,
                 password:data.password,
                 ConfirmPassword:data.confirmPassword
+            }, {
+                withCredentials: true
             })
             toast.success("Successfully Password Changed")
 
