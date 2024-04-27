@@ -158,8 +158,7 @@ exports.login = async (req, res) => {
       const option = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
-        secure: true,
-        sameSite: 'None'
+        secure: true
       };
       res.cookie("ViToken", token, option).status(200).json({
         success: true,
