@@ -8,17 +8,19 @@ export const login=(data,navigate)=>{
         dispatch(authAction.setLoading(true));
         let response;
         try {
-            console.log(data.email)
+        
            await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/login",{
                 email:data.email,password:data.password
+            }, {
+                withCredentials: true // Include cookies in the request
             }).then(res=>{
                 console.log("response",res.data.token);
                 response=res.data;
             })
-            document.cookie=`ViToken= ${response.token}`
             
-           console.log("response->",response.registredUser.FirstName)
-            toast.success(`Welcome ${response.registredUser.FirstName}`);
+          
+           console.log("response->",response)
+            toast.success(`Welcome to MASTER, ${response.registredUser.FirstName}`);
             dispatch(authAction.setToken(response.token));
             dispatch(profileAction.setProfile(response.registredUser.ProfilePicture))
             console.log( response.registredUser.ProfilePicture);
@@ -126,13 +128,15 @@ export const resetPassword=(data,navigate)=>{
     return async(dispatch)=>{
         const toastId=toast.loading("Loading");
         try{
-            await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/changepassword",{
+            const response=await axios.post("http://localhost:8080/api/v1/auth/changepassword",{
                 oldpassword:data.oldPassword,
                 password:data.password,
                 ConfirmPassword:data.confirmPassword
             }, {
                 withCredentials: true
             })
+            // console.log("Request headers:", response.config.headers);
+            console.log("Response headers:", response.headers);
             toast.success("Successfully Password Changed")
 
 
