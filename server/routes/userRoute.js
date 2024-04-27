@@ -8,7 +8,10 @@ router.post("/login",login);
 router.post("/signup",signup);
 router.post("/otp",otp);
 router.post("/profile",auth,updateProfile)
-router.post("/changepassword",auth,changePassword)
+router.post("/changepassword",auth,changePassword,(err)=>{
+    if(err)console.log("err->",err)
+    else console.log("success")
+})
 
 
 
