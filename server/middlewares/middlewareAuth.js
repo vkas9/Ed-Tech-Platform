@@ -8,7 +8,7 @@ exports.auth=async(req,res,next)=>{
         const token=req.cookies.ViToken ||req.body.token;
         console.log("token-->",token);
         if(!token){
-            return res.status(9878).json({
+            return res.status(400).json({
                 success:false,
                 message:"Token is missing"
             })
