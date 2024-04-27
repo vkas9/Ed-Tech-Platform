@@ -118,7 +118,7 @@ export const logout=(navigate)=>{
         dispatch(profileAction.setProfile(null));
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        clearCookie('ViToken');
+        document.cookie = 'ViToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         toast.success("Logged Out Successfully")
         navigate("/")
     }
