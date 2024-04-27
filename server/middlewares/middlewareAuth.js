@@ -6,7 +6,7 @@ require("dotenv").config();
 exports.auth=async(req,res,next)=>{
     try {
         const token=req.cookies.ViToken ||req.body.token;
-        console.log("token-->",token);
+        console.log("token-->",req);
         if(!token){
             return res.status(400).json({
                 success:false,
