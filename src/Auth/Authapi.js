@@ -128,7 +128,7 @@ export const resetPassword=(data,navigate)=>{
     return async(dispatch)=>{
         const toastId=toast.loading("Loading");
         try{
-            const response=await axios.post("http://localhost:8080/api/v1/auth/changepassword",{
+            const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/changepassword",{
                 oldpassword:data.oldPassword,
                 password:data.password,
                 ConfirmPassword:data.confirmPassword
