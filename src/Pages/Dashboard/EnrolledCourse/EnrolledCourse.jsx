@@ -1,4 +1,7 @@
+
+
 import { motion } from "framer-motion";
+import CourseCard from "./CourseCard";
 const EnrolledCourse = () => {
   return (
     <motion.div
@@ -15,7 +18,8 @@ const EnrolledCourse = () => {
         <span className="text-yellow-500 ">Enrolled Courses</span>
       </div>
 
-      <div>Coming Soon...</div>
+      <h1 className=" text-3xl">Enrolled Course</h1>
+      <CourseCard/>
     </motion.div>
   );
 };

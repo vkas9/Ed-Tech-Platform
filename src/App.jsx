@@ -10,7 +10,7 @@ import SignupForm from "./components/core/auth/SignpForm";
 import VerifyEmail from "./Pages/Form/VerifyEmail";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ProfileDashboard from "./Pages/Dashboard/ProfileDashboard";
-import EnrolledCourse from "./Pages/Dashboard/EnrolledCourse";
+import EnrolledCourse from "./Pages/Dashboard/EnrolledCourse/EnrolledCourse";
 import Wishlist from "./Pages/Dashboard/Wishlist";
 import PurchaseHistory from "./Pages/Dashboard/PurchaseHistory";
 import Courses from "./Pages/Dashboard/Courses";
