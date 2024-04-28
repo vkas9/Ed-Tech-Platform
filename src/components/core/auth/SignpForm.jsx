@@ -69,7 +69,7 @@ const SignupForm = () => {
                 required
                 name="Contact_Number"
                 type="tel"
-                max={10}
+                maxlength={10}
               ></Field>
             </div>
             <div className="flex flex-col vm:flex-row justify-center gap-2 xs:gap-5 vm:gap-2 ">
