@@ -157,3 +157,25 @@ export const resetPassword=(data,navigate)=>{
     }
     
 }
+
+
+export const getCourseDetail=async(courseId)=>{
+   
+
+        const toastId=toast.loading("Loading")
+        
+        try {
+        
+        const response=await axios.get("http://localhost:8080/api/v1/profile/getAllUserDetails")
+        .then((res)=>{
+            console.log("res-> ",res)
+        })
+        
+
+    } catch (error) {
+        
+    }
+
+    toast.dismiss(toastId);
+
+}
