@@ -161,7 +161,7 @@ exports.login = async (req, res) => {
         secure: true,
         sameSite:'None'
       };
-      res.cookie("ViToken", token, option).status(200).json({
+      res.cookie("EDT", token, option).status(200).json({
         success: true,
         registredUser,
         token,
