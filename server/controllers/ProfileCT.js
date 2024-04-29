@@ -37,12 +37,27 @@ exports.updateProfile=async(req,res)=>{
 exports.getAllUserDetails=async(req,res)=>{
     try {
         const id=req.user.id;
-        const userDetail=await user.findById(id).populate("Profile").exec();
-
+        const userDetail=await user.findById(id);
+        const courseDetail=await Courses.findById(userDetail.Courses[0]).populate({
+            path: "Instructor",
+            populate: {
+                path: "Profile"
+            }
+        }).populate({
+            path: "Rating_N_Reviews",
+            populate: {
+                path: "User"
+            }
+        }).populate({
+            path: "Catagory",
+            populate: {
+                path: "Course"
+            }
+        }).populate("StudentEntrolled").populate("Section").exec();
         return res.status(200).json({
             success:true,
-            message:"successfully Received User Detail",
-            userDetail
+            message:"successfully Received Course Detail",
+            courseDetail
         })
     } catch (error) {
         console.log(error)
@@ -52,7 +67,6 @@ exports.getAllUserDetails=async(req,res)=>{
         })
     }
 }
-
 exports.getEnrolledCourses=async(req,res)=>{
     try {
         const userId=req.user.id;
