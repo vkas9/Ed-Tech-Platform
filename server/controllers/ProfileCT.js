@@ -1,6 +1,6 @@
 const user=require("../models/User");
 const profile=require("../models/Profile");
-
+const Courses=require("../models/Courses")
 exports.updateProfile=async(req,res)=>{
     try {
         const{City,contactNumber,Country,Gender,about,dateOfBirth}=req.body;
@@ -71,6 +71,7 @@ exports.getEnrolledCourses=async(req,res)=>{
     try {
         const userId=req.user.id;
         const userDetails=await user.findById(userId).populate().exec();
+        
         if(!userDetails){
             return res.status(400).json({
                 success:false,
@@ -88,6 +89,7 @@ exports.getEnrolledCourses=async(req,res)=>{
         })
     }
 }
+
 
 
 exports.deleteAccount=async(req,res)=>{
