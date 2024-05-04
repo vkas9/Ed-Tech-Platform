@@ -28,7 +28,9 @@ const Navbar = () => {
   },[])
 
   const { token } = useSelector((store) => store.auth);
-  const user=JSON.parse(localStorage.getItem("user"))
+  var bytes  = CryptoJS.AES.decrypt(localStorage.getItem("user"), "EDVKAS9"); 
+  var user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
   const { totalItems } = useSelector((store) => store.card);
   const [openNavigation, setOpenNavigation] = useState(false);
   const location = useLocation();

@@ -27,9 +27,9 @@ export const login=(data,navigate)=>{
             dispatch(authAction.setToken(response.token));
             dispatch(profileAction.setProfile(response.registredUser.ProfilePicture))
             console.log( response.registredUser.ProfilePicture);
-           
+            var user = CryptoJS.AES.encrypt(JSON.stringify(response.registredUser), "EDVKAS9").toString();
             localStorage.setItem("token",JSON.stringify(response.token));
-            localStorage.setItem("user",JSON.stringify(response.registredUser));
+            localStorage.setItem("user",user);
             navigate("/dashboard/my-profile")
 
         } catch (error) {

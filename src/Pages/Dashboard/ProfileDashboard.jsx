@@ -2,8 +2,8 @@ import { MdOutlineEdit } from "react-icons/md";
 import { Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 const ProfileDashboard = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  console.log("user", user);
+  var bytes  = CryptoJS.AES.decrypt(localStorage.getItem("user"), "EDVKAS9"); 
+  var user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
   if(user) return (
 
     <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="w-full">
