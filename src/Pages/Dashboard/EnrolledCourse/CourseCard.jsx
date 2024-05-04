@@ -1,4 +1,4 @@
-const CourseCard=({course,index})=>{
+const CourseCard=({course})=>{
     return (
         <div className="flex justify-between items-center rounded-xl mt-4 bg-gray-300/20 max-w-[60rem] p-3  ">
             <div className= "gap-3 p-3 flex">

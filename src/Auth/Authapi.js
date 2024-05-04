@@ -2,6 +2,9 @@ import axios from "axios";
 import authSlice, { authAction } from "../store/authSlice"
 import { toast } from "react-hot-toast"
 import {profileAction} from "../store/profileSlice"
+import  CryptoJS  from "crypto-js";
+
+
 export const login=(data,navigate)=>{
     return async(dispatch)=>{
         const toastId=toast.loading("Loading...");
@@ -174,6 +177,8 @@ export const getCourseDetail=async(courseId)=>{
             response=res;
             
         })
+        var Text = CryptoJS.AES.encrypt(JSON.stringify(JSON.stringify(response.data.courseDetail)), "EDVKAS9").toString();
+        localStorage.setItem("EC",Text);
      
         
         
