@@ -47,24 +47,7 @@ const EnrolledCourse = () => {
       {
         enrolledCourses.length?enrolledCourses.map((course,index)=>(
 
-          <div key={index} className="flex justify-between rounded-xl mt-4 bg-gray-500/40 max-w-[60rem] p-3  ">
-            <div className=" flex">
-              <img src={course.Thumbnail} alt="course-thumbnail" className="max-w-[100px] rounded-2xl " />
-             
-              <div>
-                <h2>{course.CourseName}</h2>
-                <p>{course.CourseDescription}</p>
-              </div>
-            </div>
-            <div>
-              <span>{course?.duration}</span>
-            </div>
-            <div>
-              <p>Progress: 0%</p>
-            </div>
-
-           
-          </div>
+           <CourseCard  course={course} index={index}/>
 
         ))
         
