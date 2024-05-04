@@ -163,15 +163,19 @@ export const getCourseDetail=async(courseId)=>{
    
 
         const toastId=toast.loading("Loading")
-        
+        let response;
         try {
         
-        const response=await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getAllUserDetails",{
+        await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getAllUserDetails",{
             withCredentials:true
         })
         .then((res)=>{
             console.log("res-> ",res)
+            response=res;
+            
         })
+     
+        
         
 
     } catch (error) {
@@ -179,5 +183,6 @@ export const getCourseDetail=async(courseId)=>{
     }
 
     toast.dismiss(toastId);
+    return response;
 
 }

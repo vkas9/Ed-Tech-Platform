@@ -8,13 +8,26 @@ import { getCourseDetail } from "../../../Auth/Authapi";
 const EnrolledCourse = () => {
   const[enrolledCourses,setEnrolledCourses]= useState([]);
    
-    useEffect(()=>{
-      const data=JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = JSON.parse(localStorage.getItem("user"));
+  
+      if (data && data.Courses && data.Courses.length > 0) {
+        const courseData = await getCourseDetail(data.Courses[0]);
+       
+        setEnrolledCourses([courseData.data.courseDetail]);
+        
+        
+      } 
       
-      const courseData=getCourseDetail(data.Courses[0]);
-      
-      
-    })
+      }catch(error){
+        console.log("Unable to fetch enrolled courses")
+      }
+    };
+  
+    fetchData();
+  }, []);
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -34,9 +47,10 @@ const EnrolledCourse = () => {
       {
         enrolledCourses.length?enrolledCourses.map((course,index)=>(
 
-          <div className="flex justify-between">
+          <div key={index} className="flex justify-between rounded-xl mt-4 bg-gray-500/40 max-w-[60rem] p-3  ">
             <div className=" flex">
               <img src={course.Thumbnail} alt="course-thumbnail" className="max-w-[100px] rounded-2xl " />
+             
               <div>
                 <h2>{course.CourseName}</h2>
                 <p>{course.CourseDescription}</p>
