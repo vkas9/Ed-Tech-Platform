@@ -166,7 +166,7 @@ export const getCourseDetail=async(courseId)=>{
         
         try {
         
-        const response=await axios.get("http://localhost:8080/api/v1/profile/getAllUserDetails")
+        const response=await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getAllUserDetails")
         .then((res)=>{
             console.log("res-> ",res)
         })
