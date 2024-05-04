@@ -4,9 +4,7 @@ import { logout } from "../../Auth/Authapi";
 const ProfileDropDown=()=>{
     const navigate=useNavigate()
     const dispatch=useDispatch();
-    
-    var bytes  = CryptoJS.AES.decrypt(localStorage.getItem("user"), "EDVKAS9"); 
-    var user = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    const user=JSON.parse(localStorage.getItem("user"));
     const handleSubmit=(e)=>{
         e.preventDefault();
         navigate("/dashboard/my-profile")
