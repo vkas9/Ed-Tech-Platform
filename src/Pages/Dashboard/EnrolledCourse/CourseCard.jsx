@@ -1,8 +1,8 @@
 const CourseCard=({course})=>{
     return (
-        <div className="flex justify-between flex-col sm:flex-row mr-5 items-center rounded-xl mt-4 bg-gray-300/20 max-w-[60rem] p-3  ">
-            <div className= "gap-3 p-3 flex">
-              <img src={course.Thumbnail} alt="course-thumbnail" className="max-w-[100px] rounded-lg " />
+        <div className="flex text-xl justify-between flex-col sm:flex-row mr-5 items-center rounded-xl mt-4 bg-gray-300/10 max-w-[60rem] p-3  ">
+            <div className= "gap-3 p-2 items-center flex">
+              <img src={course.Thumbnail} alt="course-thumbnail" className="w-[150px] max-w-[150px] rounded-lg " />
              
               <div>
                 <h2>{course.CourseName}</h2>
