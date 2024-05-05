@@ -121,6 +121,7 @@ export const logout=(navigate)=>{
         dispatch(profileAction.setProfile(null));
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        localStorage.removeItem("EC");
         document.cookie = 'EDT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         toast.success("Logged Out Successfully")
         navigate("/")
