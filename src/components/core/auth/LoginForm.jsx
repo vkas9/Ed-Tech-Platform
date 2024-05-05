@@ -4,6 +4,7 @@ import {Link,useNavigate} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import {login} from "../../../Auth/Authapi"
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 const LoginForm=()=>{
     const navigate = useNavigate()
     const dispatch=useDispatch();
@@ -22,7 +23,7 @@ const LoginForm=()=>{
 
     
     return (
-        <div className="h-screen  relative flex flex-col overflow-x-hidden  items-center justify-center w-full     mx-auto ">
+        <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="h-screen  relative flex flex-col overflow-x-hidden  items-center justify-center w-full     mx-auto ">
 
             <h1 className="text-[3rem] overflow-hidden  md:text-[4em] -mt-[8rem] bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center ">Welcome Back</h1>
             <Formik  onSubmit={(values)=>(handleSubmit(values))} initialValues={{email:"",password:""}} >
@@ -40,7 +41,7 @@ const LoginForm=()=>{
                 </Form>
             </Formik>
             
-        </div>
+        </motion.div>
     );
 }
 export default LoginForm;
