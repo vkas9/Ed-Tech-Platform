@@ -38,7 +38,11 @@ exports.getAllUserDetails=async(req,res)=>{
     try {
         const id=req.user.id;
         const userDetail=await user.findById(id);
-        const courseDetail=await Courses.findById(userDetail.Courses[0]).populate({
+        var courseDetail=[];
+        for(let i=0;i<userDetail.Courses.length;i++){
+
+        
+            courseDetail.push( await Courses.findById(userDetail.Courses[i]).populate({
             path: "Instructor",
             populate: {
                 path: "Profile"
@@ -53,7 +57,9 @@ exports.getAllUserDetails=async(req,res)=>{
             populate: {
                 path: "Course"
             }
-        }).populate("StudentEntrolled").populate("Section").exec();
+        }).populate("StudentEntrolled").populate("Section").exec());
+    }
+    
         return res.status(200).json({
             success:true,
             message:"successfully Received Course Detail",

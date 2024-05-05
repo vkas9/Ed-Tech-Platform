@@ -15,12 +15,8 @@ const EnrolledCourse = () => {
         const data = JSON.parse(localStorage.getItem("user"));
   
       if (data && data.Courses && data.Courses.length > 0) {
-        const courseData = await getCourseDetail(data.Courses[0]);
-       
-        setEnrolledCourses([courseData.data.courseDetail]);
-        
-        
-        
+        const courseData = await getCourseDetail(data.Courses);
+        setEnrolledCourses(courseData.data.courseDetail);
       } 
       
       }catch(error){
@@ -30,7 +26,7 @@ const EnrolledCourse = () => {
     if(localStorage.getItem("EC")){
       var bytes  = CryptoJS.AES.decrypt(localStorage.getItem("EC"), "EDVKAS9"); 
       var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-      setEnrolledCourses([JSON.parse(decryptedData)]);
+      setEnrolledCourses(JSON.parse(decryptedData));
     }else{
       fetchData();
     }
