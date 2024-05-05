@@ -12,7 +12,7 @@ export const login=(data,navigate)=>{
         let response;
         try {
         
-           await axios.post("http://localhost:8080/api/v1/auth/login",{
+           await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/login",{
                 email:data.email,password:data.password
             }, {
                 withCredentials: true // Include cookies in the request
@@ -170,7 +170,7 @@ export const getCourseDetail=async(courseId)=>{
         let response;
         try {
         
-        await axios.get("http://localhost:8080/api/v1/profile/getAllUserDetails",{
+        await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getAllUserDetails",{
             withCredentials:true
         })
         .then((res)=>{
