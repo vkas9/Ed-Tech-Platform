@@ -51,7 +51,7 @@ const Navbar = () => {
   };
   return (
     <div
-      className={`fixed  lg:backdrop-blur-md top-[15px]  py-[6.4px] lg:py-0 rounded-b-[2.5rem] border-b border-gray-200/10 z-[100]  w-full ${
+      className={`fixed  lg:backdrop-blur-md top-[15px]   rounded-b-[2.5rem] border-b border-gray-200/10 z-[100]  w-full ${
         openNavigation
           ? " bg-gradient-to-r from-blue-950  to-black"
           : " backdrop-blur-md"
