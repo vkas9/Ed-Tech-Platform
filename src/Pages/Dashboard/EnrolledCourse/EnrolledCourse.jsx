@@ -6,17 +6,20 @@ import { useEffect, useState } from "react";
 import { getCourseDetail } from "../../../Auth/Authapi";
 import  CryptoJS  from "crypto-js";
 const EnrolledCourse = () => {
-  const[enrolledCourses,setEnrolledCourses]= useState([]);
+  const[enrolledCourses,setEnrolledCourses]= useState(null);
    
   useEffect(() => {
     const fetchData = async () => {
       try {
         
         const data = JSON.parse(localStorage.getItem("user"));
-  
+        console.log("data",data)
       if (data && data.Courses && data.Courses.length > 0) {
         const courseData = await getCourseDetail(data.Courses);
         setEnrolledCourses(courseData.data.courseDetail);
+      }
+      else{
+        setEnrolledCourses([])
       } 
       
       }catch(error){
@@ -51,19 +54,15 @@ const EnrolledCourse = () => {
       <h1 className=" text-3xl">Enrolled Course</h1>
       <div className="overflow-auto  h-[78vh] ">
       {
-        enrolledCourses.length?enrolledCourses.map((course,index)=>(
-         
-
-          
-           <CourseCard  course={course} key={index}/>
-          
-
-        ))
-       
+        !enrolledCourses?(
+          <div>
+            <p>Loading...</p>
+          </div>
+        ):enrolledCourses.length?enrolledCourses.map((course,index)=>(
+          <CourseCard  course={course} key={index}/>
+       ))     
+       :<p>You have not Enrolled in any Course Yet !</p>
         
-        
-      
-        :<p>You have not Enrolled in any Course Yet !</p>
       }
        </div>
      
