@@ -22,19 +22,26 @@ const EnrolledCourse = () => {
       }
     };
 
-    if (localStorage.getItem("EC")) {
-      var bytes = CryptoJS.AES.decrypt(localStorage.getItem("EC"), "EDVKAS9");
-      var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-      setEnrolledCourses(JSON.parse(decryptedData));
-    } else {
-      fetchData();
+    if (!enrolledCourses) {
+      if (localStorage.getItem("EC")) {
+        var bytes = CryptoJS.AES.decrypt(localStorage.getItem("EC"), "EDVKAS9");
+        var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+        setEnrolledCourses(JSON.parse(decryptedData));
+      } else {
+        fetchData();
+      }
     }
-  }, []);
+  }, [enrolledCourses]);
 
   const memoizedCourses = useMemo(() => {
     if (!enrolledCourses) return null;
     return enrolledCourses.map((course, index) => <CourseCard course={course} key={index} />);
   }, [enrolledCourses]);
+
+  const coursesToRender = useMemo(() => {
+    if (!memoizedCourses) return null;
+    return memoizedCourses.length ? memoizedCourses : <p>You have not Enrolled in any Course Yet !</p>;
+  }, [memoizedCourses]);
 
   return (
     <motion.div
@@ -53,15 +60,7 @@ const EnrolledCourse = () => {
 
       <h1 className=" text-3xl">Enrolled Course</h1>
       <div className="overflow-auto h-[78vh]">
-        {!memoizedCourses ? (
-          <div>
-            <p>Loading...</p>
-          </div>
-        ) : memoizedCourses.length ? (
-          memoizedCourses
-        ) : (
-          <p>You have not Enrolled in any Course Yet !</p>
-        )}
+        {!coursesToRender ? <div><p>Loading...</p></div> : coursesToRender}
       </div>
     </motion.div>
   );
