@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import ResetPassword from "./ResetPassword";
+import EditProfile from "./EditProfile/EditProfile";
 const Settings = () => {
   return (
     <motion.div
@@ -15,7 +16,7 @@ const Settings = () => {
         <span>/</span>
         <span className="text-yellow-500 ">Settings</span>
       </div>
-
+      <EditProfile/>
       <ResetPassword/>
     </motion.div>
   );

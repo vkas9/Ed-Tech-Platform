@@ -17,6 +17,7 @@ const ResetPassword = () => {
   };
   return (
     <div>
+       
       <h1 className="text-3xl ">Change Password</h1>
 
       <Formik
@@ -32,7 +33,7 @@ const ResetPassword = () => {
             <div className="  ">
               <Field
                 className="bg-white/20 w-full max-w-[350px] rounded-md p-2 outline-none"
-                type="text"
+                type="password"
                 required
                 placeholder="Current Password"
                 name="oldPassword"
@@ -41,7 +42,7 @@ const ResetPassword = () => {
             <div className=" ">
               <Field
                 className="bg-white/20 w-full max-w-[350px]  rounded-md p-2 outline-none"
-                type="text"
+                type="password"
                 required
                 placeholder="New Password"
                 name="password"
@@ -50,7 +51,7 @@ const ResetPassword = () => {
             <div className=" ">
               <Field
                 className="bg-white/20 w-full max-w-[350px]  rounded-md p-2 outline-none"
-                type="text"
+                type="password"
                 required
                 placeholder="Confirm New Password"
                 name="confirmPassword"
