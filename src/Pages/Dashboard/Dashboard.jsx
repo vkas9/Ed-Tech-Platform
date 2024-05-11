@@ -16,8 +16,12 @@ const Dashboard = () => {
     <div className="text-white flex relative  pt-[84px]  min-h-[calc(100vh-(85px))] ">
       <Sidebar/>
       
-      <div className="w-full  md:w-[85%]">
+      <div className="w-full max-h-[calc(100vh-(85px))] scrollbar-hidden md:w-[85%]">
+        <div style={{ overflow: 'auto', '-ms-overflow-style': 'none', 'scrollbar-width': 'none' }} className=" overflow-y-auto scroll-smooth   max-h-[calc(100vh-85px)]">
+
+
         <Outlet/>
+        </div>
       </div>
     </div>
   );

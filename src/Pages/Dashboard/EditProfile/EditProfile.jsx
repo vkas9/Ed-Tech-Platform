@@ -7,7 +7,7 @@ const EditProfile = () => {
     <div className=" mb-6">
       <h1 className="text-3xl ">Edit Profile</h1>
       <div className="mt-8  mr-5 sm:mr-0 sm:px-0  ">
-        <div className=" p-4 flex flex-col sm:flex-row items-center  bg-gray-500/30 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem] ">
+        <div className=" p-4 flex flex-col sm:flex-row items-center  bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem] ">
           <div className="min-h-[70px] min-w-[70px] max-h-[70px] max-w-[70px]   ">
             <img loading="lazy" src={user.ProfilePicture} className="" alt="" />
           </div>
@@ -27,7 +27,7 @@ const EditProfile = () => {
       </div>
       <div className="mt-8 mr-5 sm:mr-0  sm:px-0  ">
         
-        <div className=" p-4 flex flex-col sm:flex-row items-center  bg-gray-500/30 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem] ">
+        <div className=" p-4 flex flex-col sm:flex-row items-center  bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem] ">
           
           <Formik
             onSubmit={(value) => handleSubmit(value)}
