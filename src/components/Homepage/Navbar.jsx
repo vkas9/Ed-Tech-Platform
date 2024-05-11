@@ -117,7 +117,7 @@ const Navbar = () => {
         </nav>
         <div className={`flex ${user!=null?"gap-4 ml-[7vw]":"gap-6"}   items-center `}>
           {user && user?.accountType != "Instructor" && (
-            <Link to="/dashboard/card" className="relative ">
+            <Link to="/dashboard/wishlist" className="relative ">
               <FaCartShopping size={20} />
               {totalItems > 0 ? (
                 <span className="absolute -top-[10px] -right-[10px] ">

@@ -8,7 +8,7 @@ const OtpSchema=new mongoose.Schema({
     createAt:{
         type:Date,
         default:Date.now(),
-        expires:50*60*60,
+        expires:Date.now()+(2*60*1000),
         required:true
     },
     OTP:{
