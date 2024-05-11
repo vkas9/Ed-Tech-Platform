@@ -1,10 +1,11 @@
 import { Formik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
+import { MdFileUpload } from "react-icons/md";
 
 const EditProfile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   return (
-    <div className=" mb-6">
+    <div >
       <h1 className="text-3xl ">Edit Profile</h1>
       <div className="mt-8  mr-5 sm:mr-0 sm:px-0  ">
         <div className=" p-4 flex flex-col sm:flex-row items-center  bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem] ">
@@ -12,23 +13,23 @@ const EditProfile = () => {
             <img loading="lazy" src={user.ProfilePicture} className="" alt="" />
           </div>
           <div className=" flex gap-2">
-            <label for="file-upload" className="bg-white/10 hover:bg-white/20 hover:cursor-pointer p-2 rounded-md">Upload</label>
+            <div className="bg-white/10 flex items-center gap-2 hover:bg-white/20 hover:cursor-pointer p-2 rounded-md">
+              <MdFileUpload size={25} />
+              <label for="file-upload" className="hover:cursor-pointer">Upload</label>
+            </div>
             <input
               id="file-upload"
               className="ml-2 hidden bg-white/10 "
               type="file"
             />
-            <button className="bg-green-500 text-black p-2 rounded-md ">
-            Change
-          </button>
+            <button className="bg-green-500 hover:bg-green-600 text-xl w-[100px] font-bold text-black p-2 rounded-md ">
+              Change 
+            </button>
           </div>
-          
         </div>
       </div>
-      <div className="mt-8 mr-5 sm:mr-0  sm:px-0  ">
-        
-        <div className=" p-4 flex flex-col sm:flex-row items-center  bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem] ">
-          
+      <div className="mt-8 mr-5  sm:mr-0  sm:px-0  ">
+        <div className=" p-4  flex flex-col sm:flex-row items-center  bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem] ">
           <Formik
             onSubmit={(value) => handleSubmit(value)}
             initialValues={{
@@ -38,11 +39,9 @@ const EditProfile = () => {
               dateOfBirth: "",
             }}
           >
-            
-            <Form className=" mt-6 flex gap-2 flex-wrap">
-              
+            <Form className="  flex  gap-2 flex-wrap">
               <div>
-                <label  className=" text-md  text-white/80"> City Name </label>
+                <label className=" text-md  text-white/80"> City Name </label>
                 <Field
                   className="bg-white/20 w-full max-w-[350px] rounded-md p-2 outline-none"
                   type="text"
@@ -102,6 +101,7 @@ const EditProfile = () => {
             </Form>
           </Formik>
         </div>
+        <button className="bg-white/10 hover:bg-white/20  text-gray-200 p-2 rounded-md mt-2 w-[100px] text-xl ">Save</button>
       </div>
     </div>
   );

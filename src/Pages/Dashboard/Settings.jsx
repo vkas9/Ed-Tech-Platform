@@ -17,6 +17,7 @@ const Settings = () => {
         <span className="text-yellow-500 ">Settings</span>
       </div>
       <EditProfile/>
+      <div className="w-[98%] my-6  h-[1px] bg-white/20 rounded-full" />
       <ResetPassword/>
     </motion.div>
   );

@@ -88,15 +88,15 @@ const VerifyEmail=()=>{
 
         <div className="flex  justify-center px-2 relative gap-2 md:gap-4 ">
             {arr.map((item, i) => {
-                return <input key={i} value={input[i]} type="text" ref={ref[i]} maxLength="1" className={` bg-gray-700  font-bold text-center min-w-[20px] rounded-md w-full md:w-[50px] h-[40px] text-4xl  box-content overflow-hidden p-1 sm:p-3 outline-none   ${missing.includes(i)?' border-2 border-red-500 animate-pulse ':''}  max-w-[100px]`} onPaste={handlePaste} onChange={(e) => handleInput(e, i)} onKeyDown={(e) => handleOnKeyDown(e, i)} />
+                return <input key={i} value={input[i]} type="text" ref={ref[i]} maxLength="1" className={` bg-white/20  font-bold text-center min-w-[20px] rounded-md w-full md:w-[50px] h-[40px] text-4xl  box-content overflow-hidden p-1 sm:p-3 outline-none   ${missing.includes(i)?' border-2 border-red-500 animate-pulse ':''}  max-w-[100px]`} onPaste={handlePaste} onChange={(e) => handleInput(e, i)} onKeyDown={(e) => handleOnKeyDown(e, i)} />
             })}
             <div onClick={()=>{
                  dispatch(opt(signupdata,navigate));
             }} className="absolute right-2 -bottom-8 font-semibold text-lg">
-               <button>Resend OTP </button> 
+               <button className=" text-white/60 hover:text-white ">Resend OTP </button> 
             </div>
         </div>
-        <button onClick={handleSubmit2} className="  sm:text-md mt-10 px-[30px] md:px-[60px] py-[15px] text-md text-white hover:bg-purple-600 transition-all outline-none duration-200 rounded-md bg-purple-800 font-bold uppercase">Submit</button>
+        <button onClick={handleSubmit2} className="  sm:text-md mt-10 px-[30px] md:px-[50px] py-[12px] text-2xl text-white hover:bg-purple-700 transition-all outline-none duration-200 rounded-md bg-purple-800 font-bold uppercase">Submit</button>
 
     </div>
 }
