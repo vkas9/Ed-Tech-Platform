@@ -17,8 +17,6 @@ import Footer from "../../components/Homepage/Footer";
 const Home = () => {
   return (
     <div className=" overflow-hidden  ">
-      {/* section 1 */}
-      {/* <Navbar /> */}
       <Hero />
       <div className=" relative flex text-center  flex-col gap-[4rem] mt-[8rem] lg:mt-[2em] items-center">
         <p className="tracking-[5px] font-sans uppercase text-gray-400 select-none font-bold text-lg">
