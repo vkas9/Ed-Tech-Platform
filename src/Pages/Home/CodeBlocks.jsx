@@ -28,7 +28,7 @@ const CodeBlocks = () => {
       <div className=" flex flex-wrap max-w-[1200px]  gap-10 justify-center mx-auto ">
       {
         cardHeadings.map((value,index)=>(
-          <motion.div variants={fadeIn} initial="initial" whileInView="animate" viewport={{
+          <motion.div key={index} variants={fadeIn} initial="initial" whileInView="animate" viewport={{
             once:true
           }} custom={index}>
 
