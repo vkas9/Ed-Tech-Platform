@@ -57,8 +57,8 @@ const Navbar = () => {
           : " backdrop-blur-md"
       }  `}
     >
-      <div onClick={handleClick} className="flex  mx-auto  items-center min-h-[55px] justify-between px-3  lg:px-7   ">
-        <Link to="/" className="block w-[12rem ] flex items-center  xl:mr-8 ">
+      <div className="flex  mx-auto  items-center min-h-[55px] justify-between px-3  lg:px-7   ">
+        <Link to="/"  onClick={handleClick} className="block w-[12rem ] flex items-center  xl:mr-8 ">
           <img src={image} loading="lazy" className="lg:w-[200px]  w-[140px] " alt="MASTER" />
         </Link>
 
