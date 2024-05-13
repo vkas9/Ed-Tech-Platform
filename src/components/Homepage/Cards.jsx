@@ -2,27 +2,10 @@ import { TypeAnimation } from "react-type-animation";
 import Button from "../../components/Homepage/Button";
 import { IoCodeSlashSharp } from "react-icons/io5";
 import gradient from "../../assets/gradient.jpg";
-import { motion } from "framer-motion";
-const fadeIn={
-  initial:{
-    opacity:0,
-    y:50
-  },
-  animate:{
-    opacity:1,
-    y:0,
-    
-    transition:{
-      delay:.05,
-      duration:.9
-    }
-  }
-}
+
 const Cards=({head})=>{
     return (
-        <motion.li variants={fadeIn} initial="initial" whileInView="animate" viewport={{
-          once:true
-        }} className="relative bg-white/10 backdrop-blur-md overflow-visible border-solid border border-gray-400/10 min-h-[17rem] outline-none max-h-[40rem] w-[30rem] gap-6 rounded-2xl px-4 mx-3 py-2  flex flex-col justify-between">
+        <div className="relative bg-white/10 backdrop-blur-md overflow-visible border-solid border border-gray-400/10 min-h-[17rem] outline-none max-h-[40rem] w-[30rem] gap-6 rounded-2xl px-4 mx-3 py-2  flex flex-col justify-between">
           <div className="flex  flex-col  gap-6 ">
             <h3 className="  overflow-hidden text-[1.7rem] md:text-[2.5rem] font-bold ">
               {head}
@@ -43,7 +26,7 @@ const Cards=({head})=>{
             <IoCodeSlashSharp className="   text-4xl" />
           </div>
           {/* <div className="h-[200px] w-[400px]  absolute -left-4 opacity-40 -top-4 -z-10 lg:blur-[70px] blur-[50px] "><img src={gradient} alt="" /></div> */}
-        </motion.li>
+        </div>
     );
 }
 export default Cards;
