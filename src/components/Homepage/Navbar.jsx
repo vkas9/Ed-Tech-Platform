@@ -57,7 +57,7 @@ const Navbar = () => {
           : " backdrop-blur-md"
       }  `}
     >
-      <div className="flex  mx-auto  items-center min-h-[55px] justify-between px-3  lg:px-7   ">
+      <div onClick={handleClick} className="flex  mx-auto  items-center min-h-[55px] justify-between px-3  lg:px-7   ">
         <Link to="/" className="block w-[12rem ] flex items-center  xl:mr-8 ">
           <img src={image} loading="lazy" className="lg:w-[200px]  w-[140px] " alt="MASTER" />
         </Link>
@@ -74,7 +74,7 @@ const Navbar = () => {
               <>
                 {item.title === "Learn" ? (
                   <div
-                    className={`flex   items-center gap-2  relative font-bold text-2xl uppercase ${
+                    className={`flex items-center gap-2  relative font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
                     }   transition-colors lg:hover:cursor-pointer ${
                       item.onlyMobile ? "lg:hidden" : ""
@@ -82,7 +82,7 @@ const Navbar = () => {
                   >
                     <p className="select-none">{item.title}</p>
                     <IoIosArrowDown />
-                    <div className="z-[200]  invisible group-hover:visible flex flex-col rounded-xl backdrop-blur-md bg-white -bottom-[115px] -right-[40px] transition-opacity opacity-0 group-hover:opacity-100 gap-4 py-4 duration-400  w-[250px]  absolute text-center ">
+                    <div className="z-[200]  invisible group-hover:visible flex flex-col rounded-xl backdrop-blur-md bg-white fixed left-1/2 transform -translate-x-1/2  bottom-[0] lg:-bottom-[115px] lg:-right-[40px] transition-opacity opacity-0 group-hover:opacity-100 gap-4 py-4 duration-400  w-full  lg:w-[250px] lg:absolute text-center ">
                       {catagory.length
                         ? catagory.map((item) => (
                             <Link
