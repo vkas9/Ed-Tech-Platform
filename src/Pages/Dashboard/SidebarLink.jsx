@@ -8,8 +8,8 @@ const SidebarLink = ({ name, link, icon:Icon }) => {
   const location = useLocation();
   const dispatch=useDispatch();
  const navigation= useNavigate()
- const[confirmationModal,setConfirmationModal]=useState(null);
-  const handleSubmit=(e)=>{
+ const[confirmationModal,openConfirmationModal]=useState(null);
+  const handleLogout=(e)=>{
     e.preventDefault();
     dispatch(logout(navigation));
     
@@ -19,17 +19,18 @@ const SidebarLink = ({ name, link, icon:Icon }) => {
   const Route = (route) => {
     return matchPath({ path: route }, location.pathname);
   };
-  return (<>
-    <Link onClick={name=="Log out"?() => 
-           
-           setConfirmationModal({
-      text1: "Are You Sure ?",
+  const handleLogoutClick = () => {
+    openConfirmationModal({
+      text1: "Are You Sure?",
       text2: "You will be logged out of your Account",
       btn1Text: "Log out",
       btn2Text: "Cancel",
-      btn1Handler: handleSubmit,
-      btn2Handler: () => setConfirmationModal(null),
-    }):null}
+      btn1Handler: handleLogout,
+      btn2Handler: () => openConfirmationModal(null),
+    });
+  };
+  return (<>
+    <Link onClick={name=="Log out"?handleLogoutClick:null}
     to={link!=""?link:null}
     className={`py-4 px-5 ${name=='Log out'?'hover:bg-red-900/30  transition-all duration-200 hover:border-r-4 border-red-900':'sm:hover:bg-blue-900/30 active:bg-blue-900/30 transition-all duration-200 hover:border-r-4 border-blue-900'}   ${
         Route(link) ? "bg-gradient-to-l from-blue-900/30 to-transparent border-r-4 border-blue-900 " : ""

@@ -17,7 +17,7 @@ const Dashboard = () => {
       <Sidebar/>
       
       <div className="w-full max-h-[calc(100vh-(85px))] scrollbar-hidden md:w-[85%]">
-        <div style={{ overflow: 'auto', '-ms-overflow-style': 'none', 'scrollbar-width': 'none' }} className=" overflow-y-auto scroll-smooth   max-h-[calc(100vh-85px)]">
+        <div style={{ overflow: 'auto', 'scrollbar-width': 'none' }} className=" overflow-y-auto scroll-smooth   max-h-[calc(100vh-85px)]">
 
 
         <Outlet/>

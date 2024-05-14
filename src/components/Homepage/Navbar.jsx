@@ -11,9 +11,10 @@ import { useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
 import ProfileDropDown from "./ProfileDropDown";
 import axios from "axios";
-
+import SubTitle from "./SubTitle";
 
 const Navbar = () => {
+  const[name,setName]=useState(null);
   const[catagory,setCatagory]=useState([]);
   useEffect(()=>{
     axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getAllCatagory")
@@ -44,7 +45,17 @@ const Navbar = () => {
       setOpenNavigation(false);
     }
   };
-  const handleClick = () => {
+  const handleClick2=()=>{
+    if(!name){
+      
+      setName("dfd");
+    }
+    else{
+      setName(null)
+    }
+    
+  }
+  const handleClick = (e) => {
     if (!openNavigation) return;
     enablePageScroll();
     setOpenNavigation(!openNavigation);
@@ -61,7 +72,7 @@ const Navbar = () => {
         <Link to="/"  onClick={handleClick} className="block w-[12rem ] flex items-center  xl:mr-8 ">
           <img src={image} loading="lazy" className="lg:w-[200px]  w-[140px] " alt="MASTER" />
         </Link>
-
+        
         <nav
           className={`${
             openNavigation
@@ -74,6 +85,7 @@ const Navbar = () => {
               <>
                 {item.title === "Learn" ? (
                   <div
+                  onClick={handleClick2}
                     className={`flex items-center gap-2  relative font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
                     }   transition-colors lg:hover:cursor-pointer ${
@@ -82,20 +94,10 @@ const Navbar = () => {
                   >
                     <p className="select-none">{item.title}</p>
                     <IoIosArrowDown />
-                    <div className="z-[200]  invisible group-hover:visible flex flex-col rounded-xl backdrop-blur-md bg-white fixed left-1/2 transform -translate-x-1/2  bottom-[0] lg:-bottom-[115px] lg:-right-[40px] transition-opacity opacity-0 group-hover:opacity-100 gap-4 py-4 duration-400  w-full  lg:w-[250px] lg:absolute text-center ">
-                      {catagory.length
-                        ? catagory.map((item) => (
-                            <Link
-                              key={item.name}
-                              to={item.link}
-                              className="bg-gray-200 hover:bg-gray-500/60 rounded-md py-2 mx-2"
-                              onClick={handleClick}
-                            >
-                              <p className="text-black">{item.name}</p>
-                            </Link>
-                          ))
-                        : null}
-                    </div>
+                    {
+                      name!==null?<SubTitle catagory={catagory}/>:null
+                    }
+                    
                   </div>
                 ) : (
                   <Link
@@ -110,10 +112,14 @@ const Navbar = () => {
                   >
                     {item.title}
                   </Link>
+                  
+                  
                 )}
+                
               </>
             ))}
           </div>
+         
         </nav>
         <div className={`flex ${user!=null?"gap-4 ml-[7vw]":"gap-6"}   items-center `}>
           {user && user?.accountType != "Instructor" && (
@@ -166,6 +172,7 @@ const Navbar = () => {
                 />
               ) : null}
         </div>
+        
       </div>
     </div>
   );
