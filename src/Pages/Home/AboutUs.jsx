@@ -7,12 +7,12 @@ const AboutUs = () => {
   return (
     <div className=" overflow-hidden relative py-[5rem]  flex flex-col items-center mx-auto ">
       <div className=" relative  z-[3] py-4 gap-2 flex flex-col text-center h-full ">
-        <span className=" text-md md:text-2xl">Get Started Today</span>
-        <h1 className=" text-6xl px-1 md:text-6xl font-bold">
+        <span className=" text-md md:text-2xl  bg-gradient-to-br   md:bg-gradient-to-b from-white via-white to-black/40 bg-clip-text text-transparent">Get Started Today</span>
+        <h1 className=" text-6xl px-1 md:text-6xl   bg-gradient-to-b from-white via-white to-black bg-clip-text text-transparent font-bold">
           Learn. Grow. Succeed.
         </h1>
         <Link to={"/signup"}  className=" mt-5">
-          <Button className={"mx-auto rounded-md bg-yellow-500 outline-none py-2"}>
+          <Button className={"mx-auto rounded-md font-semibold text-yellow-950 hover:bg-yellow-400 bg-yellow-500 outline-none py-2"}>
             Explore More
           </Button>
         </Link>

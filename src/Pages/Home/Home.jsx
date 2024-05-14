@@ -58,7 +58,7 @@ const Home = () => {
     <div className=" overflow-hidden  ">
       <Hero />
       <div className=" relative flex text-center  flex-col gap-[4rem] mt-[8rem] lg:mt-[2em] items-center">
-        <p className="tracking-[5px] font-sans uppercase text-gray-400 select-none font-bold text-lg">
+        <p className="tracking-[5px] font-sans uppercase bg-gradient-to-br   md:bg-gradient-to-b from-white via-white to-black/40 bg-clip-text text-transparent select-none font-bold text-lg">
           Learn new skills. Prove your potential.
         </p>
         <div className="flex item-center  flex-wrap flex-row gap-10 md:gap-20 justify-center  mb-5 relative  text-6xl lg:text-8xl max-w-[1200px]">

@@ -39,7 +39,7 @@ const hero = () => {
         <Link to={"/signup"} className=" mx-auto">
           <div className="   group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">
             <div className="flex gap-4 hover:scale-105 transition-all duration-200 items-center rounded-md px-5 py-3 ">
-              <p>Teach on MASTER</p>
+              <p>Teach On MASTER</p>
               <FaArrowRight size={20}  className="animate-pulse "/>
             </div>
           </div>
