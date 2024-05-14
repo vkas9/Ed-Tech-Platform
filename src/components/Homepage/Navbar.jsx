@@ -47,7 +47,6 @@ const Navbar = () => {
   };
   const handleClick2=()=>{
     if(!name){
-      
       setName("dfd");
     }
     else{
@@ -85,6 +84,10 @@ const Navbar = () => {
               <>
                 {item.title === "Learn" ? (
                   <div
+                  onMouseLeave={()=>{
+                    setName(null)
+                  }}
+                  onMouse
                   onClick={handleClick2}
                     className={`flex items-center gap-2  relative font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
@@ -95,7 +98,7 @@ const Navbar = () => {
                     <p className="select-none">{item.title}</p>
                     <IoIosArrowDown />
                     {
-                      name!==null?<SubTitle catagory={catagory}/>:null
+                      name==null?<SubTitle catagory={catagory}/>:null
                     }
                     
                   </div>
