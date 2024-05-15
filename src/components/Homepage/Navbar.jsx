@@ -69,7 +69,7 @@ const Navbar = () => {
     >
       <div className="flex  mx-auto  items-center min-h-[55px] justify-between px-3  lg:px-7   ">
         <Link to="/"  onClick={handleClick} className="block w-[12rem ] flex items-center  xl:mr-8 ">
-          <img src={image} loading="lazy" className="lg:w-[200px]  w-[140px] " alt="MASTER" />
+          <img src={image} className="lg:w-[200px]  w-[140px] " alt="MASTER" />
         </Link>
         
         <nav
@@ -80,14 +80,14 @@ const Navbar = () => {
           } fixed top-[83px] rounded-t-[2.5rem]  left-0 right-0 bottom-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
           <div className="relative lg:border-r lg:border-l border-gray-500/20 rounded-full  z-2 flex flex-col select-none lg:select-text items-center justify-center m-auto lg:flex-row">
-            {navigation.map((item) => (
-              <>
+            {navigation.map((item,index) => (
+              <div key={index}>
                 {item.title === "Learn" ? (
                   <div
+                  key={index}
                   onMouseLeave={()=>{
                     setName(null)
                   }}
-                  onMouse
                   onClick={handleClick2}
                     className={`flex items-center gap-2  relative font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
@@ -104,7 +104,7 @@ const Navbar = () => {
                   </div>
                 ) : (
                   <Link
-                    key={item.id}
+                    key={index}
                     to={item.url}
                     onClick={handleClick}
                     className={`block relative font-bold text-2xl uppercase ${
@@ -119,7 +119,7 @@ const Navbar = () => {
                   
                 )}
                 
-              </>
+              </div>
             ))}
           </div>
          

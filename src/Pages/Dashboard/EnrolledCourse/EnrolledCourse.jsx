@@ -4,32 +4,39 @@ import { useEffect, useState } from "react";
 import { getCourseDetail } from "../../../Auth/Authapi";
 import CryptoJS from "crypto-js";
 const EnrolledCourse = () => {
-  const [enrolledCourses, setEnrolledCourses] = useState(null);
+  const [enrolledCourses, setEnrolledCourses] = useState(() => {
+     const cachedData = localStorage.getItem("enrolledCourses");
+    return cachedData ? JSON.parse(cachedData) : null;
+  });
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         const data = JSON.parse(localStorage.getItem("user"));
-        console.log("data", data);
         if (data && data.Courses && data.Courses.length > 0) {
           const courseData = await getCourseDetail(data.Courses);
+          localStorage.setItem("enrolledCourses", JSON.stringify(courseData.data.courseDetail));
           setEnrolledCourses(courseData.data.courseDetail);
         } else {
+          localStorage.setItem("enrolledCourses", JSON.stringify([]));
           setEnrolledCourses([]);
         }
       } catch (error) {
         console.log("Unable to fetch enrolled courses");
       }
     };
-    if (localStorage.getItem("EC")) {
-      var bytes = CryptoJS.AES.decrypt(localStorage.getItem("EC"), "EDVKAS9");
+    const encryptedData = localStorage.getItem("EC");
+    if (encryptedData) {
 
+     if(!enrolledCourses){  
+      var bytes = CryptoJS.AES.decrypt(localStorage.getItem("EC"), "EDVKAS9");
       var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-      setEnrolledCourses(JSON.parse(decryptedData));
+      setEnrolledCourses(JSON.parse(decryptedData)); }
     } else {
       fetchData();
     }
-  }, []);
+  }, [enrolledCourses]);
 
   return (
     <motion.div

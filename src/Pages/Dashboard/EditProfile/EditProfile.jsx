@@ -10,7 +10,7 @@ const EditProfile = () => {
       <div className="mt-8  mr-5 sm:mr-0 sm:px-0  ">
         <div className=" p-4 flex flex-col sm:flex-row items-center  bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem] ">
           <div className="min-h-[70px] min-w-[70px] max-h-[70px] max-w-[70px]   ">
-            <img loading="lazy" src={user.ProfilePicture} className="" alt="" />
+            <img  src={user.ProfilePicture} className="" alt="" />
           </div>
           <div className=" flex gap-2">
             <div className="bg-white/10 flex items-center gap-2 hover:bg-white/20 hover:cursor-pointer p-2 rounded-md">

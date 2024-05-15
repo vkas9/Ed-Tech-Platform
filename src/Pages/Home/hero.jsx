@@ -22,7 +22,7 @@ const hero = () => {
           >
             Coding Skills{" "}
             <img
-              loading="lazy"
+              
               src={curve1}
               className=" absolute left-0 top-full lg:mt-1 "
               width="624"

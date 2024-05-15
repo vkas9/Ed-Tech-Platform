@@ -3,7 +3,6 @@ import { Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 const ProfileDashboard = () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log("user", user);
   if(user) return (
 
     <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="w-full">
@@ -21,7 +20,7 @@ const ProfileDashboard = () => {
       <div className="mt-8  px-3 sm:px-0  ">
         <div className=" p-4 flex flex-col sm:flex-row items-center  bg-gray-500/30 rounded-md py-6 gap-1 w-full sm:w-[95%] lg:max-w-[55rem] sm:ml-5">
           <div className="min-h-[70px] min-w-[70px] max-h-[70px] max-w-[70px]   ">
-            <img loading="lazy" src={user.ProfilePicture} className="" alt="" />
+            <img  src={user.ProfilePicture} className="" alt="" />
           </div>
           <div className="flex  flex-col sm:flex-row text-center sm:text-start ml-3 w-full justify-between ">
             <div className="flex flex-col ">
