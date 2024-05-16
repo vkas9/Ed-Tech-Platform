@@ -60,7 +60,7 @@ const Wishlist = () => {
         ):enrolledCourses.length?enrolledCourses.map((course,index)=>(
           <WishlistCard  course={course} key={index}/>
        ))     
-       :<p>You have not Enrolled in any Course Yet !</p>
+       :<p className="relative top-1/2 left-[40%] text-2xl font-semibold w-fit text-white/40 " >Your wishlist is empty!</p>
         
       }
        </div>

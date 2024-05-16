@@ -39,7 +39,7 @@ const EditProfile = () => {
               dateOfBirth: "",
             }}
           >
-            <Form className="  flex  gap-2 flex-wrap">
+            <Form className="  flex  gap-2 flex-col sm:flex-row flex-wrap">
               <div>
                 <label className=" text-md  text-white/80"> City Name </label>
                 <Field

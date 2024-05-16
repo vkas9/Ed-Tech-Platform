@@ -64,7 +64,7 @@ const EnrolledCourse = () => {
             <CourseCard course={course} key={index} />
           ))
         ) : (
-          <p>You have not Enrolled in any Course Yet !</p>
+          <p className="relative top-1/2 left-[35%] text-2xl font-semibold w-fit text-white/40 "  >You have not enrolled in any course yet !</p>
         )}
       </div>
     </motion.div>
