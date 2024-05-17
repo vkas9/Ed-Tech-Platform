@@ -114,7 +114,7 @@ exports.otp = async (req, res) => {
       specialChars: false,
     });
     const OTPmodel = await OTP.create({ email, OTP: generatedOtp });
-    console.log(OTPmodel);
+   
     res.status(200).json({
       success: true,
       message: "Successfully OTP send",

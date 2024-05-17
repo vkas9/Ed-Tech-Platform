@@ -19,7 +19,7 @@ const OtpSchema=new mongoose.Schema({
 
 const sendMail=async(email,otp)=>{
     try {
-        const mail=await mailSender(email,"Verification Email from Vikas",otp);
+        const mail=await mailSender(email,"Verification Email from MASTER",otp);
         console.log("Email Successfull : ",email);
     } catch (error) {
         console.log("Something went Wrong while sending mail")
