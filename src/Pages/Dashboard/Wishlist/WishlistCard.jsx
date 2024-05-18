@@ -5,8 +5,9 @@ import { FaRegStar } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 
 const WishlistCard=({course})=>{
+
     return (
-        <div className="flex text-[1.1rem] justify-between flex-col sm:flex-row mr-5 items-center rounded-xl mt-4 bg-gray-300/10 max-w-[60rem] p-1  ">
+        <div className="flex text-[1.1rem] justify-between flex-col sm:flex-row mr-5 items-center hover:cursor-pointer active:bg-gray-300/20 sm:hover:bg-gray-300/20 rounded-xl mt-4 bg-gray-300/10 max-w-[60rem] p-1  ">
             <div className= "gap-3 p-2 items-center flex">
               <img src={course?.Thumbnail} alt="course-thumbnail" className="w-[100px] h-[90px] max-w-[110px] object-cover  rounded-lg " />
              
@@ -21,7 +22,7 @@ const WishlistCard=({course})=>{
               </div>
             </div>
             <div>
-              <span>Duration: {course?.duration?"":"2Hrs"}</span>
+              <span>Duration: {course?.duration?"":"2 hr"}</span>
             </div>
             <div className="flex items-center gap-7 mr-3 ">
               <p>Price: ₹ 699</p>
