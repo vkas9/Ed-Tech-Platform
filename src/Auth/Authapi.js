@@ -119,9 +119,7 @@ export const logout=(navigate)=>{
     return (dispatch)=>{
         dispatch(authAction.setToken(null));
         dispatch(profileAction.setProfile(null));
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        localStorage.removeItem("EC");
+        localStorage.clear();
         document.cookie = 'EDT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         toast.success("Logged Out Successfully")
         navigate("/")
