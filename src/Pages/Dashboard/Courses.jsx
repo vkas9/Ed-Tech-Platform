@@ -7,7 +7,7 @@ const Courses = () => {
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
       className="flex font-semibold flex-col text-lg  pt-2 pl-5 "
     >
-      <div className="flex gap-1 items-center ">
+      <div className="flex gap-1 text-white/50 overflow-x-auto items-center ">
         <span>Home</span>
         <span>/</span>
         <span>Dashboard</span>

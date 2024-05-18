@@ -42,7 +42,7 @@ const Wishlist = () => {
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
       className="flex font-semibold flex-col text-lg  pt-2 pl-5 "
     >
-      <div className="flex gap-1 items-center ">
+      <div className="flex gap-1 text-white/50  overflow-x-auto items-center ">
         <span>Home</span>
         <span>/</span>
         <span>Dashboard</span>
@@ -60,7 +60,7 @@ const Wishlist = () => {
         ):enrolledCourses.length?enrolledCourses.map((course,index)=>(
           <WishlistCard  course={course} key={index}/>
        ))     
-       :<p className="relative top-1/2 left-[40%] text-2xl font-semibold w-fit text-white/40 " >Your wishlist is empty!</p>
+       :<p className="relative text-center mr-3 top-1/3 sm:top-1/2 sm:left-[35%] text-2xl font-semibold sm:w-fit text-white/40  " >Your wishlist is empty!</p>
         
       }
        </div>
