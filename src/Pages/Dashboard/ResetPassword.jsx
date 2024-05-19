@@ -16,8 +16,7 @@ const ResetPassword = () => {
     dispatch(resetPassword(data, navigate));
   };
   return (
-    <div>
-       
+    <div className="mb-[3rem]">
       <h1 className="text-3xl ">Change Password</h1>
 
       <Formik
@@ -28,39 +27,41 @@ const ResetPassword = () => {
           confirmPassword: "",
         }}
       >
-        <Form className=" mt-6">
-          <div className="flex flex-col gap-4 pr-[20px] ">
-            <div className="  ">
-              <Field
-                className="bg-white/20 w-full max-w-[350px] rounded-md p-2 outline-none"
-                type="password"
-                required
-                placeholder="Current Password"
-                name="oldPassword"
-              ></Field>
-            </div>
-            <div className=" ">
-              <Field
-                className="bg-white/20 w-full max-w-[350px]  rounded-md p-2 outline-none"
-                type="password"
-                required
-                placeholder="New Password"
-                name="password"
-              ></Field>
-            </div>
-            <div className=" ">
-              <Field
-                className="bg-white/20 w-full max-w-[350px]  rounded-md p-2 outline-none"
-                type="password"
-                required
-                placeholder="Confirm New Password"
-                name="confirmPassword"
-              ></Field>
+        <Form className=" mr-5  mt-6">
+          <div className="p-4 bg-white/10 rounded-md   sm:w-[100%] lg:max-w-[55rem] w-full">
+            <div className="flex flex-col gap-4 ">
+              <div className="  ">
+                <Field
+                  className="bg-white/20 w-full max-w-[350px] rounded-md p-2 outline-none"
+                  type="password"
+                  required
+                  placeholder="Current Password"
+                  name="oldPassword"
+                ></Field>
+              </div>
+              <div className=" ">
+                <Field
+                  className="bg-white/20 w-full max-w-[350px]  rounded-md p-2 outline-none"
+                  type="password"
+                  required
+                  placeholder="New Password"
+                  name="password"
+                ></Field>
+              </div>
+              <div className=" ">
+                <Field
+                  className="bg-white/20 w-full max-w-[350px]  rounded-md p-2 outline-none"
+                  type="password"
+                  required
+                  placeholder="Confirm New Password"
+                  name="confirmPassword"
+                ></Field>
+              </div>
             </div>
           </div>
           <button
             type="submit"
-            className="mt-4 md:hover:bg-yellow-600 active:bg-yellow-600 shadow-inner active:shadow-yellow-700 md:hover:shadow-yellow-700  transition-all duration-200 bg-yellow-500 p-1 rounded-lg w-[130px] text-black text-2xl "
+            className="mt-2 md:hover:bg-yellow-400 active:bg-yellow-400   transition-all duration-200 bg-yellow-500 p-1 rounded-lg w-[130px] text-black text-2xl "
           >
             Change
           </button>

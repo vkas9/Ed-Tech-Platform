@@ -101,7 +101,12 @@ const EditProfile = () => {
             </Form>
           </Formik>
         </div>
-        <button className="bg-white/10 hover:bg-white/20  text-gray-200 p-2 rounded-md mt-2 w-[100px] text-xl ">Save</button>
+        <button
+            type="submit"
+            className="mt-2 md:hover:bg-yellow-400 active:bg-yellow-400   transition-all duration-200 bg-yellow-500 p-1 rounded-lg w-[130px] text-black text-2xl "
+          >
+            Save
+          </button>
       </div>
     </div>
   );
