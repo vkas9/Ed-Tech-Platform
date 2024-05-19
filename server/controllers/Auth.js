@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const optgenerator = require("otp-generator");
 const Profile = require("../models/Profile");
 const jwt = require("jsonwebtoken");
+const sendMail = require("../utils/sendMail");
 require("dotenv").config();
 //sign up handler
 exports.signup = async (req, res) => {
@@ -210,6 +211,7 @@ exports.changePassword = async (req, res) => {
       { Password: newPassHash },
       { new: true }
     );
+    await sendMail(registredUser.Email,"Password Update","Password updated successfully")
 
     return res.status(200).json({
       success:true,
