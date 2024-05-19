@@ -4,6 +4,8 @@ import { BsPerson } from "react-icons/bs";
 import { LuBookMarked } from "react-icons/lu";
 
 import { FiBookmark } from "react-icons/fi";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { MdOutlineSpaceDashboard } from "react-icons/md";
 
 
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -21,36 +23,47 @@ export const Profile = [
     id: "1",
     title: "Enrolled Courses",
     url: "/dashboard/enrolled-courses",
+    role: "Student",
     icon:LuBookMarked
   },
   {
     id: "2",
     title: "Wishlist",
     url: "/dashboard/wishlist",
+    role: "Student",
     icon:FiBookmark
   },
   {
     id: "3",
     title: "Purchase History",
     url: "/dashboard/purchase-history",
+    role: "Student",
     icon:MdOutlineShoppingCart
   },
   {
     id: "4",
     title: "Courses",
     url: "/dashboard/courses",
+    role: "Student",
     icon:PiGraduationCap
   },
-  // {
-  //   id: "5",
-  //   title: "Settings",
-  //   url: "/dashboard/settings",
-  //   icon:CiSettings
-  // },
-  // {
-  //   id: "6",
-  //   title: "Log out",
-  //   url: "/",
-  //   icon:CiLogout
-  // },
+  {
+    id:"5",
+    title: "My Courses",
+    url: "/dashboard/my-courses",
+    role: "Instructor",
+    icon: PiGraduationCap,
+  },{
+    id: "6",
+    title: "Add Course",
+    url: "/dashboard/add-course",
+    role: "Instructor",
+    icon: IoIosAddCircleOutline,
+  },{
+    id: "7",
+    title: "Dashboard",
+    url: "/dashboard/instructor",
+    role: "Instructor",
+    icon: MdOutlineSpaceDashboard,
+  },
 ];
