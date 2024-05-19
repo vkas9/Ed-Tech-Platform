@@ -3,7 +3,7 @@ import authSlice, { authAction } from "../store/authSlice"
 import { toast } from "react-hot-toast"
 import {profileAction} from "../store/profileSlice"
 import  CryptoJS  from "crypto-js";
-
+import { cardAction } from "../store/cardSlice";
 
 export const login=(data,navigate)=>{
     return async(dispatch)=>{
@@ -117,10 +117,12 @@ export const opt=(data,navigate)=>{
 }
 export const logout=(navigate)=>{
     return (dispatch)=>{
+
         dispatch(authAction.setToken(null));
         dispatch(profileAction.setProfile(null));
         localStorage.clear();
         document.cookie = 'EDT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        dispatch(cardAction.reset());
         toast.success("Logged Out Successfully")
         navigate("/")
     }
