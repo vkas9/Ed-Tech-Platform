@@ -168,7 +168,7 @@ export const getCourseDetail=async(courseId)=>{
         let response;
         try {
         
-        await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getAllUserDetails",{
+        await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getEnrolledCourses",{
             withCredentials:true
         })
         .then((res)=>{
