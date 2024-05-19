@@ -3,16 +3,10 @@ const { isString } = require("util");
 
 
 const profileSchema = new mongoose.Schema({
-    City:{
-        type:String
-    },
     contactNumber:{
         type:Number
     },
     Country:{
-        type:String
-    },
-    Gender:{
         type:String
     },
     about:{

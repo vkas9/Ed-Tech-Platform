@@ -1,25 +1,18 @@
 const user=require("../models/User");
 const profile=require("../models/Profile");
-const Courses=require("../models/Courses")
+const Courses=require("../models/Courses");
+const { UploadFile } = require("../utils/fileUploader");
 exports.updateProfile=async(req,res)=>{
     try {
-        const{City,contactNumber,Country,Gender,about,dateOfBirth}=req.body;
+        const{contactNumber,Country="",about="",dateOfBirth=""}=req.body;
         const userId=req.user.id;
-        if(!City||!contactNumber||!Country||!Gender||!about||!userId||!dateOfBirth){
-            return res.status(400).json({
-                success:false,
-                message:"Please fill all detail of Profile"
-            })
-        }
         const userDetail=await user.findById(userId);
         const profileId=userDetail.Profile;
         const profileDetail=await profile.findById(profileId);
         profileDetail.dateOfBirth=dateOfBirth;
         profileDetail.contactNumber=contactNumber;
         profileDetail.Country=Country;
-        profileDetail.Gender=Gender;
         profileDetail.about=about;
-        profileDetail.City=City;
         await profileDetail.save();
         return res.status(200).json({
             success:true,
@@ -34,14 +27,12 @@ exports.updateProfile=async(req,res)=>{
         })
     }
 }
-exports.getAllUserDetails=async(req,res)=>{
+exports.getEnrolledCourses=async(req,res)=>{
     try {
         const id=req.user.id;
         const userDetail=await user.findById(id);
         var courseDetail=[];
         for(let i=0;i<userDetail.Courses.length;i++){
-
-        
             courseDetail.push( await Courses.findById(userDetail.Courses[i]).populate({
             path: "Instructor",
             populate: {
@@ -73,7 +64,7 @@ exports.getAllUserDetails=async(req,res)=>{
         })
     }
 }
-exports.getEnrolledCourses=async(req,res)=>{
+exports.getAllUserDetails=async(req,res)=>{
     try {
         const userId=req.user.id;
         const userDetails=await user.findById(userId).populate().exec();
@@ -123,4 +114,26 @@ exports.deleteAccount=async(req,res)=>{
             message:"Something went wrong while Deleting Account"
         })
     }
+}
+
+exports.updateDisplayProfile=async(req,res)=>{
+    try {
+        const photo=req.files.profilePhoto;
+        const userId=req.user.id;
+        const image=await UploadFile(photo,{ folder: "VikasFolder", resource_type: "auto" });
+        console.log("image->",image)
+        const updatedProfile=await user.findByIdAndUpdate({_id:userId},{ProfilePicture:image.secure_url},{new:true});
+        res.status(200).json({
+            status:"true",
+            message:"Successfully updated Profile image",
+            data:updatedProfile
+        }) 
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            status:false,
+            message:error.message
+        })
+    }
+    
 }

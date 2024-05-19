@@ -14,7 +14,6 @@ exports.createCourse = async (req, res) => {
             })
         }
         const uploadThumbnail = await UploadFile(thumbnail, { folder: "VikasFolder", resource_type: "auto" });
-        console.log("sldfkjsdlkfjsdf");
         const newCourse = await Course.create({
             CourseName, CourseDescription, WhatYouWillLearn, Price, Catagory: catagory, Thumbnail: uploadThumbnail.secure_url, Instructor: req.user.id
         })
