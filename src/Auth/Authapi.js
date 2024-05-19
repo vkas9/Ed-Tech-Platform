@@ -161,32 +161,28 @@ export const resetPassword=(data,navigate)=>{
 }
 
 
-export const getCourseDetail=async(courseId)=>{
-   
+export const getCourseDetail = async (courseId, signal) => {
+  const toastId = toast.loading("Loading");
+  let response;
 
-        const toastId=toast.loading("Loading")
-        let response;
-        try {
-        
-        await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getEnrolledCourses",{
-            withCredentials:true
-        })
-        .then((res)=>{
-            console.log("res-> ",res)
-            response=res;
-            
-        })
-        var Text = CryptoJS.AES.encrypt(JSON.stringify(JSON.stringify(response.data.courseDetail)), "EDVKAS9").toString();
-        localStorage.setItem("EC",Text);
-     
-        
-        
+  try {
+    const res = await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getEnrolledCourses", {
+      withCredentials: true,
+      signal: signal,
+    });
+    response = res;
 
-    } catch (error) {
-        
+    const Text = CryptoJS.AES.encrypt(JSON.stringify(response.data.courseDetail), "EDVKAS9").toString();
+    localStorage.setItem("EC", Text);
+  } catch (error) {
+    if (axios.isCancel(error)) {
+      console.log("Request canceled", error.message);
+    } else {
+      console.log("Error fetching course details", error);
     }
-
+  } finally {
     toast.dismiss(toastId);
-    return response;
+  }
 
-}
+  return response;
+};

@@ -10,25 +10,36 @@ const EnrolledCourse = () => {
   const { enrolledCourse } = useSelector((store) => store.card);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     const fetchData = async () => {
       try {
         const data = JSON.parse(localStorage.getItem("user"));
         if (data && data.Courses && data.Courses.length > 0) {
-          const courseData = await getCourseDetail(data.Courses);
-          localStorage.setItem("enrolledCourses", JSON.stringify(courseData.data.courseDetail));
-          dispatch(cardAction.setEnrolledCourse(courseData.data.courseDetail));
+          const courseData = await getCourseDetail(data.Courses, signal);
+          if (!signal.aborted) {
+            localStorage.setItem("enrolledCourses", JSON.stringify(courseData.data.courseDetail));
+            dispatch(cardAction.setEnrolledCourse(courseData.data.courseDetail));
+          }
         } else {
           localStorage.setItem("enrolledCourses", JSON.stringify([]));
           dispatch(cardAction.setEnrolledCourse([]));
         }
       } catch (error) {
-        console.log("Unable to fetch enrolled courses");
+        if (error.name !== 'AbortError') {
+          console.log("Unable to fetch enrolled courses");
+        }
       }
     };
 
     if (!enrolledCourse) {
       fetchData();
     }
+
+    return () => {
+      controller.abort();
+    };
   }, [enrolledCourse, dispatch]);
 
   return (

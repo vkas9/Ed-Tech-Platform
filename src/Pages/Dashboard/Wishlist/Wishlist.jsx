@@ -11,11 +11,13 @@ const Wishlist = () => {
   const [Wishlist, setWishlist] = useState(wishlist);
 
   useEffect(() => {
+    const controller=new AbortController();
+    const signal=controller.signal;
     const fetchData = async () => {
       try {
         const data = JSON.parse(localStorage.getItem("user"));
         if (data && data.Courses && data.Courses.length > 0) {
-          const courseData = await getCourseDetail(data.Courses);
+          const courseData = await getCourseDetail(data.Courses,signal);
           localStorage.setItem("Wishlist", JSON.stringify(courseData.data.courseDetail));
           dispatch(cardAction.setWishlist(courseData.data.courseDetail));
         } else {
@@ -29,6 +31,9 @@ const Wishlist = () => {
 
     if (!Wishlist) {
       fetchData();
+    }
+    return ()=>{
+      controller.abort();
     }
   }, [Wishlist, dispatch]);
 
