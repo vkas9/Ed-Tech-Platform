@@ -26,8 +26,8 @@ const cardSlice = createSlice({
       state.enrolledCourse = action.payload;
     },
     reset(state) {
-      state.wishlist = initialState.wishlist;
-      state.enrolledCourse = initialState.enrolledCourse;
+      state.wishlist = null;
+      state.enrolledCourse = null;
     },
   },
 });
