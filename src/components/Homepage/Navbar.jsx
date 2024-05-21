@@ -7,19 +7,25 @@ import { ImCross } from "react-icons/im";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
 import ProfileDropDown from "./ProfileDropDown";
 import axios from "axios";
 import SubTitle from "./SubTitle";
-
+import {courseAction} from "../../store/courseSlice"
 const Navbar = () => {
   const[name,setName]=useState(null);
   const[catagory,setCatagory]=useState([]);
+  const dispatch=useDispatch();
+  const {courseCategory}=useSelector((store)=>store.course);
+  
   useEffect(()=>{
     axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getAllCatagory")
     .then(res=>{
+
       setCatagory(res.data.allCatagory);
+      dispatch(courseAction.setCourseCategory(res.data.allCatagory));
+      
       
       
       
