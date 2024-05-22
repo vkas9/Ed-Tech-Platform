@@ -4,7 +4,7 @@ const CourseCard=({course})=>{
     return (
         <div className="flex text-[1.1rem] justify-between flex-col sm:flex-row mr-5 items-center rounded-xl mt-4 hover:cursor-pointer hover:bg-gray-300/20 bg-gray-300/10 max-w-[60rem] p-1  ">
             <div className= "gap-3 p-2 items-center flex">
-              <img src={course.Thumbnail} alt="course-thumbnail" className="w-[100px] h-[90px] max-w-[110px] object-cover  rounded-lg " />
+              <img src={course.Thumbnail} alt="course-thumbnail" className="w-[120px] h-[90px] max-w-[120px] object-cover  rounded-lg " />
              
               <div>
                 <h2>{course.CourseName}</h2>
