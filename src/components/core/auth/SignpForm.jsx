@@ -4,16 +4,19 @@ import { useDispatch } from "react-redux";
 import { opt, signup } from "../../../Auth/Authapi";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import { useState } from "react";
 const SignupForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleSubmit = (data) => {
+  const[loading,setLoading]=useState(false);
+  const handleSubmit = async(data) => {
     if (data.Password !== data.ConfirmPassword) {
       toast.error("Password Not Matching");
       return;
     }
-
-    dispatch(opt(data, navigate));
+    setLoading(true);
+    await dispatch(opt(data, navigate));
+    setLoading(false);
   };
   return (
     <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} exit={{opacity:0}} className="flex  h-screen  pt-[3rem] sm:pt-[5rem]   flex-col gap-1 xs:gap-3 px-2 items-center ">
@@ -94,10 +97,11 @@ const SignupForm = () => {
               </div>
             </div>
             <button
+            disabled={loading}
               type="submit"
-              className="bg-yellow-600  hover:bg-yellow-500 text-black w-full  transition-all duration-150 font-bold text-2xl  active:bg-yellow-500 p-2 rounded-md mt-3  "
+              className={`bg-yellow-600  hover:bg-yellow-500 text-black w-full  transition-all duration-150 font-bold text-2xl ${loading?"opacity-50 cursor-not-allowed":""}  active:bg-yellow-500 p-2 rounded-md mt-3  `}
             >
-              Sign Up
+              {loading?"Signing up...":"Signup"}
             </button>
           </div>
         </Form>

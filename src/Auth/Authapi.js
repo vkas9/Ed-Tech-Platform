@@ -7,7 +7,7 @@ import { cardAction } from "../store/cardSlice";
 
 export const login=(data,navigate)=>{
     return async(dispatch)=>{
-        const toastId=toast.loading("Loading...");
+        const toastId=toast.loading("Logging in...");
         dispatch(authAction.setLoading(true));
         let response;
         try {
@@ -50,7 +50,7 @@ export const login=(data,navigate)=>{
 
 export const signup=(data,navigate)=>{
     return async(dispatch)=>{
-        const toastId=toast.loading("Loading");
+        const toastId=toast.loading("Signing up...");
         dispatch(authAction.setLoading(true));
         let response;
         try {
