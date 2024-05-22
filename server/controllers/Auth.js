@@ -160,15 +160,16 @@ exports.login = async (req, res) => {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
         secure: true,
-        sameSite:'Strict',
-        domain:'master.vkas.me'
-        
+        sameSite: 'Strict',
+        domain: '.vkas.me',
+        path: '/'
       };
+      
       res.cookie("EDT", token, option).status(200).json({
         success: true,
         registredUser,
         token,
-        message: "Successfully Logged in",
+        message: "Successfully Logged in"
       });
     } else {
       return res.status(403).json({
