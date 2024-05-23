@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   step: 1,
-  course: null,
+  course: {},
   editCourse: false,
 };
 const courseSlice = createSlice({
@@ -12,7 +12,7 @@ const courseSlice = createSlice({
     setStep(state, action) {
       state.step = action.payload;
     },
-    setcourse(state, action) {
+    setCourse(state, action) {
       state.course = action.payload;
     },
     setEditCourse: (state, action) => {

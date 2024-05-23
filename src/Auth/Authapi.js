@@ -188,3 +188,29 @@ export const getCourseDetail = async (courseId, signal) => {
 
   return response;
 };
+
+export const addCourseDetails = async (formData) => {
+  const toastId = toast.loading('Loading');
+  
+  try {
+    const response = await axios.post(
+      'https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/createCourse',
+      formData,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data', // Ensure FormData content type
+        },
+      }
+    );
+
+    toast.success('Course Details Added Successfully');
+    console.log('Course creation response:', response.data);
+    return response.data; // Assuming this returns the created course data
+  } catch (error) {
+    console.error('Error creating course:', error);
+    toast.error('Something went wrong while creating course');
+  } finally {
+    toast.dismiss(toastId);
+  }
+};

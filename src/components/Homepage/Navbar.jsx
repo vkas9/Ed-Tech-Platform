@@ -24,7 +24,7 @@ const Navbar = () => {
     .then(res=>{
 
       setCatagory(res.data.allCatagory);
-      dispatch(courseAction.setCourseCategory(res.data.allCatagory));
+      
       
       
       

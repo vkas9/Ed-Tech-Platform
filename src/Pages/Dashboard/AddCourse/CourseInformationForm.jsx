@@ -1,165 +1,290 @@
-import { Field, Form, Formik } from "formik";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { HiOutlineCurrencyRupee } from 'react-icons/hi';
-import { useSelector } from "react-redux";
-import RequirementField from "./RequirementsField"
-
+import { Formik, Form, Field } from "formik";
+import { useEffect, useState } from "react";
+import { MdOutlineCurrencyRupee } from "react-icons/md";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { MdNavigateNext } from "react-icons/md";
+import * as Yup from "yup";
+import {courseAction} from "../../../store/courseSlice"
+import { addCourseDetails } from "../../../Auth/Authapi";
+import Upload from "./Upload";
 
 
 const CourseInformationForm = () => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    getValues,
-    formState: { errors },
-  } = useForm();
-  const onSubmit=async()=>{
+  const { course, editCourse } = useSelector((state) => state.course);
+  const dispatch = useDispatch();
 
-  }
-  const { course, editCourse } = useSelector((state) => state.course)
-  // const courseCategories=useSelector((store)=>store.course.courseCategory);
-  const courseCategories=[{
-    name:"dlkjf"
-  }]
-  
-  console.log("course",courseCategories)
   const [loading, setLoading] = useState(false);
-  
-  return <>
-  <form
-    onSubmit={handleSubmit(onSubmit)}
-    className='rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8'>
-        <div>
-            <label  htmlFor='courseTitle'>Course Title<sup>*</sup></label>
-            <input
-                id='courseTitle'
-                placeholder='Enter Course Title'
-                {...register("courseTitle", {required:true})}
-                className='w-full'
-            />
-            {
-                errors.courseTitle && (
-                    <span>Course Title is Required**</span>
-                )
-            }
-        </div>
+  const [courseCategories, setCourseCategories] = useState([]);
 
-        <div>
-            <label  htmlFor='courseShortDesc'>Course Short Description<sup>*</sup></label>
-            <textarea
-                id='courseShortDesc'
-                placeholder='Enter Description'
-                {...register("courseShortDesc", {required:true})}
-                className='min-h-[140px] w-full'
-                />
-            {
-                errors.courseShortDesc && (<span>
-                    Course Description is required**
-                </span>)
-            }
-        </div>
+  const initialValues = {
+    courseTitle: course.courseName || "",
+    courseShortDesc: course.courseDescription || "",
+    coursePrice: course.price || "",
+    courseCategory: course.category?._id || "",
+    courseBenefits: course.whatYouWillLearn || "",
+  };
 
-        <div className='relative'>
-            <label htmlFor='coursePrice'>Course Price<sup>*</sup></label>
-            <input
-                id='coursePrice'
-                placeholder='Enter Course Price'
-                {...register("coursePrice", {
-                    required:true,
-                    valueAsNumber:true
-                })}
-                className='w-full'
-            />
-            <HiOutlineCurrencyRupee  className='absolute top-1/2 text-richblack-400'/>
-            {
-                errors.coursePrice && (
-                    <span>Course Price is Required**</span>
-                )
-            }
-        </div>
+  useEffect(() => {
+    const getCategories = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getAllCatagory"
+        );
+        setCourseCategories(response.data.allCatagory);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+      setLoading(false);
+    };
 
-        <div>
-            <label htmlFor='courseCategory'>Course Category<sup>*</sup></label>
-            <select
-            id='courseCategory'
-            defaultValue=""
-            {...register("courseCategory", {required:true})}
+    getCategories();
+  }, []);
+
+  const validationSchema = Yup.object({
+    courseTitle: Yup.string().required("Course title is required"),
+    courseShortDesc: Yup.string().required("Course Description is required"),
+    coursePrice: Yup.number()
+      .required("Course Price is required")
+      .positive("Price must be positive"),
+    courseCategory: Yup.string().required("Course Category is required"),
+    courseBenefits: Yup.string().required("Benefits of the course is required"),
+  });
+
+  const isFormUpdated = (currentValues) => {
+    if (!editCourse) {
+      return true; // For a new course, always treat as updated
+    }
+
+    return (
+      currentValues.courseTitle !== course.courseName ||
+      currentValues.courseShortDesc !== course.courseDescription ||
+      currentValues.coursePrice !== course.price ||
+      JSON.stringify(currentValues.courseTags) !== JSON.stringify(course.tag) ||
+      currentValues.courseBenefits !== course.whatYouWillLearn ||
+      currentValues.courseCategory !== course.category?._id ||
+      JSON.stringify(currentValues.courseRequirements) !==
+        JSON.stringify(course.instructions) ||
+      currentValues.courseImage !== course.thumbnail
+    );
+  };
+
+  const onSubmit = async (values, { setSubmitting }) => {
+    setSubmitting(true);
+
+    try {
+      console.log("Form 222values:", values);
+      if (editCourse && isFormUpdated(values)) {
+        const formData = new FormData();
+        formData.append("courseId", course._id);
+        formData.append("courseName", values.courseTitle);
+        formData.append("courseDescription", values.courseShortDesc);
+        formData.append("price", values.coursePrice);
+        formData.append("whatYouWillLearn", values.courseBenefits);
+        formData.append("category", values.courseCategory);
+        formData.append("thumbnailImage", values.courseImage);
+
+        setLoading(true);
+        const result = await editCourseDetails(formData);
+        setLoading(false);
+
+        if (result) {
+          dispatch(courseAction.setStep(2));
+          dispatch(courseAction.setCourse(result));
+        } else {
+          console.error("Edit course details failed");
+        }
+      } else {
+        const formData = new FormData();
+        formData.append("courseName", values.courseTitle);
+        formData.append("courseDescription", values.courseShortDesc);
+        formData.append("price", values.coursePrice.toString());
+        formData.append("whatYouWillLearn", values.courseBenefits);
+        formData.append("category", values.courseCategory);
+        formData.append("thumbnailImage", values.courseImage);
+        
+        console.log("data",values)
+
+        setLoading(true);
+        
+        const result = await addCourseDetails(formData);
+        setLoading(false);
+
+        if (result) {
+          dispatch(courseAction.setStep(2));
+          dispatch(courseAction.setCourse(result));
+        } else {
+          console.error("Add course details failed");
+        }
+        
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      {({ errors, touched, isSubmitting, setFieldValue }) => (
+        <Form className="space-y-8 rounded-md max-w-[700px] m-5 bg-white/10 p-6">
+          {/* Course Title */}
+          <div className="flex flex-col space-y-1">
+            <label
+              className="text-md font-semibold text-white/80"
+              htmlFor="courseTitle"
             >
-                <option value="" disabled>Choose a Category</option>
-
-                {
-                    !loading && courseCategories.map((category, index) => (
-                        <option key={index} value={category?._id}>
-                            {category?.name}
-                        </option>
-                    ))
-                }
-
-            </select>
-            {errors.courseCategory && (
-                <span>
-                    Course Category is Required
-                </span>
-            )}
-        </div>
-
-        {/* create a custom component for handling tags input */}
-        {/* <ChipInput
-            label="Tags"
-            name="courseTags"
-            placeholder="Enter tags and press enter"
-            register={register}
-            errors={errors}
-            setValue={setValue}
-            getValues = {getValues}
-        /> */}
-
-        {/* create a component for uploading and showing preview of media */}
-        {/* <Upload
-            name=
-            label=
-            register={}
-            errors=
-            setValue={}
-            /> */}
-        
-        {/*     Benefits of the Course */}
-        <div>
-            <label>Benefits of the course<sup>*</sup></label>
-            <textarea
-            id='coursebenefits'
-            placeholder='Enter Benefits of the course'
-            {...register("courseBenefits", {required:true})}
-            className='min-h-[130px] w-full'
+              Course Title <sup className="text-red-300">*</sup>
+            </label>
+            <Field
+              id="courseTitle"
+              name="courseTitle"
+              placeholder="Enter Course Title"
+              className="bg-white/10 text-xl w-full max-w-[650px] rounded-md p-2 outline-none"
             />
-            {errors.courseBenefits && (
-                <span>
-                    Benefits of the course are required**
-                </span>
+            {errors.courseTitle && touched.courseTitle && (
+              <span className="ml-2 text-xs tracking-wide text-red-300">
+                {errors.courseTitle}
+              </span>
             )}
-        </div>
+          </div>
+          {/* Course Short Description */}
+          <div className="flex flex-col space-y-1">
+            <label
+              className="text-md font-semibold text-white/80"
+              htmlFor="courseShortDesc"
+            >
+              Course Description <sup className="text-red-300">*</sup>
+            </label>
+            <Field
+              as="textarea"
+              id="courseShortDesc"
+              name="courseShortDesc"
+              placeholder="Enter Description"
+              className="bg-white/10 text-xl resize-none min-h-[130px] w-full max-w-[650px] rounded-md p-2 outline-none"
+            />
+            {errors.courseShortDesc && touched.courseShortDesc && (
+              <span className="ml-2 text-xs tracking-wide text-red-300">
+                {errors.courseShortDesc}
+              </span>
+            )}
+          </div>
+          {/* Course Price */}
+          <div className="flex flex-col space-y-1">
+            <label
+              className="text-md font-semibold text-white/80"
+              htmlFor="coursePrice"
+            >
+              Course Price <sup className="text-red-300">*</sup>
+            </label>
+            <div className="relative">
+              <Field
+                id="coursePrice"
+                name="coursePrice"
+                placeholder="Enter Course Price"
+                className="bg-white/10 text-xl w-full max-w-[650px] rounded-md p-2 outline-none pl-12"
+                type="number"
+              />
+              <MdOutlineCurrencyRupee className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl text-richblack-400" />
+            </div>
+            {errors.coursePrice && touched.coursePrice && (
+              <span className="ml-2 text-xs tracking-wide text-red-300">
+                {errors.coursePrice}
+              </span>
+            )}
+          </div>
+          {/* Course Category */}
+          <div className="flex flex-col space-y-1">
+            <label
+              className="text-md font-semibold text-white/80"
+              htmlFor="courseCategory"
+            >
+              Course Category <sup className="text-red-300">*</sup>
+            </label>
+            <Field
+              as="select"
+              id="courseCategory"
+              name="courseCategory"
+              className="bg-white/10 text-xl w-full max-w-[650px] rounded-md p-2 outline-none"
+            >
+              <option  value="" disabled>
+                Choose a Category
+              </option>
+              {!loading &&
+                courseCategories.map((category, index) => (
+                  <option className="text-black font-semibold text-xl " key={index} value={category?._id}>
+                    {category?.name}
+                  </option>
+                ))}
+            </Field>
+            {errors.courseCategory && touched.courseCategory && (
+              <span className="ml-2 text-xs tracking-wide text-red-300">
+                {errors.courseCategory}
+              </span>
+            )}
+          </div>
+          <Upload
+            name="courseImageV"
+            label="Course Thumbnail"
+            
+            errors={errors}
+            editData={editCourse ? course.thumbnail : null}
+          />
+          {/* Benefits of the course */}
+          <div className="flex flex-col space-y-1">
+            <label
+              className="text-md font-semibold text-white/80"
+              htmlFor="courseBenefits"
+            >
+              Benefits of the course <sup className="text-red-300">*</sup>
+            </label>
+            <Field
+              as="textarea"
+              id="courseBenefits"
+              name="courseBenefits"
+              placeholder="Enter benefits of the course"
+              className="bg-white/10 text-xl resize-none min-h-[130px] w-full max-w-[650px] rounded-md p-2 outline-none"
+            />
+            {errors.courseBenefits && touched.courseBenefits && (
+              <span className="ml-2 text-xs tracking-wide text-red-300">
+                {errors.courseBenefits}
+              </span>
+            )}
+          </div>
 
-        
-        <div>
-            {
-                editCourse && (
-                    <button
-                    onClick={() => dispatch(setStep(2))}
-                    className='flex items-center gap-x-2 bg-richblack-300'
-                    >
-                        Continue Without Saving
-                    </button>
-                )
-            }
-
+          {/* Next Button */}
+          <div className="flex justify-end gap-x-2">
+            {editCourse && (
+              <button
+                type="button"
+                onClick={() => dispatch(courseAction.setStep(2))}
+                disabled={loading}
+                className="flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-2 px-4 font-semibold text-black"
+              >
+                Continue Without Saving
+              </button>
+            )}
             <button
-                text={!editCourse ? "Next" : "Save Changes"}
-                />
-        </div>
-    </form>
-  
-  </>;
+              type="submit"
+              disabled={loading || isSubmitting}
+              className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-400 transition-all duration-200 py-2 px-4 font-semibold text-black ${
+                editCourse ? "ml-auto" : ""
+              }`}
+            >
+              {!editCourse ? "Next" : "Save Changes"}
+              <MdNavigateNext />
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
+  );
 };
+
 export default CourseInformationForm;
