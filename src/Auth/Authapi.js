@@ -198,15 +198,12 @@ export const addCourseDetails = async (formData) => {
       formData,
       {
         withCredentials: true,
-        headers: {
-          'Content-Type': 'multipart/form-data', // Ensure FormData content type
-        },
       }
     );
 
     toast.success('Course Details Added Successfully');
     console.log('Course creation response:', response.data);
-    return response.data; // Assuming this returns the created course data
+    return response.data; 
   } catch (error) {
     console.error('Error creating course:', error);
     toast.error('Something went wrong while creating course');

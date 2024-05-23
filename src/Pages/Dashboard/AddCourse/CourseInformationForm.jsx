@@ -104,8 +104,6 @@ const CourseInformationForm = () => {
         formData.append("category", values.courseCategory);
         formData.append("thumbnailImage", values.courseImage);
         
-        console.log("data",values)
-
         setLoading(true);
         
         const result = await addCourseDetails(formData);
@@ -230,7 +228,7 @@ const CourseInformationForm = () => {
             )}
           </div>
           <Upload
-            name="courseImageV"
+            name="courseImage"
             label="Course Thumbnail"
             
             errors={errors}
