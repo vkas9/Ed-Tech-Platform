@@ -162,7 +162,7 @@ exports.login = async (req, res) => {
         secure: true,
         sameSite:'None'
       };
-      res.cookie("EDT", token, option).status(200).json({
+      res.cookie("__EDT", token, option).status(200).json({
         success: true,
         registredUser,
         token,

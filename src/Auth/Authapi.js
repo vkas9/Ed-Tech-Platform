@@ -121,7 +121,7 @@ export const logout=(navigate)=>{
         dispatch(authAction.setToken(null));
         dispatch(profileAction.setProfile(null));
         localStorage.clear();
-        document.cookie = 'EDT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = '__EDT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         dispatch(cardAction.reset());
         toast.success("Logged Out Successfully")
         navigate("/")
