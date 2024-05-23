@@ -160,7 +160,7 @@ exports.login = async (req, res) => {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
         secure: true,
-        sameSite:'Lax'
+        sameSite:'None'
       };
       res.cookie("EDT", token, option).status(200).json({
         success: true,
