@@ -36,13 +36,24 @@ exports.createSection=async(req,res)=>{
 
 exports.updateSection=async(req,res)=>{
     try {
-        const {sectionName,sectionId}=req.body;
-        await section.findByIdAndUpdate(sectionId,{sectionName},{new:true});
+        const {sectionName,sectionId,courseId}=req.body;
+        console.log("sectionName,sectionId",sectionName,sectionId)
+        const updatedSection=await section.findByIdAndUpdate(sectionId,{sectionName},{new:true});
+        const updatedCourse = await course.findById(courseId)
+		.populate({
+			path:"Section",
+			populate:{
+				path:"subSection",
+			},
+		})
+		.exec();
         res.status(200).json({
             success:true,
-            message:"Successfully updated Section"
+            message:"Successfully updated Section",
+            updatedCourse
         }) 
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             success:false,
             message:"Something went wrong while upading Section"

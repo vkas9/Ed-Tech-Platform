@@ -265,7 +265,55 @@ export const deleteSubSection=async(data)=>{
         toast.dismiss(toastId)
     }
 }
+export const createSubSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("http://localhost:8080/api/v1/course/createSubSection",data,{
+            withCredentials:true
+        })
+        toast.success('Sub Section Created Successfully');
+        console.log('Sub Section Create response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error Creating Sub Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+export const updateSubSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("http://localhost:8080/api/v1/course/updateSubSection",data,{
+            withCredentials:true
+        })
+        toast.success('Sub Section updated Successfully');
+        console.log('Sub Section updated response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error updating Sub Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
 
-export const updateSection=()=>{
-    
+export const updateSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("http://localhost:8080/api/v1/course/updateSection",data,{
+            withCredentials:true
+        })
+        toast.success(' Section updated Successfully');
+        console.log(' Section updated response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error  updating Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
 }

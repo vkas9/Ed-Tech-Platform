@@ -131,7 +131,7 @@ const Navbar = () => {
          
         </nav>
         <div className={`flex ${user!=null?"gap-4 ml-[7vw]":"gap-6"}   items-center `}>
-          {user && user?.accountType != "Instructor" && (
+          {user && user?.role != "Instructor" ?(
             <Link to="/dashboard/wishlist" className="relative ">
               <FaCartShopping size={20} />
               {totalItems > 0 ? (
@@ -140,7 +140,7 @@ const Navbar = () => {
                 </span>
               ) : null}
             </Link>
-          )}
+          ):user && user?.role == "Instructor"&&<p className=" hidden sm:flex uppercase font-bold text-yellow-500 select-none shadow-md ">Instructor</p>}
           {token === null ? (
             <div className="flex gap-4 font-bold items-center py-3 ">
               <Button

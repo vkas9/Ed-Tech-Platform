@@ -70,7 +70,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                   <div
                     onClick={(e) => {
                       e.stopPropagation();
-                      console.log("edit button");
+                      handleChangeEditSectionName(section._id,section.SectionName)
                     }}
                     className="hover:bg-white/20 rounded-full p-2"
                   >
@@ -145,10 +145,10 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                 
                 
               ))}
-              <button className="flex items-center">
+              <div className="ml-3 flex items-center">
                 <IoMdAdd/>
                 <span>Add Lecture</span>
-              </button>
+              </div>
                </div>
             </details>
           ))}

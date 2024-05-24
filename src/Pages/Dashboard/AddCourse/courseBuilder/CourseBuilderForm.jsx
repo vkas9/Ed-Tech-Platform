@@ -2,20 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { MdAddCircleOutline } from "react-icons/md";
-import { BiRightArrow } from "react-icons/bi";
+import { FaAngleRight } from "react-icons/fa";
+
 import { useDispatch, useSelector } from 'react-redux';
 import { courseAction } from '../../../../store/courseSlice';
 import { toast } from 'react-hot-toast';
-import { createSection,updateSection } from '../../../../Auth/Authapi';
+import { createSection, updateSection } from '../../../../Auth/Authapi';
 import NestedView from './NestedView';
-
-
 
 const CourseBuilderForm = () => {
   const [editSectionName, setEditSectionName] = useState(null);
-  const { course,step } = useSelector((state) => state.course);
+  const { course, step } = useSelector((store) => store.course);
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -37,7 +35,7 @@ const CourseBuilderForm = () => {
         sectionName: values.sectionName,
         courseId: course._id,
       });
-      console.log("result",result)
+      console.log("result", result);
     }
 
     if (result) {
@@ -50,7 +48,7 @@ const CourseBuilderForm = () => {
     setSubmitting(false);
   };
 
-  const cancelEdit = () => {
+  const cancelEdit = (resetForm) => {
     setEditSectionName(null);
     resetForm();
   };
@@ -60,10 +58,8 @@ const CourseBuilderForm = () => {
     dispatch(courseAction.setEditCourse(true));
   };
 
-  console.log("cours->",course.data)
-  console.log("coursy->",course)
   const goToNext = () => {
-    console.log("next")
+    console.log("next");
     if (course?.Section?.length === 0) {
       toast.error("Please add at least one section");
       return;
@@ -72,96 +68,91 @@ const CourseBuilderForm = () => {
       toast.error("Please add at least one lecture in each section");
       return;
     }
-    
-    dispatch(courseAction.setStep(3));
 
+    dispatch(courseAction.setStep(3));
   };
 
-  // const handleChangeEditSectionName = (sectionId, sectionName) => {
-  //   if (editSectionName === sectionId) {
-  //     cancelEdit();
-  //     return;
-  //   }
-
-  //   setEditSectionName(sectionId);
-  //   setValues({ sectionName });
-  // };
-
   return (
-    <div className='text-white'>
-      <p>Course Builder</p>
-      <Formik
-    initialValues={{ sectionName: '' }}
-    validationSchema={Yup.object({
-      sectionName: Yup.string().required('Section Name is required'),
-    })}
-    onSubmit={handleSubmit}
-  >
-    {({ isSubmitting, resetForm, setValues }) => (
-      <Form>
-        <div>
-          <label htmlFor='sectionName'>
-            Section name <sup>*</sup>
-          </label>
-          <Field
-            id='sectionName'
-            name='sectionName'
-            placeholder='Add section name'
-            className='w-full'
-          />
-          <ErrorMessage name="sectionName" component="span" />
-        </div>
-        <div className='mt-10 flex w-full'>
-          <button
-            type="submit"
-            className="btn btn-outline text-white"
-            disabled={isSubmitting}
+    <div className="text-white">
+      <h1 className="text-3xl">Course Builder</h1>
+      <div className="mt-8">
+        <div className="p-4 ml-4 bg-white/10 rounded-md py-6 gap-4 w-full max-w-[700px]">
+          <Formik
+            initialValues={{ sectionName: '' }}
+            validationSchema={Yup.object({
+              sectionName: Yup.string().required('Section Name is required'),
+            })}
+            onSubmit={handleSubmit}
           >
-            {editSectionName ? "Edit Section Name" : "Create Section"}
-            <MdAddCircleOutline className='text-yellow-50 ml-2' size={20} />
-          </button>
-          {editSectionName && (
-            <button
-              type='button'
-              onClick={() => cancelEdit(resetForm)}
-              className='text-sm text-richblack-300 underline ml-10'
-            >
-              Cancel Edit
-            </button>
-          )}
+            {({ isSubmitting, resetForm, setValues }) => (
+              <Form className="flex flex-col gap-4">
+                <div className='flex flex-col'>
+                  <label htmlFor="sectionName" className="text-xl text-white/80">
+                    Section name <sup>*</sup>
+                  </label>
+                  <Field
+                    id="sectionName"
+                    name="sectionName"
+                    placeholder="Add section name"
+                    className="bg-white/20 w-full outline-none max-w-[350px] rounded-md p-2 text-white"
+                  />
+                  <ErrorMessage name="sectionName" component="span" className="text-red-500" />
+                </div>
+                <div className="flex items-center gap-4">
+                  <button
+                    type="submit"
+                    className="bg-yellow-500 hover:bg-yellow-600 text-lg w-[220px] font-bold text-black p-2 rounded-md flex items-center justify-center"
+                    disabled={isSubmitting}
+                  >
+                    {editSectionName ? "Edit Section Name" : "Create Section"}
+                    <MdAddCircleOutline className="ml-2" size={20} />
+                  </button>
+                  {editSectionName && (
+                    <button
+                      type="button"
+                      onClick={() => cancelEdit(resetForm)}
+                      className="text-sm text-richblack-300 underline"
+                    >
+                      Cancel Edit
+                    </button>
+                  )}
+                </div>
+                {course?.Section?.length > 0 && (
+                <NestedView
+                  handleChangeEditSectionName={(sectionId, sectionName) => {
+                    if (editSectionName === sectionId) {
+                      cancelEdit(resetForm);
+                      return;
+                    }
+
+                    setEditSectionName(sectionId);
+                    setValues({ sectionName });
+                  }}
+                />
+              )}
+
+              </Form>
+            )}
+          </Formik>
         </div>
-        {course?.Section?.length > 0 && (
-          <NestedView
-            dispatch={dispatch} courseAction={courseAction}
-            handleChangeEditSectionName={(sectionId, sectionName) => {
-              if (editSectionName === sectionId) {
-                cancelEdit(resetForm);
-                return;
-              }
-
-              setEditSectionName(sectionId);
-              setValues({ sectionName });
-            }}
-          />
-        )}
-      </Form>
-    )}
-  </Formik>
-
-      <div className='flex justify-end gap-x-3 mt-10'>
+      </div>
+      <div className="flex justify-end gap-4 mt-2 ml-4 w-full max-w-[700px] ">
         <button
           onClick={goBack}
-          className='rounded-md cursor-pointer flex items-center'
+          className="rounded-md cursor-pointer flex items-center bg-gray-500 hover:bg-gray-600 text-white p-2"
         >
           Back
         </button>
+        <div  onClick={goToNext} className="bg-blue-500 hover:bg-blue-600 text-xl font-bold text-white p-2 rounded-md flex items-center">
         <button
-          onClick={goToNext}
-          className='btn btn-outline flex items-center'
+         
+          
         >
           Next
-          <BiRightArrow className='ml-2' />
         </button>
+        <FaAngleRight className="ml-1 text-2xl" />
+        </div>
+        
       </div>
     </div>
   );

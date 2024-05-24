@@ -4,8 +4,10 @@ import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSubSection, updateSubSection } from '../../../../../Auth/Authapi';
 import { setCourse } from '../../../../../store/courseSlice';
-import { RxCross1 } from 'react-icons/rx';
+import { RxCross2 } from "react-icons/rx";
+
 import Upload from '../../Upload';
+import { courseAction } from '../../../../../store/courseSlice';
 const SubSectionModal = ({
     modalData,
     setModalData,
@@ -50,11 +52,9 @@ const SubSectionModal = ({
         }
 
         setLoading(true);
-        // API call
-        const result = await updateSubSection(formData, token);
-        if (result) {
-            dispatch(setCourse(result));
-        }
+        const newSubSection = await updateSubSection(formData, token);
+        if (newSubSection) dispatch(courseAction.setCourse(newSubSection));
+
         setModalData(null);
         setLoading(false);
     };
@@ -71,19 +71,16 @@ const SubSectionModal = ({
             return;
         }
 
-        // ADD
-
         const formData = new FormData();
         formData.append('sectionId', modalData);
         formData.append('title', values.lectureTitle);
         formData.append('description', values.lectureDesc);
         formData.append('video', values.lectureVideo);
         setLoading(true);
-        // API CALL
-        const result = await createSubSection(formData, token);
+        const result = await createSubSection(formData);
 
         if (result) {
-            dispatch(setCourse(result));
+            dispatch(courseAction.setCourse(result));
         }
         setModalData(null);
         setLoading(false);
@@ -96,7 +93,7 @@ const SubSectionModal = ({
                     {view && 'Viewing'} {add && 'Adding'} {edit && 'Editing'} Lecture
                 </p>
                 <button onClick={() => (!loading ? setModalData(null) : {})}>
-                    <RxCross1 />
+                    <RxCross2 />
                 </button>
             </div>
             <Formik
