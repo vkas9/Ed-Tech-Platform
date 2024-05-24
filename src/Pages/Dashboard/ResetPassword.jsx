@@ -30,27 +30,30 @@ const ResetPassword = () => {
         <Form className=" mr-5  mt-6">
           <div className="p-4 bg-white/10 rounded-md   sm:w-[100%] lg:max-w-[55rem] w-full">
             <div className="flex flex-col gap-4 ">
-              <div className="  ">
+              <div className=" flex flex-col ">
+              <label className=" text-md  text-white/80">Current Password </label>
                 <Field
-                  className="bg-white/20 w-full max-w-[350px] rounded-md p-2 outline-none"
+                  className="bg-white/10 w-full max-w-[350px] rounded-md p-2 outline-none"
                   type="password"
                   required
                   placeholder="Current Password"
                   name="oldPassword"
                 ></Field>
               </div>
-              <div className=" ">
+              <div className="flex flex-col ">
+              <label className=" text-md  text-white/80">New Password</label>
                 <Field
-                  className="bg-white/20 w-full max-w-[350px]  rounded-md p-2 outline-none"
+                  className="bg-white/10 w-full max-w-[350px]  rounded-md p-2 outline-none"
                   type="password"
                   required
                   placeholder="New Password"
                   name="password"
                 ></Field>
               </div>
-              <div className=" ">
+              <div className="flex flex-col ">
+              <label className=" text-md  text-white/80">Confirm New Password</label>
                 <Field
-                  className="bg-white/20 w-full max-w-[350px]  rounded-md p-2 outline-none"
+                  className="bg-white/10 w-full max-w-[350px]  rounded-md p-2 outline-none"
                   type="password"
                   required
                   placeholder="Confirm New Password"
