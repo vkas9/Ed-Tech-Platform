@@ -30,7 +30,7 @@ const CourseInformationForm = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getAllCatagory"
+          "http://localhost:8080/api/v1/course/getAllCatagory"
         );
         setCourseCategories(response.data.allCatagory);
       } catch (error) {
@@ -111,7 +111,7 @@ const CourseInformationForm = () => {
 
         if (result) {
           dispatch(courseAction.setStep(2));
-          dispatch(courseAction.setCourse(result));
+          dispatch(courseAction.setCourse(result.data));
         } else {
           console.error("Add course details failed");
         }
@@ -263,7 +263,7 @@ const CourseInformationForm = () => {
                 type="button"
                 onClick={() => dispatch(courseAction.setStep(2))}
                 disabled={loading}
-                className="flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-2 px-4 font-semibold text-black"
+                className="flex   text-white cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-2 px-4 font-semibold underline"
               >
                 Continue Without Saving
               </button>

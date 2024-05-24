@@ -8,8 +8,8 @@ const {
   isStudent,
 } = require("../middlewares/middlewareAuth");
 const { createCourse, getAllCourseDetail } = require("../controllers/CourseCT");
-const { createSection } = require("../controllers/SectionCT");
-const { createSubSection } = require("../controllers/Sub-SectionCT");
+const { createSection, deleteSection } = require("../controllers/SectionCT");
+const { createSubSection, deleteSubSection } = require("../controllers/Sub-SectionCT");
 const {
   createRating,
   getAverageRating,
@@ -21,6 +21,8 @@ router.post("/createCourse", auth, isInstructor, createCourse);
 router.get("/getAllCourseDetail", auth, isInstructor, getAllCourseDetail);
 router.post("/createSection", auth, isInstructor, createSection);
 router.post("/createSubSection", auth, isInstructor, createSubSection);
+router.post("/deleteSection", auth, isInstructor, deleteSection);
+router.post("/deleteSubSection", auth, isInstructor, deleteSubSection);
 
 router.post("/createRating", auth, isStudent, createRating);
 router.get("/getAverageRating", getAverageRating);

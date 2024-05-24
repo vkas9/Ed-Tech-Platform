@@ -3,6 +3,7 @@ const course=require("../models/Courses")
 exports.createSection=async(req,res)=>{
     try {
         const {sectionName,courseId}=req.body;
+        console.log("section->",sectionName,courseId)
         if(!sectionName || !courseId){
             return res.status(400).json({
                 success:false,
@@ -11,11 +12,18 @@ exports.createSection=async(req,res)=>{
         }
         
         const newSection=await section.create({SectionName:sectionName});
-        await course.findByIdAndUpdate(courseId,{$push:{Section:newSection._id}},{new:true})
+        const updatedCourse=await course.findByIdAndUpdate(courseId,{$push:{Section:newSection._id}},{new:true}).populate({
+            path: "Section",
+            populate: {
+                path: "subSection",
+            },
+        })
+        .exec();
        
         res.status(200).json({
             success:true,
-            message:"Successfully created Section"
+            message:"Successfully created Section",
+            updatedCourse
         })
     } catch (error) {
         console.log(error);
@@ -33,7 +41,7 @@ exports.updateSection=async(req,res)=>{
         res.status(200).json({
             success:true,
             message:"Successfully updated Section"
-        })
+        }) 
     } catch (error) {
         res.status(500).json({
             success:false,
@@ -43,17 +51,40 @@ exports.updateSection=async(req,res)=>{
 }
 exports.deleteSection=async(req,res)=>{
     try {
-        const {sectionId,courseId}=req.params;
-        await section.findByIdAndDelete(sectionId,{new:true});
-        await course.findOneAndUpdate(courseId,{$pull:{Section:sectionId}},{new:true});
+        const {sectionId,courseId}=req.body;
+        const updateSection=await section.findByIdAndDelete(sectionId);
+        const updateCourse=await course.findByIdAndUpdate(courseId,{$pull:{Section:sectionId}},{new:true}).populate({
+            path: "Section",
+            populate: {
+                path: "subSection",
+            },
+        })
+        .exec();
+       
+        if (!updateSection) {
+            return res.status(404).json({
+                success: false,
+                message: "Section not found or already deleted."
+            });
+        }
+
+        if (!updateCourse) {
+            return res.status(404).json({
+                success: false,
+                message: "Course not found."
+            });
+        }
         res.status(200).json({
             success:true,
-            message:"Successfully Delete Section"
+            message:"Successfully Delete Section",
+            updateSection,updateCourse
         })
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             success:false,
-            message:"Something went wrong while Deleting Section"
+            message:"Something went wrong while Deleting Section",
+            error:error
         })
     }
 }

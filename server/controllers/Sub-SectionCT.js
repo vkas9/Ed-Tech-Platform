@@ -59,3 +59,35 @@ exports.updateSubSection=async(req,res)=>{
 
 
 //todo deleting subsection
+exports.deleteSubSection=async(req,res)=>{
+    try {
+        const{sectionId,subSectionId}=req.body;
+        const updatedSubSection=await  subSection.findByIdAndDelete(subSectionId,{new:true});
+        const updatedSection=await section.findByIdAndUpdate(sectionId,{$pull:{subSection:subSectionId}},{new:true});
+        if(!updatedSection){
+            return res.status(404).json({
+                success:false,
+                message:"Section not found or already deleted"
+            })
+        }
+        if(!updatedSubSection){
+            return res.status(404).json({
+                success:"false",
+                message:"Sub Section not found or already deleted"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            message:"Successfully Sub Section Deleted",
+            updatedSection,updatedSubSection
+
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success:false,
+            message:"Something went wrong while deleting Sub Section"
+        })
+        
+    }
+}
