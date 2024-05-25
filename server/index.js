@@ -40,6 +40,7 @@ app.use("/api/v1/course",courseRoute);
 // app.use("/api/v1/payment",paymentRoute);
 app.use("/api/v1/profile",profileRoute);
 
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
