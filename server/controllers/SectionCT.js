@@ -37,8 +37,7 @@ exports.createSection=async(req,res)=>{
 exports.updateSection=async(req,res)=>{
     try {
         const {sectionName,sectionId,courseId}=req.body;
-        console.log("sectionName,sectionId",sectionName,sectionId)
-        const updatedSection=await section.findByIdAndUpdate(sectionId,{sectionName},{new:true});
+        const updatedSection=await section.findByIdAndUpdate(sectionId,{SectionName:sectionName},{new:true});
         const updatedCourse = await course.findById(courseId)
 		.populate({
 			path:"Section",

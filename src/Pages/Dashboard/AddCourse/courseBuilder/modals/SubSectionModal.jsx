@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSubSection, updateSubSection } from '../../../../../Auth/Authapi';
-import { setCourse } from '../../../../../store/courseSlice';
+import { updateSubSection, createSubSection } from '../../../../../Auth/Authapi';
 import { RxCross2 } from "react-icons/rx";
-
+import { motion } from 'framer-motion';
 import Upload from '../../Upload';
 import { courseAction } from '../../../../../store/courseSlice';
+import * as Yup from 'yup';
+
 const SubSectionModal = ({
     modalData,
     setModalData,
@@ -24,6 +25,12 @@ const SubSectionModal = ({
         lectureDesc: modalData.description || '',
         lectureVideo: modalData.videoUrl || '',
     };
+
+    const validationSchema = Yup.object().shape({
+        lectureTitle: Yup.string().required('Lecture Title is required'),
+        lectureDesc: Yup.string().required('Lecture Description is required'),
+        lectureVideo: Yup.string().required('Lecture Video is required'),
+    });
 
     const isFormUpdated = (currentValues) => {
         return (
@@ -52,7 +59,7 @@ const SubSectionModal = ({
         }
 
         setLoading(true);
-        const newSubSection = await updateSubSection(formData, token);
+        const newSubSection = await updateSubSection(formData);
         if (newSubSection) dispatch(courseAction.setCourse(newSubSection));
 
         setModalData(null);
@@ -75,45 +82,39 @@ const SubSectionModal = ({
         formData.append('sectionId', modalData);
         formData.append('title', values.lectureTitle);
         formData.append('description', values.lectureDesc);
-        formData.append('video', values.lectureVideo);
+        formData.append('videoFile', values.lectureVideo);
+        formData.append("courseId", course._id);
+
         setLoading(true);
         const result = await createSubSection(formData);
 
         if (result) {
-            dispatch(courseAction.setCourse(result));
+            console.log("result->",result)
+            dispatch(courseAction.setCourse(result.updatedCourse));
         }
         setModalData(null);
         setLoading(false);
     };
 
     return (
-        <div>
-            <div>
-                <p>
-                    {view && 'Viewing'} {add && 'Adding'} {edit && 'Editing'} Lecture
-                </p>
-                <button onClick={() => (!loading ? setModalData(null) : {})}>
-                    <RxCross2 />
-                </button>
-            </div>
-            <Formik
-                initialValues={initialValues}
-                onSubmit={onSubmit}
-                enableReinitialize
-            >
-                {({ values, setValues, handleChange }) => {
-                    useEffect(() => {
-                        if (view || edit) {
-                            setValues({
-                                lectureTitle: modalData.title || '',
-                                lectureDesc: modalData.description || '',
-                                lectureVideo: modalData.videoUrl || '',
-                            });
-                        }
-                    }, [modalData, view, edit]);
-
-                    return (
-                        <Form>
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, delay: 0.2, ease: [0, .71, .2, 1.01] }}>
+            <div className="space-y-8 rounded-md max-w-[700px] m-5 bg-white/10 p-6">
+                <div className="flex justify-between items-center">
+                    <p className="text-xl font-semibold text-white/80">
+                        {view && 'Viewing'} {add && 'Adding'} {edit && 'Editing'} Lecture
+                    </p>
+                    <button onClick={() => (!loading ? setModalData(null) : {})} className="text-white hover:text-red-300 transition">
+                        <RxCross2 size={24} />
+                    </button>
+                </div>
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={onSubmit}
+                    validationSchema={validationSchema}
+                    enableReinitialize
+                >
+                    {({ values, handleChange }) => (
+                        <Form className="space-y-6">
                             <Upload
                                 name="lectureVideo"
                                 label="Lecture Video"
@@ -122,40 +123,50 @@ const SubSectionModal = ({
                                 viewData={view ? modalData.videoUrl : null}
                                 editData={edit ? modalData.videoUrl : null}
                             />
-                            <div>
-                                <label htmlFor='lectureTitle'>Lecture Title</label>
+                            <div className="flex flex-col space-y-1">
+                                <label htmlFor='lectureTitle' className="text-md font-semibold text-white/80">
+                                    Lecture Title <sup className="text-red-300">*</sup>
+                                </label>
                                 <Field
                                     id='lectureTitle'
                                     name='lectureTitle'
                                     placeholder='Enter Lecture Title'
-                                    className='w-full'
-                                    validate={value => value ? undefined : 'Lecture Title is required'}
+                                    className='bg-white/10 text-xl w-full max-w-[650px] rounded-md p-2 outline-none'
                                 />
-                                <ErrorMessage name='lectureTitle' component='span' />
+                                <ErrorMessage name='lectureTitle' component='span' className="ml-2 text-xs tracking-wide text-red-300" />
                             </div>
-                            <div>
-                                <label htmlFor='lectureDesc'>Lecture Description</label>
+                            <div className="flex flex-col space-y-1">
+                                <label htmlFor='lectureDesc' className="text-md font-semibold text-white/80">
+                                    Lecture Description <sup className="text-red-300">*</sup>
+                                </label>
                                 <Field
                                     id='lectureDesc'
                                     name='lectureDesc'
                                     placeholder='Enter Lecture Description'
                                     as='textarea'
-                                    className='w-full min-h-[130px]'
-                                    validate={value => value ? undefined : 'Lecture Description is required'}
+                                    className='bg-white/10 text-xl resize-none min-h-[130px] w-full max-w-[650px] rounded-md p-2 outline-none'
                                 />
-                                <ErrorMessage name='lectureDesc' component='span' />
+                                <ErrorMessage name='lectureDesc' component='span' className="ml-2 text-xs tracking-wide text-red-300" />
                             </div>
-
                             {!view && (
-                                <div>
-                                    <button>{loading ? 'Loading...' : edit ? 'Save Changes' : 'Save'}</button>
+                                <div className="flex justify-end gap-x-2">
+                                    <div
+                                        
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            onSubmit(values);
+                                        }}
+                                        className={`flex cursor-pointer items-center rounded-md bg-blue-500 hover:bg-blue-600 active:bg-blue-600 text-xl transition-all duration-200 py-2 px-4 text-blue-950 font-bold`}
+                                    >
+                                        {loading ? 'Loading...' : edit ? 'Save Changes' : 'Save'}
+                                    </div>
                                 </div>
                             )}
                         </Form>
-                    );
-                }}
-            </Formik>
-        </div>
+                    )}
+                </Formik>
+            </div>
+        </motion.div>
     );
 };
 
