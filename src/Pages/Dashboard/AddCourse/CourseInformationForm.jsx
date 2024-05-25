@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import {courseAction} from "../../../store/courseSlice"
 import { addCourseDetails } from "../../../Auth/Authapi";
 import Upload from "./Upload";
-
+import { motion } from "framer-motion";
 
 const CourseInformationForm = () => {
   const { course, editCourse } = useSelector((state) => state.course);
@@ -125,6 +125,7 @@ const CourseInformationForm = () => {
   };
 
   return (
+    <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}}>
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
@@ -271,17 +272,18 @@ const CourseInformationForm = () => {
             <button
               type="submit"
               disabled={loading || isSubmitting}
-              className={`flex cursor-pointer items-center gap-x-2 rounded-md bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-400 transition-all duration-200 py-2 px-4 font-semibold text-black ${
+              className={`flex cursor-pointer items-center rounded-md bg-blue-500 hover:bg-blue-600 active:bg-blue-600 text-xl transition-all duration-200 py-2 px-4  text-blue-950 font-bold ${
                 editCourse ? "ml-auto" : ""
               }`}
             >
               {!editCourse ? "Next" : "Save Changes"}
-              <MdNavigateNext />
+              <MdNavigateNext className="text-2xl" />
             </button>
           </div>
         </Form>
       )}
     </Formik>
+    </motion.div>
   );
 };
 

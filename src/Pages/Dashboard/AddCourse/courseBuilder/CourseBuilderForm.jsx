@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { MdAddCircleOutline } from "react-icons/md";
 import { FaAngleRight } from "react-icons/fa";
-
+import { motion } from "framer-motion";
 import { useDispatch, useSelector } from 'react-redux';
 import { courseAction } from '../../../../store/courseSlice';
 import { toast } from 'react-hot-toast';
@@ -73,10 +73,10 @@ const CourseBuilderForm = () => {
   };
 
   return (
-    <div className="text-white">
+    <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="text-white">
       <h1 className="text-3xl">Course Builder</h1>
       <div className="mt-8">
-        <div className="p-4 ml-4 bg-white/10 rounded-md py-6 gap-4 w-full max-w-[700px]">
+        <div className="p-4 ml-5 bg-white/10 rounded-md py-6 gap-4 w-full max-w-[700px]">
           <Formik
             initialValues={{ sectionName: '' }}
             validationSchema={Yup.object({
@@ -94,18 +94,18 @@ const CourseBuilderForm = () => {
                     id="sectionName"
                     name="sectionName"
                     placeholder="Add section name"
-                    className="bg-white/20 w-full outline-none max-w-[350px] rounded-md p-2 text-white"
+                    className="bg-white/20 w-full outline-none max-w-[350px] rounded-md p-2 text-xl text-white"
                   />
                   <ErrorMessage name="sectionName" component="span" className="text-red-500" />
                 </div>
                 <div className="flex items-center gap-4">
                   <button
                     type="submit"
-                    className="bg-yellow-500 hover:bg-yellow-600 text-lg w-[220px] font-bold text-black p-2 rounded-md flex items-center justify-center"
+                    className="bg-blue-500 hover:bg-blue-600 text-lg max-w-[220px] font-bold text-blue-950 p-2 rounded-md flex items-center justify-center"
                     disabled={isSubmitting}
                   >
                     {editSectionName ? "Edit Section Name" : "Create Section"}
-                    <MdAddCircleOutline className="ml-2" size={20} />
+                    <MdAddCircleOutline className="ml-2 " size={20} />
                   </button>
                   {editSectionName && (
                     <button
@@ -143,7 +143,7 @@ const CourseBuilderForm = () => {
         >
           Back
         </button>
-        <div  onClick={goToNext} className="bg-blue-500 hover:bg-blue-600 text-xl font-bold text-white p-2 rounded-md flex items-center">
+        <div  onClick={goToNext} className="text-blue-950 bg-blue-500 hover:bg-blue-600 text-xl font-bold p-2 rounded-md flex items-center">
         <button
          
           
@@ -154,7 +154,7 @@ const CourseBuilderForm = () => {
         </div>
         
       </div>
-    </div>
+    </motion.div>
   );
 };
 
