@@ -20,7 +20,7 @@ app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,'public')));
 
 app.use(cors({
-  origin: ['https://master-ed-new.netlify.app', 'http://localhost:5173',"https://ed-tech-platform-client.onrender.com","https://master.vkas.me"], 
+  origin: ['https://master-ed-new.netlify.app', 'http://localhost:5173',"https://ed-tech-platform-client.onrender.com","https://www.vkas.me"], 
   credentials: true 
 }));
 
@@ -40,10 +40,7 @@ app.use("/api/v1/course",courseRoute);
 // app.use("/api/v1/payment",paymentRoute);
 app.use("/api/v1/profile",profileRoute);
 
-app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
+
 app.get("/",(req,res)=>{
     res.render("index")
 })
