@@ -1,11 +1,8 @@
-import { useEffect, useRef, useState } from "react"
-import { useDropzone } from "react-dropzone"
-import { useSelector } from "react-redux"
-import { useField } from "formik"
+import { useEffect, useRef, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { useField } from "formik";
 import { IoIosCloudUpload } from "react-icons/io";
-
-import "video-react/dist/video-react.css"
-import { Player } from "video-react"
+import ReactPlayer from "react-player";
 
 export default function Upload({
   name,
@@ -14,43 +11,41 @@ export default function Upload({
   viewData = null,
   editData = null,
 }) {
-  const { course } = useSelector((state) => state.course)
-  const [selectedFile, setSelectedFile] = useState(null)
+  const [selectedFile, setSelectedFile] = useState(null);
   const [previewSource, setPreviewSource] = useState(
     viewData ? viewData : editData ? editData : ""
-  )
-  const inputRef = useRef(null)
-  const [, , helpers] = useField(name)
-  const { setValue, setTouched } = helpers
+  );
+  const inputRef = useRef(null);
+  const [, , helpers] = useField(name);
+  const { setValue, setTouched } = helpers;
 
   const onDrop = (acceptedFiles) => {
-    const file = acceptedFiles[0]
+    const file = acceptedFiles[0];
     if (file) {
-      previewFile(file)
-      setSelectedFile(file)
+      previewFile(file);
+      setSelectedFile(file);
     }
-  }
+  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: !video
       ? { "image/*": [".jpeg", ".jpg", ".png"] }
-      : { "video/*": [".mp4"] },
+      : { "video/*": [".mp4", ".mov", ".mkv"] },
     onDrop,
-  })
+  });
 
   const previewFile = (file) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result)
-    }
-  }
+      setPreviewSource(reader.result);
+    };
+  };
 
   useEffect(() => {
-    setValue(selectedFile)
-    setTouched(true)
-  }, [selectedFile, setValue, setTouched])
-
+    setValue(selectedFile);
+    setTouched(true);
+  }, [selectedFile, setValue, setTouched]);
 
   return (
     <div className="flex flex-col space-y-2">
@@ -71,15 +66,20 @@ export default function Upload({
                 className="h-full w-full rounded-md object-cover"
               />
             ) : (
-              <Player aspectRatio="16:9" playsInline src={previewSource} />
+              <ReactPlayer
+                url={previewSource}
+                controls={true}
+                width="100%"
+                height="100%"
+              />
             )}
             {!viewData && (
               <button
                 type="button"
                 onClick={() => {
-                  setPreviewSource("")
-                  setSelectedFile(null)
-                  setValue(null)
+                  setPreviewSource("");
+                  setSelectedFile(null);
+                  setValue(null);
                 }}
                 className="mt-3 text-richblack-400 underline"
               >
@@ -101,11 +101,10 @@ export default function Upload({
               <span className="font-semibold text-yellow-50">Browse</span> a
               file
             </p>
-            
           </div>
         )}
       </div>
       {/* <ErrorMessage name={name} component="span" className="ml-2 text-xs tracking-wide text-pink-200" /> */}
     </div>
-  )
+  );
 }

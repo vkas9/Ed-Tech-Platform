@@ -102,7 +102,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                   <div
                     key={subsection?._id}
                     onClick={() => setViewSubSection(subsection)}
-                    className="px-4 py-1 bg-white/10 rounded-md ml-4 mt-2"
+                    className="px-4 py-1 hover:bg-white/20 hover:cursor-pointer bg-white/10 rounded-md ml-4 mt-2"
                   >
                     <div className="flex items-center justify-between">
                       <div>

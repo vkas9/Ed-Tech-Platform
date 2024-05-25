@@ -140,7 +140,10 @@ const Navbar = () => {
                 </span>
               ) : null}
             </Link>
-          ):user && user?.role == "Instructor"&&<p className=" hidden sm:flex uppercase font-bold text-yellow-500 select-none shadow-md ">Instructor</p>}
+          ):user && user?.role == "Instructor"&&<p className="hidden sm:flex uppercase font-bold ai text-yellow-500 select-none shadow-md drop-shadow-[0_0_10px_rgba(255,255,0,0.8)]">
+          Instructor
+        </p>
+        }
           {token === null ? (
             <div className="flex gap-4 font-bold items-center py-3 ">
               <Button
