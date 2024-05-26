@@ -18,10 +18,11 @@ const courseSlice = createSlice({
     setEditCourse: (state, action) => {
       state.editCourse = action.payload;
     },
-    resetCourseState: (state) => {
+    resetCourseState: (state,action) => {
       state.step = 1;
-      state.course = null;
       state.editCourse = false;
+      state.course = {};
+     
     },
   },
 });

@@ -42,7 +42,7 @@ exports.createCourse = async (req, res) => {
     }
 }
 
-exports.editCourseDetail=async(req,res)=>{
+exports.updateCourse=async(req,res)=>{
     try {
         const {courseId}=req.body;
         const updates=req.body;
@@ -58,16 +58,28 @@ exports.editCourseDetail=async(req,res)=>{
             const uploadThumbnail = await UploadFile(thumbnail, { folder: "VikasFolder", resource_type: "auto" });
             course.Thumbnail=uploadThumbnail.secure_url;
         }
-        for(const key in updates ){
-            if(updates.hasOwnProperty(key)){
-                course[key]=updates[key];
-            }
-        }
-    await course.save();
-    const updatedCourse=await Course.findById(courseId).populate({
+        
     
-    })
-
+    for (const key in updates) {
+        if (updates.hasOwnProperty(key)) {
+          if (key === "instructions") {
+            course[key] = JSON.parse(updates[key])
+          } else {
+            course[key] = updates[key]
+          }
+        }
+      }
+  
+      await course.save()
+      const updatedCourse = await Course.findOne({
+        _id: courseId,
+      })
+  
+        res.status(200).json({
+            success: true,
+            message: "Successfully created Course",
+            updatedCourse
+        })
 
         
 
