@@ -24,11 +24,7 @@ const Navbar = () => {
     .then(res=>{
 
       setCatagory(res.data.allCatagory);
-      
-      
-      
-      
-      
+
     }).catch(error=>{
       console.log("error",error);
     })

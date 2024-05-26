@@ -317,3 +317,20 @@ export const updateSection=async(data)=>{
         toast.dismiss(toastId)
     }
 }
+export const updateCourse=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("http://localhost:8080/api/v1/course/updateCourse",data,{
+            withCredentials:true
+        })
+        toast.success(' Course updated Successfully');
+        console.log(' Course updated response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error  updating Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
