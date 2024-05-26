@@ -20,7 +20,7 @@ app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,'public')));
 
 app.use(cors({
-  origin: ['https://master-ed-new.netlify.app', 'http://localhost:5173',"https://ed-tech-platform-client.onrender.com","https://www.vkas.me"], 
+  origin: ['https://master-ed-new.netlify.app', 'http://localhost:5173',"https://ed-tech-platform-client.onrender.com","https://master.vkas.me"], 
   credentials: true 
 }));
 

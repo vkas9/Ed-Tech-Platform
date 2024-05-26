@@ -5,21 +5,22 @@ const {UploadFile} = require("../utils/fileUploader");
 
 exports.createCourse = async (req, res) => {
     try {
-        const { CourseName, CourseDescription, WhatYouWillLearn, Price, catagory } = req.body;
+        const { courseName, courseDescription, whatYouWillLearn, price, category } = req.body;        
         const thumbnail = req.files.thumbnailImage;
-        if (!CourseName || !CourseDescription || !WhatYouWillLearn || !Price || !catagory || !thumbnail) {
+        if (!courseName || !courseDescription || !whatYouWillLearn || !price || !category || !thumbnail) {
             return res.status(401).json({
                 success: false,
                 message: "Please fill all detail of Course"
             })
         }
         const uploadThumbnail = await UploadFile(thumbnail, { folder: "VikasFolder", resource_type: "auto" });
+        console.log("pathsire-> ",uploadThumbnail)
         const newCourse = await Course.create({
-            CourseName, CourseDescription, WhatYouWillLearn, Price, Catagory: catagory, Thumbnail: uploadThumbnail.secure_url, Instructor: req.user.id
+            CourseName:courseName, CourseDescription:courseDescription, WhatYouWillLearn:whatYouWillLearn, Price:price, Catagory: category, Thumbnail: uploadThumbnail.secure_url, Instructor: req.user.id
         })
         const InstructorUser = await User.findByIdAndUpdate(req.user.id, { $push: { Courses: newCourse._id } }, { new: true });
         console.log("InstructorUser->", InstructorUser);
-        await Catagory.findByIdAndUpdate({ _id: catagory }, { $push: { Course: newCourse._id } }, { new: true });
+        await Catagory.findByIdAndUpdate({ _id: category }, { $push: { Course: newCourse._id } }, { new: true });
         console.log("InstructorUser->", InstructorUser);
         res.status(200).json({
             success: true,
@@ -41,8 +42,40 @@ exports.createCourse = async (req, res) => {
     }
 }
 
+exports.editCourseDetail=async(req,res)=>{
+    try {
+        const {courseId}=req.body;
+        const updates=req.body;
+        const course=await Course.findById(courseId);
+        if(!course){
+            return res.status(401).json({
+                success:false,
+                message:"Could not found Course"
+            })
+        }
+        if(req.files){
+            const thumbnail = req.files.thumbnailImage;
+            const uploadThumbnail = await UploadFile(thumbnail, { folder: "VikasFolder", resource_type: "auto" });
+            course.Thumbnail=uploadThumbnail.secure_url;
+        }
+        for(const key in updates ){
+            if(updates.hasOwnProperty(key)){
+                course[key]=updates[key];
+            }
+        }
+    await course.save();
+    const updatedCourse=await Course.findById(courseId).populate({
+    
+    })
 
-//get all course
+
+        
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 
 exports.getAllCourse = async (req, res) => {
     try {

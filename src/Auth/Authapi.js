@@ -188,3 +188,132 @@ export const getCourseDetail = async (courseId, signal) => {
 
   return response;
 };
+
+export const addCourseDetails = async (formData) => {
+  const toastId = toast.loading('Loading');
+  
+  try {
+    const response = await axios.post(
+      'https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/createCourse',
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+
+    toast.success('Course Details Added Successfully');
+    console.log('Course creation response:', response.data);
+    return response.data; 
+  } catch (error) {
+    console.error('Error creating course:', error);
+    toast.error('Something went wrong while creating course');
+  } finally {
+    toast.dismiss(toastId);
+  }
+};
+export const createSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/createSection",{
+            sectionName:data.sectionName,
+            courseId:data.courseId
+        },{
+            withCredentials:true
+        })
+        toast.success('Section Details Added Successfully');
+        console.log('Section creation response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error creating Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+
+export const deleteSection=async(data)=>{
+    const toastId = toast.loading('Deleting');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/deleteSection",data,{
+            withCredentials:true
+        })
+        toast.success('Section Deleted Successfully');
+        console.log('Section Delete response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error Deleting Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+export const deleteSubSection=async(data)=>{
+    const toastId = toast.loading('Deleting');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/deleteSubSection",data,{
+            withCredentials:true
+        })
+        toast.success('Sub Section Deleted Successfully');
+        console.log('Sub Section Delete response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error Deleting Sub Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+export const createSubSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/createSubSection",data,{
+            withCredentials:true
+        })
+        toast.success('Sub Section Created Successfully');
+        console.log('Sub Section Create response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error Creating Sub Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+export const updateSubSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/updateSubSection",data,{
+            withCredentials:true
+        })
+        toast.success('Sub Section updated Successfully');
+        console.log('Sub Section updated response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error updating Sub Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+
+export const updateSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/updateSection",data,{
+            withCredentials:true
+        })
+        toast.success(' Section updated Successfully');
+        console.log(' Section updated response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error  updating Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
