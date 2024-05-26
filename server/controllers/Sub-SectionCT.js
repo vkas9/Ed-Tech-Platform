@@ -72,7 +72,7 @@ exports.updateSubSection=async(req,res)=>{
 //todo deleting subsection
 exports.deleteSubSection=async(req,res)=>{
     try {
-        const{sectionId,subSectionId}=req.body;
+        const{sectionId,subSectionId,courseId}=req.body;
         const updatedSubSection=await  subSection.findByIdAndDelete(subSectionId,{new:true});
         const updatedSection=await section.findByIdAndUpdate(sectionId,{$pull:{subSection:subSectionId}},{new:true});
         if(!updatedSection){
@@ -87,10 +87,18 @@ exports.deleteSubSection=async(req,res)=>{
                 message:"Sub Section not found or already deleted"
             })
         }
+        const updatedCourse=await course.findById(courseId).populate({
+			path:"Section",
+			populate:{
+				path:"subSection",
+			},
+		})
+		.exec();
         res.status(200).json({
             success:true,
             message:"Successfully Sub Section Deleted",
-            updatedSection,updatedSubSection
+            updatedCourse
+            
 
         })
     } catch (error) {

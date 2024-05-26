@@ -19,7 +19,7 @@ const SubSectionModal = ({
     const dispatch = useDispatch();
     const { course } = useSelector((store) => store.course);
     const [loading, setLoading] = useState(false);
-
+    const [isDisabled, setIsDisabled] = useState(false);
     const initialValues = {
         lectureTitle: modalData.title || '',
         lectureDesc: modalData.description || '',
@@ -103,7 +103,7 @@ const SubSectionModal = ({
                     <p className="text-xl font-semibold text-white/80">
                         {view && 'Viewing'} {add && 'Adding'} {edit && 'Editing'} Lecture
                     </p>
-                    <button onClick={() => (!loading ? setModalData(null) : {})} className="text-white hover:text-red-300 transition">
+                    <button onClick={() => (!loading ? setModalData(null) : {})} className="text-white hover:bg-white/10 rounded-full p-2">
                         <RxCross2 size={24} />
                     </button>
                 </div>
@@ -153,7 +153,9 @@ const SubSectionModal = ({
                                     <div
                                         
                                         onClick={(e) => {
+                                            if(isDisabled)return 
                                             e.preventDefault();
+                                            setIsDisabled(true);
                                             onSubmit(values);
                                         }}
                                         className={`flex cursor-pointer items-center rounded-md bg-blue-500 hover:bg-blue-600 active:bg-blue-600 text-xl transition-all duration-200 py-2 px-4 text-blue-950 font-bold`}

@@ -42,8 +42,40 @@ exports.createCourse = async (req, res) => {
     }
 }
 
+exports.editCourseDetail=async(req,res)=>{
+    try {
+        const {courseId}=req.body;
+        const updates=req.body;
+        const course=await Course.findById(courseId);
+        if(!course){
+            return res.status(401).json({
+                success:false,
+                message:"Could not found Course"
+            })
+        }
+        if(req.files){
+            const thumbnail = req.files.thumbnailImage;
+            const uploadThumbnail = await UploadFile(thumbnail, { folder: "VikasFolder", resource_type: "auto" });
+            course.Thumbnail=uploadThumbnail.secure_url;
+        }
+        for(const key in updates ){
+            if(updates.hasOwnProperty(key)){
+                course[key]=updates[key];
+            }
+        }
+    await course.save();
+    const updatedCourse=await Course.findById(courseId).populate({
+    
+    })
 
-//get all course
+
+        
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 
 exports.getAllCourse = async (req, res) => {
     try {

@@ -74,7 +74,7 @@ const CourseInformationForm = () => {
     setSubmitting(true);
 
     try {
-      console.log("Form 222values:", values);
+
       if (editCourse && isFormUpdated(values)) {
         const formData = new FormData();
         formData.append("courseId", course._id);

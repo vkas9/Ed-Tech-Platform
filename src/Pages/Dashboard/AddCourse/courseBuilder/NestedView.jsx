@@ -40,9 +40,19 @@ const NestedView = ({ handleChangeEditSectionName }) => {
   };
   const handleDeleteSubSection = async (data) => {
     try {
-      const updated = await deleteSubSection(data);
-      console.log("updatedss", updated);
-    } catch (error) {}
+      const updated = await deleteSubSection({ ...data, courseId: course._id });
+
+      if (updated.success) {
+        console.log("updated", updated.updatedCourse);
+        dispatch(courseAction.setCourse(updated.updatedCourse));
+      } else {
+        console.error("Failed to delete Sub section:", updated.message);
+      }
+    } catch (error) {
+      console.error("Error deleting Sub Section:", error.message);
+    } finally {
+      openConfirmationModal(null);
+    }
   };
 
   return (
@@ -57,7 +67,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
               >
                 <div className="flex items-center gap-2">
                   {open ? (
-                    <IoMdArrowDropdown   className="text-lg" />
+                    <IoMdArrowDropdown className="text-lg" />
                   ) : (
                     <IoMdArrowDropright className="text-lg" />
                   )}
@@ -125,7 +135,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                           onClick={(e) => {
                             e.stopPropagation();
                             openConfirmationModal({
-                              text1: "Delete this Sub Section",
+                              text1: "Delete This Sub Section",
                               text2:
                                 "This lectures in this Section will be deleted",
                               btn1Text: "Delete",
@@ -151,7 +161,6 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                   onClick={() => setAddSubSection(section._id)}
                   className="ml-5 text-blue-500 font-bold hover:text-blue-600 hover:cursor-pointer text flex items-center"
                 >
-                  
                   <span>Add Lecture</span>
                 </div>
               </div>
