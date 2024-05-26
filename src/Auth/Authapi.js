@@ -12,7 +12,7 @@ export const login=(data,navigate)=>{
         let response;
         try {
         
-           await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/login",{
+           await axios.post("http://localhost:8080/api/v1/auth/login",{
                 email:data.email,password:data.password
             }, {
                 withCredentials: true // Include cookies in the request
@@ -55,7 +55,7 @@ export const signup=(data,navigate)=>{
         let response;
         try {
             
-            await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/signup",{
+            await axios.post("http://localhost:8080/api/v1/auth/signup",{
                 FirstName:data.FirstName,
                 LastName:data.LastName,
                 Email:data.Email,
@@ -90,7 +90,7 @@ export const opt=(data,navigate)=>{
         let response;
         
         try {
-            await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/otp",{
+            await axios.post("http://localhost:8080/api/v1/auth/otp",{
                 email:data.Email
             }).then(res=>{
                 response=res;
@@ -133,7 +133,7 @@ export const resetPassword=(data,navigate)=>{
     return async(dispatch)=>{
         const toastId=toast.loading("Changing...");
         try{
-            const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/changepassword",{
+            const response=await axios.post("http://localhost:8080/api/v1/auth/changepassword",{
                 oldpassword:data.oldPassword,
                 password:data.password,
                 ConfirmPassword:data.confirmPassword
@@ -168,7 +168,7 @@ export const getCourseDetail = async (courseId, signal) => {
   let response;
 
   try {
-    const res = await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getEnrolledCourses", {
+    const res = await axios.get("http://localhost:8080/api/v1/profile/getEnrolledCourses", {
       withCredentials: true,
       signal: signal,
     });
@@ -188,3 +188,132 @@ export const getCourseDetail = async (courseId, signal) => {
 
   return response;
 };
+
+export const addCourseDetails = async (formData) => {
+  const toastId = toast.loading('Loading');
+  
+  try {
+    const response = await axios.post(
+      'http://localhost:8080/api/v1/course/createCourse',
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+
+    toast.success('Course Details Added Successfully');
+    console.log('Course creation response:', response.data);
+    return response.data; 
+  } catch (error) {
+    console.error('Error creating course:', error);
+    toast.error('Something went wrong while creating course');
+  } finally {
+    toast.dismiss(toastId);
+  }
+};
+export const createSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        const response=await axios.post("http://localhost:8080/api/v1/course/createSection",{
+            sectionName:data.sectionName,
+            courseId:data.courseId
+        },{
+            withCredentials:true
+        })
+        toast.success('Section Details Added Successfully');
+        console.log('Section creation response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error creating Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+
+export const deleteSection=async(data)=>{
+    const toastId = toast.loading('Deleting');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("http://localhost:8080/api/v1/course/deleteSection",data,{
+            withCredentials:true
+        })
+        toast.success('Section Deleted Successfully');
+        console.log('Section Delete response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error Deleting Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+export const deleteSubSection=async(data)=>{
+    const toastId = toast.loading('Deleting');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("http://localhost:8080/api/v1/course/deleteSubSection",data,{
+            withCredentials:true
+        })
+        toast.success('Sub Section Deleted Successfully');
+        console.log('Sub Section Delete response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error Deleting Sub Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+export const createSubSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("http://localhost:8080/api/v1/course/createSubSection",data,{
+            withCredentials:true
+        })
+        toast.success('Sub Section Created Successfully');
+        console.log('Sub Section Create response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error Creating Sub Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+export const updateSubSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("http://localhost:8080/api/v1/course/updateSubSection",data,{
+            withCredentials:true
+        })
+        toast.success('Sub Section updated Successfully');
+        console.log('Sub Section updated response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error updating Sub Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+
+export const updateSection=async(data)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("http://localhost:8080/api/v1/course/updateSection",data,{
+            withCredentials:true
+        })
+        toast.success(' Section updated Successfully');
+        console.log(' Section updated response:', response.data);
+        return response.data
+    } catch (error) {
+        console.error("Error  updating Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
