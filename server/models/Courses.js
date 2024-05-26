@@ -13,8 +13,7 @@ const CoursesSchema = new mongoose.Schema({
         trim:true
     },
     WhatYouWillLearn:{
-        type:String,
-        time:true
+        type:String
     }
     ,
     Instructor:{
@@ -49,8 +48,7 @@ const CoursesSchema = new mongoose.Schema({
     }],
     status:{
         type:String,
-        enum:["Draft","Published"],
-        default:"Draft"
+        enum:["Draft","Published"]
     }
 
 

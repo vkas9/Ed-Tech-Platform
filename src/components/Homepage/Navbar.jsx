@@ -7,25 +7,19 @@ import { ImCross } from "react-icons/im";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
 import ProfileDropDown from "./ProfileDropDown";
 import axios from "axios";
 import SubTitle from "./SubTitle";
-import {courseAction} from "../../store/courseSlice"
+
 const Navbar = () => {
   const[name,setName]=useState(null);
   const[catagory,setCatagory]=useState([]);
-  const dispatch=useDispatch();
-  const {courseCategory}=useSelector((store)=>store.course);
-  
   useEffect(()=>{
     axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getAllCatagory")
     .then(res=>{
-
       setCatagory(res.data.allCatagory);
-      
-      
       
       
       
@@ -131,7 +125,7 @@ const Navbar = () => {
          
         </nav>
         <div className={`flex ${user!=null?"gap-4 ml-[7vw]":"gap-6"}   items-center `}>
-          {user && user?.role != "Instructor" ?(
+          {user && user?.accountType != "Instructor" && (
             <Link to="/dashboard/wishlist" className="relative ">
               <FaCartShopping size={20} />
               {totalItems > 0 ? (
@@ -140,10 +134,7 @@ const Navbar = () => {
                 </span>
               ) : null}
             </Link>
-          ):user && user?.role == "Instructor"&&<p className="hidden sm:flex uppercase font-bold ai text-yellow-500 select-none shadow-md drop-shadow-[0_0_10px_rgba(255,255,0,0.8)]">
-          Instructor
-        </p>
-        }
+          )}
           {token === null ? (
             <div className="flex gap-4 font-bold items-center py-3 ">
               <Button

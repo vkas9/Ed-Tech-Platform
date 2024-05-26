@@ -59,5 +59,11 @@ export const Profile = [
     url: "/dashboard/add-course",
     role: "Instructor",
     icon: IoIosAddCircleOutline,
-  }
+  },{
+    id: "7",
+    title: "Dashboard",
+    url: "/dashboard/instructor",
+    role: "Instructor",
+    icon: MdOutlineSpaceDashboard,
+  },
 ];

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const ConfirmModal=({modalData})=>{
     console.log("modalData->",modalData)
     return (
-        <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.2,delay:0}}  className="top-0 left-0 z-[9999] flex justify-center bg-black/60 fixed w-[100vw] h-[100vh]  backdrop-blur-md">
+        <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.2,delay:0}}  className="top-0 z-[9999] flex justify-center bg-black/60 fixed w-[100vw] h-[100vh]  backdrop-blur-md">
             <div className="fixed flex py-6 flex-col text-center items-center gap-3  w-[400px] top-[35%]   rounded-xl bg-white/10 p-2  ">
                 <span className="text-4xl ">{modalData?.text1}</span>
                 <p className="text-gray-500/80 ">{modalData?.text2}</p>

@@ -15,7 +15,6 @@ import Wishlist from "./Pages/Dashboard/Wishlist/Wishlist";
 import PurchaseHistory from "./Pages/Dashboard/PurchaseHistory";
 import Courses from "./Pages/Dashboard/Courses";
 import Settings from "./Pages/Dashboard/Settings";
-import Indexcourse from "./Pages/Dashboard/AddCourse/Indexcourse";
 
 
 function App() {
@@ -71,7 +70,6 @@ function App() {
               <Route path="purchase-history" element={<PurchaseHistory/>} />
               <Route path="Courses" element={<Courses/>} />
               <Route path="Settings" element={<Settings/>} />
-              <Route path="add-course" element={<Indexcourse/>} />
             
           </Route>
         </Routes>
