@@ -27,6 +27,7 @@ exports.updateProfile=async(req,res)=>{
         })
     }
 }
+
 exports.getEnrolledCourses=async(req,res)=>{
     try {
         const id=req.user.id;
@@ -64,6 +65,33 @@ exports.getEnrolledCourses=async(req,res)=>{
         })
     }
 }
+
+exports.getAllInstructorCourses=async(req,res)=>{
+    try {
+        const userId=req.user.id;
+        const instructorCourses = await Courses.find({
+            Instructor: userId,
+          }).sort({ createdAt: -1 })
+
+          res.status(200).json({
+            success:true,
+            message:"Successfully Received Intructor All Courses",
+            instructorCourses
+
+          })
+        
+    } catch (error) {
+        console.log(error);
+        res.status(200).json({
+            success:false,
+            message:"Something went wrong while Receiving Intructor All Courses"
+        })
+        
+    }
+}
+
+
+
 exports.getAllUserDetails=async(req,res)=>{
     try {
         const userId=req.user.id;

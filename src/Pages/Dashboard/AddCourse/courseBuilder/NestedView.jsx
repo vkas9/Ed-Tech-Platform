@@ -58,7 +58,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
   return (
     <>
       <div className="">
-        <div className="bg-white/10 max-w-[700px] m-5 p-4 rounded-md shadow-md">
+        <div className="bg-white/10 w-full md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">
           {course?.Section?.map((section) => (
             <details key={section._id} className="mb-2">
               <summary
@@ -71,7 +71,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                   ) : (
                     <IoMdArrowDropright className="text-lg" />
                   )}
-                  <p className="text-lg">{section.SectionName}</p>
+                  <p className="text-lg  max-w-[90px] md:max-w-none md:whitespace-normal truncate">{section.SectionName}</p>
                 </div>
                 <div className="flex">
                   <div
@@ -116,7 +116,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <p>{subsection.title}</p>
+                        <p className="max-w-[70px] truncate md:max-w-none md:whitespace-normal">{subsection.title}</p>
                       </div>
                       <div className="flex">
                         <div

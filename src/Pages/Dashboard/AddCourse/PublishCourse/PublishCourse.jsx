@@ -34,6 +34,8 @@ const PublishCourse = () => {
         goToCourses();
       }
       setLoading(false);
+      dispatch(courseAction.setCreatingCourse(true));
+
     },
   });
 
@@ -48,9 +50,11 @@ const PublishCourse = () => {
   };
 
   const goToCourses = () => {
+    dispatch(courseAction.setCreatingCourse(true));
     dispatch(courseAction.resetCourseState());
+    
     toast.success("Course Created!")
-    navigate("/dashboard/my-profile");
+    navigate("/dashboard/all-courses");
   };
 
   return (

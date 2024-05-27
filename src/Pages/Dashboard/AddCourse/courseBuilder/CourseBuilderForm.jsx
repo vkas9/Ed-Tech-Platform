@@ -73,10 +73,10 @@ const CourseBuilderForm = () => {
   };
 
   return (
-    <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="text-white">
+    <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="text-white ">
       <h1 className="text-3xl">Course Builder</h1>
       <div className="mt-8">
-        <div className="p-4 ml-5 bg-white/10 rounded-md py-6 gap-4 w-full max-w-[700px]">
+        <div className="p-4 mx-5 bg-white/10 rounded-md py-6 gap-4 max-w-[700px]">
           <Formik
             initialValues={{ sectionName: '' }}
             validationSchema={Yup.object({
@@ -136,7 +136,7 @@ const CourseBuilderForm = () => {
           </Formik>
         </div>
       </div>
-      <div className="flex justify-end gap-4 mt-2 ml-4 w-full max-w-[700px] ">
+      <div className="flex justify-end gap-4 mt-2 mx-5  max-w-[700px] ">
         <button
           onClick={goBack}
           className="rounded-md cursor-pointer flex items-center bg-gray-500 hover:bg-gray-600 text-white p-2"

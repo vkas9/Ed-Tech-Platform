@@ -42,7 +42,7 @@ export const Profile = [
   },
   {
     id: "4",
-    title: "Courses",
+    title: "Explore Courses",
     url: "/dashboard/courses",
     role: "Student",
     icon:PiGraduationCap
@@ -50,7 +50,7 @@ export const Profile = [
   {
     id:"5",
     title: "My Courses",
-    url: "/dashboard/my-courses",
+    url: "/dashboard/all-courses",
     role: "Instructor",
     icon: PiGraduationCap,
   },{

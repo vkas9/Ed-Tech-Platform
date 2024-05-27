@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast"
 import {profileAction} from "../store/profileSlice"
 import  CryptoJS  from "crypto-js";
 import { cardAction } from "../store/cardSlice";
+import { courseAction } from "../store/courseSlice";
 
 export const login=(data,navigate)=>{
     return async(dispatch)=>{
@@ -123,6 +124,7 @@ export const logout=(navigate)=>{
         localStorage.clear();
         document.cookie = '__EDT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         dispatch(cardAction.reset());
+        dispatch(courseAction.resetCourseState());
         toast.success("Logged Out Successfully")
         navigate("/")
     }
@@ -321,7 +323,7 @@ export const updateCourse=async(data)=>{
     const toastId = toast.loading('Loading');
     try {
         console.log("Data",data)
-        const response=await axios.post("http://localhost:8080/api/v1/course/updateCourse",data,{
+        const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/updateCourse",data,{
             withCredentials:true
         })
         toast.success(' Course updated Successfully');
@@ -329,6 +331,22 @@ export const updateCourse=async(data)=>{
         return response.data
     } catch (error) {
         console.error("Error  updating Section",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+export const getAllInstructorCourses=async(signal)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        const response=await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getAllInstructorCourses",{
+            withCredentials:true,
+            signal: signal,
+        })
+        toast.success('All Course Fetch Successfully');
+        return response.data
+    } catch (error) {
+        console.error("Error  Fetching Instructor Courses",error);
         toast.error(error.response.data.message);
     }finally{
         toast.dismiss(toastId)

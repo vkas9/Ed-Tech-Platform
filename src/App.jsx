@@ -16,6 +16,7 @@ import PurchaseHistory from "./Pages/Dashboard/PurchaseHistory";
 import Courses from "./Pages/Dashboard/Courses";
 import Settings from "./Pages/Dashboard/Settings";
 import Indexcourse from "./Pages/Dashboard/AddCourse/Indexcourse";
+import AllCourse from "./Pages/Dashboard/InstructorCourse/AllCourse";
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
               <Route path="Courses" element={<Courses/>} />
               <Route path="Settings" element={<Settings/>} />
               <Route path="add-course" element={<Indexcourse/>} />
+              <Route path="all-courses" element={<AllCourse/>} />
             
           </Route>
         </Routes>

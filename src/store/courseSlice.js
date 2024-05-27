@@ -4,6 +4,10 @@ const initialState = {
   step: 1,
   course: {},
   editCourse: false,
+  allInstructoreCourses:localStorage.getItem("__IC_")
+  ? JSON.parse(localStorage.getItem("__IC_"))
+  : null,
+  creatingCourse:false
 };
 const courseSlice = createSlice({
   name: "course",
@@ -22,8 +26,14 @@ const courseSlice = createSlice({
       state.step = 1;
       state.editCourse = false;
       state.course = {};
+      state.allInstructoreCourses=null
      
+    },setIC(state, action) {
+      state.allInstructoreCourses = action.payload;
     },
+    setCreatingCourse(state,action){
+      state.creatingCourse=action.payload
+    }
   },
 });
 export const courseAction = courseSlice.actions;
