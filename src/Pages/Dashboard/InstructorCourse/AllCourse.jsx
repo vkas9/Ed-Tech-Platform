@@ -60,8 +60,8 @@ const AllCourse = () => {
         <span className="text-yellow-500">My Courses </span>
       </div>
 
-      <h1 className="text-3xl">My Courses{allInstructoreCourses&&<span className="ml-2">({allInstructoreCourses.length})</span>}</h1>
-      <div className="overflow-auto h-[78vh]">
+      <h1 className="text-3xl mb-3">My Courses{allInstructoreCourses&&<span className="ml-2">({allInstructoreCourses.length})</span>}</h1>
+      <div className="overflow-auto   max-h-[75vh]">
         {!allInstructoreCourses ? (
           <div>
             <p>Loading...</p>
