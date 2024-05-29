@@ -13,10 +13,11 @@ import ProfileDashboard from "./Pages/Dashboard/ProfileDashboard";
 import EnrolledCourse from "./Pages/Dashboard/EnrolledCourse/EnrolledCourse";
 import Wishlist from "./Pages/Dashboard/Wishlist/Wishlist";
 import PurchaseHistory from "./Pages/Dashboard/PurchaseHistory";
-import Courses from "./Pages/Dashboard/Courses";
+import Courses from "./Pages/Dashboard/Explore Courses/Courses";
 import Settings from "./Pages/Dashboard/Settings";
 import Indexcourse from "./Pages/Dashboard/AddCourse/Indexcourse";
 import AllCourse from "./Pages/Dashboard/InstructorCourse/AllCourse";
+import ViewCourse from "./Pages/Dashboard/Explore Courses/ViewCourse";
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
                 element={<ProfileDashboard/>}
               />
               <Route path="enrolled-courses" element={<EnrolledCourse/>} />
+              <Route path="en" element={<ViewCourse/>} />
               <Route path="wishlist" element={<Wishlist/>} />
               <Route path="purchase-history" element={<PurchaseHistory/>} />
               <Route path="Courses" element={<Courses/>} />

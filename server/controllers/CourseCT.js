@@ -92,11 +92,11 @@ exports.updateCourse=async(req,res)=>{
 exports.getAllCourse = async (req, res) => {
     try {
         const allCourse = await Course.find({});
-        console.log(allCourse);
-        return res.status(400).json({
+       
+        return res.status(200).json({
             success: true,
             message: "Successfully received All Course",
-            course: allCourse
+            allCourse
         })
     } catch (error) {
         console.log(error);

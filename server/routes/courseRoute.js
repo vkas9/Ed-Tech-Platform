@@ -7,7 +7,7 @@ const {
   isInstructor,
   isStudent,
 } = require("../middlewares/middlewareAuth");
-const { createCourse, getAllCourseDetail, updateCourse } = require("../controllers/CourseCT");
+const { createCourse, getAllCourseDetail, updateCourse,getAllCourse } = require("../controllers/CourseCT");
 const { createSection, deleteSection, updateSection } = require("../controllers/SectionCT");
 const { createSubSection, deleteSubSection,updateSubSection } = require("../controllers/Sub-SectionCT");
 const {
@@ -26,6 +26,7 @@ router.post("/deleteSubSection", auth, isInstructor, deleteSubSection);
 router.post("/updateSubSection", auth, isInstructor, updateSubSection);
 router.post("/updateSection", auth, isInstructor, updateSection);
 router.post("/updateCourse", auth, isInstructor, updateCourse);
+router.get("/getAllCourse", auth, getAllCourse);
 
 
 router.post("/createRating", auth, isStudent, createRating);

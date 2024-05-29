@@ -13,7 +13,7 @@ const Dashboard = () => {
     }
   }, []);
   return (
-    <div className="text-white flex relative  pt-[84px]  min-h-[calc(100vh-(85px))] ">
+    <div className="text-white flex fixed top-0 left-0  w-screen bg-gradient-to-br from-[#000435] via-gray-950/100 to-black pt-[84px]  min-h-[calc(100vh-(85px))] ">
       <Sidebar/>
       
       <div className="w-full max-h-[calc(100vh-(85px))] scrollbar-hidden md:w-[85%]">

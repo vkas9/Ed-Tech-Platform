@@ -352,3 +352,21 @@ export const getAllInstructorCourses=async(signal)=>{
         toast.dismiss(toastId)
     }
 }
+export const getAllCourse=async(signal)=>{
+    const toastId = toast.loading('Loading');
+    try {
+        console.log("hiii")
+        const response=await axios.get("http://localhost:8080/api/v1/course/getAllCourse",{
+            withCredentials:true,
+            signal: signal,
+        })
+        toast.success('All Course Fetch Successfully');
+        console.log("res",response.data.allCourse)
+        return response.data.allCourse
+    } catch (error) {
+        console.error("Error Fetching All Courses",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}

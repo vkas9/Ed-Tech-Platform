@@ -33,8 +33,7 @@ const hero = () => {
           <div className="max-w-[600px] lg:hidden  opacity-20 absolute top-0 right-0  -z-[100] h-[220px]   rounded-full blur-2xl "><img src={g2} alt="" /></div>
         </h1>
         <p className="max-w-[3xl] mx-auto  text-sm text-gray-400  px-3  font-semibold lg:text-lg  ">
-          Unleash the power of AI within Brainwave. Upgrade your productivity
-          with Brainwave, the open AI chat app.{" "}
+        Upgrade your Coding Skills with MASTER Today for Success.{" "}
         </p>
         <Link to={"/signup"} className=" mx-auto">
           <div className="   group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">

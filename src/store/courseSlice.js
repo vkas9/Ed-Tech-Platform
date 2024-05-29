@@ -7,7 +7,10 @@ const initialState = {
   allInstructoreCourses:localStorage.getItem("__IC_")
   ? JSON.parse(localStorage.getItem("__IC_"))
   : null,
-  creatingCourse:false
+  creatingCourse:false,
+  exploreAllCourses:localStorage.getItem("_$c_")
+  ? JSON.parse(localStorage.getItem("_$c_"))
+  : null,
 };
 const courseSlice = createSlice({
   name: "course",
@@ -26,13 +29,17 @@ const courseSlice = createSlice({
       state.step = 1;
       state.editCourse = false;
       state.course = {};
-      state.allInstructoreCourses=null
+      state.allInstructoreCourses=null,
+      state.exploreAllCourses=null
      
     },setIC(state, action) {
       state.allInstructoreCourses = action.payload;
     },
     setCreatingCourse(state,action){
       state.creatingCourse=action.payload
+    },
+    setExploreAllCourses(state,action){
+      state.exploreAllCourses=action.payload;
     }
   },
 });
