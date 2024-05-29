@@ -57,8 +57,8 @@ const EnrolledCourse = () => {
         <span className="text-yellow-500">Enrolled_Courses</span>
       </div>
 
-      <h1 className="text-3xl">Enrolled Course</h1>
-      <div className="overflow-auto h-[78vh]">
+      <h1 className="text-3xl mb-3">Enrolled Course</h1>
+      <div className="overflow-auto h-[75vh]">
         {!enrolledCourse ? (
           <div>
             <p>Loading...</p>

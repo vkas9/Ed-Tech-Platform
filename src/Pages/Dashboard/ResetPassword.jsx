@@ -3,17 +3,22 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { resetPassword } from "../../Auth/Authapi";
+import { useState } from "react";
 
 const ResetPassword = () => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleSubmit = (data) => {
+  const handleSubmit = async(data) => {
+    setLoading(true);
+    
     if (data.password !== data.confirmPassword) {
       toast.error("Password Not Matching");
       return;
     }
     console.log("data->", data);
-    dispatch(resetPassword(data, navigate));
+    await dispatch(resetPassword(data, navigate));
+    setLoading(false);
   };
   return (
     <div className="mb-[3rem]">
@@ -64,9 +69,10 @@ const ResetPassword = () => {
           </div>
           <button
             type="submit"
-            className="mt-2 md:hover:bg-yellow-400 active:bg-yellow-400   transition-all duration-200 bg-yellow-500 p-1 rounded-lg w-[130px] text-black text-2xl "
+            disabled={loading}
+            className={`mt-2 md:hover:bg-yellow-400 active:bg-yellow-400 ${loading?"opacity-50 cursor-not-allowed":" "}  transition-all duration-200 bg-yellow-500 p-1 rounded-lg w-[130px] text-black text-2xl `}
           >
-            Change
+           {loading?"Changing...":"Change"}
           </button>
         </Form>
       </Formik>

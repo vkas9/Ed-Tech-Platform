@@ -56,8 +56,8 @@ const Wishlist = () => {
         <span className="text-yellow-500">Wishlist</span>
       </div>
 
-      <h1 className="text-3xl">My Wishlist</h1>
-      <div className="overflow-auto h-[78vh]">
+      <h1 className="text-3xl mb-3">My Wishlist</h1>
+      <div className="overflow-auto h-[75vh]">
         {!Wishlist ? (
           <div>
             <p>Loading...</p>
