@@ -293,7 +293,7 @@ export const deleteCartDetails=async(data)=>{
     }
 }
 export const getCartDetails=async(signal)=>{
-    const toastId = toast.loading('Adding');
+    const toastId = toast.loading('Fetching...');
     try {
         
         const response=await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getCartDetails",{
