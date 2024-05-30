@@ -25,7 +25,7 @@ const ExploreCoursesCard=({course})=>{
               <span>Duration: {course?.duration?"":"2 hr"}</span>
             </div>
             <div className="flex items-center gap-7 mr-3 ">
-              <p>Price: ₹ 699</p>
+              <p> <span className="text-white/60">Price:</span>  ₹{course.Price}</p>
               <div className="flex flex-col  gap-1">
               <div className="text-[1.1rem] bg-white/10 text-center hover:bg-green-500/20 active:bg-green-500/30  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  " >Buy</div>
               <div className="text-[1.1rem] hover:text-white text-white/30   box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  " >Add to Cart</div>

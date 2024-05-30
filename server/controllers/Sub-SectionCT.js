@@ -13,7 +13,8 @@ exports.createSubSection=async(req,res)=>{
             })
         }
         const VideoFile=await UploadFile(video,{folder: "VikasFolder",resource_type:"auto"});
-        const subSectionObject=await subSection.create({title,description,videoURL:VideoFile.secure_url});
+        const videoDuration=Math.ceil(VideoFile.duration).toString()
+        const subSectionObject=await subSection.create({title,description,videoURL:VideoFile.secure_url,duration:videoDuration});
         await section.findByIdAndUpdate(sectionId,{$push:{subSection:subSectionObject._id}},{new:true});
         const updatedCourse = await course.findById(courseId)
 		.populate({

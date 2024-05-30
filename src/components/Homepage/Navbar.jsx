@@ -32,7 +32,7 @@ const Navbar = () => {
 
   const { token } = useSelector((store) => store.auth);
   const user=JSON.parse(localStorage.getItem("user"))
-  const { totalItems } = useSelector((store) => store.card);
+  const { wishlist } = useSelector((store) => store.card);
   const [openNavigation, setOpenNavigation] = useState(false);
   const location = useLocation();
   const Route = (route) => {
@@ -130,9 +130,9 @@ const Navbar = () => {
           {user && user?.role != "Instructor" ?(
             <Link to="/dashboard/wishlist" className="relative ">
               <FaCartShopping size={20} />
-              {totalItems > 0 ? (
-                <span className="absolute -top-[10px] -right-[10px] ">
-                  {totalItems}
+              {wishlist?.length > 0 ? (
+                <span className="absolute -top-[11px] -right-[11px] ">
+                  {wishlist.length}
                 </span>
               ) : null}
             </Link>

@@ -2,7 +2,7 @@ import Button from "../../components/Homepage/Button";
 import IconBtn from "./IconBtn";
 import { motion } from "framer-motion";
 const ConfirmModal=({modalData})=>{
-    console.log("modalData->",modalData)
+  
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.2,delay:0}}  className="top-0 left-0 z-[9999] flex justify-center bg-black/60 fixed w-[100vw] h-[100vh]  backdrop-blur-md">
             <div className="fixed flex py-6 flex-col text-center items-center gap-3  w-[400px] top-[35%]   rounded-xl bg-white/10 p-2  ">

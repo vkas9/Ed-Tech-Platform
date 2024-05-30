@@ -7,17 +7,22 @@ import { deleteSection, deleteSubSection } from "../../../../Auth/Authapi";
 import { courseAction } from "../../../../store/courseSlice";
 import { IoMdAdd } from "react-icons/io";
 import SubSectionModal from "./modals/SubSectionModal";
+import { MdOutlineOndemandVideo } from "react-icons/md";
+
 const NestedView = ({ handleChangeEditSectionName }) => {
   const { course } = useSelector((store) => store.course);
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  const [openSections, setOpenSections] = useState({});
   const [confirmationModal, openConfirmationModal] = useState(null);
   const [viewSubSection, setViewSubSection] = useState(null);
   const [editSubSection, setEditSubSection] = useState(null);
   const [addSubSection, setAddSubSection] = useState(null);
 
-  const handleSetOpen = () => {
-    setOpen(!open);
+  const handleSetOpen = (sectionId) => {
+    setOpenSections((prevState) => ({
+      ...prevState,
+      [sectionId]: !prevState[sectionId],
+    }));
   };
 
   const handleDeleteSection = async (sectionId) => {
@@ -43,7 +48,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
       const updated = await deleteSubSection({ ...data, courseId: course._id });
 
       if (updated.success) {
-        console.log("updated", updated.updatedCourse);
+        
         dispatch(courseAction.setCourse(updated.updatedCourse));
       } else {
         console.error("Failed to delete Sub section:", updated.message);
@@ -62,11 +67,11 @@ const NestedView = ({ handleChangeEditSectionName }) => {
           {course?.Section?.map((section) => (
             <details key={section._id} className="mb-2">
               <summary
-                onClick={handleSetOpen}
+                onClick={() => handleSetOpen(section._id)}
                 className="cursor-pointer flex items-center justify-between p-2 bg-white/20 rounded-md hover:bg-white/30"
               >
                 <div className="flex items-center gap-2">
-                  {open ? (
+                  {openSections[section._id] ? (
                     <IoMdArrowDropdown className="text-lg" />
                   ) : (
                     <IoMdArrowDropright className="text-lg" />
@@ -116,7 +121,11 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="max-w-[70px] truncate md:max-w-none md:whitespace-normal">{subsection.title}</p>
+                      <div className="flex items-center gap-2">
+                        <MdOutlineOndemandVideo/>
+                      
+                        <p className="max-w-[70px] truncate md:max-w-none md:whitespace-normal">{subsection.title}</p> 
+                         </div>
                       </div>
                       <div className="flex">
                         <div

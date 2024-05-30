@@ -25,7 +25,7 @@ const WishlistCard=({course})=>{
               <span>Duration: {course?.duration?"":"2 hr"}</span>
             </div>
             <div className="flex items-center gap-7 mr-3 ">
-              <p>Price: ₹ 699</p>
+            <p> <span className="text-white/60">Price:</span>  ₹{course.Price}</p>
               <RxCross2 className="text-[1.5rem] hover:bg-white/10 box-content p-3 transition-all hover:cursor-pointer duration-150 rounded-full  " />
 
             </div>

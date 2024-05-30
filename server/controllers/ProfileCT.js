@@ -49,7 +49,12 @@ exports.getEnrolledCourses=async(req,res)=>{
             populate: {
                 path: "Course"
             }
-        }).populate("StudentEntrolled").populate("Section").exec());
+        }).populate("StudentEntrolled").populate("Section").populate({
+            path: "Section",
+            populate: {
+                path: "subSection",
+            },
+        }).exec());
     }
     
         return res.status(200).json({

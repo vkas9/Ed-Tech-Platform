@@ -356,7 +356,7 @@ export const getAllCourse=async(signal)=>{
     const toastId = toast.loading('Loading');
     try {
         console.log("hiii")
-        const response=await axios.get("http://localhost:8080/api/v1/course/getAllCourse",{
+        const response=await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getAllCourse",{
             withCredentials:true,
             signal: signal,
         })
