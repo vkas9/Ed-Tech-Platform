@@ -12,7 +12,7 @@ const CourseCard=({course,index})=>{
             <div className= "gap-3 p-2 items-center flex">
               <img src={course.Thumbnail} alt="course-thumbnail" className="w-[120px] h-[90px] max-w-[120px] object-cover  rounded-lg " />
              
-              <div>
+              <div className=" w-[120px] md:w-[200px]">
                 <h2>{course.CourseName}</h2>
                 <p className="text-white/40 text-[.9rem] ">{course.CourseDescription}</p>
               </div>

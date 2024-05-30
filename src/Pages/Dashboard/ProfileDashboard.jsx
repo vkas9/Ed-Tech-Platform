@@ -1,8 +1,14 @@
 import { MdOutlineEdit } from "react-icons/md";
 import { Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { profileAction } from "../../store/profileSlice";
 const ProfileDashboard = () => {
+ 
+  const dispatch=useDispatch()
   const user = JSON.parse(localStorage.getItem("user"));
+  dispatch(profileAction.setProfile(user))
+
   if(user) return (
 
     <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="w-full">

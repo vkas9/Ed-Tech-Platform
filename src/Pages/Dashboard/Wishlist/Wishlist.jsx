@@ -1,25 +1,26 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { getCourseDetail } from "../../../Auth/Authapi";
+import { getCartDetails, getCourseDetail } from "../../../Auth/Authapi";
 import WishlistCard from "./WishlistCard";
 import { cardAction } from "../../../store/cardSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector((store) => store.profile);
   const { wishlist } = useSelector((store) => store.card);
-  const [Wishlist, setWishlist] = useState(wishlist);
 
+  const [Wishlist, setWishlist] = useState(wishlist);
   useEffect(() => {
     const controller=new AbortController();
     const signal=controller.signal;
     const fetchData = async () => {
       try {
         const data = JSON.parse(localStorage.getItem("user"));
-        if (data && data.Courses && data.Courses.length > 0) {
-          const courseData = await getCourseDetail(data.Courses,signal);
-          localStorage.setItem("Wishlist", JSON.stringify(courseData.data.courseDetail));
-          dispatch(cardAction.setWishlist(courseData.data.courseDetail));
+        if (data && data.Cart && data.Cart.length > 0) {
+          const cartData = await getCartDetails(signal);
+          localStorage.setItem("Wishlist", JSON.stringify(cartData));
+          dispatch(cardAction.setWishlist(cartData));
         } else {
           localStorage.setItem("Wishlist", JSON.stringify([]));
           dispatch(cardAction.setWishlist([]));
@@ -29,13 +30,13 @@ const Wishlist = () => {
       }
     };
 
-    if (!Wishlist) {
+    if (!Wishlist ||wishlist?.length!==user?.Cart?.length) {
       fetchData();
     }
     return ()=>{
       controller.abort();
     }
-  }, [Wishlist, dispatch]);
+  }, [Wishlist, dispatch,user]);
 
   useEffect(() => {
     setWishlist(wishlist);

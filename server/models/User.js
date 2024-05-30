@@ -54,7 +54,11 @@ const userModel = new mongoose.Schema({
     Active: {
         type: Boolean,
         default:true
-    }
+    },
+    Cart:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Course"
+    }]
     
 })
 module.exports = mongoose.model("User", userModel);

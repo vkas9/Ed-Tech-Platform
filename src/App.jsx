@@ -17,7 +17,7 @@ import Courses from "./Pages/Dashboard/ExploreCourses/Courses";
 import Settings from "./Pages/Dashboard/Settings";
 import Indexcourse from "./Pages/Dashboard/AddCourse/Indexcourse";
 import AllCourse from "./Pages/Dashboard/InstructorCourse/AllCourse";
-import ViewCourse from "./Pages/Dashboard/ExploreCourses/ViewCourse"
+import ViewCourse from "./Pages/Dashboard/EnrolledCourse/ViewCourse"
 
 
 function App() {

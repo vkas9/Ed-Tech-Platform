@@ -8,7 +8,7 @@ const Sidebar = () => {
   const location=useLocation();
   const user=JSON.parse(localStorage.getItem("user"))
   return (
-    <div className="top-[68px]  hidden sm:flex flex-col rounded-tl-[2.5rem] overflow-hidden  min-h-[calc(100vh-(85px))]  min-w-[15%] bg-gray-500/20 ">
+    <div className="top-[68px]  hidden md:flex flex-col rounded-tl-[2.5rem] overflow-hidden  min-h-[calc(100vh-(85px))]  min-w-[15%] bg-gray-500/20 ">
       <div
         className="flex flex-col font-semibold text-blue-1
         00 lg:text-lg "

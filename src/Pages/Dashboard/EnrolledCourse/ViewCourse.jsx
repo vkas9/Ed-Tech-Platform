@@ -19,6 +19,11 @@ const ViewCourse=()=>{
         [sectionId]: !prevState[sectionId],
       }));
     };
+    function secondsToMinutesAndSeconds(totalSeconds) {
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${minutes} minutes ${seconds} seconds`;
+  }
     
     return (
         <motion.div
@@ -104,9 +109,9 @@ const ViewCourse=()=>{
                               sectionId: section._id,
                             });
                           }}
-                          className="py-1 text-white/50"
+                          className="py-2 text-sm text-white/50"
                         >
-                          {subsection.duration} Sec
+                          {secondsToMinutesAndSeconds(subsection.duration) }
                         </div>
                         {/* <div
                           onClick={(e) => {

@@ -23,7 +23,7 @@ export const login=(data,navigate)=>{
             })
             
           
-           console.log("response->",response)
+           
             toast.success(`Welcome to MASTER, ${response.registredUser.FirstName}`);
             dispatch(authAction.setToken(response.token));
             dispatch(profileAction.setProfile(response.registredUser.ProfilePicture))
@@ -31,6 +31,7 @@ export const login=(data,navigate)=>{
            
             localStorage.setItem("token",JSON.stringify(response.token));
             localStorage.setItem("user",JSON.stringify(response.registredUser));
+            
             navigate("/dashboard/my-profile")
 
         } catch (error) {
@@ -250,6 +251,66 @@ export const deleteSection=async(data)=>{
         toast.dismiss(toastId)
     }
 }
+
+export const updateCartDetails=async(data)=>{
+    const toastId = toast.loading('Adding');
+    try {
+        console.log("Data",data)
+        const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/updateCartDetails",{
+            courseId:data.toString()
+        },{
+            withCredentials:true
+        })
+        localStorage.setItem("user",JSON.stringify(response.data.updatedUser));
+        toast.success('Course Added to Cart');
+        console.log('Course Added to Cart', response.data);
+        return response.data.updatedUser
+    } catch (error) {
+        console.error("Error Course Added to Cart",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+export const deleteCartDetails=async(data)=>{
+    const toastId = toast.loading('Deleting');
+    try {
+      
+        const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/deleteCartDetails",{
+            courseId:data.toString()
+        },{
+            withCredentials:true
+        })
+        localStorage.setItem("user",JSON.stringify(response.data.updatedUser));
+        toast.success('Course Deleted from Cart');
+        console.log('Course deleted from Cart', response.data);
+        return response.data.updatedUser
+    } catch (error) {
+        console.error("Error Course Deleting from Cart",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+export const getCartDetails=async(signal)=>{
+    const toastId = toast.loading('Adding');
+    try {
+        
+        const response=await axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getCartDetails",{
+            withCredentials:true,
+            signal: signal,
+        })
+        toast.success('Cart Fetched!');
+        
+        return response.data.updatedCart.Cart
+    } catch (error) {
+        console.error("Error fetching cart",error);
+        toast.error(error.response.data.message);
+    }finally{
+        toast.dismiss(toastId)
+    }
+}
+
 export const deleteSubSection=async(data)=>{
     const toastId = toast.loading('Deleting');
     try {

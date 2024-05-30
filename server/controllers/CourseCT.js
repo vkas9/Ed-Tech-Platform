@@ -2,7 +2,6 @@ const User = require("../models/User");
 const Catagory = require("../models/Catagory");
 const Course = require("../models/Courses")
 const {UploadFile} = require("../utils/fileUploader");
-
 exports.createCourse = async (req, res) => {
     try {
         const { courseName, courseDescription, whatYouWillLearn, price, category } = req.body;        
@@ -106,7 +105,72 @@ exports.getAllCourse = async (req, res) => {
         })
     }
 }
+exports.updateCartDetails=async(req,res)=>{
+    try {
+        const{courseId}=req.body;
+        console.log("courseId",courseId)
+        const userId=req.user.id;
+        
+        const updatedUser=await User.findByIdAndUpdate(userId,{$push:{Cart:courseId}},{new:true});
+        console.log("updatedUser",updatedUser)
+        res.status(200).json({
+            success:true,
+            message:"Successfully Course added to Cart",
+            updatedUser
+        })
 
+
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"something went wrong while adding course to cart"
+        })
+    }
+}
+exports.getCartDetails=async(req,res)=>{
+    try {
+        const userId=req.user.id;
+        const updatedCart=await User.findById(userId).populate({path:"Cart"}).exec();
+        res.status(200).json({
+            success:true,
+            message:"Successfully Fetched Cart",
+            updatedCart
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"something went wrong while fetching cart list"
+        })
+    }
+}
+
+exports.deleteCartDetails=async(req,res)=>{
+    try {
+        const{courseId}=req.body;
+        console.log("courseId",courseId)
+        const userId=req.user.id;
+        
+        const updatedUser=await User.findByIdAndUpdate(userId,{$pull:{Cart:courseId}},{new:true});
+        console.log("updatedUser",updatedUser)
+        res.status(200).json({
+            success:true,
+            message:"Successfully Course deleted from Cart",
+            updatedUser
+        })
+
+
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"something went wrong while deleting course from cart"
+        })
+    }
+}
 
 exports.getAllCourseDetail = async (req, res) => {
     try {
