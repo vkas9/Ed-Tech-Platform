@@ -13,7 +13,7 @@ import ProfileDashboard from "./Pages/Dashboard/ProfileDashboard";
 import EnrolledCourse from "./Pages/Dashboard/EnrolledCourse/EnrolledCourse";
 import Wishlist from "./Pages/Dashboard/Wishlist/Wishlist";
 import PurchaseHistory from "./Pages/Dashboard/PurchaseHistory";
-import Courses from "./Pages/Dashboard/Explore Courses/Courses";
+import Courses from "./Pages/Dashboard/ExploreCourses/Courses";
 import Settings from "./Pages/Dashboard/Settings";
 import Indexcourse from "./Pages/Dashboard/AddCourse/Indexcourse";
 import AllCourse from "./Pages/Dashboard/InstructorCourse/AllCourse";
