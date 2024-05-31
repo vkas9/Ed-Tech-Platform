@@ -36,10 +36,10 @@ const VideoModal = ({data}) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2, delay: 0 }}
-      className="top-0 left-0 z-[9999] flex justify-center bg-black/60 fixed  w-[100vw] h-[100vh]  backdrop-blur-md"
+      className="top-0 left-0 z-[9999]  flex justify-center bg-black/60 fixed  w-[100vw] h-[100vh]  backdrop-blur-md"
     >
       <div className="fixed flex py-6 flex-col text-center items-center  gap-3 w-full  md:w-[650px] top-[25%]   rounded-xl bg-white/10 p-2  ">
-        <RxCross2 onClick={data.cancel} className=" absolute -top-7 hover:cursor-pointer text-white/50 hover:text-white text-3xl right-2 md:-right-7"/>
+        <RxCross2 onClick={data.cancel} className=" absolute -top-7 hover:cursor-pointer text-white/50 hover:text-white text-3xl right-0 md:-right-7"/>
         <VideoPlayer options={videoPlayerOptions} onReady={handlePlayerReady} />
       </div>
     </motion.div>
