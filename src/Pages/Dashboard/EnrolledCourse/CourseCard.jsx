@@ -1,11 +1,11 @@
 import { FiMoreVertical } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-
+import { v4 as uuidv4 } from 'uuid';
 const CourseCard=({course,index})=>{
   const navigate = useNavigate();
  
   const handleClick=()=>{
-    navigate(`/dashboard/course/${index}`); 
+    navigate(`/dashboard/course/${uuidv4()}/${course._id}/${index}`); 
   }
     return (
         <div onClick={handleClick} className="flex text-[1.1rem] justify-between flex-col sm:flex-row mr-5 items-center rounded-xl mt-4 hover:cursor-pointer hover:bg-gray-300/20 bg-gray-300/10 max-w-[60rem] p-1  ">

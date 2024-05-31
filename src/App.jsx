@@ -69,7 +69,7 @@ function App() {
                 element={<ProfileDashboard/>}
               />
               <Route path="enrolled-courses" element={<EnrolledCourse/>} />
-              <Route path="course/:index" element={<ViewCourse/>} />
+              <Route path="course/:ud/:courseId/:index" element={<ViewCourse/>} />
               <Route path="wishlist" element={<Wishlist/>} />
               <Route path="purchase-history" element={<PurchaseHistory/>} />
               <Route path="Courses" element={<Courses/>} />

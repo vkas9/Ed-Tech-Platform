@@ -43,7 +43,7 @@ exports.updateSubSection=async(req,res)=>{
        
         const {title,description,sectionId,subSectionId}=req.body;
         const video=req.files.videoFile
-        if(!title||!timeDuration||!description||!sectionId){
+        if(!title||!description||!sectionId){
             return res.status(400).json({
                 success:false,
                 message:"Please fill all detail of subSection"
@@ -51,7 +51,7 @@ exports.updateSubSection=async(req,res)=>{
         }
         const subSectionDetail=await subSection.findById(subSectionId);
         subSectionDetail.title=title;
-        subSectionDetail.timeDuration=timeDuration;
+        
         subSectionDetail.description=description;
         subSectionDetail.videoURL=video.secure_url;
         await section.save({subSection:subSectionDetail});

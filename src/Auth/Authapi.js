@@ -329,7 +329,7 @@ export const deleteSubSection=async(data)=>{
     }
 }
 export const createSubSection=async(data)=>{
-    const toastId = toast.loading('Loading');
+    const toastId = toast.loading('Uploading...');
     try {
         console.log("Data",data)
         const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/createSubSection",data,{
@@ -346,7 +346,7 @@ export const createSubSection=async(data)=>{
     }
 }
 export const updateSubSection=async(data)=>{
-    const toastId = toast.loading('Loading');
+    const toastId = toast.loading('Uploading...');
     try {
         console.log("Data",data)
         const response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/updateSubSection",data,{
