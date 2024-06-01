@@ -14,8 +14,7 @@ const ExploreCoursesCard = ({ course }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const user = JSON.parse(localStorage.getItem("user"));
-  console.log("user?.Cart?", user?.Cart);
+  const {user} =  useSelector((store) => store.profile);
 
   const handleCart = async () => {
     setLoading(true)

@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import {decryptData} from "./../components/core/auth/crypto"
 const initialState = {
   totalItems: localStorage.getItem("totalItems")
     ? JSON.parse(localStorage.getItem("totalItems"))
     : 0,
-  enrolledCourse: localStorage.getItem("enrolledCourses")
-    ? JSON.parse(localStorage.getItem("enrolledCourses"))
+  enrolledCourse: localStorage.getItem("#ec&_")
+    ? decryptData(localStorage.getItem("#ec&_"))
     : null,
-  wishlist: localStorage.getItem("Wishlist")
-    ? JSON.parse(localStorage.getItem("Wishlist"))
+  wishlist: localStorage.getItem("_%wl%")
+    ? decryptData(localStorage.getItem("_%wl%"))
     : null
 };
 

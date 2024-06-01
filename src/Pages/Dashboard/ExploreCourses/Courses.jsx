@@ -16,7 +16,6 @@ const Courses = () => {
     const signal=controller.signal;
     const fetchData = async () => {
       try {
-        // const data = JSON.parse(localStorage.getItem("user"));
         
           const courseData = await getAllCourse(signal);
           

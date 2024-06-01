@@ -8,17 +8,18 @@ import { courseAction } from "../../../store/courseSlice";
 const AllCourse = () => {
   const dispatch = useDispatch();
   const { allInstructoreCourses,creatingCourse } = useSelector((store) => store.course);
-    console.log("creatingCourse",allInstructoreCourses)
+    // console.log("creatingCourse",allInstructoreCourses)
+    const {user:data} =  useSelector((store) => store.profile);
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
 
     const fetchData = async () => {
       try {
-        const data = JSON.parse(localStorage.getItem("user"));
+        
         if (data && data.role==="Instructor" ) {
           const courseData = await getAllInstructorCourses(signal);
-          console.log("courseData->",courseData)
+          // console.log("courseData->",courseData)
           if (!signal.aborted) {
 
             localStorage.setItem("__IC_", JSON.stringify(courseData.instructorCourses));

@@ -28,9 +28,9 @@ const VerifyEmail=()=>{
         }
     };
     const handlePaste = (e) => {
-        console.log(e.clipboardData);
+        // console.log(e.clipboardData);
         const data = e.clipboardData.getData('text');
-        console.log("pasted Data", data);
+        // console.log("pasted Data", data);
         if (!Number(data) || data.length !== input.length) return;
 
         const newArr = data.split('');

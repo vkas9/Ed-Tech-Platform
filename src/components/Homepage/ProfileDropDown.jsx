@@ -4,7 +4,7 @@ import { logout } from "../../Auth/Authapi";
 const ProfileDropDown=()=>{
     const navigate=useNavigate()
     const dispatch=useDispatch();
-    const user=JSON.parse(localStorage.getItem("user"));
+    const {user}= useSelector((store) => store.profile);
     const handleSubmit=(e)=>{
         e.preventDefault();
         navigate("/dashboard/my-profile")

@@ -10,7 +10,7 @@ const ViewCourse = () => {
   const { enrolledCourse } = useSelector((store) => store.card);
 
   const { index } = useParams();
-  console.log("enrolledCourse", index);
+  // console.log("enrolledCourse", index);
 
   const [openSections, setOpenSections] = useState({});
   const [confirmationModal, openConfirmationModal] = useState(null);

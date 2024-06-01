@@ -2,9 +2,10 @@ import axios from "axios";
 import authSlice, { authAction } from "../store/authSlice"
 import { toast } from "react-hot-toast"
 import {profileAction} from "../store/profileSlice"
-import  CryptoJS  from "crypto-js";
+import {encryptData} from "../components/core/auth/crypto"
 import { cardAction } from "../store/cardSlice";
 import { courseAction } from "../store/courseSlice";
+import { useDispatch } from "react-redux";
 
 export const login=(data,navigate)=>{
     return async(dispatch)=>{
@@ -28,9 +29,11 @@ export const login=(data,navigate)=>{
             dispatch(authAction.setToken(response.token));
             dispatch(profileAction.setProfile(response.registredUser.ProfilePicture))
             console.log( response.registredUser.ProfilePicture);
+            dispatch(profileAction.setProfile(response.registredUser))
            
             localStorage.setItem("token",JSON.stringify(response.token));
-            localStorage.setItem("user",JSON.stringify(response.registredUser));
+            const text=encryptData(response.registredUser)
+            localStorage.setItem("_/u%__?",text);
             
             navigate("/dashboard/my-profile")
 
@@ -177,8 +180,7 @@ export const getCourseDetail = async (courseId, signal) => {
     });
     response = res;
 
-    const Text = CryptoJS.AES.encrypt(JSON.stringify(response.data.courseDetail), "EDVKAS9").toString();
-    localStorage.setItem("EC", Text);
+   
   } catch (error) {
     if (axios.isCancel(error)) {
       console.log("Request canceled", error.message);
@@ -253,6 +255,7 @@ export const deleteSection=async(data)=>{
 }
 
 export const updateCartDetails=async(data)=>{
+  
     const toastId = toast.loading('Adding');
     try {
         console.log("Data",data)
@@ -261,7 +264,10 @@ export const updateCartDetails=async(data)=>{
         },{
             withCredentials:true
         })
-        localStorage.setItem("user",JSON.stringify(response.data.updatedUser));
+        
+        const text=encryptData(response.data.updatedUser)
+        localStorage.setItem("_/u%__?",text);
+       
         toast.success('Course Added to Cart');
         console.log('Course Added to Cart', response.data);
         return response.data.updatedUser
@@ -273,6 +279,7 @@ export const updateCartDetails=async(data)=>{
     }
 }
 export const deleteCartDetails=async(data)=>{
+    
     const toastId = toast.loading('Deleting');
     try {
       
@@ -281,7 +288,11 @@ export const deleteCartDetails=async(data)=>{
         },{
             withCredentials:true
         })
-        localStorage.setItem("user",JSON.stringify(response.data.updatedUser));
+      
+      
+        const text=encryptData(response.data.updatedUser)
+        localStorage.setItem("_/u%__?",text);
+        
         toast.success('Course Deleted from Cart');
         console.log('Course deleted from Cart', response.data);
         return response.data.updatedUser

@@ -4,28 +4,35 @@ import { useEffect } from "react";
 import { getCourseDetail } from "../../../Auth/Authapi";
 import { useDispatch, useSelector } from "react-redux";
 import { cardAction } from "../../../store/cardSlice";
-
+import {encryptData} from "../../../components/core/auth/crypto"
 const EnrolledCourse = () => {
   const dispatch = useDispatch();
   const { enrolledCourse } = useSelector((store) => store.card);
+  const {user:data} =  useSelector((store) => store.profile);
+ 
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
 
     const fetchData = async () => {
       try {
-        const data = JSON.parse(localStorage.getItem("user"));
+        
+        
         if (data && data.Courses && data.Courses.length > 0) {
           const courseData = await getCourseDetail(data.Courses, signal);
+          // console.log("courseData->",courseData)
           if (!signal.aborted) {
-            localStorage.setItem("enrolledCourses", JSON.stringify(courseData.data.courseDetail));
+            const text=encryptData(courseData.data.courseDetail)
+        
+            localStorage.setItem("#ec&_",text);
             dispatch(cardAction.setEnrolledCourse(courseData.data.courseDetail));
           }
         } else {
-          localStorage.setItem("enrolledCourses", JSON.stringify([]));
+          localStorage.setItem("#ec&_", JSON.stringify([]));
           dispatch(cardAction.setEnrolledCourse([]));
         }
       } catch (error) {
+        console.log("error",error)
         if (error.name !== 'AbortError') {
           console.log("Unable to fetch enrolled courses");
         }

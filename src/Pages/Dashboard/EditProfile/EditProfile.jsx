@@ -1,9 +1,10 @@
 import { Formik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import { MdFileUpload } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const EditProfile = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const {user} =  useSelector((store) => store.profile);
   return (
     <div >
       <h1 className="text-3xl ">Edit Profile</h1>

@@ -4,25 +4,26 @@ import { getCartDetails, getCourseDetail } from "../../../Auth/Authapi";
 import WishlistCard from "./WishlistCard";
 import { cardAction } from "../../../store/cardSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import {encryptData} from "./../../../components/core/auth/crypto" 
 const Wishlist = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.profile);
   const { wishlist } = useSelector((store) => store.card);
-
+  const {user:data} =  useSelector((store) => store.profile);
   const [Wishlist, setWishlist] = useState(wishlist);
   useEffect(() => {
     const controller=new AbortController();
     const signal=controller.signal;
     const fetchData = async () => {
       try {
-        const data = JSON.parse(localStorage.getItem("user"));
+       
         if (data && data.Cart && data.Cart.length > 0) {
           const cartData = await getCartDetails(signal);
-          localStorage.setItem("Wishlist", JSON.stringify(cartData));
+          const text=encryptData(cartData);
+          localStorage.setItem("_%wl%", text);
           dispatch(cardAction.setWishlist(cartData));
         } else {
-          localStorage.setItem("Wishlist", JSON.stringify([]));
+          localStorage.setItem("_%wl%", JSON.stringify([]));
           dispatch(cardAction.setWishlist([]));
         }
       } catch (error) {

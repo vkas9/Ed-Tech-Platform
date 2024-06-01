@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Sidebar = () => {
   const location=useLocation();
-  const user=JSON.parse(localStorage.getItem("user"))
+  const {user}= useSelector((store) => store.profile);
   return (
     <div className="top-[68px]  hidden md:flex flex-col rounded-tl-[2.5rem] overflow-hidden  min-h-[calc(100vh-(85px))]  min-w-[15%] bg-gray-500/20 ">
       <div

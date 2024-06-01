@@ -43,7 +43,7 @@ const VideoPlayer = (props) => {
     };
   }, [playerRef]);
   return (
-    <div data-vjs-player className="w-full md:w-[600px]">
+    <div data-vjs-player className="w-full   h-full md:w-[99%]">
       <div ref={videoRef} />
     </div>
   );

@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 const WishlistCard = ({ course }) => {
 const dispatch=useDispatch()
   const handleCart = async () => {
-   
+  
     const updatedUser = await deleteCartDetails(course?._id);
     dispatch(profileAction.setProfile(updatedUser));
   };

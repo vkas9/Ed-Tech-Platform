@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import {decryptData} from "../components/core/auth/crypto"
 
 const initialState = {
-  user: localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
+  user: localStorage.getItem("_/u%__?")
+    ? decryptData(localStorage.getItem("_/u%__?"))
     : null,
   loading: false,
 };

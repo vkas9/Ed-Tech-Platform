@@ -1,12 +1,12 @@
 import { MdOutlineEdit } from "react-icons/md";
 import { Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { profileAction } from "../../store/profileSlice";
 const ProfileDashboard = () => {
  
   const dispatch=useDispatch()
-  const user = JSON.parse(localStorage.getItem("user"));
+  const {user} =  useSelector((store) => store.profile);
   dispatch(profileAction.setProfile(user))
 
   if(user) return (
