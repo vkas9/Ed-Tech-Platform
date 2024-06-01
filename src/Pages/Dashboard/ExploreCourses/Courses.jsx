@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllCourse } from "../../../Auth/Authapi";
 import { courseAction } from "../../../store/courseSlice";
 import ExploreCoursesCard from "./ExploreCoursesCard";
+import { encryptData } from "../../../components/core/auth/crypto";
 const Courses = () => {
 
   const dispatch = useDispatch();
@@ -18,8 +19,8 @@ const Courses = () => {
       try {
         
           const courseData = await getAllCourse(signal);
-          
-          localStorage.setItem("_$c_", JSON.stringify(courseData));
+          const text=encryptData(courseData);
+          localStorage.setItem("m::_$c_",text);
           dispatch(courseAction.setExploreAllCourses(courseData));
         
       } catch (error) {

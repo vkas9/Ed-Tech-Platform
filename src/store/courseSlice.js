@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { decryptData } from "../components/core/auth/crypto";
 const initialState = {
   step: 1,
   course: {},
@@ -8,8 +8,8 @@ const initialState = {
   ? JSON.parse(localStorage.getItem("__IC_"))
   : null,
   creatingCourse:false,
-  exploreAllCourses:localStorage.getItem("_$c_")
-  ? JSON.parse(localStorage.getItem("_$c_"))
+  exploreAllCourses:localStorage.getItem("m::_$c_")
+  ? decryptData(localStorage.getItem("m::_$c_"))
   : null,
 };
 const courseSlice = createSlice({
