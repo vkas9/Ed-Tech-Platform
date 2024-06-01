@@ -11,13 +11,13 @@ export const navigation = [
   },
   {
     id: "2",
-    title: "About Us",
-    url: "/About-Us",
+    title: "Pricing",
+    url: "/Pricing",
   },
   {
     id: "3",
-    title: "Pricing",
-    url: "/Pricing",
+    title: "About Us",
+    url: "/About-Us",
   },
   {
   id: "4",
@@ -27,7 +27,7 @@ export const navigation = [
   ,
   {
     id: "5",
-    title: "New account",
+    title: "New Account",
     url: "/signup",
     onlyMobile: true,
   },
@@ -35,6 +35,12 @@ export const navigation = [
     id: "6",
     title: "Sign in",
     url: "/login",
+    onlyMobile: true,
+  }, 
+  {
+    id: "7",
+    title: "Log Out",
+    url: "",
     onlyMobile: true,
   },
 ];

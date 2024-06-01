@@ -123,7 +123,7 @@ export const logout=(navigate)=>{
         dispatch(authAction.setToken(null));
         dispatch(profileAction.setProfile(null));
         localStorage.clear();
-        document.cookie = '__EDT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookies = '__EDT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         dispatch(cardAction.reset());
         dispatch(courseAction.resetCourseState());
         toast.success("Logged Out Successfully")

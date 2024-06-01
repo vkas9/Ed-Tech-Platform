@@ -5,14 +5,17 @@ import Button from "./Button";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
-import { Link, matchPath, useLocation } from "react-router-dom";
+import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { FaCartShopping } from "react-icons/fa6";
 import ProfileDropDown from "./ProfileDropDown";
 import axios from "axios";
+import { CiLogout } from "react-icons/ci";
 import SubTitle from "./SubTitle";
 import {courseAction} from "../../store/courseSlice"
+import { logout } from "../../Auth/Authapi";
+import ConfirmModal from "../../Pages/Dashboard/ConfirmModal";
 const Navbar = () => {
   const[name,setName]=useState(null);
   const[catagory,setCatagory]=useState([]);
@@ -34,6 +37,7 @@ const Navbar = () => {
   const { user } = useSelector((store) => store.profile);
   const { wishlist } = useSelector((store) => store.card);
   const [openNavigation, setOpenNavigation] = useState(false);
+  const navigate=useNavigate()
   const location = useLocation();
   const Route = (route) => {
     return matchPath({ path: route }, location.pathname);
@@ -56,10 +60,37 @@ const Navbar = () => {
     }
     
   }
-  const handleClick = (e) => {
+  const[confirmationModal,openConfirmationModal]=useState(null);
+  const handleLogout=(e)=>{
+    e.preventDefault();
+    dispatch(logout(navigate));
+    openConfirmationModal(null)
     if (!openNavigation) return;
     enablePageScroll();
     setOpenNavigation(!openNavigation);
+
+}
+  const handleLogoutClick = () => {
+    openConfirmationModal({
+      text1: "Are You Sure?",
+      text2: "You will be logged out of your Account",
+      btn1Text: "Log out",
+      btn2Text: "Cancel",
+      btn1Handler: handleLogout,
+      btn2Handler: () => openConfirmationModal(null),
+    });
+  };
+  const handleClick = (e) => {
+    if(e.target.innerHTML=="Log Out"){
+      handleLogoutClick()
+    }else{
+      if (!openNavigation) return;
+      enablePageScroll();
+      setOpenNavigation(!openNavigation);
+    }
+    
+   
+   
   };
   return (
     <div
@@ -104,14 +135,26 @@ const Navbar = () => {
                     }
                     
                   </div>
-                ) : (
-                  <Link
+                ) : 
+                (
+                  user?<Link
+                    key={index}
+                    to={!item.title=="Log Out"&&item.url}
+                    onClick={handleClick}
+                    className={`block relative font-bold text-2xl uppercase ${
+                      Route(item.url) ? "text-white" : "text-gray-500"
+                    }   transition-colors lg:hover:cursor-pointer ${item.title==="New Account" ||item.title==="Sign in"?"hidden":""} ${
+                      item.onlyMobile ? "lg:hidden" : ""
+                    } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
+                  >
+                    {item.title}
+                  </Link>:<Link
                     key={index}
                     to={item.url}
                     onClick={handleClick}
                     className={`block relative font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
-                    }   transition-colors lg:hover:cursor-pointer ${
+                    }   transition-colors lg:hover:cursor-pointer ${item.title==="Log Out"?"hidden":""} ${
                       item.onlyMobile ? "lg:hidden" : ""
                     } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
                   >
@@ -119,7 +162,9 @@ const Navbar = () => {
                   </Link>
                   
                   
-                )}
+                )
+                
+                }
                 
               </div>
             ))}
@@ -181,7 +226,7 @@ const Navbar = () => {
               ) : null}
         </div>
         
-      </div>
+      </div>{confirmationModal && <ConfirmModal modalData={confirmationModal} /> }
     </div>
   );
 };
