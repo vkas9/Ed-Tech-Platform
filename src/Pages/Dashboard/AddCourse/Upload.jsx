@@ -3,6 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { useField } from "formik";
 import { IoIosCloudUpload } from "react-icons/io";
 import ReactPlayer from "react-player";
+import { toast } from "react-hot-toast"; // Assuming you're using toast for notifications
 
 export default function Upload({
   name,
@@ -15,13 +16,21 @@ export default function Upload({
   const [previewSource, setPreviewSource] = useState(
     viewData ? viewData : editData ? editData : ""
   );
+  const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef(null);
   const [, , helpers] = useField(name);
   const { setValue, setTouched } = helpers;
+  const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100 MB
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
+    console.log("file",file)
     if (file) {
+      if (file.size > MAX_FILE_SIZE) {
+        toast.error("The file size exceeds the limit of 100 MB");
+        return;
+      }
+      setIsLoading(true);
       previewFile(file);
       setSelectedFile(file);
     }
@@ -39,6 +48,11 @@ export default function Upload({
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setPreviewSource(reader.result);
+      setIsLoading(false);
+    };
+    reader.onerror = () => {
+      setIsLoading(false);
+      toast.error("Failed to read file. Please try again.");
     };
   };
 
@@ -57,7 +71,9 @@ export default function Upload({
           isDragActive ? "bg-richblack-600" : "bg-richblack-700"
         } flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dashed border-white/40`}
       >
-        {previewSource ? (
+        {isLoading ? (
+          <p className="text-center text-richblack-200">Loading...</p>
+        ) : previewSource ? (
           <div className="flex w-full flex-col p-6">
             {!video ? (
               <img
@@ -99,10 +115,17 @@ export default function Upload({
             <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
               Drag and drop an {!video ? "image" : "video"}, or click to{" "}
               <span className="font-semibold text-yellow-50">Browse</span> a
-              file<br/>
-              
+              file
+              <br />
             </p>
-            <span className=" font-bold text-red-400">The file size limit is 100 MB for Now<sup className="text-red-400">*</sup></span>
+            {video ? (
+              <span className="font-bold text-red-400">
+                The file size limit is 100 MB for now
+                <sup className="text-red-400">*</sup>
+              </span>
+            ) : (
+              ""
+            )}
           </div>
         )}
       </div>

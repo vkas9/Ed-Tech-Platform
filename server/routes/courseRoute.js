@@ -26,7 +26,7 @@ router.post("/deleteSubSection", auth, isInstructor, deleteSubSection);getCartDe
 router.post("/updateSubSection", auth, isInstructor, updateSubSection);
 router.post("/updateSection", auth, isInstructor, updateSection);
 router.post("/updateCourse", auth, isInstructor, updateCourse);
-router.get("/getAllCourse", auth, getAllCourse);
+router.get("/getAllCourse", getAllCourse);
 router.post("/updateCartDetails", auth, updateCartDetails);
 router.get("/getCartDetails", auth, getCartDetails);
 router.post("/deleteCartDetails", auth, deleteCartDetails);
