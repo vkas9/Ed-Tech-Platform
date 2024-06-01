@@ -94,7 +94,7 @@ const Navbar = () => {
   };
   return (
     <div
-      className={`fixed  lg:backdrop-blur-md top-[15px]   rounded-b-[2.5rem] border-b border-gray-200/10 z-[100]  w-full ${
+      className={`fixed   lg:backdrop-blur-md top-[15px] h-[55px] md:h-[69px]  rounded-b-[2.5rem] border-b border-gray-200/10 z-[100]  w-full ${
         openNavigation
           ? " bg-gradient-to-r from-blue-950  to-black"
           : " backdrop-blur-md"
@@ -104,13 +104,13 @@ const Navbar = () => {
         <Link to="/"  onClick={handleClick} className="block w-[12rem ] flex items-center  xl:mr-8 ">
           <img src={image} className="lg:w-[200px]  w-[140px] " alt="MASTER" />
         </Link>
-        
+        {/* top-[70px] */}
         <nav
           className={`${
             openNavigation
               ? "flex overflow-y-scroll bg-gradient-to-br from-blue-950 via-gray-950 to-black"
               : "hidden"
-          } fixed top-[83px] rounded-t-[2.5rem]  left-0 right-0 bottom-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
+          } fixed top-[70px] md:top-[84px] rounded-t-[2.5rem]  left-0 right-0 bottom-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
           <div className="relative lg:border-r lg:border-l border-gray-500/20 rounded-full  z-2 flex flex-col select-none lg:select-text items-center justify-center m-auto lg:flex-row">
             {navigation.map((item,index) => (
