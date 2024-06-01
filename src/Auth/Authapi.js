@@ -300,7 +300,7 @@ export const getCartDetails=async(signal)=>{
             withCredentials:true,
             signal: signal,
         })
-        toast.success('Cart Fetched!');
+        
         
         return response.data.updatedCart.Cart
     } catch (error) {
@@ -421,7 +421,7 @@ export const getAllCourse=async(signal)=>{
             withCredentials:true,
             signal: signal,
         })
-        toast.success('All Course Fetch Successfully');
+        
         console.log("res",response.data.allCourse)
         return response.data.allCourse
     } catch (error) {
