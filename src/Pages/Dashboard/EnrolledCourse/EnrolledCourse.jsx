@@ -8,7 +8,6 @@ import { cardAction } from "../../../store/cardSlice";
 const EnrolledCourse = () => {
   const dispatch = useDispatch();
   const { enrolledCourse } = useSelector((store) => store.card);
-
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;

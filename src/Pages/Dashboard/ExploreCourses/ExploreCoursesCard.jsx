@@ -61,18 +61,20 @@ const ExploreCoursesCard = ({ course }) => {
       <div>
         <span>Duration: {course?.duration ? "" : "2 hr"}</span>
       </div>
-      <div className="flex items-center gap-7 mr-3 ">
+      <div className="flex items-center gap-10 justify-between pr-3 w-[250px] mr-3 ">
         <p>
           {" "}
           <span className="text-white/60">Price:</span> ₹{course.Price}
         </p>
         <div className="flex flex-col justify-center items-center  w-[110px]  gap-1">
-          <div className="text-[1.1rem] w-[80px] bg-white/10 text-center hover:bg-green-500/20 active:bg-green-500/30  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  ">
-            Buy
+          <div className="text-[1.1rem] w-[120px] bg-white/10 text-center hover:bg-green-500/20 active:bg-green-500/30  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  ">
+          {user?.Courses?.includes(course._id)
+              ? <span onClick={()=>(navigate("/dashboard/enrolled-courses"))}>Go to Course</span>
+              : "Buy"}
           </div>
           <div
             onClick={handleCart}
-            className="text-[1.1rem] hover:text-white text-white/30   box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  "
+            className={`text-[1.1rem] ${user?.Courses?.includes(course._id)?"hidden":null} hover:text-white text-white/30   box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  `}
           >
            
             {user?.Cart?.includes(course._id)

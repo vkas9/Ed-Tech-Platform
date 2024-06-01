@@ -56,7 +56,7 @@ exports.getEnrolledCourses=async(req,res)=>{
             },
         }).exec());
     }
-    
+    courseDetail.reverse();
         return res.status(200).json({
             success:true,
             message:"successfully Received Course Detail",

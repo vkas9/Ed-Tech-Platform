@@ -99,8 +99,10 @@ export default function Upload({
             <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
               Drag and drop an {!video ? "image" : "video"}, or click to{" "}
               <span className="font-semibold text-yellow-50">Browse</span> a
-              file
+              file<br/>
+              
             </p>
+            <span className=" font-bold text-red-400">The file size limit is 100 MB for Now<sup className="text-red-400">*</sup></span>
           </div>
         )}
       </div>

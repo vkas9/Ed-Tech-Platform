@@ -12,8 +12,23 @@ exports.createSubSection=async(req,res)=>{
                 message:"Please fill all detail of subSection"
             })
         }
+        if(!video){
+            return res.status(400).json({
+                success:false,
+                message:"Please Upload a video file"
+            })
+        }
+        if (video.size > 100 * 1024 * 1024) {
+            return res.status(400).json({
+                success: false,
+                message: "Video file is too large"
+            });
+        }
         const VideoFile=await UploadFile(video,{folder: "VikasFolder",resource_type:"auto"});
-        const videoDuration=Math.ceil(VideoFile.duration).toString()
+        if(!VideoFile ||!VideoFile.secure_url){
+            throw new Error("Failed to upload video to Cloudinary");
+        }
+        const videoDuration=VideoFile.duration?Math.ceil(VideoFile.duration).toString():"0";
         const subSectionObject=await subSection.create({title,description,videoURL:VideoFile.secure_url,duration:videoDuration});
         await section.findByIdAndUpdate(sectionId,{$push:{subSection:subSectionObject._id}},{new:true});
         const updatedCourse = await course.findById(courseId)
@@ -34,6 +49,7 @@ exports.createSubSection=async(req,res)=>{
         return res.status(500).json({
             success:false,
             message:"Something went wrong while creating Sub-section",
+           
 
         })
     }

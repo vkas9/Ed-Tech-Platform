@@ -160,7 +160,7 @@ const SubSectionModal = ({
                                         }}
                                         className={`flex cursor-pointer items-center rounded-md bg-blue-500 hover:bg-blue-600 active:bg-blue-600 text-xl transition-all duration-200 py-2 px-4 text-blue-950 font-bold`}
                                     >
-                                        {loading ? 'Loading...' : edit ? 'Save Changes' : 'Save'}
+                                        {loading ? 'Loading...' : edit ? 'Save Changes' : 'Upload'}
                                     </div>
                                 </div>
                             )}

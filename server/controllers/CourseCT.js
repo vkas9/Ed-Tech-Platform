@@ -90,7 +90,7 @@ exports.updateCourse=async(req,res)=>{
 
 exports.getAllCourse = async (req, res) => {
     try {
-        const allCourse = await Course.find({});
+        const allCourse = await Course.find({}).sort({createdAt:-1});
        
         return res.status(200).json({
             success: true,
