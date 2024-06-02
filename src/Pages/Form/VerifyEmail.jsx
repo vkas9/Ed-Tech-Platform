@@ -126,7 +126,7 @@ const VerifyEmail = () => {
           }}
           className="absolute right-2 -bottom-8 font-semibold text-lg"
         >
-          <button className=" text-white/60 hover:text-white ">
+          <button className=" text-white/60 sm:hover:text-white active:text-white  ">
             Resend OTP{" "}
           </button>
         </div>
@@ -135,7 +135,7 @@ const VerifyEmail = () => {
         onClick={() => handleSubmit2()}
         className="  sm:text-md mt-10 px-[30px] md:px-[50px] py-[12px] text-2xl text-white hover:bg-purple-700 transition-all outline-none duration-200 rounded-md bg-purple-800 font-bold uppercase"
       >
-        Submit
+        verify
       </button>
     </motion.div>
   );

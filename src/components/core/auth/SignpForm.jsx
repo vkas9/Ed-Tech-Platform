@@ -5,10 +5,12 @@ import { opt, signup } from "../../../Auth/Authapi";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import {authAction} from "../../../store/authSlice"
 const SignupForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const[loading,setLoading]=useState(false);
+  dispatch(authAction.setForgotPassword(false))
   const handleSubmit = async(data) => {
     if (data.Password !== data.ConfirmPassword) {
       toast.error("Password Not Matching");

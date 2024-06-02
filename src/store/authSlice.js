@@ -19,7 +19,7 @@ const authSlice=createSlice({
         setSignUpData(state,action){
             state.signupdata=action.payload;
         },
-        setforgotPassword(state,action){
+        setForgotPassword(state,action){
             state.forgotPassword=action.payload
         },
         setUserEmail(state,action){

@@ -39,7 +39,7 @@ const ResetPasswordOut = () => {
     animate={{ opacity: 1, x: 0 }}
     exit={{ opacity: 0 }}
     transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }} className="h-screen  relative flex flex-col overflow-x-hidden items-center justify-center w-full mx-auto">
-      <h1 className="text-[3rem] overflow-hidden  md:text-[4em] -mt-[8rem] bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center">
+      <h1 className="text-[2.7rem] overflow-hidden  md:text-[4em] -mt-[8rem] bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center">
         Change Password
       </h1>
 

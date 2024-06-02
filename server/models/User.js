@@ -30,7 +30,7 @@ const userModel = new mongoose.Schema({
     },
     Active: {
         type: Boolean,
-        required: true
+        default:true
     },
     Courses: [{
         type: mongoose.Schema.Types.ObjectId,
