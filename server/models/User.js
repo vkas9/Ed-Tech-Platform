@@ -59,10 +59,6 @@ const userModel = new mongoose.Schema({
         type:String,
         enum:["Admin","Student","Instructor"]
     },
-    Active: {
-        type: Boolean,
-        default:true
-    },
     Cart:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Course"
@@ -72,7 +68,7 @@ const userModel = new mongoose.Schema({
 
 userModel.methods.generateAccessToken=function(){
     return jwt.sign({
-        email: this.Email,
+        email: this.Email.toLowerCase(),
         role: this.role,
         id: this._id,
     },process.env.ACCESS_TOKEN_SECRET,{expiresIn:process.env.ACCESS_TOKEN_EXPIRY})
