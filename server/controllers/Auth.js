@@ -132,6 +132,7 @@ exports.otp = async (req, res) => {
 const generateAccessAndRefreshToken=async(userId)=>{
   const user=await User.findById(userId);
   const accessToken=user.generateAccessToken();
+  console.log("accessToken->>",accessToken)
   const refreshToken=user.generateRefreshToken();
   user.refreshToken=refreshToken;
   await user.save({validationBeforeSave:false});
@@ -158,7 +159,7 @@ exports.login = async (req, res) => {
     }
 
     
-    if (await bcrypt.compare(password, registredUser.Password)) {
+    if (await bcrypt.compare(password,registredUser.Password)) {
       const {accessToken,refreshToken}=await generateAccessAndRefreshToken(registredUser._id)
       const options = {
         httpOnly: true,

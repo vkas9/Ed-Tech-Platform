@@ -67,11 +67,13 @@ const userModel = new mongoose.Schema({
 },{timestamps:true})
 
 userModel.methods.generateAccessToken=function(){
-    return jwt.sign({
+    const ged= jwt.sign({
         email: this.Email.toLowerCase(),
         role: this.role,
         id: this._id,
     },process.env.ACCESS_TOKEN_SECRET,{expiresIn:process.env.ACCESS_TOKEN_EXPIRY})
+    console.log("ged->",ged);
+    return ged;
 }
 
 userModel.methods.generateRefreshToken=function(){
