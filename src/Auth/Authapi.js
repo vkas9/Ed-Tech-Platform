@@ -123,7 +123,7 @@ export const forgotPasswordOtp = async (data, navigate) => {
   console.log("hengi")
   try {
     await axios
-      .post("http://localhost:8080/api/v1/auth/forgotPasswordOTP", {
+      .post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/forgotPasswordOTP", {
         email: data.email,
       })
       .then((res) => {
@@ -154,7 +154,7 @@ export const verifyForgotOTP = async(data, navigate) => {
       try {
         await axios
           .post(
-            "http://localhost:8080/api/v1/auth/verifyForgotPasswordOTP",
+            "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/verifyForgotPasswordOTP",
             {
                 email:data.email,
                 otp: String(data.data.otp),
@@ -238,7 +238,7 @@ export const resetPasswordOut = async(data, navigate) => {
       const toastId = toast.loading("Changing...");
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/v1/auth/resetPassword",
+          "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/resetPassword",
           {
             email:data.email,
             password: data.data.password,
