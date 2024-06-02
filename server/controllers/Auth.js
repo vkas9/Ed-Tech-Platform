@@ -75,7 +75,7 @@ exports.signup = async (req, res) => {
       Password: hashedPassword,
       Email,
       Contact_Number,
-      role,
+      role:"Student",
       Profile: userProfile._id,
       avatar: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${FirstName}`,
     });
