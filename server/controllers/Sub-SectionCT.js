@@ -24,7 +24,7 @@ exports.createSubSection=async(req,res)=>{
                 message: "Video file is too large"
             });
         }
-        const VideoFile=await UploadFile(video,{folder: "VikasFolder",resource_type:"auto"});
+        const VideoFile=await UploadFile(video.tempFilePath,{folder: "VikasFolder",resource_type:"auto"});
         if(!VideoFile ||!VideoFile.secure_url){
             throw new Error("Failed to upload video to Cloudinary");
         }

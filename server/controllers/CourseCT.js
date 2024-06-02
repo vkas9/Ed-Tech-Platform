@@ -2,6 +2,9 @@ const User = require("../models/User");
 const Catagory = require("../models/Catagory");
 const Course = require("../models/Courses")
 const {UploadFile} = require("../utils/fileUploader");
+const sharp=require("sharp");
+const path=require('path');
+const fs = require('fs/promises');
 exports.createCourse = async (req, res) => {
     try {
         const { courseName, courseDescription, whatYouWillLearn, price, category } = req.body;        
@@ -12,11 +15,15 @@ exports.createCourse = async (req, res) => {
                 message: "Please fill all detail of Course"
             })
         }
-        const uploadThumbnail = await UploadFile(thumbnail, { folder: "VikasFolder", resource_type: "auto" });
-        console.log("pathsire-> ",uploadThumbnail)
+        const tempCompressedPath = path.join("./public/temp", 'compressed_' + Date.now() + '.jpeg');
+
+        await sharp(thumbnail.tempFilePath)
+        .resize(1024,1024,{fit:sharp.fit.inside,withoutEnlargement:true}).toFormat("jpeg",{quality:80}).toFile(tempCompressedPath);
+        const uploadThumbnail = await UploadFile(tempCompressedPath, { folder: "VikasFolder", transformation:[ { quality: "auto:good" },{ fetch_format: "auto" }], resource_type: "auto" });
         const newCourse = await Course.create({
             CourseName:courseName, CourseDescription:courseDescription, WhatYouWillLearn:whatYouWillLearn, Price:price, Catagory: category, Thumbnail: uploadThumbnail.secure_url, Instructor: req.user.id
         })
+        await fs.unlink(tempCompressedPath);
         const InstructorUser = await User.findByIdAndUpdate(req.user.id, { $push: { Courses: newCourse._id } }, { new: true });
         console.log("InstructorUser->", InstructorUser);
         await Catagory.findByIdAndUpdate({ _id: category }, { $push: { Course: newCourse._id } }, { new: true });
@@ -54,7 +61,7 @@ exports.updateCourse=async(req,res)=>{
         }
         if(req.files){
             const thumbnail = req.files.thumbnailImage;
-            const uploadThumbnail = await UploadFile(thumbnail, { folder: "VikasFolder", resource_type: "auto" });
+            const uploadThumbnail = await UploadFile(thumbnail.tempFilePath, { folder: "VikasFolder", resource_type: "auto" });
             course.Thumbnail=uploadThumbnail.secure_url;
         }
         

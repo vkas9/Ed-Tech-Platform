@@ -153,7 +153,7 @@ exports.updateDisplayProfile=async(req,res)=>{
     try {
         const photo=req.files.profilePhoto;
         const userId=req.user.id;
-        const image=await UploadFile(photo,{ folder: "VikasFolder", resource_type: "auto" });
+        const image=await UploadFile(photo.tempFilePath,{ folder: "VikasFolder", resource_type: "auto" });
         console.log("image->",image)
         const updatedProfile=await user.findByIdAndUpdate({_id:userId},{ProfilePicture:image.secure_url},{new:true});
         res.status(200).json({
