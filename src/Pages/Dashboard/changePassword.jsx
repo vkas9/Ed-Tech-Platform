@@ -2,10 +2,10 @@ import { Formik, Form, Field } from "formik";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { resetPassword } from "../../Auth/Authapi";
+import { changePasswordAuth } from "../../Auth/Authapi";
 import { useState } from "react";
 
-const ResetPassword = () => {
+const changePassword = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const ResetPassword = () => {
       return;
     }
     console.log("data->", data);
-    await dispatch(resetPassword(data, navigate));
+    await dispatch(changePasswordAuth(data, navigate));
     setLoading(false);
   };
   return (
@@ -79,4 +79,4 @@ const ResetPassword = () => {
     </div>
   );
 };
-export default ResetPassword;
+export default changePassword;

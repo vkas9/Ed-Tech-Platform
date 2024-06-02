@@ -18,6 +18,8 @@ import Settings from "./Pages/Dashboard/Settings";
 import Indexcourse from "./Pages/Dashboard/AddCourse/Indexcourse";
 import AllCourse from "./Pages/Dashboard/InstructorCourse/AllCourse";
 import ViewCourse from "./Pages/Dashboard/EnrolledCourse/ViewCourse"
+import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
+import ChangePassword from "./Pages/ForgotPassword/ResetPasswordOut";
 
 
 function App() {
@@ -53,10 +55,37 @@ function App() {
             }
           />
           <Route
+            path="reset-password/verify"
+            element={
+              <OpenRoute>
+                <VerifyEmail />
+              </OpenRoute>
+            }
+
+          />
+          <Route
+            path="reset-password/change-password"
+            element={
+              <OpenRoute>
+                <ChangePassword />
+              </OpenRoute>
+            }
+
+          />
+          <Route
             path="signup/verify-email"
             element={
               <OpenRoute>
                 <VerifyEmail />
+              </OpenRoute>
+            }
+
+          />
+           <Route
+            path="reset-password"
+            element={
+              <OpenRoute>
+                <ForgotPassword />
               </OpenRoute>
             }
 

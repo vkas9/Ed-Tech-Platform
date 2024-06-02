@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import ResetPassword from "./ResetPassword";
+import ResetPassword from "./changePassword";
 import EditProfile from "./EditProfile/EditProfile";
 const Settings = () => {
   return (

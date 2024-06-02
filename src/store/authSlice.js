@@ -4,7 +4,10 @@ const authSlice=createSlice({
     name:"auth",
     initialState: {token:localStorage.getItem("token")? JSON.parse(localStorage.getItem("token")):null,
                     loading:false,
-                    signupdata:null
+                    signupdata:null,
+                    forgotPassword:false,
+                    userEmail:null
+
 },
     reducers:{
         setToken(state,action){
@@ -15,7 +18,14 @@ const authSlice=createSlice({
         },
         setSignUpData(state,action){
             state.signupdata=action.payload;
-        }
+        },
+        setforgotPassword(state,action){
+            state.forgotPassword=action.payload
+        },
+        setUserEmail(state,action){
+            state.userEmail=action.payload
+        },
+        
     }
 })
 export const authAction=authSlice.actions;

@@ -132,7 +132,6 @@ exports.otp = async (req, res) => {
 const generateAccessAndRefreshToken=async(userId)=>{
   const user=await User.findById(userId);
   const accessToken=user.generateAccessToken();
-  console.log("accessToken->>",accessToken)
   const refreshToken=user.generateRefreshToken();
   user.refreshToken=refreshToken;
   await user.save({validationBeforeSave:false});
@@ -159,7 +158,7 @@ exports.login = async (req, res) => {
     }
 
     
-    if (await bcrypt.compare(password,registredUser.Password)) {
+    if (await bcrypt.compare(password, registredUser.Password)) {
       const {accessToken,refreshToken}=await generateAccessAndRefreshToken(registredUser._id)
       const options = {
         httpOnly: true,
@@ -275,6 +274,109 @@ exports.changePassword = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "An error occurred while changing password"
+    });
+  }
+};
+
+exports.verifyForgotPasswordOTP=async(req,res)=>{
+  try {
+   const{otp,email}=req.body;
+   console.log("opt",otp," email->",email)
+    const recentOtp = await OTP.find({ email })
+      .sort({ createAt: -1 })
+      .limit(1);
+    console.log("recentOtp-->", recentOtp);
+    if (recentOtp[0] === 0 || recentOtp.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "OTP Expired",
+      });
+    } else if (recentOtp[0].OTP !== otp) {
+      return res.status(400).json({
+        success: false,
+
+        message: "OTP not Matching",
+      });
+    }
+    res.status(200).json({
+      success:true,
+      message:"Email Verified!"
+    })
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      success:false,
+      message:"Failed to Verify OTP"
+    })
+  }
+}
+exports.resetPassword = async (req, res) => {
+  try {
+    const {password, ConfirmPassword,email } = req.body;
+    if (!email || !password || !ConfirmPassword) {
+      return res.status(400).json({
+        success: false,
+        message: "Email, password, and confirm password are required",
+      });
+    }
+    const registredUser = await User.findOne({Email:email} );
+   
+    if(!registredUser){
+      return res.status(400).json({
+        success: false,
+        message: "User Not Found!",
+      });
+    }
+    if (password !== ConfirmPassword){
+      return res.status(400).json({
+        success: false,
+        message: "Password do not matching!",
+      });
+    }
+    
+    const newPassHash = await bcrypt.hash(password, 10);
+  
+    const updatedUser = await User.findOneAndUpdate(
+      {Email:email},
+      { Password: newPassHash },
+      { new: true }
+    );
+   
+    await sendMail(email,"Password Reset ","Password Reset successfully")
+
+    return res.status(200).json({
+      success:true,
+      message: "Password successfully Reset!",
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while changing password"
+    });
+  }
+};
+
+exports.forgotPasswordOTP=async (req, res) => {
+  try {
+    const { email } = req.body;
+    const generatedOtp = optgenerator.generate(6, {
+      upperCaseAlphabets: false,
+      lowerCaseAlphabets: false,
+      specialChars: false,
+    });
+   await OTP.create({ email, OTP: generatedOtp });
+   
+    res.status(200).json({
+      success: true,
+      message: "Successfully OTP send",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while OTP Generating",
     });
   }
 };
