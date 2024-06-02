@@ -5,7 +5,7 @@ const jwt=require("jsonwebtoken")
 require("dotenv").config();
 exports.auth=async(req,res,next)=>{
     try {
-        const token=req.cookies.__EDT ||req.body.token;
+        const token=req.cookies?.__EDTat
         console.log("token-->",token);
         if(!token){
             return res.status(400).json({
@@ -14,17 +14,26 @@ exports.auth=async(req,res,next)=>{
             })
         }
         try {
-            const decode=jwt.verify(token,process.env.JWT_SECRET);
-            console.log("decode->",decode);
-            req.user=decode;
+            const decodedToken=jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+            console.log("decodedToken->",decodedToken);
+            req.user=decodedToken;
+            next();
         } catch (error) {
             console.log(error);
+            if(error.name=="TokenExpiredError"){
+                
+                return res.status(401).json({
+                    success:false,
+                    message:"Token has Expired"
+                })
+            }
+            else{
             return res.status(501).json({
                 success:false,
                 message:"Invalid Token"
-            })
+            })}
         }
-        next();
+       
 
     } catch (error) {
         console.log(error);

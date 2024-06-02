@@ -77,7 +77,7 @@ exports.signup = async (req, res) => {
       Contact_Number,
       role,
       Profile: userProfile._id,
-      ProfilePicture: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${FirstName}`,
+      avatar: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${FirstName}`,
     });
     console.log("userDB", userDB);
     return res.status(200).json({
@@ -129,6 +129,16 @@ exports.otp = async (req, res) => {
   }
 };
 
+const generateAccessAndRefreshToken=async(userId)=>{
+  const user=await User.findById(userId);
+  const accessToken=user.generateAccessToken();
+  const refreshToken=user.generateRefreshToken();
+  user.refreshToken=refreshToken;
+  await user.save({validationBeforeSave:false});
+  return {accessToken,refreshToken};
+
+}
+
 //log in
 exports.login = async (req, res) => {
   try {
@@ -147,25 +157,19 @@ exports.login = async (req, res) => {
       });
     }
 
-    const payload = {
-      email: registredUser.Email,
-      role: registredUser.role,
-      id: registredUser._id,
-    };
+    
     if (await bcrypt.compare(password, registredUser.Password)) {
-      const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "2hr",
-      });
-      const option = {
-        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      const {accessToken,refreshToken}=await generateAccessAndRefreshToken(registredUser._id)
+      const options = {
         httpOnly: true,
         secure: true,
         sameSite:'None'
       };
-      res.cookie("__EDT", token, option).status(200).json({
+      res.cookie("__EDTat", accessToken, options).cookie("__EDTrt",refreshToken,options).status(200).json({
         success: true,
         registredUser,
-        token,
+        token:accessToken,
+        refreshToken,
         message: "Successfully Logged in",
       });
     } else {
@@ -183,6 +187,54 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.refreshAccessToken=async(req,res)=>{
+  try {
+    const token=req.cookies.__EDTrt||req.body.__EDTrt;
+    console.log("refreshToken->",token);
+    if(!token){
+      return res.status(401).json({
+        success:false,
+        message:"Unauthorized Request"
+      })
+    }
+    const decodedToken=jwt.verify(token,process.env.REFRESH_TOKEN_SECRET)
+    const user=await User.findById(decodedToken?.id);
+    if(!user){
+      return res.status(401).json({
+        success:false,
+        message:"Invalid Refresh Token"
+      })
+    }
+    if(token!==user?.refreshToken){
+      return res.status(401).json({
+        success:false,
+        message:"Refresh Token has Expired or Used"
+      })
+    }
+    const options={
+      httpOnly:true,
+      secure:true
+    }
+    const{refreshToken:newRefreshToken,accessToken:newAccessToken}=generateAccessAndRefreshToken(decodedToken?._id);
+    res.status(200).cookie("newRefreshToken",newRefreshToken,options).cookie("newAccessToken",newAccessToken,options).json({
+      success:true,
+      token:newAccessToken,
+      refreshToken:newRefreshToken
+
+
+    })
+
+
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      sucess:false,
+      message:""
+    })
+    
+  }
+}
 // change password
 exports.changePassword = async (req, res) => {
   try {
@@ -225,3 +277,33 @@ exports.changePassword = async (req, res) => {
     });
   }
 };
+
+//user log out
+
+exports.userLogOut=async(_,res)=>{
+  try {
+    // const userId=req.user.id;
+    // await User.findByIdAndUpdate(userId, {
+    //     refreshToken: ""
+      
+    // }, { new: true });
+    const options = {
+      httpOnly: true,
+      secure: true,
+      sameSite:'None'
+    };
+    return res.status(200).clearCookie("__EDTat",options).clearCookie("__EDTrt",options).json({
+      success:true,
+      message:"Successfully Logged Out"
+    })
+
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while logging out",
+    });
+  
+  }
+}

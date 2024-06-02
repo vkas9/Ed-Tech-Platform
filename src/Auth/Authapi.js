@@ -27,8 +27,8 @@ export const login=(data,navigate)=>{
            
             toast.success(`Welcome to MASTER, ${response.registredUser.FirstName}`);
             dispatch(authAction.setToken(response.token));
-            dispatch(profileAction.setProfile(response.registredUser.ProfilePicture))
-            console.log( response.registredUser.ProfilePicture);
+            dispatch(profileAction.setProfile(response.registredUser.avatar))
+            
             dispatch(profileAction.setProfile(response.registredUser))
            
             localStorage.setItem("token",JSON.stringify(response.token));
@@ -121,16 +121,28 @@ export const opt=(data,navigate)=>{
     }
 }
 export const logout=(navigate)=>{
-    return (dispatch)=>{
-
-        dispatch(authAction.setToken(null));
-        dispatch(profileAction.setProfile(null));
-        localStorage.clear();
-        document.cookies = '__EDT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        dispatch(cardAction.reset());
-        dispatch(courseAction.resetCourseState());
-        toast.success("Logged Out Successfully")
-        navigate("/")
+    return async(dispatch)=>{
+        const toastId=toast.loading("Loading");
+        var response;
+        try {
+            response=await axios.post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/logout",{},{
+                withCredentials:true
+            })
+            console.log("response",response)
+            dispatch(authAction.setToken(null));
+            dispatch(profileAction.setProfile(null));
+            localStorage.clear();
+           
+            dispatch(cardAction.reset());
+            dispatch(courseAction.resetCourseState());
+            toast.success(response.data.message)
+            navigate("/")
+        } catch (error) {
+            toast.error(response.data.message)
+            
+        }finally{
+            toast.dismiss(toastId)
+        }
     }
     
 }

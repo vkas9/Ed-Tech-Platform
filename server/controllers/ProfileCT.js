@@ -155,7 +155,7 @@ exports.updateDisplayProfile=async(req,res)=>{
         const userId=req.user.id;
         const image=await UploadFile(photo.tempFilePath,{ folder: "VikasFolder", resource_type: "auto" });
         console.log("image->",image)
-        const updatedProfile=await user.findByIdAndUpdate({_id:userId},{ProfilePicture:image.secure_url},{new:true});
+        const updatedProfile=await user.findByIdAndUpdate({_id:userId},{avatar:image.secure_url},{new:true});
         res.status(200).json({
             status:"true",
             message:"Successfully updated Profile image",

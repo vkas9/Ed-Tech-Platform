@@ -14,7 +14,7 @@ const ProfileDropDown=()=>{
     return (
         <div onClick={handleSubmit} className="h-[55px] lg:h-[40px]  hover:cursor-pointer mx-auto items-center flex justify-end md:my-[6px] lg:my-[14px]  ">
             <div className="rounded-full h-[30px] w-[30px] md:h-[40px] md:w-[40px] ">
-            <img src={user.ProfilePicture} alt="" className="rounded-full" /></div>
+            <img src={user.avatar} alt="" className="rounded-full" /></div>
         </div>
     );
 
