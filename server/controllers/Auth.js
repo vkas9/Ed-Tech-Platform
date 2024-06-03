@@ -164,7 +164,7 @@ exports.login = async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite:'None',
-        expires:process.env.COOKIE_EXPIRY
+        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
       };
       res.cookie("__EDTat", accessToken, options).cookie("__EDTrt",refreshToken,options).status(200).json({
         success: true,
@@ -215,7 +215,7 @@ exports.refreshAccessToken=async(req,res)=>{
     const options={
       httpOnly:true,
       secure:true,
-      expires:new Date(Date.now() + process.env.COOKIE_EXPIRY)
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
     }
     const{refreshToken:newRefreshToken,accessToken:newAccessToken}=generateAccessAndRefreshToken(decodedToken?._id);
     res.status(200).cookie("newRefreshToken",newRefreshToken,options).cookie("newAccessToken",newAccessToken,options).json({
