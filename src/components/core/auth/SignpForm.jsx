@@ -21,8 +21,8 @@ const SignupForm = () => {
     setLoading(false);
   };
   return (
-    <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} exit={{opacity:0}} className="flex  h-screen  pt-[3rem] sm:pt-[5rem]   flex-col gap-1 xs:gap-3 px-2 items-center ">
-      <h1 className="text-[2.5rem]  overflow-hidden mt-[1rem] mx-2  md:text-[4em]  bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center ">
+    <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} exit={{opacity:0}} className="flex  h-screen b pt-[3rem] sm:pt-[15vh]  flex-col gap-1 xs:gap-3 px-2 items-center ">
+      <h1 className="text-[2.5rem]    mt-[1rem] mx-2  md:text-[4em]  bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center ">
         Create Master Account
       </h1>
       <Formik
