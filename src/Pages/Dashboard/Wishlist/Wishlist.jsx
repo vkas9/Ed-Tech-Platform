@@ -20,10 +20,10 @@ const Wishlist = () => {
         if (data && data.Cart && data.Cart.length > 0) {
           const cartData = await getCartDetails(signal);
           const text=encryptData(cartData);
-          localStorage.setItem("_%wl%", text);
+          localStorage.setItem(import.meta.env.VITE_CART_D, text);
           dispatch(cardAction.setWishlist(cartData));
         } else {
-          localStorage.setItem("_%wl%", JSON.stringify([]));
+          localStorage.setItem(import.meta.env.VITE_CART_D, JSON.stringify([]));
           dispatch(cardAction.setWishlist([]));
         }
       } catch (error) {

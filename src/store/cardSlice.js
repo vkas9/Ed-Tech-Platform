@@ -4,11 +4,11 @@ const initialState = {
   totalItems: localStorage.getItem("totalItems")
     ? JSON.parse(localStorage.getItem("totalItems"))
     : 0,
-  enrolledCourse: localStorage.getItem("#ec&_")
-    ? decryptData(localStorage.getItem("#ec&_"))
+  enrolledCourse: localStorage.getItem(import.meta.env.VITE_ENROLL_C)
+    ? decryptData(localStorage.getItem(import.meta.env.VITE_ENROLL_C))
     : null,
-  wishlist: localStorage.getItem("_%wl%")
-    ? decryptData(localStorage.getItem("_%wl%"))
+  wishlist: localStorage.getItem(import.meta.env.VITE_CART_D)
+    ? decryptData(localStorage.getItem(import.meta.env.VITE_CART_D))
     : null
 };
 

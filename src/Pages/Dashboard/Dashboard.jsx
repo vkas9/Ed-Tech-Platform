@@ -6,7 +6,7 @@ import ProfileDashboard from "./ProfileDashboard";
 import Sidebar from "./Sidebar";
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { token } = useSelector((store) => store.auth);
+  const {token } = useSelector((store) => store.auth);
   useEffect(() => {
     if (!token) {
       navigate("/login");

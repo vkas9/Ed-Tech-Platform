@@ -20,7 +20,7 @@ const Courses = () => {
         
           const courseData = await getAllCourse(signal);
           const text=encryptData(courseData);
-          localStorage.setItem("m::_$c_",text);
+          localStorage.setItem(import.meta.env.VITE_ALL_C,text);
           dispatch(courseAction.setExploreAllCourses(courseData));
         
       } catch (error) {

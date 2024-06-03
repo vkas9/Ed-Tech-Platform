@@ -33,7 +33,7 @@ const Navbar = () => {
     })
   },[])
 
-  const { token } = useSelector((store) => store.auth);
+  const {token } = useSelector((store) => store.auth);
   const { user } = useSelector((store) => store.profile);
   const { wishlist } = useSelector((store) => store.card);
   const [openNavigation, setOpenNavigation] = useState(false);

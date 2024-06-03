@@ -5,10 +5,11 @@ import { profileAction } from "../store/profileSlice";
 import { encryptData } from "../components/core/auth/crypto";
 import { cardAction } from "../store/cardSlice";
 import { courseAction } from "../store/courseSlice";
-const BASE_URL="https://ed-tech-platform-1-n5ez.onrender.com"
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const login = (data, navigate) => {
   return async (dispatch) => {
+    console.log("BASE_URL", BASE_URL);
     const toastId = toast.loading("Logging in...");
     dispatch(authAction.setLoading(true));
     let response;
@@ -35,9 +36,12 @@ export const login = (data, navigate) => {
 
       dispatch(profileAction.setProfile(response.registredUser));
 
-      localStorage.setItem("token", JSON.stringify(response.token));
+      localStorage.setItem(
+        import.meta.env.VITE_TOKEN,
+        JSON.stringify(response.token)
+      );
       const text = encryptData(response.registredUser);
-      localStorage.setItem("_/u%__?", text);
+      localStorage.setItem(import.meta.env.VITE_USER, text);
 
       navigate("/dashboard/my-profile");
     } catch (error) {
@@ -60,19 +64,16 @@ export const signup = (data, navigate) => {
     let response;
     try {
       await axios
-        .post(
-          `${BASE_URL}/api/v1/auth/signup`,
-          {
-            FirstName: data.FirstName,
-            LastName: data.LastName,
-            Email: data.Email,
-            Contact_Number: data.Contact_Number,
-            Password: data.Password,
-            ConfirmPassword: data.ConfirmPassword,
-            role: data.role,
-            otp: String(data.otp),
-          }
-        )
+        .post(`${BASE_URL}/api/v1/auth/signup`, {
+          FirstName: data.FirstName,
+          LastName: data.LastName,
+          Email: data.Email,
+          Contact_Number: data.Contact_Number,
+          Password: data.Password,
+          ConfirmPassword: data.ConfirmPassword,
+          role: data.role,
+          otp: String(data.otp),
+        })
         .then((res) => {
           response = res;
         });
@@ -120,7 +121,7 @@ export const opt = (data, navigate) => {
 export const forgotPasswordOtp = async (data, navigate) => {
   const toastId = toast.loading("Loading");
   let response;
-  console.log("hengi")
+  console.log("hengi");
   try {
     await axios
       .post(`${BASE_URL}/api/v1/auth/forgotPasswordOTP`, {
@@ -131,7 +132,6 @@ export const forgotPasswordOtp = async (data, navigate) => {
       });
     console.log("data", data.Email);
 
-    
     toast.success(response.data.message);
     navigate("/reset-password/verify");
   } catch (error) {
@@ -140,42 +140,34 @@ export const forgotPasswordOtp = async (data, navigate) => {
     } else {
       toast.error("Something went wrong");
     }
-  }finally{
+  } finally {
     toast.dismiss(toastId);
   }
-  
 };
 
-export const verifyForgotOTP = async(data, navigate) => {
-    
-      const toastId = toast.loading("Loading...");
-      
-      let response;
-      try {
-        await axios
-          .post(
-            `${BASE_URL}/api/v1/auth/verifyForgotPasswordOTP`,
-            {
-                email:data.email,
-                otp: String(data.data.otp),
-            }
-          )
-          .then((res) => {
-            response = res;
-          });
-        console.log("response", response);
-  
-        navigate("/reset-password/change-password");
-        toast.success(response.data.message);
-      } catch (error) {
-        toast.error(error.response.data.message);
-      }
-      finally{
+export const verifyForgotOTP = async (data, navigate) => {
+  const toastId = toast.loading("Loading...");
 
-      
-      toast.dismiss(toastId);}
-    
-  };
+  let response;
+  try {
+    await axios
+      .post(`${BASE_URL}/api/v1/auth/verifyForgotPasswordOTP`, {
+        email: data.email,
+        otp: String(data.data.otp),
+      })
+      .then((res) => {
+        response = res;
+      });
+    console.log("response", response);
+
+    navigate("/reset-password/change-password");
+    toast.success(response.data.message);
+  } catch (error) {
+    toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+  }
+};
 export const logout = (navigate) => {
   return async (dispatch) => {
     const toastId = toast.loading("Loading");
@@ -233,33 +225,26 @@ export const changePasswordAuth = (data, navigate) => {
     toast.dismiss(toastId);
   };
 };
-export const resetPasswordOut = async(data, navigate) => {
-    
-      const toastId = toast.loading("Changing...");
-      try {
-        const response = await axios.post(
-          `${BASE_URL}/api/v1/auth/resetPassword`,
-          {
-            email:data.email,
-            password: data.data.password,
-            ConfirmPassword: data.data.confirmPassword,
-          }
-        );
-        toast.success(response.data.message);
-        navigate("/login")
-      } catch (error) {
-        if (error.response.data.message) {
-          toast.error(error.response.data.message);
-        } else {
-          toast.error("Something went wrong");
-        }
-      }
-      finally{
-
-      
-      toast.dismiss(toastId);}
-
-  };
+export const resetPasswordOut = async (data, navigate) => {
+  const toastId = toast.loading("Changing...");
+  try {
+    const response = await axios.post(`${BASE_URL}/api/v1/auth/resetPassword`, {
+      email: data.email,
+      password: data.data.password,
+      ConfirmPassword: data.data.confirmPassword,
+    });
+    toast.success(response.data.message);
+    navigate("/login");
+  } catch (error) {
+    if (error.response.data.message) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("Something went wrong");
+    }
+  } finally {
+    toast.dismiss(toastId);
+  }
+};
 export const getCourseDetail = async (courseId, signal) => {
   const toastId = toast.loading("Loading");
   let response;
@@ -369,7 +354,7 @@ export const updateCartDetails = async (data) => {
     );
 
     const text = encryptData(response.data.updatedUser);
-    localStorage.setItem("_/u%__?", text);
+    localStorage.setItem(import.meta.env.VITE_USER, text);
 
     toast.success("Course Added to Cart");
     console.log("Course Added to Cart", response.data);
@@ -395,7 +380,7 @@ export const deleteCartDetails = async (data) => {
     );
 
     const text = encryptData(response.data.updatedUser);
-    localStorage.setItem("_/u%__?", text);
+    localStorage.setItem(import.meta.env.VITE_USER, text);
 
     toast.success("Course Deleted from Cart");
     console.log("Course deleted from Cart", response.data);
@@ -556,13 +541,10 @@ export const getAllCourse = async (signal) => {
   const toastId = toast.loading("Loading");
   try {
     console.log("hiii");
-    const response = await axios.get(
-      `${BASE_URL}/api/v1/course/getAllCourse`,
-      {
-        withCredentials: true,
-        signal: signal,
-      }
-    );
+    const response = await axios.get(`${BASE_URL}/api/v1/course/getAllCourse`, {
+      withCredentials: true,
+      signal: signal,
+    });
 
     console.log("res", response.data.allCourse);
     return response.data.allCourse;

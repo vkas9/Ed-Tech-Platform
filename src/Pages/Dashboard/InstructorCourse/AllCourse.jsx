@@ -22,11 +22,11 @@ const AllCourse = () => {
           // console.log("courseData->",courseData)
           if (!signal.aborted) {
 
-            localStorage.setItem("__IC_", JSON.stringify(courseData.instructorCourses));
+            localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, JSON.stringify(courseData.instructorCourses));
             dispatch(courseAction.setIC(courseData.instructorCourses));
           }
         } else {
-          localStorage.setItem("__IC_", JSON.stringify([]));
+          localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, JSON.stringify([]));
           dispatch(courseAction.setIC([]));
         }
       } catch (error) {

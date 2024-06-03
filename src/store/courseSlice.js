@@ -4,12 +4,12 @@ const initialState = {
   step: 1,
   course: {},
   editCourse: false,
-  allInstructoreCourses:localStorage.getItem("__IC_")
-  ? JSON.parse(localStorage.getItem("__IC_"))
+  allInstructoreCourses:localStorage.getItem(import.meta.env.VITE_INSTRUCT_ALL_C)
+  ? JSON.parse(localStorage.getItem(import.meta.env.VITE_INSTRUCT_ALL_C))
   : null,
   creatingCourse:false,
-  exploreAllCourses:localStorage.getItem("m::_$c_")
-  ? decryptData(localStorage.getItem("m::_$c_"))
+  exploreAllCourses:localStorage.getItem(import.meta.env.VITE_ALL_C)
+  ? decryptData(localStorage.getItem(import.meta.env.VITE_ALL_C))
   : null,
 };
 const courseSlice = createSlice({

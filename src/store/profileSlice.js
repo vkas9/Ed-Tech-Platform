@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import {decryptData} from "../components/core/auth/crypto"
 
 const initialState = {
-  user: localStorage.getItem("_/u%__?")
-    ? decryptData(localStorage.getItem("_/u%__?"))
+  user: localStorage.getItem(import.meta.env.VITE_USER)
+    ? decryptData(localStorage.getItem(import.meta.env.VITE_USER))
     : null,
   loading: false,
 };

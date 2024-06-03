@@ -24,11 +24,11 @@ const EnrolledCourse = () => {
           if (!signal.aborted) {
             const text=encryptData(courseData.data.courseDetail)
         
-            localStorage.setItem("#ec&_",text);
+            localStorage.setItem(import.meta.env.VITE_ENROLL_C,text);
             dispatch(cardAction.setEnrolledCourse(courseData.data.courseDetail));
           }
         } else {
-          localStorage.setItem("#ec&_", JSON.stringify([]));
+          localStorage.setItem(import.meta.env.VITE_ENROLL_C, JSON.stringify([]));
           dispatch(cardAction.setEnrolledCourse([]));
         }
       } catch (error) {
