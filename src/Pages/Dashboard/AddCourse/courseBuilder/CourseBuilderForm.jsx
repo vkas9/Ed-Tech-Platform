@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { useDispatch, useSelector } from 'react-redux';
 import { courseAction } from '../../../../store/courseSlice';
 import { toast } from 'react-hot-toast';
-import { createSection, updateSection } from '../../../../Auth/Authapi';
+import { createSection, updateSection } from '../../../../APIs/Authapi';
 import NestedView from './NestedView';
 
 const CourseBuilderForm = () => {

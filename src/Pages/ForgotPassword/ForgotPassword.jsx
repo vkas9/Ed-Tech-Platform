@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { forgotPasswordOtp } from "../../Auth/Authapi";
+import { forgotPasswordOtp } from "../../APIs/Authapi";
 import {authAction} from "../../store/authSlice"
 const ForgotPassword = () => {
     const [loading, setLoading] = useState(false);

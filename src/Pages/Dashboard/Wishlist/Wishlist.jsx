@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { getCartDetails, getCourseDetail } from "../../../Auth/Authapi";
+import { getCartDetails, getCourseDetail } from "../../../APIs/Authapi";
 import WishlistCard from "./WishlistCard";
 import { cardAction } from "../../../store/cardSlice";
 import { useDispatch, useSelector } from "react-redux";

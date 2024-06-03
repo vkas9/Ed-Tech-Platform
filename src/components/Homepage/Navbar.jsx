@@ -14,7 +14,7 @@ import axios from "axios";
 import { CiLogout } from "react-icons/ci";
 import SubTitle from "./SubTitle";
 import {courseAction} from "../../store/courseSlice"
-import { logout } from "../../Auth/Authapi";
+import { logout } from "../../APIs/Authapi";
 import ConfirmModal from "../../Pages/Dashboard/ConfirmModal";
 const Navbar = () => {
   const[name,setName]=useState(null);

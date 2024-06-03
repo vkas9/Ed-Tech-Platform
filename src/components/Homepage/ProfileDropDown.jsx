@@ -1,6 +1,6 @@
 import { useSelector,useDispatch } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { logout } from "../../Auth/Authapi";
+import { logout } from "../../APIs/Authapi";
 const ProfileDropDown=()=>{
     const navigate=useNavigate()
     const dispatch=useDispatch();

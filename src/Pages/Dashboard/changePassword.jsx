@@ -2,7 +2,7 @@ import { Formik, Form, Field } from "formik";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { changePasswordAuth } from "../../Auth/Authapi";
+import { changePasswordAuth } from "../../APIs/Authapi";
 import { useState } from "react";
 
 const changePassword = () => {

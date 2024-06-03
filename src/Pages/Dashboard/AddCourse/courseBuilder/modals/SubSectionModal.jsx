@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSubSection, createSubSection } from '../../../../../Auth/Authapi';
+import { updateSubSection, createSubSection } from '../../../../../APIs/Authapi';
 import { RxCross2 } from "react-icons/rx";
 import { motion } from 'framer-motion';
 import Upload from '../../Upload';

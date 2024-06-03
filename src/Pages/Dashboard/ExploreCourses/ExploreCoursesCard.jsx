@@ -5,7 +5,7 @@ import { FaRegStar } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getCartDetails, updateCartDetails } from "../../../Auth/Authapi";
+import { getCartDetails, updateCartDetails } from "../../../APIs/Authapi";
 import { useNavigate } from "react-router-dom";
 import { profileAction } from "../../../store/profileSlice";
 const ExploreCoursesCard = ({ course }) => {

@@ -2,7 +2,7 @@ import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useNavigation } from "react-router-dom";
-import { resetPasswordOut } from "../../Auth/Authapi";
+import { resetPasswordOut } from "../../APIs/Authapi";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 const ResetPasswordOut = () => {

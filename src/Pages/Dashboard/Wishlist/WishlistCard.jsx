@@ -3,7 +3,7 @@ import ReactStars from "react-stars";
 import { FaStar } from "react-icons/fa6";
 import { FaRegStar } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
-import { deleteCartDetails } from "../../../Auth/Authapi";
+import { deleteCartDetails } from "../../../APIs/Authapi";
 import { profileAction } from "../../../store/profileSlice";
 import { useDispatch } from "react-redux";
 const WishlistCard = ({ course }) => {

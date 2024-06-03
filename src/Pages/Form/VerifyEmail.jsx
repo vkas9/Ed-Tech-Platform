@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Button from "../../components/Homepage/Button";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { signup, opt, verifyForgotOTP, forgotPasswordOtp } from "../../Auth/Authapi";
+import { signup, opt, verifyForgotOTP, forgotPasswordOtp } from "../../APIs/Authapi";
 import { Link, useNavigate } from "react-router-dom";
 import {motion} from "framer-motion"
 const VerifyEmail = () => {

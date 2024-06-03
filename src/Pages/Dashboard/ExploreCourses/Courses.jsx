@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCourse } from "../../../Auth/Authapi";
+import { getAllCourse } from "../../../APIs/Authapi";
 import { courseAction } from "../../../store/courseSlice";
 import ExploreCoursesCard from "./ExploreCoursesCard";
 import { encryptData } from "../../../components/core/auth/crypto";

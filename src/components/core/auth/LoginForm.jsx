@@ -2,7 +2,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../../Auth/Authapi";
+import { login } from "../../../APIs/Authapi";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";

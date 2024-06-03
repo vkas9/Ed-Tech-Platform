@@ -1,7 +1,7 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { opt } from "../../../Auth/Authapi";
+import { opt } from "../../../APIs/Authapi";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useState } from "react";

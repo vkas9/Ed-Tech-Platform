@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { MdNavigateNext } from "react-icons/md";
 import * as Yup from "yup";
 import {courseAction} from "../../../store/courseSlice"
-import { addCourseDetails } from "../../../Auth/Authapi";
+import { addCourseDetails } from "../../../APIs/Authapi";
 import Upload from "./Upload";
 import { motion } from "framer-motion";
 

@@ -1,5 +1,5 @@
 import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
-import { logout } from "../../Auth/Authapi";
+import { logout } from "../../APIs/Authapi";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import ConfirmModal from "./ConfirmModal";

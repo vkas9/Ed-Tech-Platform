@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { updateCourse } from "../../../../Auth/Authapi";
+import { updateCourse } from "../../../../APIs/Authapi";
 import { courseAction } from "../../../../store/courseSlice";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";

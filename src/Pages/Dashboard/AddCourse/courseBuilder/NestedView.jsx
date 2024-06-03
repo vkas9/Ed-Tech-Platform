@@ -3,7 +3,7 @@ import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
 import { useState } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import ConfirmModal from "../../ConfirmModal";
-import { deleteSection, deleteSubSection } from "../../../../Auth/Authapi";
+import { deleteSection, deleteSubSection } from "../../../../APIs/Authapi";
 import { courseAction } from "../../../../store/courseSlice";
 import { IoMdAdd } from "react-icons/io";
 import SubSectionModal from "./modals/SubSectionModal";
