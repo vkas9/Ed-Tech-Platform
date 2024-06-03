@@ -163,7 +163,8 @@ exports.login = async (req, res) => {
       const options = {
         httpOnly: true,
         secure: true,
-        sameSite:'None'
+        sameSite:'None',
+        expires:new Date(Date.now() + process.env.COOKIE_EXPIRY)
       };
       res.cookie("__EDTat", accessToken, options).cookie("__EDTrt",refreshToken,options).status(200).json({
         success: true,
@@ -213,7 +214,8 @@ exports.refreshAccessToken=async(req,res)=>{
     }
     const options={
       httpOnly:true,
-      secure:true
+      secure:true,
+      expires:new Date(Date.now() + process.env.COOKIE_EXPIRY)
     }
     const{refreshToken:newRefreshToken,accessToken:newAccessToken}=generateAccessAndRefreshToken(decodedToken?._id);
     res.status(200).cookie("newRefreshToken",newRefreshToken,options).cookie("newAccessToken",newAccessToken,options).json({
