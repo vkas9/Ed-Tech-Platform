@@ -164,7 +164,7 @@ exports.login = async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite:'None',
-        expires:new Date(Date.now() + process.env.COOKIE_EXPIRY)
+        expires:new process.env.COOKIE_EXPIRY
       };
       res.cookie("__EDTat", accessToken, options).cookie("__EDTrt",refreshToken,options).status(200).json({
         success: true,
