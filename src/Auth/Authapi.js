@@ -5,7 +5,7 @@ import { profileAction } from "../store/profileSlice";
 import { encryptData } from "../components/core/auth/crypto";
 import { cardAction } from "../store/cardSlice";
 import { courseAction } from "../store/courseSlice";
-import { useDispatch } from "react-redux";
+const BASE_URL="https://ed-tech-platform-1-n5ez.onrender.com"
 
 export const login = (data, navigate) => {
   return async (dispatch) => {
@@ -15,7 +15,7 @@ export const login = (data, navigate) => {
     try {
       await axios
         .post(
-          "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/login",
+          `${BASE_URL}/api/v1/auth/login`,
           {
             email: data.email,
             password: data.password,
@@ -61,7 +61,7 @@ export const signup = (data, navigate) => {
     try {
       await axios
         .post(
-          "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/signup",
+          `${BASE_URL}/api/v1/auth/signup`,
           {
             FirstName: data.FirstName,
             LastName: data.LastName,
@@ -95,7 +95,7 @@ export const opt = (data, navigate) => {
 
     try {
       await axios
-        .post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/otp", {
+        .post(`${BASE_URL}/api/v1/auth/otp`, {
           email: data.Email,
         })
         .then((res) => {
@@ -123,7 +123,7 @@ export const forgotPasswordOtp = async (data, navigate) => {
   console.log("hengi")
   try {
     await axios
-      .post("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/forgotPasswordOTP", {
+      .post(`${BASE_URL}/api/v1/auth/forgotPasswordOTP`, {
         email: data.email,
       })
       .then((res) => {
@@ -154,7 +154,7 @@ export const verifyForgotOTP = async(data, navigate) => {
       try {
         await axios
           .post(
-            "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/verifyForgotPasswordOTP",
+            `${BASE_URL}/api/v1/auth/verifyForgotPasswordOTP`,
             {
                 email:data.email,
                 otp: String(data.data.otp),
@@ -182,7 +182,7 @@ export const logout = (navigate) => {
     var response;
     try {
       response = await axios.post(
-        "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/logout",
+        `${BASE_URL}/api/v1/auth/logout`,
         {},
         {
           withCredentials: true,
@@ -210,7 +210,7 @@ export const changePasswordAuth = (data, navigate) => {
     const toastId = toast.loading("Changing...");
     try {
       const response = await axios.post(
-        "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/changepassword",
+        `${BASE_URL}/api/v1/auth/changepassword`,
         {
           oldpassword: data.oldPassword,
           password: data.password,
@@ -238,7 +238,7 @@ export const resetPasswordOut = async(data, navigate) => {
       const toastId = toast.loading("Changing...");
       try {
         const response = await axios.post(
-          "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/auth/resetPassword",
+          `${BASE_URL}/api/v1/auth/resetPassword`,
           {
             email:data.email,
             password: data.data.password,
@@ -266,7 +266,7 @@ export const getCourseDetail = async (courseId, signal) => {
 
   try {
     const res = await axios.get(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getEnrolledCourses",
+      `${BASE_URL}/api/v1/profile/getEnrolledCourses`,
       {
         withCredentials: true,
         signal: signal,
@@ -291,7 +291,7 @@ export const addCourseDetails = async (formData) => {
 
   try {
     const response = await axios.post(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/createCourse",
+      `${BASE_URL}/api/v1/course/createCourse`,
       formData,
       {
         withCredentials: true,
@@ -312,7 +312,7 @@ export const createSection = async (data) => {
   const toastId = toast.loading("Loading");
   try {
     const response = await axios.post(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/createSection",
+      `${BASE_URL}/api/v1/course/createSection`,
       {
         sectionName: data.sectionName,
         courseId: data.courseId,
@@ -337,7 +337,7 @@ export const deleteSection = async (data) => {
   try {
     console.log("Data", data);
     const response = await axios.post(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/deleteSection",
+      `${BASE_URL}/api/v1/course/deleteSection`,
       data,
       {
         withCredentials: true,
@@ -359,7 +359,7 @@ export const updateCartDetails = async (data) => {
   try {
     console.log("Data", data);
     const response = await axios.post(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/updateCartDetails",
+      `${BASE_URL}/api/v1/course/updateCartDetails`,
       {
         courseId: data.toString(),
       },
@@ -385,7 +385,7 @@ export const deleteCartDetails = async (data) => {
   const toastId = toast.loading("Deleting");
   try {
     const response = await axios.post(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/deleteCartDetails",
+      `${BASE_URL}/api/v1/course/deleteCartDetails`,
       {
         courseId: data.toString(),
       },
@@ -411,7 +411,7 @@ export const getCartDetails = async (signal) => {
   const toastId = toast.loading("Fetching...");
   try {
     const response = await axios.get(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getCartDetails",
+      `${BASE_URL}/api/v1/course/getCartDetails`,
       {
         withCredentials: true,
         signal: signal,
@@ -432,7 +432,7 @@ export const deleteSubSection = async (data) => {
   try {
     console.log("Data", data);
     const response = await axios.post(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/deleteSubSection",
+      `${BASE_URL}/api/v1/course/deleteSubSection`,
       data,
       {
         withCredentials: true,
@@ -453,7 +453,7 @@ export const createSubSection = async (data) => {
   try {
     console.log("Data", data);
     const response = await axios.post(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/createSubSection",
+      `${BASE_URL}/api/v1/course/createSubSection`,
       data,
       {
         withCredentials: true,
@@ -474,7 +474,7 @@ export const updateSubSection = async (data) => {
   try {
     console.log("Data", data);
     const response = await axios.post(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/updateSubSection",
+      `${BASE_URL}/api/v1/course/updateSubSection`,
       data,
       {
         withCredentials: true,
@@ -496,7 +496,7 @@ export const updateSection = async (data) => {
   try {
     console.log("Data", data);
     const response = await axios.post(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/updateSection",
+      `${BASE_URL}/api/v1/course/updateSection`,
       data,
       {
         withCredentials: true,
@@ -517,7 +517,7 @@ export const updateCourse = async (data) => {
   try {
     console.log("Data", data);
     const response = await axios.post(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/updateCourse",
+      `${BASE_URL}/api/v1/course/updateCourse`,
       data,
       {
         withCredentials: true,
@@ -537,7 +537,7 @@ export const getAllInstructorCourses = async (signal) => {
   const toastId = toast.loading("Loading");
   try {
     const response = await axios.get(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/profile/getAllInstructorCourses",
+      `${BASE_URL}/api/v1/profile/getAllInstructorCourses`,
       {
         withCredentials: true,
         signal: signal,
@@ -557,7 +557,7 @@ export const getAllCourse = async (signal) => {
   try {
     console.log("hiii");
     const response = await axios.get(
-      "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getAllCourse",
+      `${BASE_URL}/api/v1/course/getAllCourse`,
       {
         withCredentials: true,
         signal: signal,
