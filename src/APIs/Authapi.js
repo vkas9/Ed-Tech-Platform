@@ -45,7 +45,7 @@ export const login = (data, navigate) => {
 
       navigate("/dashboard/my-profile");
     } catch (error) {
-      console.error("Login api error", error.response.data.message);
+      console.log("Login api error", error.response.data.message);
       if (error.response.data.message) {
         toast.error(error.response.data.message);
       } else {
