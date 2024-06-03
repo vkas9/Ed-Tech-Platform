@@ -69,7 +69,7 @@ export const signup = (data, navigate) => {
             Contact_Number: data.Contact_Number,
             Password: data.Password,
             ConfirmPassword: data.ConfirmPassword,
-            role: "Student",
+            role: data.role,
             otp: String(data.otp),
           }
         )

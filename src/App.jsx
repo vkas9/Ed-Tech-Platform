@@ -47,7 +47,7 @@ function App() {
             }
           />
           <Route
-            path="signup"
+            path="signup/:id/:roll"
             element={
               <OpenRoute>
                 <SignupForm />

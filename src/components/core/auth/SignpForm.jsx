@@ -1,5 +1,5 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { opt } from "../../../APIs/Authapi";
 import toast from "react-hot-toast";
@@ -8,8 +8,11 @@ import { useState } from "react";
 import * as Yup from "yup";
 
 import { authAction } from "../../../store/authSlice";
+import Switch from "./Switch";
 
 const SignupForm = () => {
+  let {roll}=useParams();
+  const temp=roll.charAt(0).toUpperCase() + roll.slice(1).toLowerCase();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -57,6 +60,7 @@ const SignupForm = () => {
       <h1 className="text-[2.5rem] mt-[1rem] mx-2 md:text-[4em] bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center">
         Create Master Account
       </h1>
+     
       <Formik
         initialValues={{
           FirstName: "",
@@ -65,12 +69,15 @@ const SignupForm = () => {
           Contact_Number: "",
           Password: "",
           ConfirmPassword: "",
-          role: "",
+          role:temp,
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className=" ">
+        <Form className="  ">
+        <div  className=" w-full ">
+          <Switch roll={temp}/>
+        </div>
           <div className="w-screen xs:w-full p-6 rounded-3xl flex flex-col gap-2 xs:gap-5">
             <div className="flex w-full flex-col xs:flex-row justify-center gap-2 xs:gap-2">
               <div>

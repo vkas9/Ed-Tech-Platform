@@ -11,11 +11,11 @@ const AboutUs = () => {
         <h1 className=" text-6xl px-1 md:text-6xl   bg-gradient-to-b from-white via-white to-black bg-clip-text text-transparent font-bold">
           Learn. Grow. Succeed.
         </h1>
-        <Link to={"/signup"}  className=" mt-5">
-          <Button className={"mx-auto rounded-md font-semibold text-yellow-950 hover:bg-yellow-400 bg-yellow-500 outline-none py-2"}>
+        <div  className=" mt-5">
+          <Button link={"/dashboard/courses"} className={"mx-auto rounded-md font-bold text-yellow-950 hover:bg-yellow-400 bg-yellow-500 outline-none py-2"}>
             Explore More
           </Button>
-        </Link>
+        </div>
       </div>
       <div className="absolute overflow-hidden  rounded-2xl h-full mx-auto  top-0">
         <video

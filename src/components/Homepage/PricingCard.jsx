@@ -1,4 +1,5 @@
 import { GoCheckCircleFill } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 const PricingCard = ({ title, price, description, className }) => {
     return (
@@ -50,8 +51,8 @@ const PricingCard = ({ title, price, description, className }) => {
             </div>
             <div className="mt-[4rem] ">
                 <div className=" text-5xl lg:text-6xl font-bold "><span className="text-4xl">₹</span> {price}</div>
-                <div className="select-none w-full text-center text-black bg-white rounded-xl py-2 mt-8 text-3xl font-bold hover:cursor-pointer active:text-yellow-950 active:bg-yellow-500 md:hover:text-yellow-950 md:hover:bg-yellow-500  transition-all duration-200  ">
-                    <span>Enroll Now</span>
+                <div  className="select-none w-full text-center text-black bg-white rounded-xl py-2 mt-8 text-3xl font-bold hover:cursor-pointer active:text-yellow-950 active:bg-yellow-500 md:hover:text-yellow-950 md:hover:bg-yellow-500  transition-all duration-200  ">
+                    <Link to="/dashboard/courses">Enroll Now</Link>
                 </div>
 
             </div>

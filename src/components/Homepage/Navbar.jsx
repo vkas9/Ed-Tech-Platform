@@ -188,7 +188,7 @@ const Navbar = () => {
           {token === null ? (
             <div className="flex gap-4 font-bold items-center py-3 ">
               <Button
-                link={"/signup"}
+                link={"/signup/i/student"}
                 className={`hidden rounded-full lg:flex  outline-none hover:border-white border-r border-l border-gray-500/60  lg:hover:bg-white lg:active:bg-gray-300  lg:hover:text-black py-2 `}
               >
                 Sign Up

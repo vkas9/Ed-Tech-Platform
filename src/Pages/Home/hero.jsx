@@ -9,6 +9,7 @@ import Button from "../../components/Homepage/Button";
 import { motion } from "framer-motion";
 //
 const hero = () => {
+  
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.6,delay:.2,ease:[0,.71,.2,1.01]}} className=" mx-auto  relative lg:h-[calc(100vh-68px)]  md:pt-[15vh] text-center flex mt-[84px]   lg:min-h-[55em]  ">
      <div className="  mx-auto h-fit  flex flex-col px-[1px] md:px-8  mt-[calc(6rem-68px)]    z-10 gap-[3rem] lg:gap-[4rem] ">
@@ -35,30 +36,30 @@ const hero = () => {
         <p className="max-w-[3xl] mx-auto  text-sm text-gray-400  px-3  font-semibold lg:text-lg  ">
         Upgrade your Coding Skills with MASTER Today for Success.{" "}
         </p>
-        <Link to={"/signup"} className=" mx-auto">
+        <Link to={"/login"} className=" mx-auto">
           <div className="   group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">
             <div className="flex gap-4 hover:scale-105 transition-all duration-200 items-center rounded-md px-5 py-3 ">
-              <p>Teach On MASTER</p>
+              <p>Teach on MASTER</p>
               <FaArrowRight size={20}  className="animate-pulse "/>
             </div>
           </div>
         </Link>
         <div className="flex  select-none flex-col mx-auto sm:flex-row gap-5 ">
           <Button
-            link={"/signup"}
+            link={"/signup/i/student"}
             className={
-              " outline-none rounded-md  font-semibold hover-none text-black bg-yellow-500 py-3 "
+              " outline-none rounded-md   font-semibold hover-none text-black bg-blue-500 py-3 "
             }
           >
             Learn More
           </Button>
           <Button
-            link={"/signup"}
+            link={"/dashboard/courses"}
             className={
               " outline-none  rounded-md bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-3"
             }
           >
-            Book a Demo
+            Explore Courses
           </Button>
         </div>
       </div>
