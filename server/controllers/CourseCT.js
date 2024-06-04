@@ -97,18 +97,41 @@ exports.updateCourse=async(req,res)=>{
 
 exports.getAllCourse = async (req, res) => {
     try {
-        const allCourse = await Course.find({}).sort({createdAt:-1});
-       
+        // const allCourse = await Course.find({status:"Published"}).sort({createdAt:-1});
+        
+        
+        var courseDetail=await Course.find({status:"Published"}).populate({
+            path: "Instructor",
+            populate: {
+                path: "Profile"
+            }
+        }).populate({
+            path: "Rating_N_Reviews",
+            populate: {
+                path: "User"
+            }
+        }).populate({
+            path: "Catagory",
+            populate: {
+                path: "Course"
+            }
+        }).populate("StudentEntrolled").populate("Section").populate({
+            path: "Section",
+            populate: {
+                path: "subSection",
+            },
+        }).exec();
+        courseDetail.reverse();
         return res.status(200).json({
             success: true,
-            message: "Successfully received All Course",
-            allCourse
+            message: "Successfully received Explore Course",
+            allCourse:courseDetail
         })
     } catch (error) {
         console.log(error);
         res.status(500).json({
             success: false,
-            message: "Something went wrong while getting all Course"
+            message: "Something went wrong while getting Explore Course"
         })
     }
 }

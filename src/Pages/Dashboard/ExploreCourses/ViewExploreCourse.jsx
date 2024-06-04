@@ -4,9 +4,9 @@ import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
 import { useParams } from "react-router-dom";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import { motion } from "framer-motion";
-import VideoModal from "./VideoModal/VideoModal";
+import { AiFillLock } from "react-icons/ai";
 const ViewCourse = () => {
-  const { enrolledCourse } = useSelector((store) => store.card)
+  const { exploreAllCourses } = useSelector((store) => store.course)
   const {courseId} = useParams();
   const [openSections, setOpenSections] = useState({});
   const [confirmationModal, openConfirmationModal] = useState(null);
@@ -21,7 +21,8 @@ const ViewCourse = () => {
     const seconds = totalSeconds % 60;
     return `${minutes} minutes ${seconds} seconds`;
   }
-  const eCourse=enrolledCourse.find(item=>item._id===courseId);
+  const eCourse=exploreAllCourses.find(item=>item._id===courseId);
+
   const getTotalLectures=()=>{
     
     let total=0;
@@ -30,6 +31,9 @@ const ViewCourse = () => {
     }
     return total;
   }
+ 
+ 
+  
 
   return (
     <motion.div
@@ -43,7 +47,7 @@ const ViewCourse = () => {
         <span>/</span>
         <span>Dashboard</span>
         <span>/</span>
-        <span>Enrolled_Courses</span>
+        <span>Explore_Courses</span>
         <span>/</span>
         <span className="text-yellow-500">
           {eCourse.CourseName}
@@ -67,6 +71,7 @@ const ViewCourse = () => {
                 <p className="text-lg  max-w-[90px] md:max-w-none md:whitespace-normal truncate">
                   {section.SectionName}
                 </p>
+                <AiFillLock  className="text-white/70 "/>
               </div>
               <div className="flex">
                 <div className=" p-2">{section.subSection.length} Lectures</div>
@@ -114,7 +119,7 @@ const ViewCourse = () => {
             </div>
           </details>
         ))}
-        {confirmationModal && <VideoModal data={confirmationModal} />}
+      
       </div>
     </motion.div>
   );

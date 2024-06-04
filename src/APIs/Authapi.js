@@ -540,7 +540,6 @@ export const getAllInstructorCourses = async (signal) => {
 export const getAllCourse = async (signal) => {
   const toastId = toast.loading("Loading");
   try {
-    console.log("hiii");
     const response = await axios.get(`${BASE_URL}/api/v1/course/getAllCourse`, {
       withCredentials: true,
       signal: signal,

@@ -9,7 +9,7 @@ const EnrolledCourse = () => {
   const dispatch = useDispatch();
   const { enrolledCourse } = useSelector((store) => store.card);
   const {user:data} =  useSelector((store) => store.profile);
- 
+ console.log("enrolledCourse",enrolledCourse)
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -71,7 +71,7 @@ const EnrolledCourse = () => {
           </div>
         ) : enrolledCourse.length ? (
           enrolledCourse.map((course, index) => (
-            <CourseCard course={course} key={index} index={index} />
+            <CourseCard course={course} key={index} />
           ))
         ) : (
           <p className="relative text-center mr-3 top-1/3 sm:top-1/2 sm:left-[2%] md:left-[20%] lg:left-[35%] text-2xl font-semibold sm:w-fit text-white/40">

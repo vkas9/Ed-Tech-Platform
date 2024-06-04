@@ -66,7 +66,7 @@ exports.getEnrolledCourses=async(req,res)=>{
         console.log(error)
         return res.status(500).json({
             success:false,
-            message:"Something went wrong while Getting user detail"
+            message:"Something went wrong while Getting Enrolled Courses detail"
         })
     }
 }

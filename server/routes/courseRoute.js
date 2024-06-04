@@ -22,7 +22,7 @@ router.get("/getAllCourseDetail", auth, isInstructor, getAllCourseDetail);
 router.post("/createSection", auth, isInstructor, createSection);
 router.post("/createSubSection", auth, isInstructor, createSubSection);
 router.post("/deleteSection", auth, isInstructor, deleteSection);
-router.post("/deleteSubSection", auth, isInstructor, deleteSubSection);getCartDetails
+router.post("/deleteSubSection", auth, isInstructor, deleteSubSection);
 router.post("/updateSubSection", auth, isInstructor, updateSubSection);
 router.post("/updateSection", auth, isInstructor, updateSection);
 router.post("/updateCourse", auth, isInstructor, updateCourse);

@@ -11,6 +11,7 @@ const Courses = () => {
   const { exploreAllCourses } = useSelector((store) => store.course);
   
   const [course, setCourses] = useState(exploreAllCourses);
+  console.log("courses->",course)
 
   useEffect(() => {
     const controller=new AbortController();

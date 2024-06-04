@@ -13,7 +13,7 @@ const Sidebar = () => {
         className="flex flex-col font-semibold text-blue-1
         00 lg:text-lg "
       >
-        {Profile.map((item, index) => {
+        {Profile.map((item) => {
         
           if(item.role &&user?.role!==item.role)return null;
           return (<SidebarLink

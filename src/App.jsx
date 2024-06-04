@@ -20,6 +20,8 @@ import AllCourse from "./Pages/Dashboard/InstructorCourse/AllCourse";
 import ViewCourse from "./Pages/Dashboard/EnrolledCourse/ViewCourse"
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import ChangePassword from "./Pages/ForgotPassword/ResetPasswordOut";
+import ViewExploreCourse from "./Pages/Dashboard/ExploreCourses/ViewExploreCourse";
+import ViewWishlistCourse from "./Pages/Dashboard/Wishlist/ViewWishlistCourse";
 
 
 function App() {
@@ -98,7 +100,9 @@ function App() {
                 element={<ProfileDashboard/>}
               />
               <Route path="enrolled-courses" element={<EnrolledCourse/>} />
-              <Route path="course/:ud/:courseId/:index" element={<ViewCourse/>} />
+              <Route path="enrolled-courses/:ud/:courseId" element={<ViewCourse/>} />
+              <Route path="courses/:ud/:courseId" element={<ViewExploreCourse/>} />
+              <Route path="wishlist/:ud/:courseId" element={<ViewWishlistCourse/>} />
               <Route path="wishlist" element={<Wishlist/>} />
               <Route path="purchase-history" element={<PurchaseHistory/>} />
               <Route path="Courses" element={<Courses/>} />

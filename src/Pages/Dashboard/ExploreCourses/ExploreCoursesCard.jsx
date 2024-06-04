@@ -8,6 +8,8 @@ import { useState } from "react";
 import { getCartDetails, updateCartDetails } from "../../../APIs/Authapi";
 import { useNavigate } from "react-router-dom";
 import { profileAction } from "../../../store/profileSlice";
+import { v4 as uuidv4 } from "uuid";
+
 const ExploreCoursesCard = ({ course }) => {
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState(false);
@@ -29,9 +31,15 @@ const ExploreCoursesCard = ({ course }) => {
     // navigate("/dashboard/wishlist");
     setLoading(false)
   };
+ 
+  const handleClick=()=>{
+    
+    if(user?.Courses?.includes(course._id))  navigate(`/dashboard/enrolled-courses`); 
+    else  navigate(`/dashboard/courses/${uuidv4()}/${course._id}`); 
+  }
 
   return (
-    <div className="flex text-[1.1rem] justify-between flex-col sm:flex-row mr-5 items-center hover:cursor-pointer active:bg-gray-300/20 sm:hover:bg-gray-300/20 rounded-xl mt-4 bg-gray-300/10 max-w-[60rem] p-1  ">
+    <div onClick={handleClick} className="flex text-[1.1rem] justify-between flex-col sm:flex-row mr-5 items-center hover:cursor-pointer active:bg-gray-300/20 sm:hover:bg-gray-300/20 rounded-xl mt-4 bg-gray-300/10 max-w-[60rem] p-1  ">
       <div className="gap-3 p-2 items-center flex">
         <img
           src={course?.Thumbnail}
@@ -66,13 +74,16 @@ const ExploreCoursesCard = ({ course }) => {
           <span className="text-white/60">Price:</span> ₹{course.Price}
         </p>
         <div className="flex flex-col justify-center items-center  w-[110px]  gap-1">
-          <div className="text-[1.1rem] w-[120px] bg-white/10 text-center hover:bg-green-500/20 active:bg-green-500/30  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  ">
+          <div onClick={(e)=>{ e.stopPropagation() }} className="text-[1.1rem] w-[120px] bg-white/10 text-center hover:bg-green-500/20 active:bg-green-500/30  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  ">
           {user?.Courses?.includes(course._id)
-              ? <span onClick={()=>(navigate("/dashboard/enrolled-courses"))}>Go to Course</span>
+              ? <span onClick={(e)=>{ e.stopPropagation() 
+                navigate("/dashboard/enrolled-courses")}}>Go to Course</span>
               : "Buy"}
           </div>
           <div
-            onClick={handleCart}
+            onClick={(e)=>{  
+              e.stopPropagation()
+              handleCart()}}
             className={`text-[1.1rem] ${user?.Courses?.includes(course._id)?"hidden":null} hover:text-white text-white/30   box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  `}
           >
            

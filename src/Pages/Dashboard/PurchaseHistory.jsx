@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+// import CourseCard from "./PurchaseHistoryList/CourseCard";
 const PurchaseHistory = () => {
+  const PurchaseHistoryList=[];
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -15,7 +18,21 @@ const PurchaseHistory = () => {
         <span className="text-yellow-500 ">PurchaseHistory</span>
       </div>
 
-      <div>Coming Soon...</div>
+      <div className="overflow-auto h-[75vh]">
+        {!PurchaseHistoryList ? (
+          <div>
+            <p>Loading...</p>
+          </div>
+        ) : PurchaseHistoryList.length ? (
+          PurchaseHistoryList.map((course, index) => (
+            <CourseCard course={course} key={index} />
+          ))
+        ) : (
+          <p className="relative text-center mr-3 top-1/3 sm:top-1/2 sm:left-[2%] md:left-[20%] lg:left-[35%] text-2xl font-semibold sm:w-fit text-white/40">
+           Purchase History is empty!
+          </p>
+        )}
+      </div>
     </motion.div>
   );
 };

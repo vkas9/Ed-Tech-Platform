@@ -66,7 +66,7 @@ const Wishlist = () => {
           </div>
         ) : Wishlist.length ? (
           Wishlist.map((course, index) => (
-            <WishlistCard course={course} key={index} />
+            <WishlistCard course={course} key={index}  />
           ))
         ) : (
           <p className="relative text-center mr-3 top-1/3 sm:top-1/2 sm:left-[35%] text-2xl font-semibold sm:w-fit text-white/40">
