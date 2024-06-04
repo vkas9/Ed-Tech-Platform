@@ -7,46 +7,65 @@ const path=require('path');
 const fs = require('fs/promises');
 exports.createCourse = async (req, res) => {
     try {
-        const { courseName, courseDescription, whatYouWillLearn, price, category } = req.body;        
-        const thumbnail = req.files.thumbnailImage;
+        const { courseName, courseDescription, whatYouWillLearn, price, category } = req.body;
+        const thumbnail = req.files?.thumbnailImage;
+
         if (!courseName || !courseDescription || !whatYouWillLearn || !price || !category || !thumbnail) {
-            return res.status(401).json({
+            return res.status(400).json({
                 success: false,
-                message: "Please fill all detail of Course"
-            })
+                message: "Please fill all details of the course"
+            });
         }
-        const tempCompressedPath = path.join(__dirname,"./public/temp", 'compressed_' + Date.now() + '.jpeg');
+
+        const tempDir = path.join(__dirname, '..', 'public', 'temp');
+        const tempCompressedPath = path.join(tempDir, `compressed_${Date.now()}.jpeg`);
+
+        await fs.mkdir(tempDir, { recursive: true });
 
         await sharp(thumbnail.tempFilePath)
-        .resize(1024,1024,{fit:sharp.fit.inside,withoutEnlargement:true}).toFormat("jpeg",{quality:80}).toFile(tempCompressedPath);
-        const uploadThumbnail = await UploadFile(tempCompressedPath, { folder: "VikasFolder", transformation:[ { quality: "auto:good" },{ fetch_format: "auto" }], resource_type: "auto" });
+            .resize(1024, 1024, { fit: sharp.fit.inside, withoutEnlargement: true })
+            .toFormat('jpeg', { quality: 80 })
+            .toFile(tempCompressedPath);
+
+        const uploadThumbnail = await UploadFile(tempCompressedPath, {
+            folder: "VikasFolder",
+            transformation: [
+                { quality: "auto:good" },
+                { fetch_format: "auto" }
+            ],
+            resource_type: "auto"
+        });
+
         const newCourse = await Course.create({
-            CourseName:courseName, CourseDescription:courseDescription, WhatYouWillLearn:whatYouWillLearn, Price:price, Catagory: category, Thumbnail: uploadThumbnail.secure_url, Instructor: req.user.id
-        })
+            CourseName: courseName,
+            CourseDescription: courseDescription,
+            WhatYouWillLearn: whatYouWillLearn,
+            Price: price,
+            Category: category,
+            Thumbnail: uploadThumbnail.secure_url,
+            Instructor: req.user.id
+        });
+
         await fs.unlink(tempCompressedPath);
-        const InstructorUser = await User.findByIdAndUpdate(req.user.id, { $push: { Courses: newCourse._id } }, { new: true });
-        console.log("InstructorUser->", InstructorUser);
-        await Catagory.findByIdAndUpdate({ _id: category }, { $push: { Course: newCourse._id } }, { new: true });
-        console.log("InstructorUser->", InstructorUser);
+
+       
+        await User.findByIdAndUpdate(req.user.id, { $push: { Courses: newCourse._id } }, { new: true });
+        await Catagory.findByIdAndUpdate(category, { $push: { Course: newCourse._id } }, { new: true });
+
         res.status(200).json({
             success: true,
             message: "Successfully created Course",
             data: newCourse
-        })
-
-
-
-
+        });
     } catch (error) {
-        console.log(error)
+        console.error("Error creating course:", error);
         res.status(500).json({
             success: false,
-            message: "somthing went wrong while creating course",
-            error
-        })
-
+            message: "Something went wrong while creating the course",
+            error: error.message
+        });
     }
-}
+};
 
 exports.updateCourse=async(req,res)=>{
     try {
