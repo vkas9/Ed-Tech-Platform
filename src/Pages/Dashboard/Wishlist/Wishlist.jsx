@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { getCartDetails, getCourseDetail } from "../../../APIs/Authapi";
+import { getAllCourse, getCartDetails, getCourseDetail } from "../../../APIs/Authapi";
 import WishlistCard from "./WishlistCard";
 import { cardAction } from "../../../store/cardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {encryptData} from "./../../../components/core/auth/crypto" 
+import { courseAction } from "../../../store/courseSlice";
 const Wishlist = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.profile);
@@ -19,9 +20,13 @@ const Wishlist = () => {
        
         if (data && data.Cart && data.Cart.length > 0) {
           const cartData = await getCartDetails(signal);
-          const text=encryptData(cartData);
-          localStorage.setItem(import.meta.env.VITE_CART_D, text);
+          const courseData = await getAllCourse(signal);
+          const cartText=encryptData(cartData);
+          const courseText=encryptData(courseData);
+          localStorage.setItem(import.meta.env.VITE_CART_D, cartText);
+          localStorage.setItem(import.meta.env.VITE_ALL_C,courseText);
           dispatch(cardAction.setWishlist(cartData));
+          dispatch(courseAction.setExploreAllCourses(courseData));
         } else {
           localStorage.setItem(import.meta.env.VITE_CART_D, JSON.stringify([]));
           dispatch(cardAction.setWishlist([]));

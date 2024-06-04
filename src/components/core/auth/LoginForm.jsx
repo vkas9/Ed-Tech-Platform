@@ -73,12 +73,12 @@ const LoginForm = () => {
             <ErrorMessage name="password" component="div" className="text-red-500 text-sm" />
             </div>
           </div>
-          <Link
-            to={"/reset-password"}
-            className="block mt-1 text-gray-400 hover:text-white font-semibold text-end"
+          <div
+            
+            className="block mt-1 font-semibold text-end"
           >
-            <span>Forgot Password?</span>
-          </Link>
+            <Link to={"/reset-password"} className=" text-white/50 hover:text-white">Forgot Password?</Link>
+          </div>
           <button
             disabled={loading}
             className={`bg-yellow-500 hover:bg-yellow-600 text-yellow-950 transition-all duration-150 w-full font-bold text-2xl ${
