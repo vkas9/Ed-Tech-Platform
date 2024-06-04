@@ -15,7 +15,7 @@ exports.createCourse = async (req, res) => {
                 message: "Please fill all detail of Course"
             })
         }
-        const tempCompressedPath = path.join("./public/temp", 'compressed_' + Date.now() + '.jpeg');
+        const tempCompressedPath = path.join(__dirname,"./public/temp", 'compressed_' + Date.now() + '.jpeg');
 
         await sharp(thumbnail.tempFilePath)
         .resize(1024,1024,{fit:sharp.fit.inside,withoutEnlargement:true}).toFormat("jpeg",{quality:80}).toFile(tempCompressedPath);
