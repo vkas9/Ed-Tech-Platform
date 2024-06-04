@@ -51,9 +51,11 @@ export const login = (data, navigate) => {
       } else {
         toast.error("Something went wrong or Server Offline");
       }
+    }finally{
+      dispatch(authAction.setLoading(false));
+      toast.dismiss(toastId);
     }
-    dispatch(authAction.setLoading(false));
-    toast.dismiss(toastId);
+    
   };
 };
 

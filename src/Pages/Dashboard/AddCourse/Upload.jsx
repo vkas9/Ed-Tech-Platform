@@ -90,17 +90,19 @@ export default function Upload({
               />
             )}
             {!viewData && (
+              <div className=" flex justify-center">
               <button
                 type="button"
                 onClick={() => {
                   setPreviewSource("");
                   setSelectedFile(null);
                   setValue(null);
-                }}
-                className="mt-3 text-richblack-400 underline"
+                }} 
+                className="mt-3 text-richblack-400 bg-white/10 py-2 rounded-full px-5  "
               >
                 Cancel
               </button>
+              </div>
             )}
           </div>
         ) : (
@@ -112,10 +114,10 @@ export default function Upload({
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <IoIosCloudUpload className="text-3xl text-yellow-50" />
             </div>
-            <p className="mt-2 max-w-[200px] text-center text-sm text-richblack-200">
-              Drag and drop an {!video ? "image" : "video"}, or click to{" "}
-              <span className="font-semibold text-yellow-50">Browse</span> a
-              file
+            <p className="mt-2 max-w-[200px] leading-8 text-center text-lg text-richblack-200">
+              Drag and drop an {!video ? "image" : "video"}, or {" "}
+              <span className="font-semibold bg-white/10 hover:bg-white/20 py-1 px-2 rounded-full text-yellow-50">Browse a
+              file</span>
               <br />
             </p>
             {video ? (
@@ -129,7 +131,6 @@ export default function Upload({
           </div>
         )}
       </div>
-      {/* <ErrorMessage name={name} component="span" className="ml-2 text-xs tracking-wide text-pink-200" /> */}
     </div>
   );
 }

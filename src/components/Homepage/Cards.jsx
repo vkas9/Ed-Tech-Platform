@@ -5,7 +5,7 @@ import gradient from "../../assets/gradient.jpg";
 
 const Cards=({head})=>{
     return (
-        <div className="relative bg-white/10 backdrop-blur-md overflow-visible border-solid border border-gray-400/10 min-h-[17rem] outline-none max-h-[40rem] max-w-[30rem] gap-6 rounded-2xl px-4 mx-3 py-2  flex flex-col justify-between">
+        <div className="relative bg-white/[.07] backdrop-blur-md overflow-visible border-solid border border-white/10 min-h-[17rem] outline-none max-h-[40rem] max-w-[30rem] gap-6 rounded-2xl px-4 mx-3 py-2  flex flex-col justify-between">
           <div className="flex  flex-col  gap-6 ">
             <h3 className="  overflow-hidden text-[1.7rem] md:text-[2.5rem] font-bold ">
               {head}
@@ -23,9 +23,9 @@ const Cards=({head})=>{
             >
               Explore More
             </Button>
-            <IoCodeSlashSharp className="   text-4xl" />
+            <IoCodeSlashSharp className="text-4xl text-white/50" />
           </div>
-          {/* <div className="h-[200px] w-[400px]  absolute -left-4 opacity-40 -top-4 -z-10 lg:blur-[70px] blur-[50px] "><img src={gradient} alt="" /></div> */}
+          <div className="h-[200px] hidden sm:flex w-[300px]  absolute -left-4 opacity-40 -top-4 -z-10 lg:blur-[70px] blur-[50px] "><img src={gradient} className="rotate-12 " alt="" /></div>
         </div>
     );
 }
