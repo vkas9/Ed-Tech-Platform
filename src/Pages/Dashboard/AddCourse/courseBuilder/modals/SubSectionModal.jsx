@@ -86,14 +86,19 @@ const SubSectionModal = ({
         formData.append("courseId", course._id);
 
         setLoading(true);
-        const result = await createSubSection(formData);
-
-        if (result) {
-            console.log("result->",result)
-            dispatch(courseAction.setCourse(result.updatedCourse));
-        }
+        
+        try {
+            const result = await createSubSection(formData);
+    
+            if (result) {
+                // console.log("result->",result)
+                dispatch(courseAction.setCourse(result.updatedCourse));
+            }
+        } catch (error) {
+            console.error(error)
+        }finally{
         setModalData(null);
-        setLoading(false);
+        setLoading(false);}
     };
 
     return (

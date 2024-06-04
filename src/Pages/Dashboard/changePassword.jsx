@@ -16,9 +16,13 @@ const changePassword = () => {
       toast.error("Password Not Matching");
       return;
     }
-    console.log("data->", data);
-    await dispatch(changePasswordAuth(data, navigate));
-    setLoading(false);
+    // console.log("data->", data);
+    try {
+      await dispatch(changePasswordAuth(data, navigate));
+    } catch (error) {
+      console.error(error)
+    }finally{
+    setLoading(false);}
   };
   return (
     <div className="mb-[3rem]">

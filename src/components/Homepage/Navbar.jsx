@@ -29,7 +29,7 @@ const Navbar = () => {
       setCatagory(res.data.allCatagory);
 
     }).catch(error=>{
-      console.log("error",error);
+      console.error("error",error);
     })
   },[])
 

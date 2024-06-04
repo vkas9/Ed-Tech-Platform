@@ -32,7 +32,7 @@ const SignupForm = () => {
   });
 
   const handleSubmit = async (data) => {
-    console.log("data->",data)
+    // console.log("data->",data)
     if (data.Password !== data.ConfirmPassword) {
       toast.error("Passwords do not match");
       return;
@@ -44,8 +44,10 @@ const SignupForm = () => {
       setLoading(false);
     } catch (error) {
       console.error("Signup failed:", error);
-      setLoading(false);
+      
       toast.error("Signup failed. Please try again.");
+    }finally{
+      setLoading(false);
     }
   };
 

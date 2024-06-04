@@ -17,7 +17,7 @@ const CourseBuilderForm = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log("UPDATED");
+    // console.log("UPDATED");
   }, [course]);
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
@@ -35,7 +35,7 @@ const CourseBuilderForm = () => {
         sectionName: values.sectionName,
         courseId: course._id,
       });
-      console.log("result", result);
+      // console.log("result", result);
     }
 
     if (result) {
@@ -59,7 +59,7 @@ const CourseBuilderForm = () => {
   };
 
   const goToNext = () => {
-    console.log("next");
+    // console.log("next");
     if (course?.Section?.length === 0) {
       toast.error("Please add at least one section");
       return;

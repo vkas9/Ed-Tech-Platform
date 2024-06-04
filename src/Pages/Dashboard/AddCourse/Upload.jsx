@@ -24,7 +24,7 @@ export default function Upload({
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
-    console.log("file",file)
+    // console.log("file",file)
     if (file) {
       if (file.size > MAX_FILE_SIZE) {
         toast.error("The file size exceeds the limit of 100 MB");

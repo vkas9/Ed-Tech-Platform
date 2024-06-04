@@ -9,7 +9,7 @@ const EnrolledCourse = () => {
   const dispatch = useDispatch();
   const { enrolledCourse } = useSelector((store) => store.card);
   const {user:data} =  useSelector((store) => store.profile);
- console.log("enrolledCourse",enrolledCourse)
+//  console.log("enrolledCourse",enrolledCourse)
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -32,7 +32,7 @@ const EnrolledCourse = () => {
           dispatch(cardAction.setEnrolledCourse([]));
         }
       } catch (error) {
-        console.log("error",error)
+        console.error("error",error)
         if (error.name !== 'AbortError') {
           console.log("Unable to fetch enrolled courses");
         }

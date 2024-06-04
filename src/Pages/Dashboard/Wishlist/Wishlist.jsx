@@ -6,6 +6,7 @@ import { cardAction } from "../../../store/cardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {encryptData} from "./../../../components/core/auth/crypto" 
 import { courseAction } from "../../../store/courseSlice";
+import toast from "react-hot-toast";
 const Wishlist = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.profile);
@@ -32,7 +33,7 @@ const Wishlist = () => {
           dispatch(cardAction.setWishlist([]));
         }
       } catch (error) {
-        console.log("Unable to fetch wishlist courses");
+        toast.error("Unable to fetch wishlist courses");
       }
     };
 

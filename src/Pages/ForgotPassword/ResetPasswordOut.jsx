@@ -18,18 +18,23 @@ const ResetPasswordOut = () => {
   }, []);
   const handleSubmit=async(data)=>{
     setLoading(true);
-    console.log("dat",data)
+    // console.log("dat",data)
     
     if (data.password !== data.confirmPassword) {
       toast.error("Password Not Matching");
       setLoading(false)
       return;
     }
-    console.log("data->", data);
+    // console.log("data->", data);
     
     
-    await resetPasswordOut({data,email:userEmail}, navigate)
-    setLoading(false);
+    
+   try {
+     await resetPasswordOut({data,email:userEmail}, navigate)
+   } catch (error) {
+    console.error(error)
+   }finally{
+    setLoading(false);}
 
   }
   

@@ -9,7 +9,6 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const login = (data, navigate) => {
   return async (dispatch) => {
-    console.log("BASE_URL", BASE_URL);
     const toastId = toast.loading("Logging in...");
     dispatch(authAction.setLoading(true));
     let response;
@@ -26,7 +25,6 @@ export const login = (data, navigate) => {
           }
         )
         .then((res) => {
-          console.log("response", res.data.token);
           response = res.data;
         });
 
@@ -79,15 +77,15 @@ export const signup = (data, navigate) => {
         .then((res) => {
           response = res;
         });
-      console.log("response", response);
 
       navigate("/login");
       toast.success(response.data.message);
     } catch (error) {
       toast.error(error.response.data.message);
     }
+    finally{
     dispatch(authAction.setLoading(false));
-    toast.dismiss(toastId);
+    toast.dismiss(toastId);}
   };
 };
 export const opt = (data, navigate) => {
@@ -104,7 +102,7 @@ export const opt = (data, navigate) => {
         .then((res) => {
           response = res;
         });
-      console.log("data", data.Email);
+   
 
       dispatch(authAction.setSignUpData(data));
       toast.success(response.data.message);
@@ -116,14 +114,14 @@ export const opt = (data, navigate) => {
         toast.error("Something went wrong");
       }
     }
+    finally{
     dispatch(authAction.setLoading(false));
-    toast.dismiss(toastId);
+    toast.dismiss(toastId);}
   };
 };
 export const forgotPasswordOtp = async (data, navigate) => {
   const toastId = toast.loading("Loading");
   let response;
-  console.log("hengi");
   try {
     await axios
       .post(`${BASE_URL}/api/v1/auth/forgotPasswordOTP`, {
@@ -132,7 +130,7 @@ export const forgotPasswordOtp = async (data, navigate) => {
       .then((res) => {
         response = res;
       });
-    console.log("data", data.Email);
+    // console.log("data", data.Email);
 
     toast.success(response.data.message);
     navigate("/reset-password/verify");
@@ -160,7 +158,7 @@ export const verifyForgotOTP = async (data, navigate) => {
       .then((res) => {
         response = res;
       });
-    console.log("response", response);
+    // console.log("response", response);
 
     navigate("/reset-password/change-password");
     toast.success(response.data.message);
@@ -182,7 +180,7 @@ export const logout = (navigate) => {
           withCredentials: true,
         }
       );
-      console.log("response", response);
+      
       dispatch(authAction.setToken(null));
       dispatch(profileAction.setProfile(null));
       localStorage.clear();
@@ -215,7 +213,7 @@ export const changePasswordAuth = (data, navigate) => {
         }
       );
       // console.log("Request headers:", response.config.headers);
-      console.log("Response headers:", response.headers);
+      // console.log("Response headers:", response.headers);
       toast.success("Successfully Password Changed");
     } catch (error) {
       if (error.response.data.message) {
@@ -223,8 +221,8 @@ export const changePasswordAuth = (data, navigate) => {
       } else {
         toast.error("Something went wrong");
       }
-    }
-    toast.dismiss(toastId);
+    }finally{
+    toast.dismiss(toastId);}
   };
 };
 export const resetPasswordOut = async (data, navigate) => {
@@ -262,9 +260,9 @@ export const getCourseDetail = async (courseId, signal) => {
     response = res;
   } catch (error) {
     if (axios.isCancel(error)) {
-      console.log("Request canceled", error.message);
+      console.error("Request canceled", error.message);
     } else {
-      console.log("Error fetching course details", error);
+      console.error("Error fetching course details", error);
     }
   } finally {
     toast.dismiss(toastId);
@@ -286,7 +284,7 @@ export const addCourseDetails = async (formData) => {
     );
 
     toast.success("Course Details Added Successfully");
-    console.log("Course creation response:", response.data);
+    // console.log("Course creation response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error creating course:", error);
@@ -309,7 +307,7 @@ export const createSection = async (data) => {
       }
     );
     toast.success("Section Details Added Successfully");
-    console.log("Section creation response:", response.data);
+    // console.log("Section creation response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error creating Section", error);
@@ -322,7 +320,7 @@ export const createSection = async (data) => {
 export const deleteSection = async (data) => {
   const toastId = toast.loading("Deleting");
   try {
-    console.log("Data", data);
+    // console.log("Data", data);
     const response = await axios.post(
       `${BASE_URL}/api/v1/course/deleteSection`,
       data,
@@ -331,7 +329,7 @@ export const deleteSection = async (data) => {
       }
     );
     toast.success("Section Deleted Successfully");
-    console.log("Section Delete response:", response.data);
+    // console.log("Section Delete response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error Deleting Section", error);
@@ -344,7 +342,7 @@ export const deleteSection = async (data) => {
 export const updateCartDetails = async (data) => {
   const toastId = toast.loading("Adding");
   try {
-    console.log("Data", data);
+    // console.log("Data", data);
     const response = await axios.post(
       `${BASE_URL}/api/v1/course/updateCartDetails`,
       {
@@ -359,7 +357,7 @@ export const updateCartDetails = async (data) => {
     localStorage.setItem(import.meta.env.VITE_USER, text);
 
     toast.success("Course Added to Cart");
-    console.log("Course Added to Cart", response.data);
+    // console.log("Course Added to Cart", response.data);
     return response.data.updatedUser;
   } catch (error) {
     console.error("Error Course Added to Cart", error);
@@ -385,7 +383,7 @@ export const deleteCartDetails = async (data) => {
     localStorage.setItem(import.meta.env.VITE_USER, text);
 
     toast.success("Course Deleted from Cart");
-    console.log("Course deleted from Cart", response.data);
+    // console.log("Course deleted from Cart", response.data);
     return response.data.updatedUser;
   } catch (error) {
     console.error("Error Course Deleting from Cart", error);
@@ -417,7 +415,7 @@ export const getCartDetails = async (signal) => {
 export const deleteSubSection = async (data) => {
   const toastId = toast.loading("Deleting");
   try {
-    console.log("Data", data);
+    // console.log("Data", data);
     const response = await axios.post(
       `${BASE_URL}/api/v1/course/deleteSubSection`,
       data,
@@ -426,7 +424,7 @@ export const deleteSubSection = async (data) => {
       }
     );
     toast.success("Sub Section Deleted Successfully");
-    console.log("Sub Section Delete response:", response.data);
+    // console.log("Sub Section Delete response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error Deleting Sub Section", error);
@@ -438,7 +436,7 @@ export const deleteSubSection = async (data) => {
 export const createSubSection = async (data) => {
   const toastId = toast.loading("Uploading...");
   try {
-    console.log("Data", data);
+    // console.log("Data", data);
     const response = await axios.post(
       `${BASE_URL}/api/v1/course/createSubSection`,
       data,
@@ -447,7 +445,7 @@ export const createSubSection = async (data) => {
       }
     );
     toast.success("Sub Section Created Successfully");
-    console.log("Sub Section Create response:", response.data);
+    // console.log("Sub Section Create response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error Creating Sub Section", error);
@@ -459,7 +457,7 @@ export const createSubSection = async (data) => {
 export const updateSubSection = async (data) => {
   const toastId = toast.loading("Uploading...");
   try {
-    console.log("Data", data);
+    // console.log("Data", data);
     const response = await axios.post(
       `${BASE_URL}/api/v1/course/updateSubSection`,
       data,
@@ -468,7 +466,7 @@ export const updateSubSection = async (data) => {
       }
     );
     toast.success("Sub Section updated Successfully");
-    console.log("Sub Section updated response:", response.data);
+    // console.log("Sub Section updated response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error updating Sub Section", error);
@@ -481,7 +479,7 @@ export const updateSubSection = async (data) => {
 export const updateSection = async (data) => {
   const toastId = toast.loading("Loading");
   try {
-    console.log("Data", data);
+    // console.log("Data", data);
     const response = await axios.post(
       `${BASE_URL}/api/v1/course/updateSection`,
       data,
@@ -490,7 +488,7 @@ export const updateSection = async (data) => {
       }
     );
     toast.success(" Section updated Successfully");
-    console.log(" Section updated response:", response.data);
+    // console.log(" Section updated response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error  updating Section", error);
@@ -502,7 +500,7 @@ export const updateSection = async (data) => {
 export const updateCourse = async (data) => {
   const toastId = toast.loading("Loading");
   try {
-    console.log("Data", data);
+    // console.log("Data", data);
     const response = await axios.post(
       `${BASE_URL}/api/v1/course/updateCourse`,
       data,
@@ -511,7 +509,7 @@ export const updateCourse = async (data) => {
       }
     );
     toast.success(" Course updated Successfully");
-    console.log(" Course updated response:", response.data);
+    // console.log(" Course updated response:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error  updating Section", error);
@@ -547,7 +545,7 @@ export const getAllCourse = async (signal) => {
       signal: signal,
     });
 
-    console.log("res", response.data.allCourse);
+    // console.log("res", response.data.allCourse);
     return response.data.allCourse;
   } catch (error) {
     console.error("Error Fetching All Courses", error);

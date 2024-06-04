@@ -4,7 +4,9 @@ import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
 import { useParams } from "react-router-dom";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import { motion } from "framer-motion";
-import { AiFillLock } from "react-icons/ai";
+import { MdLock } from "react-icons/md";
+
+
 const ViewCourse = () => {
   const { exploreAllCourses } = useSelector((store) => store.course)
   const {courseId} = useParams();
@@ -70,7 +72,7 @@ const ViewCourse = () => {
                 <p className="text-lg  max-w-[90px] md:max-w-none md:whitespace-normal truncate">
                   {section.SectionName}
                 </p>
-                <AiFillLock  className="text-white/70 "/>
+                <MdLock  className=" text-2xl font-bold text-white/70 "/>
               </div>
               <div className="flex">
                 <div className=" p-2">{section.subSection.length} Lectures</div>

@@ -54,7 +54,7 @@ const VerifyEmail = () => {
   const { signupdata, forgotPassword,userEmail } = useSelector((store) => store.auth);
 
   useEffect(() => {
-    console.log("forgotPassword", forgotPassword);
+    // console.log("forgotPassword", forgotPassword);
     if (!signupdata && !forgotPassword) {
       navigate("/login");
     }

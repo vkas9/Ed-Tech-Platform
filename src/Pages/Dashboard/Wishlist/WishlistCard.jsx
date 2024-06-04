@@ -21,7 +21,7 @@ const WishlistCard = ({ course}) => {
       const updatedUser = await deleteCartDetails(course?._id);
       dispatch(profileAction.setProfile(updatedUser));
     } catch (error) {
-      console.log(error)
+      console.error(error)
       
     }
     finally{

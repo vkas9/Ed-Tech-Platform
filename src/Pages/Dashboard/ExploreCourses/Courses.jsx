@@ -5,13 +5,14 @@ import { getAllCourse } from "../../../APIs/Authapi";
 import { courseAction } from "../../../store/courseSlice";
 import ExploreCoursesCard from "./ExploreCoursesCard";
 import { encryptData } from "../../../components/core/auth/crypto";
+import toast from "react-hot-toast";
 const Courses = () => {
 
   const dispatch = useDispatch();
   const { exploreAllCourses } = useSelector((store) => store.course);
   
   const [course, setCourses] = useState(exploreAllCourses);
-  console.log("courses->",course)
+  // console.log("courses->",course)
 
   useEffect(() => {
     const controller=new AbortController();
@@ -25,7 +26,7 @@ const Courses = () => {
           dispatch(courseAction.setExploreAllCourses(courseData));
         
       } catch (error) {
-        console.log("Unable to fetch all courses");
+        toast.error("Unable to fetch all courses");
       }
     };
 
