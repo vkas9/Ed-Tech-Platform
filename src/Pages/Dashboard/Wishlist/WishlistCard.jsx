@@ -8,13 +8,26 @@ import { profileAction } from "../../../store/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 
 const WishlistCard = ({ course}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const handleCart = async () => {
-    const updatedUser = await deleteCartDetails(course?._id);
-    dispatch(profileAction.setProfile(updatedUser));
+    setLoading(true)
+    
+    try {
+      const updatedUser = await deleteCartDetails(course?._id);
+      dispatch(profileAction.setProfile(updatedUser));
+    } catch (error) {
+      console.log(error)
+      
+    }
+    finally{
+      setLoading(false)
+    }
+
   };
   const { user } = useSelector((store) => store.profile);
   const handleClick = () => {
@@ -70,6 +83,9 @@ const WishlistCard = ({ course}) => {
           >
             Buy
           </div>
+          <button disabled={loading} className="rounded-full">
+
+          
           <RxCross2
             onClick={(e) => {
               e.stopPropagation();
@@ -77,6 +93,7 @@ const WishlistCard = ({ course}) => {
             }}
             className="text-[1.5rem] hover:bg-white/10 box-content p-3 transition-all hover:cursor-pointer duration-150 rounded-full  "
           />
+          </button>
         </div>
       </div>
     </div>
