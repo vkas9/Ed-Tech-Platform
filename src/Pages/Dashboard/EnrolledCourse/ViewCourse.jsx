@@ -6,8 +6,8 @@ import { MdOutlineOndemandVideo } from "react-icons/md";
 import { motion } from "framer-motion";
 import VideoModal from "./VideoModal/VideoModal";
 const ViewCourse = () => {
-  const { enrolledCourse } = useSelector((store) => store.card)
-  const {courseId} = useParams();
+  const { enrolledCourse } = useSelector((store) => store.card);
+  const { courseId } = useParams();
   const [openSections, setOpenSections] = useState({});
   const [confirmationModal, openConfirmationModal] = useState(null);
   const handleSetOpen = (sectionId) => {
@@ -21,15 +21,14 @@ const ViewCourse = () => {
     const seconds = totalSeconds % 60;
     return `${minutes} minutes ${seconds} seconds`;
   }
-  const eCourse=enrolledCourse.find(item=>item._id===courseId);
-  const getTotalLectures=()=>{
-    
-    let total=0;
-    for(let temp in eCourse.Section){
-      total+=eCourse.Section[temp].subSection.length;
+  const eCourse = enrolledCourse.find((item) => item._id === courseId);
+  const getTotalLectures = () => {
+    let total = 0;
+    for (let temp in eCourse.Section) {
+      total += eCourse.Section[temp].subSection.length;
     }
     return total;
-  }
+  };
 
   return (
     <motion.div
@@ -45,12 +44,12 @@ const ViewCourse = () => {
         <span>/</span>
         <span>Enrolled_Courses</span>
         <span>/</span>
-        <span className="text-yellow-500">
-          {eCourse.CourseName}
-        </span>
+        <span className="text-yellow-500">{eCourse.CourseName}</span>
       </div>
       <h1 className="text-3xl mb-3">Course Content</h1>
-      <h2 className="text-white/50 ">{eCourse.Section.length} Sections  • {getTotalLectures()} Lectures  </h2>
+      <h2 className="text-white/50 ">
+        {eCourse.Section.length} Sections • {getTotalLectures()} Lectures{" "}
+      </h2>
       <div className="bg-white/10 w-full md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">
         {eCourse?.Section.map((section) => (
           <details key={section._id} className="mb-2">
@@ -70,7 +69,6 @@ const ViewCourse = () => {
               </div>
               <div className="flex">
                 <div className=" p-2">{section.subSection.length} Lectures</div>
-               
               </div>
             </summary>
             <div>
@@ -79,7 +77,10 @@ const ViewCourse = () => {
                   key={subsection?._id}
                   onClick={(e) => {
                     e.stopPropagation();
-                    openConfirmationModal({data:subsection.videoURL, cancel: () => openConfirmationModal(null),});
+                    openConfirmationModal({
+                      data: subsection.videoURL,
+                      cancel: () => openConfirmationModal(null),
+                    });
                   }}
                   className="px-4 py-1 hover:bg-white/20 hover:cursor-pointer bg-white/10 rounded-md ml-4 mt-2"
                 >
@@ -93,20 +94,10 @@ const ViewCourse = () => {
                         </p>
                       </div>
                     </div>
-                    <div className="flex">
-                      <div
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setEditSubSection({
-                            ...subsection,
-                            sectionId: section._id,
-                          });
-                        }}
-                        className="py-2 text-sm text-white/50"
-                      >
+                    <div className="  flex">
+                      <div className="py-2 select-none text-sm text-white/50">
                         {secondsToMinutesAndSeconds(subsection.duration)}
                       </div>
-                     
                     </div>
                   </div>
                 </div>
