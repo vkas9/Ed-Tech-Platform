@@ -16,7 +16,7 @@ const EditProfile = () => {
           <div className=" flex gap-2">
             <div className="bg-white/10 flex items-center gap-2 hover:bg-white/20 hover:cursor-pointer p-2 rounded-md">
               <MdFileUpload size={25} />
-              <label for="file-upload" className="hover:cursor-pointer">Upload</label>
+              <label htmlFor="file-upload" className="hover:cursor-pointer">Upload</label>
             </div>
             <input
               id="file-upload"
@@ -58,7 +58,7 @@ const EditProfile = () => {
                 <Field
                   className="bg-white/20 w-full max-w-[350px] rounded-md p-2 outline-none"
                   type="text"
-                  maxlength="10"
+                  maxLength="10"
                   required
                   placeholder="Enter Mobile Number"
                   name="contactNumber"

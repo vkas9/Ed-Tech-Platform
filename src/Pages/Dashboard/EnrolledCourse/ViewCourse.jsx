@@ -42,12 +42,12 @@ const ViewCourse = () => {
         <span>/</span>
         <span>Dashboard</span>
         <span>/</span>
-        <span>Enrolled_Courses</span>
+        <span className="whitespace-nowrap">Enrolled Courses</span>
         <span>/</span>
-        <span className="text-yellow-500">{eCourse.CourseName}</span>
+        <span className="text-yellow-500 whitespace-nowrap">{eCourse.CourseName}</span>
       </div>
       <h1 className="text-3xl mb-3">Course Content</h1>
-      <h2 className="text-white/50 ">
+      <h2 className="text-white/50 mb-1 ">
         {eCourse.Section.length} Sections • {getTotalLectures()} Lectures{" "}
       </h2>
       <div className="bg-white/10 w-full md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">

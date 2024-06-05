@@ -6,6 +6,8 @@ const initialState = {
     ? decryptData(localStorage.getItem(import.meta.env.VITE_USER))
     : null,
   loading: false,
+  openNavigation:false,
+  sidebarShow:false
 };
 
 
@@ -20,7 +22,14 @@ const profileSlice = createSlice({
     setLoading(state, action) {
       state.loading = action.payload;
     },
+    setOpenNavigation(state,action){
+      state.openNavigation=action.payload
+    },
+    setSidebarShow(state,action){
+      state.sidebarShow=action.payload
+    }
   },
+
 });
 
 export const profileAction = profileSlice.actions;

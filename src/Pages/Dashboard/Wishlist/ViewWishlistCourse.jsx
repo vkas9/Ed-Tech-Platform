@@ -50,7 +50,7 @@ const ViewCourse = () => {
         <span>/</span>
         <span>Wishlist</span>
         <span>/</span>
-        <span className="text-yellow-500">
+        <span className="text-yellow-500 whitespace-nowrap">
           {eCourse.CourseName}
         </span>
       </div>

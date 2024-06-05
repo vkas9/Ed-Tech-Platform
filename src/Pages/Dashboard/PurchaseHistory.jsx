@@ -15,7 +15,7 @@ const PurchaseHistory = () => {
         <span>/</span>
         <span>Dashboard</span>
         <span>/</span>
-        <span className="text-yellow-500 ">PurchaseHistory</span>
+        <span className="text-yellow-500 whitespace-nowrap ">Purchase History</span>
       </div>
 
       <div className="overflow-auto h-[75vh]">

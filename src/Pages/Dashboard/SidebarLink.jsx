@@ -1,11 +1,13 @@
 import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../APIs/Authapi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import ConfirmModal from "./ConfirmModal";
+import {profileAction} from "../../store/profileSlice"
 
 const SidebarLink = ({ name, link, icon:Icon }) => {
   const location = useLocation();
+  const{sidebarShow:show}=useSelector((store)=>store.profile)
   const dispatch=useDispatch();
  const navigation= useNavigate()
  const[confirmationModal,openConfirmationModal]=useState(null);
@@ -30,7 +32,7 @@ const SidebarLink = ({ name, link, icon:Icon }) => {
     });
   };
   return (<>
-    <Link onClick={name=="Log out"?handleLogoutClick:null}
+    <Link onClick={name=="Log out"?handleLogoutClick:() => (show ? dispatch(profileAction.setSidebarShow(!show)) : null)}
     to={link!=""?link:null}
     className={`py-4 px-5 ${name=='Log out'?'hover:bg-red-900/30  transition-all duration-200 hover:border-r-4 border-red-900':'sm:hover:bg-blue-900/30 active:bg-blue-900/30 transition-all duration-200 hover:border-r-4 border-blue-900'}   ${
         Route(link) ? "bg-gradient-to-l from-blue-900/30 to-transparent border-r-4 border-blue-900 " : ""

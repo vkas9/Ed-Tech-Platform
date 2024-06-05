@@ -1,5 +1,5 @@
 import Button from "../../components/Homepage/Button";
-import IconBtn from "./IconBtn";
+import ButtonUse from "./ButtonUse";
 import { motion } from "framer-motion";
 const ConfirmModal=({modalData})=>{
   
@@ -9,7 +9,7 @@ const ConfirmModal=({modalData})=>{
                 <span className="text-4xl font-semibold">{modalData?.text1}</span>
                 <p className="text-gray-500/80 font-semibold ">{modalData?.text2}</p>
                 <div className=" flex gap-5 ">
-                   <IconBtn   
+                   <ButtonUse   
                     onClick={modalData?.btn1Handler}
                     text={modalData?.btn1Text}
                     className={"bg-gray-400/20 text-2xl text-white/90  px-2 transition-all duration-100 hover:bg-white/20 rounded-md"}

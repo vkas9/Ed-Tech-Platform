@@ -60,7 +60,7 @@ const EnrolledCourse = () => {
         <span>/</span>
         <span>Dashboard</span>
         <span>/</span>
-        <span className="text-yellow-500">Enrolled_Courses</span>
+        <span className="text-yellow-500 whitespace-nowrap">Enrolled Courses</span>
       </div>
 
       <h1 className="text-3xl mb-3">Enrolled Course</h1>

@@ -16,11 +16,13 @@ import SubTitle from "./SubTitle";
 import {courseAction} from "../../store/courseSlice"
 import { logout } from "../../APIs/Authapi";
 import ConfirmModal from "../../Pages/Dashboard/ConfirmModal";
+import {profileAction} from "../../store/profileSlice"
 const Navbar = () => {
   const[name,setName]=useState(null);
   const[catagory,setCatagory]=useState([]);
   const dispatch=useDispatch();
-  const {courseCategory}=useSelector((store)=>store.course);
+
+  const {openNavigation}=useSelector((store)=>store.profile)
   const  BASE_URL=import.meta.env.VITE_BASE_URL;
   useEffect(()=>{
     axios.get(`${BASE_URL}/api/v1/course/getAllCatagory`)
@@ -35,8 +37,7 @@ const Navbar = () => {
 
   const {token } = useSelector((store) => store.auth);
   const { user } = useSelector((store) => store.profile);
-  const { wishlist } = useSelector((store) => store.card);
-  const [openNavigation, setOpenNavigation] = useState(false);
+
   const navigate=useNavigate()
   const location = useLocation();
   const Route = (route) => {
@@ -45,10 +46,10 @@ const Navbar = () => {
   const toggle = () => {
     if (!openNavigation) {
       disablePageScroll();
-      setOpenNavigation(true);
+      dispatch(profileAction.setOpenNavigation(true));
     } else {
       enablePageScroll();
-      setOpenNavigation(false);
+      dispatch(profileAction.setOpenNavigation(false));
     }
   };
   const handleClick2=()=>{
@@ -67,7 +68,7 @@ const Navbar = () => {
     openConfirmationModal(null)
     if (!openNavigation) return;
     enablePageScroll();
-    setOpenNavigation(!openNavigation);
+    dispatch(profileAction.setOpenNavigation(!openNavigation))
 
 }
   const handleLogoutClick = () => {
@@ -86,7 +87,8 @@ const Navbar = () => {
     }else{
       if (!openNavigation) return;
       enablePageScroll();
-      setOpenNavigation(!openNavigation);
+      dispatch(profileAction.setOpenNavigation(!openNavigation))
+      
     }
     
    

@@ -1,4 +1,4 @@
-const IconBtn=({
+const ButtonUse=({
     onClick,
     type,
     className,
@@ -17,4 +17,4 @@ const IconBtn=({
         </button>
     );
 }
-export default IconBtn;
+export default ButtonUse;
