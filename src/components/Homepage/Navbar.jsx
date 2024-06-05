@@ -4,7 +4,6 @@ import { navigation } from "../../constants";
 import Button from "./Button";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
-import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,21 +36,15 @@ const Navbar = () => {
 
   const {token } = useSelector((store) => store.auth);
   const { user } = useSelector((store) => store.profile);
-
+const toggle=()=>{
+  dispatch(profileAction.setOpenNavigation(!openNavigation))
+}
   const navigate=useNavigate()
   const location = useLocation();
   const Route = (route) => {
     return matchPath({ path: route }, location.pathname);
   };
-  const toggle = () => {
-    if (!openNavigation) {
-      disablePageScroll();
-      dispatch(profileAction.setOpenNavigation(true));
-    } else {
-      enablePageScroll();
-      dispatch(profileAction.setOpenNavigation(false));
-    }
-  };
+ 
   const handleClick2=()=>{
     if(!name){
       setName("dfd");
@@ -67,8 +60,8 @@ const Navbar = () => {
     dispatch(logout(navigate));
     openConfirmationModal(null)
     if (!openNavigation) return;
-    enablePageScroll();
-    dispatch(profileAction.setOpenNavigation(!openNavigation))
+    
+    toggle()
 
 }
   const handleLogoutClick = () => {
@@ -86,8 +79,8 @@ const Navbar = () => {
       handleLogoutClick()
     }else{
       if (!openNavigation) return;
-      enablePageScroll();
-      dispatch(profileAction.setOpenNavigation(!openNavigation))
+      
+      toggle()
       
     }
     
@@ -176,7 +169,8 @@ const Navbar = () => {
         </nav>
         <div className={`flex ${user!=null?"gap-4 ml-[7vw]":"gap-6"}   items-center `}>
           {user && user?.role != "Instructor" ?(
-            <Link to="/dashboard/wishlist" className="relative ">
+            <Link to="/dashboard/wishlist" onClick={(e)=> { e.stopPropagation()
+              openNavigation&&toggle()}} className="relative ">
               <FaCartShopping size={20} />
               {user?.Cart?.length > 0 ? (
                 <span className="absolute -top-[11px] -right-[11px] ">

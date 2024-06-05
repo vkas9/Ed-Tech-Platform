@@ -1,12 +1,17 @@
 import { useSelector,useDispatch } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { logout } from "../../APIs/Authapi";
+import {profileAction} from "../../store/profileSlice"
 const ProfileDropDown=()=>{
     const navigate=useNavigate()
     const dispatch=useDispatch();
-    const {user}= useSelector((store) => store.profile);
+    const {user,openNavigation}= useSelector((store) => store.profile);
     const handleSubmit=(e)=>{
-        e.preventDefault();
+        
+        e.preventDefault()
+        
+        
+         if(openNavigation) dispatch(profileAction.setOpenNavigation(!openNavigation))
         navigate("/dashboard/my-profile")
 
     }

@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import {profileAction} from "../../store/profileSlice"
 import ProfileDashboard from "./ProfileDashboard";
 import { IoIosArrowForward } from "react-icons/io";
-
+import { motion } from "framer-motion";
 import Sidebar from "./Sidebar";
 const Dashboard = () => {
   const dispatch=useDispatch()
@@ -31,7 +31,10 @@ const Dashboard = () => {
           <Outlet />
           
         <div onClick={(e)=>{dispatch(profileAction.setSidebarShow(!show))}}className={`${show?"bg-black/50":"hidden"}  w-full h-full absolute top-0 right-0 pt-5  `} />
-        <div onClick={(e)=>{dispatch(profileAction.setSidebarShow(!show))}} className={` bg-white/10 md:hidden   rounded-full p-2 text-end w-fit absolute right-0 top-11 mr-5`}><IoIosArrowForward className="text-3xl "/></div>
+        <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }} onClick={(e)=>{dispatch(profileAction.setSidebarShow(!show))}} className={` bg-white/10 md:hidden   rounded-full p-2 text-end w-fit absolute right-0 top-9 mr-5`}><IoIosArrowForward className="text-3xl "/></motion.div>
         </div>
         
       </div>
