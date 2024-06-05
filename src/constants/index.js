@@ -12,17 +12,17 @@ export const navigation = [
   {
     id: "2",
     title: "Pricing",
-    url: "/Pricing",
+    url: "/pricing",
   },
   {
     id: "3",
     title: "About Us",
-    url: "/About-Us",
+    url: "/about-us",
   },
   {
   id: "4",
     title: "Contact us",
-    url: "/Contact-us",
+    url: "/contact-us",
   }
   ,
   {

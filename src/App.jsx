@@ -22,6 +22,8 @@ import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import ChangePassword from "./Pages/ForgotPassword/ResetPasswordOut";
 import ViewExploreCourse from "./Pages/Dashboard/ExploreCourses/ViewExploreCourse";
 import ViewWishlistCourse from "./Pages/Dashboard/Wishlist/ViewWishlistCourse";
+import AboutUs from "./Pages/NavbarPages/AboutUs";
+import ContactUs from "./Pages/NavbarPages/ContactUs";
 
 
 function App() {
@@ -71,6 +73,24 @@ function App() {
               <OpenRoute>
                 <ChangePassword />
               </OpenRoute>
+            }
+
+          />
+          <Route
+            path="about-us"
+            element={
+              
+                <AboutUs />
+              
+            }
+
+          />
+          <Route
+            path="contact-us"
+            element={
+              
+                <ContactUs />
+              
             }
 
           />

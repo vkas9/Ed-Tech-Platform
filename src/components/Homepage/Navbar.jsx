@@ -21,9 +21,9 @@ const Navbar = () => {
   const[catagory,setCatagory]=useState([]);
   const dispatch=useDispatch();
   const {courseCategory}=useSelector((store)=>store.course);
-  
+  const  BASE_URL=import.meta.env.VITE_BASE_URL;
   useEffect(()=>{
-    axios.get("https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getAllCatagory")
+    axios.get(`${BASE_URL}/api/v1/course/getAllCatagory`)
     .then(res=>{
 
       setCatagory(res.data.allCatagory);
@@ -137,11 +137,12 @@ const Navbar = () => {
                   </div>
                 ) : 
                 (
-                  user?<Link
+                  user?
+                  <Link
                     key={index}
-                    to={!item.title=="Log Out"&&item.url}
+                    to={item.title !== "Log Out"&&item.url}
                     onClick={handleClick}
-                    className={`block relative font-bold text-2xl uppercase ${
+                    className={`block relative  font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
                     }   transition-colors lg:hover:cursor-pointer ${item.title==="New Account" ||item.title==="Sign in"?"hidden":""} ${
                       item.onlyMobile ? "lg:hidden" : ""
