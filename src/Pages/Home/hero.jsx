@@ -48,7 +48,7 @@ const hero = () => {
           <Button
             link={"/signup/i/student"}
             className={
-              " outline-none rounded-md   font-semibold hover-none text-black bg-blue-500 py-3 "
+              " outline-none rounded-md   font-semibold hover-none text-black md:hover:bg-yellow-400 bg-yellow-500  py-3 "
             }
           >
             Learn More

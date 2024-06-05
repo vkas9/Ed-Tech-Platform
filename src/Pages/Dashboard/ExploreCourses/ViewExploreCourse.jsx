@@ -107,7 +107,7 @@ const ViewCourse = () => {
                             sectionId: section._id,
                           });
                         }}
-                        className="py-2 text-sm text-white/50"
+                        className="py-2 text-sm select-none text-white/50"
                       >
                         {secondsToMinutesAndSeconds(subsection.duration)}
                       </div>

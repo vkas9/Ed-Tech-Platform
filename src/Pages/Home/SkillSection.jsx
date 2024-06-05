@@ -3,6 +3,7 @@ import { FaHandPointRight } from "react-icons/fa";
 import Button from "../../components/Homepage/Button";
 import techimage from "../../assets/tech.png";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 const fadeIn={
   initial:{
     opacity:0,
@@ -47,7 +48,7 @@ const SkillSection = () => {
                     </li>
                     
                 </ul>
-                <Button className={"outline-none rounded-md mx-auto text-yellow-950  bg-yellow-500 py-3 px-5 font-semibold"} > Learn More</Button>
+                <div className={"outline-none text-xl rounded-md mx-auto text-yellow-950   bg-yellow-500 sm:hover:bg-yellow-400 py-3 px-5  hover:cursor-pointer font-bold"} ><Link  to="/signup/i/student"> Learn More</Link></div>
             </div>
             
             <div className=" overflow-hidden hidden md:flex relative rounded-3xl ">
