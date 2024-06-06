@@ -33,8 +33,11 @@ const Wishlist = () => {
           dispatch(cardAction.setWishlist([]));
         }
       } catch (error) {
-        toast.error("Unable to fetch wishlist courses");
+        if (!controller.signal.aborted) {
+          toast.error("Unable to fetch wishlist courses");
+        }
       }
+      
     };
 
     if (!Wishlist ||wishlist?.length!==user?.Cart?.length) {

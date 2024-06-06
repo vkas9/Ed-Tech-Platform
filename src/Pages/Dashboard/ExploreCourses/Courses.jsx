@@ -6,15 +6,23 @@ import { courseAction } from "../../../store/courseSlice";
 import ExploreCoursesCard from "./ExploreCoursesCard";
 import { encryptData } from "../../../components/core/auth/crypto";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Courses = () => {
-
+  const navigate=useNavigate()
+  const { token } = useSelector((store) => store.auth);
+  
   const dispatch = useDispatch();
   const { exploreAllCourses } = useSelector((store) => store.course);
   
   const [course, setCourses] = useState(exploreAllCourses);
-  // console.log("courses->",course)
+
 
   useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }else{
+
+    
     const controller=new AbortController();
     const signal=controller.signal;
     const fetchData = async () => {
@@ -26,7 +34,11 @@ const Courses = () => {
           dispatch(courseAction.setExploreAllCourses(courseData));
         
       } catch (error) {
-        console.error("Unable to fetch all courses");
+        if (!controller.signal.aborted){
+
+        
+        toast.error("Unable to fetch all courses");
+      }
       }
     };
 
@@ -36,6 +48,7 @@ const Courses = () => {
     return ()=>{
       controller.abort();
     }
+  }
   }, [course, dispatch]);
 
   useEffect(() => {

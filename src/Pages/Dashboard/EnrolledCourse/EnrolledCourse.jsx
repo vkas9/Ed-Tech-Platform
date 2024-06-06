@@ -32,9 +32,10 @@ const EnrolledCourse = () => {
           dispatch(cardAction.setEnrolledCourse([]));
         }
       } catch (error) {
-        console.error("error",error)
-        if (error.name !== 'AbortError') {
-          console.log("Unable to fetch enrolled courses");
+        if (!controller.signal.aborted){
+
+        
+          toast.error("Unable to fetch Enrolled Courses");
         }
       }
     };
@@ -46,7 +47,7 @@ const EnrolledCourse = () => {
     return () => {
       controller.abort();
     };
-  }, [enrolledCourse, dispatch]);
+  }, [enrolledCourse,data, dispatch]);
 
   return (
     <motion.div
