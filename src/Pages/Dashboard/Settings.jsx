@@ -7,7 +7,7 @@ const Settings = () => {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
-      className="flex font-semibold flex-col text-lg  pt-2 pl-5 "
+      className="flex pb-[4rem] font-semibold flex-col text-lg  pt-2 pl-5 "
     >
       <div className="flex gap-1 items-center text-white/50  overflow-x-auto ">
         <span>Home</span>

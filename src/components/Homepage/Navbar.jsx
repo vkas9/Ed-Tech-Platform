@@ -12,58 +12,55 @@ import ProfileDropDown from "./ProfileDropDown";
 import axios from "axios";
 import { CiLogout } from "react-icons/ci";
 import SubTitle from "./SubTitle";
-import {courseAction} from "../../store/courseSlice"
+import { courseAction } from "../../store/courseSlice";
 import { logout } from "../../APIs/Authapi";
 import ConfirmModal from "../../Pages/Dashboard/ConfirmModal";
-import {profileAction} from "../../store/profileSlice"
+import { profileAction } from "../../store/profileSlice";
 const Navbar = () => {
-  const[name,setName]=useState(null);
-  const[catagory,setCatagory]=useState([]);
-  const dispatch=useDispatch();
+  const [name, setName] = useState(null);
+  const [catagory, setCatagory] = useState([]);
+  const dispatch = useDispatch();
 
-  const {openNavigation}=useSelector((store)=>store.profile)
-  const  BASE_URL=import.meta.env.VITE_BASE_URL;
-  useEffect(()=>{
-    axios.get(`${BASE_URL}/api/v1/course/getAllCatagory`)
-    .then(res=>{
+  const { openNavigation,sidebarShow:show } = useSelector((store) => store.profile);
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}/api/v1/course/getAllCatagory`)
+      .then((res) => {
+        setCatagory(res.data.allCatagory);
+      })
+      .catch((error) => {
+        console.error("error", error);
+      });
+  }, []);
 
-      setCatagory(res.data.allCatagory);
-
-    }).catch(error=>{
-      console.error("error",error);
-    })
-  },[])
-
-  const {token } = useSelector((store) => store.auth);
+  const { token } = useSelector((store) => store.auth);
   const { user } = useSelector((store) => store.profile);
-const toggle=()=>{
-  dispatch(profileAction.setOpenNavigation(!openNavigation))
-}
-  const navigate=useNavigate()
+  const toggle = () => {
+    dispatch(profileAction.setOpenNavigation(!openNavigation));
+  };
+  const navigate = useNavigate();
   const location = useLocation();
   const Route = (route) => {
     return matchPath({ path: route }, location.pathname);
   };
- 
-  const handleClick2=()=>{
-    if(!name){
+
+  const handleClick2 = () => {
+    if (!name) {
       setName("dfd");
+    } else {
+      setName(null);
     }
-    else{
-      setName(null)
-    }
-    
-  }
-  const[confirmationModal,openConfirmationModal]=useState(null);
-  const handleLogout=(e)=>{
+  };
+  const [confirmationModal, openConfirmationModal] = useState(null);
+  const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout(navigate));
-    openConfirmationModal(null)
+    openConfirmationModal(null);
     if (!openNavigation) return;
-    
-    toggle()
 
-}
+    toggle();
+  };
   const handleLogoutClick = () => {
     openConfirmationModal({
       text1: "Are You Sure?",
@@ -75,17 +72,13 @@ const toggle=()=>{
     });
   };
   const handleClick = (e) => {
-    if(e.target.innerHTML=="Log Out"){
-      handleLogoutClick()
-    }else{
+    if (e.target.innerHTML == "Log Out") {
+      handleLogoutClick();
+    } else {
+      if(show)dispatch(profileAction.setSidebarShow(!show))
       if (!openNavigation) return;
-      
-      toggle()
-      
+      toggle();
     }
-    
-   
-   
   };
   return (
     <div
@@ -96,7 +89,11 @@ const toggle=()=>{
       }  `}
     >
       <div className="flex  mx-auto  items-center min-h-[55px] justify-between px-3  lg:px-7   ">
-        <Link to="/"  onClick={handleClick} className="block w-[12rem ] flex items-center  xl:mr-8 ">
+        <Link
+          to="/"
+          onClick={handleClick}
+          className="block w-[12rem ] flex items-center  xl:mr-8 "
+        >
           <img src={image} className="lg:w-[200px]  w-[140px] " alt="MASTER" />
         </Link>
         {/* top-[70px] */}
@@ -108,15 +105,15 @@ const toggle=()=>{
           } fixed top-[70px] md:top-[84px] rounded-t-[2.5rem]  left-0 right-0 bottom-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
           <div className="relative lg:border-r lg:border-l border-gray-500/20 rounded-full  z-2 flex flex-col select-none lg:select-text items-center justify-center m-auto lg:flex-row">
-            {navigation.map((item,index) => (
+            {navigation.map((item, index) => (
               <div key={index}>
                 {item.title === "Learn" ? (
                   <div
-                  key={index}
-                  onMouseLeave={()=>{
-                    setName(null)
-                  }}
-                  onClick={handleClick2}
+                    key={index}
+                    onMouseLeave={() => {
+                      setName(null);
+                    }}
+                    onClick={handleClick2}
                     className={`flex items-center gap-2  relative font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
                     }   transition-colors lg:hover:cursor-pointer ${
@@ -125,52 +122,60 @@ const toggle=()=>{
                   >
                     <p className="select-none">{item.title}</p>
                     <IoIosArrowDown />
-                    {
-                      name==null?<SubTitle catagory={catagory}/>:null
-                    }
-                    
+                    {name == null ? <SubTitle catagory={catagory} /> : null}
                   </div>
-                ) : 
-                (
-                  user?
+                ) : user ? (
                   <Link
                     key={index}
-                    to={item.title !== "Log Out"&&item.url}
+                    to={item.title !== "Log Out" && item.url}
                     onClick={handleClick}
                     className={`block relative  font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
-                    }   transition-colors lg:hover:cursor-pointer ${item.title==="New Account" ||item.title==="Sign in"?"hidden":""} ${
-                      item.onlyMobile ? "lg:hidden" : ""
-                    } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
-                  >
-                    {item.title}
-                  </Link>:<Link
-                    key={index}
-                    to={item.url}
-                    onClick={handleClick}
-                    className={`block relative font-bold text-2xl uppercase ${
-                      Route(item.url) ? "text-white" : "text-gray-500"
-                    }   transition-colors lg:hover:cursor-pointer ${item.title==="Log Out"?"hidden":""} ${
+                    }   transition-colors lg:hover:cursor-pointer ${
+                      item.title === "New Account" || item.title === "Sign in"
+                        ? "hidden"
+                        : ""
+                    } ${
                       item.onlyMobile ? "lg:hidden" : ""
                     } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
                   >
                     {item.title}
                   </Link>
-                  
-                  
-                )
-                
-                }
-                
+                ) : (
+                  <Link
+                    key={index}
+                    to={item.url}
+                    onClick={handleClick}
+                    className={`block relative font-bold text-2xl uppercase ${
+                      Route(item.url) ? "text-white" : "text-gray-500"
+                    }   transition-colors lg:hover:cursor-pointer ${
+                      item.title === "Log Out" ? "hidden" : ""
+                    } ${
+                      item.onlyMobile ? "lg:hidden" : ""
+                    } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
+                  >
+                    {item.title}
+                  </Link>
+                )}
               </div>
             ))}
           </div>
-         
         </nav>
-        <div className={`flex ${user!=null?"gap-4 ml-[7vw]":"gap-6"}   items-center `}>
-          {user && user?.role != "Instructor" ?(
-            <Link to="/dashboard/wishlist" onClick={(e)=> { e.stopPropagation()
-              openNavigation&&toggle()}} className="relative ">
+        <div
+          className={`flex ${
+            user != null ? "gap-4 ml-[7vw]" : "gap-6"
+          }   items-center `}
+        >
+          {user && user?.role != "Instructor" ? (
+            <Link
+              to="/dashboard/wishlist"
+              onClick={(e) => {
+                e.stopPropagation();
+                openNavigation && toggle();
+                if(show)dispatch(profileAction.setSidebarShow(!show))
+              }}
+              className="relative "
+            >
               <FaCartShopping size={20} />
               {user?.Cart?.length > 0 ? (
                 <span className="absolute -top-[11px] -right-[11px] ">
@@ -178,10 +183,14 @@ const toggle=()=>{
                 </span>
               ) : null}
             </Link>
-          ):user && user?.role == "Instructor"&&<p className="hidden sm:flex uppercase font-bold ai text-yellow-500 select-none shadow-md drop-shadow-[0_0_10px_rgba(255,255,0,0.8)]">
-          Instructor
-        </p>
-        }
+          ) : (
+            user &&
+            user?.role == "Instructor" && (
+              <p className="hidden sm:flex uppercase font-bold ai text-yellow-500 select-none shadow-md drop-shadow-[0_0_10px_rgba(255,255,0,0.8)]">
+                Instructor
+              </p>
+            )
+          )}
           {token === null ? (
             <div className="flex gap-4 font-bold items-center py-3 ">
               <Button
@@ -210,20 +219,22 @@ const toggle=()=>{
             </div>
           ) : null}
           {token !== null ? <ProfileDropDown /> : null}
-          {token !== null ? openNavigation ? (
-                <ImCross
-                  onClick={toggle}
-                  className="md:text-3xl text-2xl hover:cursor-pointer  lg:hidden "
-                />
-              ) : (
-                <GiHamburgerMenu
-                  onClick={toggle}
-                  className="md:text-3xl text-2xl hover:cursor-pointer  lg:hidden "
-                />
-              ) : null}
+          {token !== null ? (
+            openNavigation ? (
+              <ImCross
+                onClick={toggle}
+                className="md:text-3xl text-2xl hover:cursor-pointer  lg:hidden "
+              />
+            ) : (
+              <GiHamburgerMenu
+                onClick={toggle}
+                className="md:text-3xl text-2xl hover:cursor-pointer  lg:hidden "
+              />
+            )
+          ) : null}
         </div>
-        
-      </div>{confirmationModal && <ConfirmModal modalData={confirmationModal} /> }
+      </div>
+      {confirmationModal && <ConfirmModal modalData={confirmationModal} />}
     </div>
   );
 };

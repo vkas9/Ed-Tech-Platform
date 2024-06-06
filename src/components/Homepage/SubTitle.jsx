@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
+import {profileAction} from "../../store/profileSlice"
+import { useDispatch, useSelector } from "react-redux";
 const SubTitle=({catagory})=>{
+  const dispatch=useDispatch();
+  const {openNavigation,sidebarShow:show} =useSelector((store)=>store.profile)
     return (
         <motion.div
       initial={{ opacity: 0 }}
@@ -12,6 +15,10 @@ const SubTitle=({catagory})=>{
       {catagory.length
         ? catagory.map((item) => (
             <Link
+            onClick={(e)=>{ e.stopPropagation()
+              if(openNavigation) dispatch(profileAction.setOpenNavigation(!openNavigation))
+                if(show)dispatch(profileAction.setSidebarShow(!show))
+            }}
               key={item.name}
               to={item.link}
               className="bg-gray-200 hover:bg-gray-500/60 rounded-md py-2 mx-2"

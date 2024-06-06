@@ -26,7 +26,7 @@ const Courses = () => {
           dispatch(courseAction.setExploreAllCourses(courseData));
         
       } catch (error) {
-        toast.error("Unable to fetch all courses");
+        console.error("Unable to fetch all courses");
       }
     };
 
@@ -57,7 +57,7 @@ const Courses = () => {
         <span className="text-yellow-500 ">Courses</span>
       </div>
     <h1 className="text-3xl mb-3">Explore Courses</h1>
-      <div className="overflow-auto h-[75vh]">
+      <div className="overflow-auto  pb-[4rem] h-[75vh]">
         {!course ? (
           <div>
             <p>Loading...</p>

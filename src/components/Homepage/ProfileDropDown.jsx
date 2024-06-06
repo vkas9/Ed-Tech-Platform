@@ -5,12 +5,12 @@ import {profileAction} from "../../store/profileSlice"
 const ProfileDropDown=()=>{
     const navigate=useNavigate()
     const dispatch=useDispatch();
-    const {user,openNavigation}= useSelector((store) => store.profile);
+    const {user,openNavigation,sidebarShow:show}= useSelector((store) => store.profile);
     const handleSubmit=(e)=>{
         
         e.preventDefault()
         
-        
+         if(show)dispatch(profileAction.setSidebarShow(!show))
          if(openNavigation) dispatch(profileAction.setOpenNavigation(!openNavigation))
         navigate("/dashboard/my-profile")
 

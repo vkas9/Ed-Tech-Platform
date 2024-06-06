@@ -45,7 +45,7 @@ const ProfileDashboard = () => {
         </div>
       </div>
       <div className="mt-8 px-3 sm:px-0">
-        <div className=" p-4 flex flex-col items-center  bg-white/10 rounded-md pt-2 pb-6 gap-9 sm:w-[95%] w-full  lg:max-w-[55rem] sm:ml-5 ">
+        <div className=" p-4 flex mb-[4rem] flex-col items-center  bg-white/10 rounded-md pt-2 pb-6 gap-9 sm:w-[95%] w-full  lg:max-w-[55rem] sm:ml-5 ">
           <div className="flex mt-2 overflow-x-auto items-center mx-3 w-full justify-between  ">
             <div className="flex text-2xl font-semibold flex-col ">
               <span className="overflow-x-auto ">Personal Details</span>
@@ -58,7 +58,7 @@ const ProfileDashboard = () => {
             </div>
             </Link>
           </div>
-          <div className=" w-full bg-gray-500/10 flex-col sm:flex-row p-4 py-6 rounded-xl  mx-3 flex justify-between  gap-3">
+          <div className="  w-full bg-gray-500/10  flex-col sm:flex-row p-4 py-6 rounded-xl  mx-3 flex justify-between  gap-3">
             <div className="flex flex-col gap-4 ">
               <div className="flex flex-col ">
                 <span className="text-gray-400 overflow-x-auto">First Name</span>

@@ -65,7 +65,7 @@ const Wishlist = () => {
       </div>
 
       <h1 className="text-3xl mb-3">My Wishlist <span>({wishlist?.length}</span>)</h1>
-      <div className="overflow-auto  h-[75vh] ">
+      <div className="overflow-auto  pb-[4rem]  h-[75vh] ">
         {!Wishlist ? (
           <div>
             <p>Loading...</p>
