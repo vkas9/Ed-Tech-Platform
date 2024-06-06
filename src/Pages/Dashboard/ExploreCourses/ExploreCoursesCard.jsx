@@ -93,7 +93,7 @@ const ExploreCoursesCard = ({ course }) => {
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className="text-[1.1rem] md:mr-2  w-[120px] bg-white/10 text-center hover:bg-green-500/20 active:bg-green-500/30  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  "
+            className="text-[1.1rem] md:mr-2  w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  "
           >
             {user?.Courses?.includes(course._id) ? (
               <span
