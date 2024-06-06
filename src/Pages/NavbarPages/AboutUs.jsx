@@ -1,6 +1,10 @@
+import {motion} from "framer-motion"
 const AboutUs = () => {
   return (
-    <div className="w-screen min-h-screen  flex-col pt-[3rem]   font-semibold text-white/50 flex items-center justify-center ">
+    <motion.div
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }} className="w-screen min-h-screen  flex-col pt-[3rem]   font-semibold text-white/50 flex items-center justify-center ">
        <div className="flex items-center justify-center">
           <h1 className="text-[2.5rem]   w-fit mt-[1rem]  mx-2 md:text-[4rem] bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center">
             About Us
@@ -29,7 +33,7 @@ const AboutUs = () => {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default AboutUs;
