@@ -382,8 +382,8 @@ export const deleteCartDetails = async (data) => {
     const text = encryptData(response.data.updatedUser);
     localStorage.setItem(import.meta.env.VITE_USER, text);
 
-    toast.success("Course Deleted from Cart");
-    // console.log("Course deleted from Cart", response.data);
+    toast.success("Course Deleted from Wishlist");
+
     return response.data.updatedUser;
   } catch (error) {
     console.error("Error Course Deleting from Cart", error);

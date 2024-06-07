@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const ExploreCoursesCard = ({ course }) => {
   const [loading, setLoading] = useState(false);
-  const [cart, setCart] = useState(false);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,7 +28,6 @@ const ExploreCoursesCard = ({ course }) => {
 
     const updatedUser = await updateCartDetails(course?._id);
     dispatch(profileAction.setProfile(updatedUser));
-    // navigate("/dashboard/wishlist");
     setLoading(false);
   };
 
@@ -41,24 +40,26 @@ const ExploreCoursesCard = ({ course }) => {
   return (
     <div
       onClick={handleClick}
-      className="flex relative text-[1.1rem] justify-between flex-col sm:flex-row mr-5  rounded-xl mt-4 hover:cursor-pointer active:bg-gray-300/20 sm:hover:bg-gray-300/20 bg-gray-300/10 max-w-[60rem] p-1 "
+      className={`flex relative text-[1.1rem] justify-between flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
+        !isButtonHovered ? 'sm:hover:bg-gray-300/20' : ''
+      } bg-gray-300/10 max-w-[60rem] p-1`}
     >
       <div className="gap-3 p-2 overflow-auto items-center flex">
         <img
           src={course?.Thumbnail}
           alt="course-thumbnail"
-          className="w-[160px] h-[110px] max-w-[160px] object-cover  rounded-lg "
+          className="w-[160px] h-[110px] max-w-[160px] object-cover rounded-lg"
         />
 
-        <div className=" w-[200px]">
+        <div className="w-[200px]">
           <h2>{course.CourseName}</h2>
-          <p className="text-white/40 text-[.9rem] ">
+          <p className="text-white/40 text-[.9rem]">
             {course.CourseDescription}
           </p>
           <div className="flex gap-2 whitespace-nowrap overflow-auto items-center">
             <span>4.8</span>
             <ReactStars
-              className=" min-w-fit hidden xs:flex  whitespace-nowrap overflow-auto  "
+              className="min-w-fit hidden xs:flex whitespace-nowrap overflow-auto"
               count={5}
               size={25}
               edit={false}
@@ -69,42 +70,48 @@ const ExploreCoursesCard = ({ course }) => {
           </div>
         </div>
       </div>
-      <div className="h-[1px] bg-white/10 mx-3 my-1  " />
+      <div className="h-[1px] bg-white/10 mx-3 my-1" />
 
-      <div className="flex  xs:items-center gap-1 vm:gap-5  justify-between">
-      <div className="vm:grid overflow-x-auto xd:w-[220px]  grid-flow-col items-start  gap-2">
-          <div className=" w-fit  pl-4 sm:pl-0 flex items-center ">
-            <span className="">
-              {" "}
+      <div className="flex xs:items-center gap-1 vm:gap-5 justify-between">
+        <div className="vm:grid overflow-x-auto xd:w-[220px] grid-flow-col items-start gap-2">
+          <div className="w-fit pl-4 sm:pl-0 flex items-center">
+            <span>
               <span className="text-white/40">Duration:</span>{" "}
-              <span className="whitespace-nowrap"><span className="sm:block"> 5hr 45m</span></span>
+              <span className="whitespace-nowrap">
+                <span className="sm:block"> 5hr 45m</span>
+              </span>
             </span>
           </div>
 
-          <div className=" w-fit pl-4 flex items-center ">
-            <span className="">
-              {" "}
-              <span className="text-white/40">Price:</span > <span className="sm:block"> ₹{course.Price}</span>
+          <div className="w-fit pl-4 flex items-center">
+            <span>
+              <span className="text-white/40">Price:</span>{" "}
+              <span className="sm:block"> ₹{course.Price}</span>
             </span>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center    gap-1">
+        <div className="flex flex-col justify-center items-center gap-1">
           <div
             onClick={(e) => {
               e.stopPropagation();
+              navigate(
+                user?.Courses?.includes(course._id)
+                  ? "/dashboard/enrolled-courses"
+                  : ""
+              );
             }}
-            className="text-[1.1rem] md:mr-2  w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  "
+            onMouseEnter={(e) => {
+              e.stopPropagation();
+              setIsButtonHovered(true);
+            }}
+            onMouseLeave={(e) => {
+              e.stopPropagation();
+              setIsButtonHovered(false);
+            }}
+            className="text-[1.1rem] select-none md:mr-2 w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20 box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full"
           >
             {user?.Courses?.includes(course._id) ? (
-              <span
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate("/dashboard/enrolled-courses");
-                }}
-                className=""
-              >
-                Go to Course
-              </span>
+              <span>Go to Course</span>
             ) : (
               "Buy"
             )}
@@ -114,16 +121,24 @@ const ExploreCoursesCard = ({ course }) => {
               e.stopPropagation();
               handleCart();
             }}
+            onMouseEnter={(e) => {
+              e.stopPropagation();
+              setIsButtonHovered(true);
+            }}
+            onMouseLeave={(e) => {
+              e.stopPropagation();
+              setIsButtonHovered(false);
+            }}
             className={`text-[1.1rem] ${
               user?.Courses?.includes(course._id) ? "hidden" : null
-            } hover:text-white text-white/30   box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full  `}
+            } hover:text-white text-white/30 box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full`}
           >
             {user?.Cart?.includes(course._id) ? "Go to Cart" : "Add to Cart"}
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   );
 };
-export default ExploreCoursesCard;
 
+export default ExploreCoursesCard;

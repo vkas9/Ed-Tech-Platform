@@ -206,7 +206,7 @@ exports.deleteCartDetails=async(req,res)=>{
         console.log("updatedUser",updatedUser)
         res.status(200).json({
             success:true,
-            message:"Successfully Course deleted from Cart",
+            message:"Successfully Course deleted from Wishlist",
             updatedUser
         })
 
@@ -216,7 +216,7 @@ exports.deleteCartDetails=async(req,res)=>{
         console.log(error);
         return res.status(500).json({
             success:false,
-            message:"something went wrong while deleting course from cart"
+            message:"something went wrong while deleting course from Wishlist"
         })
     }
 }

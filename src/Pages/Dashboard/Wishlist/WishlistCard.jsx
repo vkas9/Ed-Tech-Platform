@@ -13,6 +13,7 @@ import { useState } from "react";
 const WishlistCard = ({ course }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [loading, setLoading] = useState(false);
   const handleCart = async () => {
     setLoading(true);
@@ -38,7 +39,7 @@ const WishlistCard = ({ course }) => {
         e.stopPropagation();
         handleClick();
       }}
-      className="flex relative text-[1.1rem] justify-between flex-col sm:flex-row mr-5  rounded-xl mt-4 hover:cursor-pointer active:bg-gray-300/20 sm:hover:bg-gray-300/20 bg-gray-300/10 max-w-[60rem] p-1  "
+      className={`flex relative text-[1.1rem] justify-between flex-col sm:flex-row mr-5  rounded-xl mt-4 hover:cursor-pointer ${!isButtonHovered?"active:bg-gray-300/20 sm:hover:bg-gray-300/20":""} bg-gray-300/10 max-w-[60rem] p-1  `}
     >
       <div className="gap-3 p-2 overflow-auto items-center flex">
         <img
@@ -86,7 +87,15 @@ const WishlistCard = ({ course }) => {
         </div>
         <div
           onClick={(e) => e.stopPropagation()}
-          className=" text-[1.1rem] ml-7   w-[80px] vm:w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full "
+          onMouseEnter={(e)=>{
+            e.stopPropagation()
+            setIsButtonHovered(true)
+          }}
+          onMouseLeave={(e)=>{
+            e.stopPropagation()
+            setIsButtonHovered(false)
+          }}
+          className=" text-[1.1rem] ml-7 select-none   w-[80px] vm:w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full "
         >
           Buy
         </div>
@@ -97,6 +106,14 @@ const WishlistCard = ({ course }) => {
           onClick={(e) => {
             e.stopPropagation();
             handleCart();
+          }}
+          onMouseEnter={(e)=>{
+            e.stopPropagation()
+            setIsButtonHovered(true)
+          }}
+          onMouseLeave={(e)=>{
+            e.stopPropagation()
+            setIsButtonHovered(false)
           }}
           className="text-[1.7rem] absolute lg:top-1 lg:right-1  top-1 right-1  sm:-top-1 sm:-right-1 hover:bg-white/10 box-content p-2 md:p-3 transition-all hover:cursor-pointer duration-150 rounded-full  "
         />
