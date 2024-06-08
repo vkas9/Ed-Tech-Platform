@@ -183,11 +183,12 @@ export const logout = (navigate) => {
       
       dispatch(authAction.setToken(null));
       dispatch(profileAction.setProfile(null));
-      localStorage.clear();
+      
 
       dispatch(cardAction.reset());
       dispatch(courseAction.resetCourseState());
       toast.success(response.data.message);
+      localStorage.clear();
       navigate("/");
     } catch (error) {
       toast.error(response.data.message);
@@ -402,8 +403,8 @@ export const getCartDetails = async (signal) => {
         signal: signal,
       }
     );
-
-    return response.data.updatedCart.Cart;
+   const updatedWishlist= response.data.updatedCart.Cart;
+    return updatedWishlist.reverse();
   } catch (error) {
     console.error("Error fetching cart", error);
     toast.error(error.response.data.message);
@@ -497,6 +498,25 @@ export const updateSection = async (data) => {
     toast.dismiss(toastId);
   }
 };
+export const editCourseDetails=async(data)=>{
+  const toastId = toast.loading("Loading");
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/v1/course/editCourseDetails`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+    toast.success(" Course updated Successfully");
+    return response.data;
+  } catch (error) {
+    console.error("Error  updating Course", error);
+    toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+  }
+}
 export const updateCourse = async (data) => {
   const toastId = toast.loading("Loading");
   try {

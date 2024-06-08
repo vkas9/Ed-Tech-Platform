@@ -20,10 +20,11 @@ const SubSectionModal = ({
     const { course } = useSelector((store) => store.course);
     const [loading, setLoading] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
+   
     const initialValues = {
         lectureTitle: modalData.title || '',
         lectureDesc: modalData.description || '',
-        lectureVideo: modalData.videoUrl || '',
+        lectureVideo: modalData.videoURL || '',
     };
 
     const validationSchema = Yup.object().shape({
@@ -36,7 +37,7 @@ const SubSectionModal = ({
         return (
             currentValues.lectureTitle !== modalData.title ||
             currentValues.lectureDesc !== modalData.description ||
-            currentValues.lectureVideo !== modalData.videoUrl
+            currentValues.lectureVideo !== modalData.videoURL
         );
     };
 
@@ -54,7 +55,7 @@ const SubSectionModal = ({
             formData.append('description', values.lectureDesc);
         }
 
-        if (values.lectureVideo !== modalData.videoUrl) {
+        if (values.lectureVideo !== modalData.videoURL) {
             formData.append('video', values.lectureVideo);
         }
 
@@ -125,8 +126,8 @@ const SubSectionModal = ({
                                 label="Lecture Video"
                                 setValue={handleChange}
                                 video={true}
-                                viewData={view ? modalData.videoUrl : null}
-                                editData={edit ? modalData.videoUrl : null}
+                                viewData={view ? modalData.videoURL : null}
+                                editData={edit ? modalData.videoURL : null}
                             />
                             <div className="flex flex-col space-y-1">
                                 <label htmlFor='lectureTitle' className="text-md font-semibold text-white/80">

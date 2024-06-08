@@ -4,7 +4,7 @@ const Indexcourse=()=>{
     return (
         <div>
             <div>
-                <h1>Add Course</h1>
+                <h1>Create Course</h1>
                 <div>
                     <RenderSteps/>
                 </div>

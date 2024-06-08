@@ -12,6 +12,7 @@ import { MdOutlineOndemandVideo } from "react-icons/md";
 const NestedView = ({ handleChangeEditSectionName }) => {
   const { course } = useSelector((store) => store.course);
   const dispatch = useDispatch();
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [openSections, setOpenSections] = useState({});
   const [confirmationModal, openConfirmationModal] = useState(null);
   const [viewSubSection, setViewSubSection] = useState(null);
@@ -68,7 +69,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
             <details key={section._id} className="mb-2">
               <summary
                 onClick={() => handleSetOpen(section._id)}
-                className="cursor-pointer flex items-center justify-between p-2 bg-white/20 rounded-md hover:bg-white/30"
+                className={`cursor-pointer flex items-center justify-between p-2 ${!isButtonHovered?"hover:bg-white/30":""} bg-white/20 rounded-md `}
               >
                 <div className="flex items-center gap-2">
                   {openSections[section._id] ? (
@@ -87,8 +88,17 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                         section.SectionName
                       );
                     }}
+                    onMouseEnter={(e)=>{
+                      e.stopPropagation()
+                      setIsButtonHovered(true)
+                    }}
+                    onMouseLeave={(e)=>{
+                      e.stopPropagation()
+                      setIsButtonHovered(false)
+                    }}
                     className="hover:bg-white/20 rounded-full p-2"
                   >
+                    
                     <MdEdit className="text-xl" />
                   </div>
                   <div
@@ -106,6 +116,14 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                         btn2Handler: () => openConfirmationModal(null),
                       });
                     }}
+                    onMouseEnter={(e)=>{
+                      e.stopPropagation()
+                      setIsButtonHovered(true)
+                    }}
+                    onMouseLeave={(e)=>{
+                      e.stopPropagation()
+                      setIsButtonHovered(false)
+                    }}
                     className="hover:bg-white/20 rounded-full p-2"
                   >
                     <MdDelete className="text-xl" />
@@ -117,7 +135,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                   <div
                     key={subsection?._id}
                     onClick={() => setViewSubSection(subsection)}
-                    className="px-4 py-1 hover:bg-white/20 hover:cursor-pointer bg-white/10 rounded-md ml-4 mt-2"
+                    className={`px-4 py-1 ${!isButtonHovered?"hover:bg-white/20 active:bg-white/20":""} hover:cursor-pointer bg-white/10 rounded-md ml-4 mt-2`}
                   >
                     <div className="flex items-center justify-between">
                       <div>
@@ -135,6 +153,14 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                               ...subsection,
                               sectionId: section._id,
                             });
+                          }}
+                          onMouseEnter={(e)=>{
+                            e.stopPropagation()
+                            setIsButtonHovered(true)
+                          }}
+                          onMouseLeave={(e)=>{
+                            e.stopPropagation()
+                            setIsButtonHovered(false)
                           }}
                           className="hover:bg-white/20 rounded-full p-2"
                         >
@@ -157,6 +183,14 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                               },
                               btn2Handler: () => openConfirmationModal(null),
                             });
+                          }}
+                          onMouseEnter={(e)=>{
+                            e.stopPropagation()
+                            setIsButtonHovered(true)
+                          }}
+                          onMouseLeave={(e)=>{
+                            e.stopPropagation()
+                            setIsButtonHovered(false)
                           }}
                           className="hover:bg-white/20 rounded-full p-2"
                         >

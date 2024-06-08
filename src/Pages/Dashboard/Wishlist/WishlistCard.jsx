@@ -29,6 +29,7 @@ const WishlistCard = ({ course }) => {
   };
   const { user } = useSelector((store) => store.profile);
   const handleClick = () => {
+    
     if (user?.Courses?.includes(course._id))
       navigate(`/dashboard/enrolled-courses`);
     else navigate(`/dashboard/wishlist/${uuidv4()}/${course._id}`);
@@ -95,13 +96,13 @@ const WishlistCard = ({ course }) => {
             e.stopPropagation()
             setIsButtonHovered(false)
           }}
-          className=" text-[1.1rem] ml-7 select-none   w-[80px] vm:w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full "
+          className=" text-[1.1rem] ml-7   w-[80px] vm:w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full "
         >
           Buy
         </div>
       </div>
 
-      <button disabled={loading} className="">
+      <button disabled={loading} className="bg-red-500"  >
         <RxCross2
           onClick={(e) => {
             e.stopPropagation();

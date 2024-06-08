@@ -4,12 +4,14 @@ import { useEffect } from "react";
 import { getAllInstructorCourses } from "../../../APIs/Authapi";
 import { useDispatch, useSelector } from "react-redux";
 import { courseAction } from "../../../store/courseSlice";
+import { encryptData } from "../../../components/core/auth/crypto";
 
 const AllCourse = () => {
   const dispatch = useDispatch();
-  const { allInstructoreCourses,creatingCourse } = useSelector((store) => store.course);
-    // console.log("creatingCourse",allInstructoreCourses)
+  const { allInstructoreCourses,creatingCourse } = useSelector((store) => store.course)  
+  // console.log("allInstructoreCourses->",allInstructoreCourses,"creatingCourse->",creatingCourse)
     const {user:data} =  useSelector((store) => store.profile);
+    
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -19,15 +21,15 @@ const AllCourse = () => {
         
         if (data && data.role==="Instructor" ) {
           const courseData = await getAllInstructorCourses(signal);
-          // console.log("courseData->",courseData)
+          
           if (!signal.aborted) {
-
-            localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, JSON.stringify(courseData.instructorCourses));
+            const text=encryptData(courseData.instructorCourses)
+            localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, JSON.stringify(text));
             dispatch(courseAction.setIC(courseData.instructorCourses));
           }
         } else {
-          localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, JSON.stringify([]));
-          dispatch(courseAction.setIC([]));
+          localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, JSON.stringify(null));
+          dispatch(courseAction.setIC(null));
         }
       } catch (error) {
         if (error.name !== 'AbortError') {
@@ -37,7 +39,7 @@ const AllCourse = () => {
       dispatch(courseAction.setCreatingCourse(false));
     };
 
-    if (creatingCourse|| !allInstructoreCourses) {
+    if (creatingCourse||allInstructoreCourses === null) {
       fetchData();
     }
 

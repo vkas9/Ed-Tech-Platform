@@ -6,24 +6,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { MdNavigateNext } from "react-icons/md";
 import * as Yup from "yup";
 import {courseAction} from "../../../store/courseSlice"
-import { addCourseDetails } from "../../../APIs/Authapi";
+import { addCourseDetails, editCourseDetails, updateCourse } from "../../../APIs/Authapi";
 import Upload from "./Upload";
 import { motion } from "framer-motion";
 
 const CourseInformationForm = () => {
   const { course, editCourse } = useSelector((state) => state.course);
   const dispatch = useDispatch();
-
   const [loading, setLoading] = useState(false);
   const [courseCategories, setCourseCategories] = useState([]);
 
   const initialValues = {
-    courseTitle: course.courseName || "",
-    courseShortDesc: course.courseDescription || "",
-    coursePrice: course.price || "",
-    courseCategory: course.category?._id || "",
-    courseBenefits: course.whatYouWillLearn || "",
+    courseTitle: course.CourseName || "",
+    courseShortDesc: course.CourseDescription || "",
+    coursePrice: course.Price || "",
+    courseCategory: course.Catagory || "",
+    courseBenefits: course.WhatYouWillLearn || "",
   };
+  
 
   useEffect(() => {
     const getCategories = async () => {
@@ -58,15 +58,12 @@ const CourseInformationForm = () => {
     }
 
     return (
-      currentValues.courseTitle !== course.courseName ||
-      currentValues.courseShortDesc !== course.courseDescription ||
-      currentValues.coursePrice !== course.price ||
-      JSON.stringify(currentValues.courseTags) !== JSON.stringify(course.tag) ||
-      currentValues.courseBenefits !== course.whatYouWillLearn ||
-      currentValues.courseCategory !== course.category?._id ||
-      JSON.stringify(currentValues.courseRequirements) !==
-        JSON.stringify(course.instructions) ||
-      currentValues.courseImage !== course.thumbnail
+      currentValues.courseTitle !== course.CourseName ||
+      currentValues.courseShortDesc !== course.CourseDescription ||
+      currentValues.coursePrice !== course.Price ||
+      currentValues.courseBenefits !== course.WhatYouWillLearn ||
+      currentValues.courseCategory !== course.Catagory 
+      // currentValues.courseImage !== course.Thumbnail
     );
   };
 
@@ -75,7 +72,8 @@ const CourseInformationForm = () => {
 
     try {
 
-      if (editCourse && isFormUpdated(values)) {
+      if (editCourse ) {
+        
         const formData = new FormData();
         formData.append("courseId", course._id);
         formData.append("courseName", values.courseTitle);
@@ -83,15 +81,16 @@ const CourseInformationForm = () => {
         formData.append("price", values.coursePrice);
         formData.append("whatYouWillLearn", values.courseBenefits);
         formData.append("category", values.courseCategory);
-        formData.append("thumbnailImage", values.courseImage);
-
+        formData.append("thumbnailImage", values.courseImage|| course.Thumbnail);
+        // console.log("values.courseImage",course.Thumbnail)
         setLoading(true);
         const result = await editCourseDetails(formData);
+        // console.log("result->",result)
         setLoading(false);
 
         if (result) {
           dispatch(courseAction.setStep(2));
-          dispatch(courseAction.setCourse(result));
+          dispatch(courseAction.setCourse(result.course));
         } else {
           console.error("Edit course details failed");
         }
@@ -102,18 +101,19 @@ const CourseInformationForm = () => {
         formData.append("price", values.coursePrice.toString());
         formData.append("whatYouWillLearn", values.courseBenefits);
         formData.append("category", values.courseCategory);
-        formData.append("thumbnailImage", values.courseImage);
-        
+        formData.append("thumbnailImage",values.courseImage);
+      
         setLoading(true);
         
         const result = await addCourseDetails(formData);
         setLoading(false);
+       
 
         if (result) {
           dispatch(courseAction.setStep(2));
           dispatch(courseAction.setCourse(result.data));
         } else {
-          console.error("Add course details failed");
+          console.error("Create course details failed");
         }
         
       }
@@ -130,9 +130,10 @@ const CourseInformationForm = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      enableReinitialize
     >
       {({ errors, touched, isSubmitting, setFieldValue }) => (
-        <Form className="space-y-8 rounded-md max-w-[700px] m-5 bg-white/10 p-6">
+        <Form className="space-y-8 rounded-md max-w-[700px] m-5 bg-white/10 mb-[10rem] p-6">
           {/* Course Title */}
           <div className="flex flex-col space-y-1">
             <label
@@ -233,7 +234,8 @@ const CourseInformationForm = () => {
             label="Course Thumbnail"
             
             errors={errors}
-            editData={editCourse ? course.thumbnail : null}
+            editData={editCourse ? course.Thumbnail
+              : null}
           />
           {/* Benefits of the course */}
           <div className="flex flex-col space-y-1">

@@ -7,6 +7,7 @@ const path=require('path');
 const fs = require('fs/promises');
 exports.createCourse = async (req, res) => {
     try {
+
         const { courseName, courseDescription, whatYouWillLearn, price, category } = req.body;
         const thumbnail = req.files?.thumbnailImage;
 
@@ -41,7 +42,7 @@ exports.createCourse = async (req, res) => {
             CourseDescription: courseDescription,
             WhatYouWillLearn: whatYouWillLearn,
             Price: price,
-            Category: category,
+            Catagory: category,
             Thumbnail: uploadThumbnail.secure_url,
             Instructor: req.user.id
         });
@@ -110,6 +111,60 @@ exports.updateCourse=async(req,res)=>{
 
     } catch (error) {
         console.log(error);
+        
+    }
+}
+exports.editCourseDetails=async(req,res)=>{
+    try {
+        const {courseId}=req.body;
+        const course=await Course.findById(courseId);
+        const { courseName, courseDescription, whatYouWillLearn, price, category,thumbnailImage } = req.body;
+        const thumbnail = req.files?.thumbnailImage;
+        var uploadThumbnail;
+        if(thumbnail){
+            const tempDir = path.join(__dirname, '..', 'public', 'temp');
+            const tempCompressedPath = path.join(tempDir, `compressed_${Date.now()}.jpeg`);
+    
+            await fs.mkdir(tempDir, { recursive: true });
+    
+            await sharp(thumbnail.tempFilePath)
+                .resize(1024, 1024, { fit: sharp.fit.inside, withoutEnlargement: true })
+                .toFormat('jpeg', { quality: 80 })
+                .toFile(tempCompressedPath);
+    
+            uploadThumbnail = await UploadFile(tempCompressedPath, {
+                folder: "VikasFolder",
+                transformation: [
+                    { quality: "auto:good" },
+                    { fetch_format: "auto" }
+                ],
+                resource_type: "auto"
+            });
+            await fs.unlink(tempCompressedPath);
+        }
+        
+        
+        course.CourseName=courseName;
+        course.CourseDescription=courseDescription;
+        course.WhatYouWillLearn=whatYouWillLearn;
+        course.Catagory=category;
+        course.Price=price;
+        course.Thumbnail=thumbnailImage||uploadThumbnail.secure_url
+        await course.save()
+        res.status(200).json({
+        success:true,
+        message:"course Updated",
+        course
+       })
+
+
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            success:true,
+            message:"course not Updated"
+           }) 
         
     }
 }

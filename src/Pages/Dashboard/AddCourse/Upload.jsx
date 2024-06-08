@@ -12,6 +12,7 @@ export default function Upload({
   viewData = null,
   editData = null,
 }) {
+  // console.log("video=>",video,"/","viewData->",viewData)
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewSource, setPreviewSource] = useState(
     viewData ? viewData : editData ? editData : ""
@@ -98,7 +99,7 @@ export default function Upload({
                   setSelectedFile(null);
                   setValue(null);
                 }} 
-                className="mt-3 text-richblack-400 bg-white/10 py-2 rounded-full px-5  "
+                className="mt-3 text-richblack-400 active:bg-white/20 sm:hover:bg-white/20 bg-white/10 py-2 rounded-full px-5  "
               >
                 Cancel
               </button>

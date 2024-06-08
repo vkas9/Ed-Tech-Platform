@@ -55,8 +55,8 @@ export const Profile = [
     icon: PiGraduationCap,
   },{
     id: "6",
-    title: "Add Course",
-    url: "/dashboard/add-course",
+    title: "Create Course",
+    url: "/dashboard/create-course",
     role: "Instructor",
     icon: IoIosAddCircleOutline,
   }
