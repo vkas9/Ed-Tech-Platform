@@ -87,7 +87,9 @@ const WishlistCard = ({ course }) => {
           </div>
         </div>
         <div
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()}}
           onMouseEnter={(e)=>{
             e.stopPropagation()
             setIsButtonHovered(true)
@@ -96,7 +98,7 @@ const WishlistCard = ({ course }) => {
             e.stopPropagation()
             setIsButtonHovered(false)
           }}
-          className=" text-[1.1rem] ml-7   w-[80px] vm:w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full "
+          className=" text-[1.1rem] ml-7   select-none w-[80px] vm:w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full "
         >
           Buy
         </div>
