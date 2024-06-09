@@ -11,7 +11,7 @@ const ProfileDashboard = () => {
 
   if(user) return (
 
-    <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="w-full">
+    <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="w-full pb-[8rem]">
       <div className=" text-lg flex flex-col gap-4 mt-2 ml-5 ">
         <div className="flex text-white/50  overflow-x-auto font-semibold gap-2 ">
           <span>Home</span>
