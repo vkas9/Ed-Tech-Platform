@@ -1,4 +1,3 @@
-import { TypeAnimation } from "react-type-animation";
 import Button from "../../components/Homepage/Button";
 import { IoCodeSlashSharp } from "react-icons/io5";
 import gradient from "../../assets/gradient.jpg";
