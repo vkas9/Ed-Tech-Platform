@@ -581,6 +581,7 @@ export const updateProfile=async(data)=>{
       withCredentials:true,
       
     })
+    toast.success("Saved")
    
   } catch (error) {
     console.log(error)
