@@ -166,7 +166,6 @@ exports.login = async (req, res) => {
         sameSite:'None',
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
       };
-      console.log("registredUser",registredUser)
       res.cookie("__EDTat", accessToken, options).cookie("__EDTrt",refreshToken,options).status(200).json({
         success: true,
         registredUser,
