@@ -280,39 +280,43 @@ exports.changePassword = async (req, res) => {
   }
 };
 
-exports.verifyForgotPasswordOTP=async(req,res)=>{
+exports.verifyForgotPasswordOTP = async (req, res) => {
   try {
-   const{otp,email}=req.body;
-   console.log("opt",otp," email->",email)
+    const { otp, email } = req.body;
+    console.log("otp", otp, " email->", email);
+
     const recentOtp = await OTP.find({ email })
-      .sort({ createAt: -1 })
-      .limit(1);
-    console.log("recentOtp-->", recentOtp);
-    if (recentOtp[0] === 0 || recentOtp.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "OTP Expired",
-      });
-    } else if (recentOtp[0].OTP !== otp) {
-      return res.status(400).json({
-        success: false,
+    .sort({ createdAt: -1 })
+    .limit(1);
+  console.log("recentOtp-->", recentOtp);
 
-        message: "OTP not Matching",
-      });
-    }
-    res.status(200).json({
-      success:true,
-      message:"Email Verified!"
-    })
-
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({
-      success:false,
-      message:"Failed to Verify OTP"
-    })
+  if (recentOtp.length === 0 || recentOtp[0] === 0) {
+    return res.status(400).json({
+      success: false,
+      message: "OTP Expired",
+    });
+  } else if (recentOtp[0].OTP !== otp) {
+    return res.status(400).json({
+      success: false,
+      message: "OTP not Matching",
+    });
   }
+  
+  res.status(200).json({
+    success: true,
+    message: "Email Verified!",
+  });
+
+} catch (error) {
+  console.log(error);
+  res.status(500).json({
+    success: false,
+    message: "Failed to Verify OTP",
+  });
 }
+};
+
+
 exports.resetPassword = async (req, res) => {
   try {
     const {password, ConfirmPassword,email } = req.body;

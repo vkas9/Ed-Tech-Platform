@@ -18,7 +18,7 @@ const VerifyEmail = () => {
 
   const handleInput = (e, index) => {
     const val = e.target.value;
-    if (val === 0 && !Number(val)) return;
+    if (!/^\d$/.test(val)) return;
     const newInput = [...input];
     newInput[index] = val;
     setInput(newInput);
@@ -43,10 +43,13 @@ const VerifyEmail = () => {
       const copyInput = [...input];
       copyInput[index] = "";
       setInput(copyInput);
-
+      console.log("input[index]",input[index])
       setTimeout(() => {
-        if (index >= 0) {
-          ref[index - 1].current.focus();
+        if (index > 0) {
+          if(input[index]!==''){
+            ref[index - 1].current.focus();
+          }
+         
         }
       }, 10);
     }
