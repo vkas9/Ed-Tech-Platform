@@ -6,10 +6,10 @@ const profileSchema = new mongoose.Schema({
     contactNumber:{
         type:Number
     },
-    Country:{
+    city:{
         type:String
     },
-    about:{
+    gender:{
         type:String
     },
     dateOfBirth:{

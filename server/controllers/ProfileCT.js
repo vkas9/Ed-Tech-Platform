@@ -4,19 +4,20 @@ const Courses=require("../models/Courses");
 const { UploadFile } = require("../utils/fileUploader");
 exports.updateProfile=async(req,res)=>{
     try {
-        const{contactNumber,Country="",about="",dateOfBirth=""}=req.body;
+        const{contactNumber,city,gender,dateOfBirth}=req.body;
         const userId=req.user.id;
         const userDetail=await user.findById(userId);
         const profileId=userDetail.Profile;
         const profileDetail=await profile.findById(profileId);
         profileDetail.dateOfBirth=dateOfBirth;
         profileDetail.contactNumber=contactNumber;
-        profileDetail.Country=Country;
-        profileDetail.about=about;
+        profileDetail.city=city;
+        profileDetail.gender=gender;
         await profileDetail.save();
         return res.status(200).json({
             success:true,
-            message:"successfully update user Profile"
+            message:"successfully update user Profile",
+            profileDetail
         })
         
     } catch (error) {

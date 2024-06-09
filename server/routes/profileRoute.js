@@ -2,11 +2,12 @@ const app=require('express');
 const router=app.Router();
 
 
-const{deleteAccount,getEnrolledCourses, getAllInstructorCourses}=require("../controllers/ProfileCT");
+const{deleteAccount,getEnrolledCourses, getAllInstructorCourses, updateProfile}=require("../controllers/ProfileCT");
 const {auth,isInstructor,isStudent}=require("../middlewares/middlewareAuth");
 
 router.delete("/deleteAccount",auth,isStudent,deleteAccount);
 router.get("/getEnrolledCourses",auth,getEnrolledCourses);
 router.get("/getAllInstructorCourses",auth,isInstructor,getAllInstructorCourses);
+router.post("/updateProfile",auth,updateProfile);
 
 module.exports=router;

@@ -574,3 +574,17 @@ export const getAllCourse = async (signal) => {
     toast.dismiss(toastId);
   }
 };
+export const updateProfile=async(data)=>{
+  const toastId = toast.loading("Saving");
+  try {
+    const response=await axios.post(`${BASE_URL}/api/v1/profile/updateProfile`,data,{
+      withCredentials:true,
+      
+    })
+   
+  } catch (error) {
+    console.log(error)
+  }finally{
+    toast.dismiss(toastId)
+  }
+}
