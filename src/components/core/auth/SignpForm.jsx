@@ -57,7 +57,7 @@ const SignupForm = () => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
       exit={{ opacity: 0 }}
-      className="flex h-screen  pt-[3rem] sm:pt-[15vh] flex-col gap-1 xs:gap-3 px-2 items-center"
+      className="flex min-h-screen  pt-[3rem] sm:pt-[15vh] flex-col gap-1 xs:gap-3 px-2 items-center"
     >
       <h1 className="text-[2.5rem] mt-[1rem] mx-2 md:text-[4em] bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center">
         Create Master Account
