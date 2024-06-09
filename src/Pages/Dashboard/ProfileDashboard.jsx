@@ -68,6 +68,10 @@ const ProfileDashboard = () => {
                 <span className="text-gray-400 overflow-x-auto">Last Name</span>
                 <span className="capitalize overflow-x-auto ">{user.LastName}</span>
               </div>
+              <div className="flex flex-col ">
+                <span className="text-gray-400 overflow-x-auto">Gender</span>
+                <span className="capitalize overflow-x-auto ">{user.Profile.gender?user.Profile.gender:"NIL"}</span>
+              </div>
             </div>
             <div className="flex flex-col gap-4">
               <div className="flex  flex-col ">
@@ -77,6 +81,10 @@ const ProfileDashboard = () => {
               <div className="flex flex-col ">
                 <span className="text-gray-400 overflow-x-auto">Phone Number</span>
                 <span className="overflow-x-auto">{user.Contact_Number}</span>
+              </div>
+              <div className="flex flex-col ">
+                <span className="text-gray-400 overflow-x-auto">Date Of Birth</span>
+                <span className="capitalize overflow-x-auto ">{user.Profile.dateOfBirth?user.Profile.dateOfBirth.slice(0,10):"NIL"}</span>
               </div>
             </div>
           </div>

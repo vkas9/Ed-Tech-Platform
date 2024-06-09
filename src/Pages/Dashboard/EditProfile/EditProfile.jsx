@@ -10,10 +10,11 @@ import { updateProfile } from "../../../APIs/Authapi";
 const EditProfile = () => {
   const { user } = useSelector((store) => store.profile);
   const [loading, setLoading] = useState(false);
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values,{resetForm}) => {
     try {
       setLoading(true);
       await updateProfile(values);
+      resetForm();
     } catch (error) {
       console.error(error);
     } finally {
@@ -58,7 +59,7 @@ const EditProfile = () => {
               dateOfBirth: null,
             }}
           >
-            {({ setFieldValue, values }) => (
+            {({ setFieldValue, values,resetForm }) => (
               <Form className="flex gap-2  flex-col md:flex-row flex-wrap">
                 <div className="flex flex-col">
                   <label className="text-md text-white/80">City Name</label>

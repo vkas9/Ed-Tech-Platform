@@ -149,7 +149,7 @@ exports.login = async (req, res) => {
         message: "Please fill all Details",
       });
     }
-    const registredUser = await User.findOne({ Email: email });
+    const registredUser = await User.findOne({ Email: email }).populate({ path: "Profile"}).exec()
     if (!registredUser) {
       return res.status(401).json({
         success: false,
@@ -166,6 +166,7 @@ exports.login = async (req, res) => {
         sameSite:'None',
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
       };
+      console.log("registredUser",registredUser)
       res.cookie("__EDTat", accessToken, options).cookie("__EDTrt",refreshToken,options).status(200).json({
         success: true,
         registredUser,

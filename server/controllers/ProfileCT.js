@@ -9,10 +9,18 @@ exports.updateProfile=async(req,res)=>{
         const userDetail=await user.findById(userId);
         const profileId=userDetail.Profile;
         const profileDetail=await profile.findById(profileId);
-        profileDetail.dateOfBirth=dateOfBirth;
-        profileDetail.contactNumber=contactNumber;
-        profileDetail.city=city;
-        profileDetail.gender=gender;
+        if (dateOfBirth !== null) {
+            profileDetail.dateOfBirth = dateOfBirth;
+        }
+        if (contactNumber !=='') {
+            profileDetail.contactNumber = contactNumber;
+        }
+        if (city !=='') {
+            profileDetail.city = city;
+        }
+        if (gender !=='') {
+            profileDetail.gender = gender;
+        }
         await profileDetail.save();
         return res.status(200).json({
             success:true,
