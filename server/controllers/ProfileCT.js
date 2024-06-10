@@ -25,10 +25,11 @@ exports.updateProfile = async (req, res) => {
       profileDetail.gender = gender;
     }
     await profileDetail.save();
+    const registredUser = await user.findById(userId).populate({ path: "Profile"}).exec()
     return res.status(200).json({
       success: true,
       message: "successfully update user Profile",
-      profileDetail,
+      registredUser
     });
   } catch (error) {
     console.log(error);

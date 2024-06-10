@@ -13,7 +13,7 @@ const dispatch=useDispatch()
   const isLargeScreen = useMediaQuery(768); 
   console.log("isLargeScreen",isLargeScreen)
 
-  const commonClasses = `fixed z-[9] md:relative ${data ? "" : "hidden"} md:flex flex-col lg:rounded-tl-[2.5rem] overflow-hidden min-h-[calc(100vh-(70px))] md:min-h-[calc(100vh-(84px))] min-w-[15%] ${data ? "bg-gradient-to-br" : "bg-gray-500/20"} from-[#000435] via-gray-950/100 to-black`;
+  const commonClasses = `fixed z-[9] md:relative ${data ? "" : "hidden"} md:flex flex-col md:rounded-tl-[2.5rem] overflow-hidden min-h-[calc(100vh-(70px))] md:min-h-[calc(100vh-(84px))] min-w-[15%] ${data ? "bg-gradient-to-br" : "bg-gray-500/20"} from-[#000435] via-gray-950/100 to-black`;
   useEffect(() => {
     if (isLargeScreen && show) {
       dispatch(profileAction.setSidebarShow(!show));

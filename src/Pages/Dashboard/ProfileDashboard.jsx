@@ -80,7 +80,7 @@ const ProfileDashboard = () => {
               </div>
               <div className="flex flex-col ">
                 <span className="text-gray-400 overflow-x-auto">Phone Number</span>
-                <span className="overflow-x-auto">{user.Contact_Number}</span>
+                <span className="overflow-x-auto">{user?.Profile?.contactNumber || user.Contact_Number}</span>
               </div>
               <div className="flex flex-col ">
                 <span className="text-gray-400 overflow-x-auto">Date Of Birth</span>

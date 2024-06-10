@@ -574,13 +574,16 @@ export const getAllCourse = async (signal) => {
     toast.dismiss(toastId);
   }
 };
-export const updateProfile=async(data)=>{
+export const updateProfile=async( dispatch,data)=>{
   const toastId = toast.loading("Saving");
   try {
     const response=await axios.post(`${BASE_URL}/api/v1/profile/updateProfile`,data,{
       withCredentials:true,
       
     })
+    dispatch(profileAction.setProfile(response.data.registredUser));
+    const text = encryptData(response.data.registredUser);
+    localStorage.setItem(import.meta.env.VITE_USER, text);
     toast.success("Saved")
    
   } catch (error) {
@@ -597,7 +600,7 @@ export const updateDisplayProfile=async(dispatch,data)=>{
       withCredentials:true,
       
     })
-    console.log("response.updatedProfile",response)
+    
     dispatch(profileAction.setProfile(response.data.updatedProfile));
     const text = encryptData(response.data.updatedProfile);
     localStorage.setItem(import.meta.env.VITE_USER, text);
