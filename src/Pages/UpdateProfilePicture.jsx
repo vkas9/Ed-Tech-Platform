@@ -33,7 +33,7 @@ const dispatch=useDispatch()
       setShow(!show)}} className="h-screen z-[10] overflow-y-auto   px-2 w-screen fixed top-0 left-0 bg-black/50 flex items-start sm:items-center justify-center">
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
-          <Form onClick={(e)=>e.stopPropagation()}  className="bg-gradient-to-tr h-fit   mt-[5rem] from-[#010035] via-gray-950/100 to-black   p-4 max-w-[500px] w-[500px] rounded-md">
+          <Form onClick={(e)=>e.stopPropagation()}  className="bg-gradient-to-tr h-fit   mt-[6rem] sm:mt-[0rem] from-[#010035] via-gray-950/100 to-black   p-4 max-w-[500px] w-[500px] rounded-md">
             <UploadProfile name="profilePicture" label="Profile Picture" />
             <div className="w-full flex flex-col sm:flex-row items-center justify-between">
 
