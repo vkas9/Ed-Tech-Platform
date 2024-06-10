@@ -109,13 +109,18 @@ const UploadProfile = ({
             className="flex w-full flex-col  items-center p-6"
             {...getRootProps()}
           >
-            <input {...getInputProps()} ref={inputRef} className="hidden" />
-            <div
+            <input
+              {...getInputProps()}
+              ref={inputRef}
+              className="hidden"
+              id={name} // Ensure the input has an id
+            />
+            <label
+              htmlFor={name} // Link the label to the input
               className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800 cursor-pointer"
-              onClick={() => inputRef.current.click()}
             >
               <IoIosCloudUpload className="text-3xl text-yellow-50" />
-            </div>
+            </label>
             <p className="mt-2 max-w-[200px] leading-8 text-center text-lg text-richblack-200">
               Drag and drop an {!video ? "image" : "video"}, or{" "}
               <span className="font-semibold bg-white/10 hover:bg-white/20 whitespace-nowrap py-1 px-2 rounded-full text-yellow-50">
