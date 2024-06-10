@@ -15,7 +15,7 @@ const ExploreCoursesCard = ({ course }) => {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  
   const { user } = useSelector((store) => store.profile);
 
   const handleCart = async () => {

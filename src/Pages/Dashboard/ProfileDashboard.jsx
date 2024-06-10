@@ -25,8 +25,8 @@ const ProfileDashboard = () => {
       </div>
       <div className="mt-8  px-3 sm:px-0  ">
         <div className=" p-4 flex flex-col sm:flex-row items-center  bg-white/10 rounded-md py-6 gap-1 w-full sm:w-[95%] lg:max-w-[55rem] sm:ml-5">
-          <div className="min-h-[70px] min-w-[70px] max-h-[70px] max-w-[70px]   ">
-            <img  src={user.avatar} className="" alt="" />
+          <div className="min-h-[70px] min-w-[70px] max-h-[70px] rounded-full overflow-hidden  max-w-[70px]   ">
+            <img  src={user.avatar} className="overflow-auto rounded-full min-h-[70px] min-w-[70px] max-h-[70px] object-cover" alt="" />
           </div>
           <div className="flex  flex-col sm:flex-row text-center sm:text-start ml-3 w-full justify-between ">
             <div className="flex flex-col ">

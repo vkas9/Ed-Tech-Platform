@@ -30,7 +30,7 @@ export const login = (data, navigate) => {
 
       toast.success(`Welcome to MASTER, ${response.registredUser.FirstName}`);
       dispatch(authAction.setToken(response.token));
-      dispatch(profileAction.setProfile(response.registredUser.avatar));
+      // dispatch(profileAction.setProfile(response.registredUser.avatar));
 
       dispatch(profileAction.setProfile(response.registredUser));
 
@@ -582,6 +582,27 @@ export const updateProfile=async(data)=>{
       
     })
     toast.success("Saved")
+   
+  } catch (error) {
+    console.log(error)
+  }finally{
+    toast.dismiss(toastId)
+  }
+}
+
+export const updateDisplayProfile=async(dispatch,data)=>{
+  const toastId = toast.loading("Changing");
+  try {
+    const response=await axios.post(`${BASE_URL}/api/v1/profile/updateDisplayProfile`,data,{
+      withCredentials:true,
+      
+    })
+    console.log("response.updatedProfile",response)
+    dispatch(profileAction.setProfile(response.data.updatedProfile));
+    const text = encryptData(response.data.updatedProfile);
+    localStorage.setItem(import.meta.env.VITE_USER, text);
+
+    toast.success("Changed")
    
   } catch (error) {
     console.log(error)

@@ -6,10 +6,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { updateProfile } from "../../../APIs/Authapi";
+import UpdateProfilePicture from "../../UpdateProfilePicture";
 
 const EditProfile = () => {
   const { user } = useSelector((store) => store.profile);
   const [loading, setLoading] = useState(false);
+  const[show,setShow]=useState(false)
   const handleSubmit = async (values,{resetForm}) => {
     try {
       setLoading(true);
@@ -21,28 +23,22 @@ const EditProfile = () => {
       setLoading(false);
     }
   };
+  const handleUpload=()=>{
+
+  }
 
   return (
     <div>
       <h1 className="text-3xl">Edit Profile</h1>
       <div className="mt-8 mr-5 sm:mr-0 sm:px-0">
         <div className="p-4 flex flex-col sm:flex-row items-center bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem]">
-          <div className="min-h-[70px] min-w-[70px] max-h-[70px] max-w-[70px]">
-            <img src={user.avatar} className="" alt="" />
+        <div className="min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[70px] sm:min-w-[70px] sm:max-h-[70px] sm:max-w-[70px] rounded-full overflow-hidden  max-w-[120px]   ">
+            <img  src={user.avatar} className="overflow-auto rounded-full min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[70px] sm:min-w-[70px] sm:max-h-[70px] sm:max-w-[70px]  max-w-[120px]  object-cover" alt="" />
           </div>
           <div className="flex gap-2">
-            <div className="bg-white/10 flex items-center gap-2 hover:bg-white/20 hover:cursor-pointer p-2 rounded-md">
-              <MdFileUpload size={25} />
-              <label htmlFor="file-upload" className="hover:cursor-pointer">
-                Upload
-              </label>
-            </div>
-            <input
-              id="file-upload"
-              className="ml-2 hidden bg-white/10"
-              type="file"
-            />
-            <button className="bg-green-500 hover:bg-green-600 text-xl w-[100px] font-bold text-black p-2 rounded-md">
+            
+            
+            <button  onClick={()=>setShow(!show)} className="bg-white/10 hover:bg-white/20 text-xl w-[100px] font-bold text-white p-2 rounded-md">
               Change
             </button>
           </div>
@@ -139,6 +135,7 @@ const EditProfile = () => {
           </Formik>
         </div>
       </div>
+      {show &&  <UpdateProfilePicture show={show} setShow={setShow} />}
     </div>
   );
 };
