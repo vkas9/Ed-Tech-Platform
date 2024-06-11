@@ -34,7 +34,7 @@ const EditProfile = () => {
       <div className="mt-8 mr-5 sm:mr-0 sm:px-0">
         <div className="p-4 flex flex-col sm:flex-row items-center bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem]">
         <div className="min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px] rounded-full overflow-hidden  max-w-[120px]   ">
-            <img  src={user.avatar} className="overflow-auto rounded-full min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px]  max-w-[120px]  object-cover" alt="" />
+            <img  src={user?.avatar} className="overflow-auto rounded-full min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px]  max-w-[120px]  object-cover" alt="" />
           </div>
           <div className="flex gap-2">
             

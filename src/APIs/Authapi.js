@@ -191,7 +191,7 @@ export const logout = (navigate) => {
       localStorage.clear();
       navigate("/");
     } catch (error) {
-      toast.error(response.data.message);
+      toast.error(error.message);
     } finally {
       toast.dismiss(toastId);
     }
@@ -600,7 +600,6 @@ export const updateDisplayProfile=async(dispatch,data)=>{
       withCredentials:true,
       
     })
-    
     dispatch(profileAction.setProfile(response.data.updatedProfile));
     const text = encryptData(response.data.updatedProfile);
     localStorage.setItem(import.meta.env.VITE_USER, text);
@@ -608,7 +607,7 @@ export const updateDisplayProfile=async(dispatch,data)=>{
     toast.success("Changed")
    
   } catch (error) {
-    console.log(error)
+    toast.error(error.message)
   }finally{
     toast.dismiss(toastId)
   }
