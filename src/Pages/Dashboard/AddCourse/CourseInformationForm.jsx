@@ -15,28 +15,29 @@ const CourseInformationForm = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [courseCategories, setCourseCategories] = useState([]);
-
   const initialValues = {
     courseTitle: course.CourseName || "",
     courseShortDesc: course.CourseDescription || "",
     coursePrice: course.Price || "",
-    courseCategory: course.Catagory || "",
+    courseCategory: course.Catagory?._id || "",
     courseBenefits: course.WhatYouWillLearn || "",
   };
-  
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     const getCategories = async () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://ed-tech-platform-1-n5ez.onrender.com/api/v1/course/getAllCatagory"
+          `${BASE_URL}/api/v1/course/getAllCatagory`
         );
         setCourseCategories(response.data.allCatagory);
       } catch (error) {
         console.error("Error fetching categories:", error);
+      }finally{
+        setLoading(false);
       }
-      setLoading(false);
+      
     };
 
     getCategories();
@@ -67,8 +68,9 @@ const CourseInformationForm = () => {
     );
   };
 
-  const onSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
+
 
     try {
 
@@ -82,7 +84,7 @@ const CourseInformationForm = () => {
         formData.append("whatYouWillLearn", values.courseBenefits);
         formData.append("category", values.courseCategory);
         formData.append("thumbnailImage", values.courseImage|| course.Thumbnail);
-        // console.log("values.courseImage",course.Thumbnail)
+        console.log("values.courseImage",course.Thumbnail)
         setLoading(true);
         const result = await editCourseDetails(formData);
         // console.log("result->",result)
@@ -129,7 +131,7 @@ const CourseInformationForm = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       enableReinitialize
     >
       {({ errors, touched, isSubmitting, setFieldValue }) => (
@@ -266,13 +268,14 @@ const CourseInformationForm = () => {
                 type="button"
                 onClick={() => dispatch(courseAction.setStep(2))}
                 disabled={loading}
-                className="flex   text-white cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-2 px-4 font-semibold underline"
+                className="flex   text-white bg-white/10 active:hover-white/20 sm:hover:bg-white/20  cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-2 px-4 font-semibold"
               >
                 Continue Without Saving
               </button>
             )}
             <button
               type="submit"
+              
               disabled={loading || isSubmitting}
               className={`flex cursor-pointer items-center rounded-md bg-blue-500 hover:bg-blue-600 active:bg-blue-600 text-xl transition-all duration-200 py-2 px-4  text-blue-950 font-bold ${
                 editCourse ? "ml-auto" : ""

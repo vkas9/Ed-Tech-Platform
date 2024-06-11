@@ -8,21 +8,28 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { courseAction } from "../../../store/courseSlice";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
+import { FaAngleDown } from "react-icons/fa6";
+
 const MyCourseCard=({course})=>{
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const dispatch=useDispatch()
   const navigate=useNavigate()
+  
   // const{course:currentCourse}=useSelector((store) => store.course);
-  const handeClick=()=>{
+  const handleEdit=()=>{
+   
     dispatch(courseAction.setCourse(course));
     dispatch(courseAction.setEditCourse(true));
     dispatch(courseAction.setStep(1));
     navigate("/dashboard/create-course")
 
   }
-
+  const handleClick=()=>{
+    navigate(`/dashboard/all-courses/${uuidv4()}/${course._id}`); 
+  }
     return (
-        <div className={`flex text-[1.1rem] justify-between flex-col sm:flex-row mr-5 items-center hover:cursor-pointer ${!isButtonHovered?"active:bg-gray-300/20 sm:hover:bg-gray-300/20":""} rounded-xl mt-4 bg-gray-300/10 max-w-[60rem] p-1  `}>
+        <div onClick={handleClick} className={`relative flex text-[1.1rem] justify-between flex-col sm:flex-row mr-5 items-center hover:cursor-pointer ${!isButtonHovered?"active:bg-gray-300/20 sm:hover:bg-gray-300/20":""} rounded-xl mt-4 bg-gray-300/10 max-w-[60rem] p-1  `}>
             <div className= "gap-3 p-2 items-center flex">
               
               <p className={`${course.status=="Draft"?"text-red-500":"text-green-500 "} text-center w-[80px] p-1  rounded-full font-bold`}>{course.status}</p>
@@ -33,7 +40,7 @@ const MyCourseCard=({course})=>{
                 <h2 className=" hover:overflow-x-auto truncate ">{course.CourseName}</h2>
                 <p className="text-white/40 text-[.9rem] ">{course.CourseDescription}</p>
                 <div className="flex gap-2 items-center">
-                    <span>4.8</span>
+                    <span>0.0</span>
                     <ReactStars count={5} size={25} edit={false} activeColor="#ffd700" emptyIcon={<FaRegStar/>} fullIcon={<FaStar/>}  />
 
                 </div>
@@ -47,7 +54,9 @@ const MyCourseCard=({course})=>{
               <div className="flex items-center gap-2">
 
              
-                <MdOutlineEdit onClick={handeClick} onMouseEnter={(e)=>{
+                <MdOutlineEdit onClick={(e)=>{
+                  e.stopPropagation()
+                  handleEdit()}} onMouseEnter={(e)=>{
             e.stopPropagation()
             setIsButtonHovered(true)
           }}
@@ -55,7 +64,7 @@ const MyCourseCard=({course})=>{
             e.stopPropagation()
             setIsButtonHovered(false)
           }} className="text-[1.5rem] hover:bg-white/10 box-content p-3 transition-all hover:cursor-pointer duration-150 rounded-full"/>
-              <RxCross2 onMouseEnter={(e)=>{
+              <RxCross2 onClick={(e)=>{e.stopPropagation()}} onMouseEnter={(e)=>{
             e.stopPropagation()
             setIsButtonHovered(true)
           }}
@@ -65,6 +74,7 @@ const MyCourseCard=({course})=>{
           }} className="text-[1.5rem] hover:bg-white/10 box-content p-3 transition-all hover:cursor-pointer duration-150 rounded-full  " />
               </div>
             </div>
+            {/* <span className="absolute  text-[1.4rem] text-white/10 hover:animate-bounce left-1/2 bottom-0"><FaAngleDown/></span> */}
 
            
           </div>

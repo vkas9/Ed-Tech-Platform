@@ -20,7 +20,7 @@ const SubSectionModal = ({
     const { course } = useSelector((store) => store.course);
     const [loading, setLoading] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
-   
+
     const initialValues = {
         lectureTitle: modalData.title || '',
         lectureDesc: modalData.description || '',
@@ -34,10 +34,11 @@ const SubSectionModal = ({
     });
 
     const isFormUpdated = (currentValues) => {
+        
         return (
             currentValues.lectureTitle !== modalData.title ||
             currentValues.lectureDesc !== modalData.description ||
-            currentValues.lectureVideo !== modalData.videoURL
+            currentValues.lectureVideo !== null
         );
     };
 
@@ -46,6 +47,7 @@ const SubSectionModal = ({
 
         formData.append('sectionId', modalData.sectionId);
         formData.append('subSectionId', modalData._id);
+        formData.append('courseId', course._id);
 
         if (values.lectureTitle !== modalData.title) {
             formData.append('title', values.lectureTitle);
@@ -61,21 +63,26 @@ const SubSectionModal = ({
 
         setLoading(true);
         const newSubSection = await updateSubSection(formData);
-        if (newSubSection) dispatch(courseAction.setCourse(newSubSection));
+        if (newSubSection) {
+           
+            dispatch(courseAction.setCourse(newSubSection.updatedCourse));
+        }
 
         setModalData(null);
         setLoading(false);
     };
 
     const onSubmit = async (values) => {
+        
         if (view) return;
 
         if (edit) {
             if (!isFormUpdated(values)) {
-                toast.error('No changes made to the form');
+                toast.error('No changes made to the Sub-Section');
             } else {
-                handleEditSubSection(values);
+               await handleEditSubSection(values);
             }
+            setIsDisabled(false)
             return;
         }
 
@@ -100,6 +107,7 @@ const SubSectionModal = ({
         }finally{
         setModalData(null);
         setLoading(false);}
+        
     };
 
     return (
@@ -138,6 +146,7 @@ const SubSectionModal = ({
                                     name='lectureTitle'
                                     placeholder='Enter Lecture Title'
                                     className='bg-white/10 text-xl w-full max-w-[650px] rounded-md p-2 outline-none'
+                                    readOnly={view}
                                 />
                                 <ErrorMessage name='lectureTitle' component='span' className="ml-2 text-xs tracking-wide text-red-300" />
                             </div>
@@ -151,6 +160,7 @@ const SubSectionModal = ({
                                     placeholder='Enter Lecture Description'
                                     as='textarea'
                                     className='bg-white/10 text-xl resize-none min-h-[130px] w-full max-w-[650px] rounded-md p-2 outline-none'
+                                    readOnly={view}
                                 />
                                 <ErrorMessage name='lectureDesc' component='span' className="ml-2 text-xs tracking-wide text-red-300" />
                             </div>

@@ -24,6 +24,7 @@ import ViewExploreCourse from "./Pages/Dashboard/ExploreCourses/ViewExploreCours
 import ViewWishlistCourse from "./Pages/Dashboard/Wishlist/ViewWishlistCourse";
 import AboutUs from "./Pages/NavbarPages/AboutUs";
 import ContactUs from "./Pages/NavbarPages/ContactUs";
+import ViewInstructorCourse from "./Pages/Dashboard/InstructorCourse/ViewInstructorCourse";
 
 
 function App() {
@@ -121,6 +122,7 @@ function App() {
               />
               <Route path="enrolled-courses" element={<EnrolledCourse/>} />
               <Route path="enrolled-courses/:ud/:courseId" element={<ViewCourse/>} />
+              <Route path="all-courses/:ud/:courseId" element={<ViewInstructorCourse/>} />
               <Route path="courses/:ud/:courseId" element={<ViewExploreCourse/>} />
               <Route path="wishlist/:ud/:courseId" element={<ViewWishlistCourse/>} />
               <Route path="wishlist" element={<Wishlist/>} />

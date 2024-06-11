@@ -150,11 +150,39 @@ exports.editCourseDetails=async(req,res)=>{
         course.Catagory=category;
         course.Price=price;
         course.Thumbnail=thumbnailImage||uploadThumbnail.secure_url
-        await course.save()
+        await course.save();
+        const updatedCourse=await Course.findById(courseId)
+        .populate({
+          path: "Instructor",
+          populate: {
+            path: "Profile",
+          },
+        })
+        .populate({
+          path: "Rating_N_Reviews",
+          populate: {
+            path: "User",
+          },
+        })
+        .populate({
+          path: "Catagory",
+          populate: {
+            path: "Course",
+          },
+        })
+        .populate("StudentEntrolled")
+        .populate("Section")
+        .populate({
+          path: "Section",
+          populate: {
+            path: "subSection",
+          },
+        })
+        .exec()
         res.status(200).json({
         success:true,
         message:"course Updated",
-        course
+        course:updatedCourse
        })
 
 

@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { decryptData } from "../components/core/auth/crypto";
+
 const initialState = {
   step: 1,
   course: {},
   editCourse: false,
   allInstructoreCourses:localStorage.getItem(import.meta.env.VITE_INSTRUCT_ALL_C)
-  ? JSON.parse(localStorage.getItem(import.meta.env.VITE_INSTRUCT_ALL_C))
+  ? decryptData(localStorage.getItem(import.meta.env.VITE_INSTRUCT_ALL_C))
   : null,
   creatingCourse:false,
   exploreAllCourses:localStorage.getItem(import.meta.env.VITE_ALL_C)

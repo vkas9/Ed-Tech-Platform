@@ -25,6 +25,7 @@ exports.createSubSection=async(req,res)=>{
             });
         }
         const VideoFile=await UploadFile(video.tempFilePath,{folder: "VikasFolder",resource_type:"auto"});
+       
         if(!VideoFile ||!VideoFile.secure_url){
             throw new Error("Failed to upload video to Cloudinary");
         }
@@ -57,23 +58,68 @@ exports.createSubSection=async(req,res)=>{
 exports.updateSubSection=async(req,res)=>{
     try {
        
-        const {title,description,sectionId,subSectionId}=req.body;
-        const video=req.files.videoFile
-        if(!title||!description||!sectionId){
-            return res.status(400).json({
-                success:false,
-                message:"Please fill all detail of subSection"
-            })
-        }
-        const subSectionDetail=await subSection.findById(subSectionId);
-        subSectionDetail.title=title;
+        const {title,description,sectionId,subSectionId,courseId}=req.body;
+        const video=req.files?.video
+        console.log("title,description,sectionId,subSectionId",title,description,sectionId,subSectionId)
         
-        subSectionDetail.description=description;
-        subSectionDetail.videoURL=video.secure_url;
-        await section.save({subSection:subSectionDetail});
+        const subSectionDetail=await subSection.findById(subSectionId);
+
+        if (title !== undefined) {
+            subSectionDetail.title=title;
+          }
+          if (description !== undefined) {
+            subSectionDetail.description=description;
+          }
+          
+         if (video) {
+            const VideoFile=await UploadFile(video.tempFilePath,{folder: "VikasFolder",resource_type:"auto"});
+            
+            console.log("VideoFile->",VideoFile)
+            if(!VideoFile ||!VideoFile.secure_url){
+                throw new Error("Failed to upload video to Cloudinary");
+            }
+            const videoDuration=VideoFile.duration?Math.ceil(VideoFile.duration).toString():"0";
+            subSectionDetail.duration=videoDuration
+            subSectionDetail.videoURL=VideoFile.secure_url
+        }
+        
+        
+        
+       
+        await subSectionDetail.save();
+        const updatedCourse=await course.findById(courseId)
+        .populate({
+          path: "Instructor",
+          populate: {
+            path: "Profile",
+          },
+        })
+        .populate({
+          path: "Rating_N_Reviews",
+          populate: {
+            path: "User",
+          },
+        })
+        .populate({
+          path: "Catagory",
+          populate: {
+            path: "Course",
+          },
+        })
+        .populate("StudentEntrolled")
+        .populate("Section")
+        .populate({
+          path: "Section",
+          populate: {
+            path: "subSection",
+          },
+        })
+        .exec()
+
         res.status(200).json({
             success:true,
-            message:"Successfully updated Sub-section"
+            message:"Successfully updated Sub-section",
+            updatedCourse
         })
 
     } catch (error) {

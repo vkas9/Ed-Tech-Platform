@@ -8,28 +8,21 @@ import { encryptData } from "../../../components/core/auth/crypto";
 
 const AllCourse = () => {
   const dispatch = useDispatch();
-  const { allInstructoreCourses,creatingCourse } = useSelector((store) => store.course)  
-  // console.log("allInstructoreCourses->",allInstructoreCourses,"creatingCourse->",creatingCourse)
-    const {user:data} =  useSelector((store) => store.profile);
-    
+  const { allInstructoreCourses, creatingCourse } = useSelector((store) => store.course);
+  const { user: data } = useSelector((store) => store.profile);
   useEffect(() => {
+    if (!data || data.role !== "Instructor") return; // Exit early if not an instructor or no user data
+
     const controller = new AbortController();
     const signal = controller.signal;
 
     const fetchData = async () => {
       try {
-        
-        if (data && data.role==="Instructor" ) {
-          const courseData = await getAllInstructorCourses(signal);
-          
-          if (!signal.aborted) {
-            const text=encryptData(courseData.instructorCourses)
-            localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, JSON.stringify(text));
-            dispatch(courseAction.setIC(courseData.instructorCourses));
-          }
-        } else {
-          localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, JSON.stringify(null));
-          dispatch(courseAction.setIC(null));
+        const courseData = await getAllInstructorCourses(signal);
+        if (!signal.aborted) {
+          const text = encryptData(courseData.instructorCourses);
+          localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, text);
+          dispatch(courseAction.setIC(courseData.instructorCourses));
         }
       } catch (error) {
         if (error.name !== 'AbortError') {
@@ -39,14 +32,14 @@ const AllCourse = () => {
       dispatch(courseAction.setCreatingCourse(false));
     };
 
-    if (creatingCourse||allInstructoreCourses === null) {
+    if (creatingCourse || !allInstructoreCourses) {
       fetchData();
     }
 
     return () => {
       controller.abort();
     };
-  }, [allInstructoreCourses, dispatch]);
+  }, [creatingCourse, allInstructoreCourses, data, dispatch]);
 
   return (
     <motion.div
@@ -63,8 +56,10 @@ const AllCourse = () => {
         <span className="text-yellow-500">My Courses </span>
       </div>
 
-      <h1 className="text-3xl mb-3">My Courses{allInstructoreCourses&&<span className="ml-2">({allInstructoreCourses.length})</span>}</h1>
-      <div className="overflow-auto   max-h-[75vh]">
+      <h1 className="text-3xl mb-3">
+        My Courses{allInstructoreCourses && <span className="ml-2">({allInstructoreCourses.length})</span>}
+      </h1>
+      <div className="overflow-auto max-h-[75vh]">
         {!allInstructoreCourses ? (
           <div>
             <p>Loading...</p>

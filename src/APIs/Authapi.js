@@ -171,32 +171,41 @@ export const verifyForgotOTP = async (data, navigate) => {
 export const logout = (navigate) => {
   return async (dispatch) => {
     const toastId = toast.loading("Loading");
-    var response;
     try {
-      response = await axios.post(
+      const response = await axios.post(
         `${BASE_URL}/api/v1/auth/logout`,
         {},
         {
           withCredentials: true,
         }
       );
-      
-      dispatch(authAction.setToken(null));
-      dispatch(profileAction.setProfile(null));
-      
 
-      dispatch(cardAction.reset());
-      dispatch(courseAction.resetCourseState());
-      toast.success(response.data.message);
-      localStorage.clear();
-      navigate("/");
+      if (response.status === 200) {
+        
+        localStorage.clear();
+        
+      
+        dispatch(authAction.setToken(null));
+        dispatch(profileAction.setProfile(null));
+        dispatch(cardAction.reset());
+        dispatch(courseAction.resetCourseState());
+
+       
+        navigate("/");
+
+        // Show success toast
+        toast.success(response.data.message);
+      } else {
+        toast.error("Failed to logout. Please try again.");
+      }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(`Logout failed: ${error.response?.data?.message || error.message}`);
     } finally {
       toast.dismiss(toastId);
     }
   };
 };
+
 
 export const changePasswordAuth = (data, navigate) => {
   return async (dispatch) => {
@@ -548,15 +557,19 @@ export const getAllInstructorCourses = async (signal) => {
         signal: signal,
       }
     );
-    toast.success("All Course Fetch Successfully");
+    toast.success("All Courses Fetched Successfully");
     return response.data;
   } catch (error) {
-    console.error("Error  Fetching Instructor Courses", error);
-    toast.error(error.response.data.message);
+    if (axios.isCancel(error)) {
+      console.error("Request canceled", error.message);
+    } else {
+      console.error("Error fetching course details", error);
+    }
   } finally {
     toast.dismiss(toastId);
   }
 };
+
 export const getAllCourse = async (signal) => {
   const toastId = toast.loading("Loading");
   try {
@@ -569,7 +582,8 @@ export const getAllCourse = async (signal) => {
     return response.data.allCourse;
   } catch (error) {
     console.error("Error Fetching All Courses", error);
-    toast.error(error.response.data.message);
+    const errorMessage = error.response?.data?.message || "An error occurred while fetching courses.";
+    toast.error(errorMessage);
   } finally {
     toast.dismiss(toastId);
   }

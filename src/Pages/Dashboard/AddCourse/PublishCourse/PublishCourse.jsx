@@ -39,11 +39,11 @@ const PublishCourse = () => {
     },
   });
 
-  useEffect(() => {
-    if (course?.status === "Published") {
-      formik.setFieldValue("public", true);
-    }
-  }, [course, formik]);
+  // useEffect(() => {
+  //   if (course?.status === "Published") {
+  //     formik.setFieldValue("public", true);
+  //   }
+  // }, [course, formik]);
 
   const goBack = () => {
     dispatch(courseAction.setStep(2));
