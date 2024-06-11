@@ -581,9 +581,12 @@ export const getAllCourse = async (signal) => {
     // console.log("res", response.data.allCourse);
     return response.data.allCourse;
   } catch (error) {
-    console.error("Error Fetching All Courses", error);
-    const errorMessage = error.response?.data?.message || "An error occurred while fetching courses.";
-    toast.error(errorMessage);
+    if (axios.isCancel(error)) {
+      console.error("Request canceled", error.message);
+    } else {
+      toast.error("Error fetching course details", error);
+    }
+   
   } finally {
     toast.dismiss(toastId);
   }

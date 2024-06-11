@@ -33,7 +33,7 @@ const ExploreCoursesCard = ({ course }) => {
 
   const handleClick = () => {
     if (user?.Courses?.includes(course._id))
-      navigate(`/dashboard/enrolled-courses`);
+      navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
     else navigate(`/dashboard/courses/${uuidv4()}/${course._id}`);
   };
 
@@ -94,11 +94,7 @@ const ExploreCoursesCard = ({ course }) => {
           <div
             onClick={(e) => {
               e.stopPropagation();
-              navigate(
-                user?.Courses?.includes(course._id)
-                  ? "/dashboard/enrolled-courses"
-                  : ""
-              );
+              navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
             }}
             onMouseEnter={(e) => {
               e.stopPropagation();

@@ -6,6 +6,7 @@ import { updateCourse } from "../../../../APIs/Authapi";
 import { courseAction } from "../../../../store/courseSlice";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
+
 const PublishCourse = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,15 +36,8 @@ const PublishCourse = () => {
       }
       setLoading(false);
       dispatch(courseAction.setCreatingCourse(true));
-
     },
   });
-
-  // useEffect(() => {
-  //   if (course?.status === "Published") {
-  //     formik.setFieldValue("public", true);
-  //   }
-  // }, [course, formik]);
 
   const goBack = () => {
     dispatch(courseAction.setStep(2));
@@ -52,8 +46,8 @@ const PublishCourse = () => {
   const goToCourses = () => {
     dispatch(courseAction.setCreatingCourse(true));
     dispatch(courseAction.resetCourseState());
-    
-    toast.success("Course Created!")
+
+    toast.success("Course Created!");
     navigate("/dashboard/all-courses");
   };
 
@@ -63,22 +57,30 @@ const PublishCourse = () => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
-      className="max-w-[700px] m-5 rounded-md bg-white/10 p-6"
+      
     >
-      <p className="text-2xl font-semibold text-white/80">Publish Course</p>
-      <form onSubmit={formik.handleSubmit} className="space-y-8">
-        <div className="flex items-center space-y-1">
-          <label htmlFor="public" className="text-md font-semibold text-white/80">
-            <input
-              type="checkbox"
-              id="public"
-              name="public"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              checked={formik.values.public}
-              className="h-4 w-4 rounded bg-white/10 text-richblack-400 focus:ring-2 focus:ring-blue-500"
-            />
-            <span className="ml-2">Make this course public</span>
+      <h1 className="text-3xl font-bold mb-4">Course Publish</h1>
+      <form onSubmit={formik.handleSubmit} className="space-y-8 bg-white/10 p-6 rounded-md max-w-[700px] mt-4 shadow-lg">
+        <div className="flex items-center space-x-3">
+          <label htmlFor="public" className="text-md font-semibold text-white/80 flex items-center cursor-pointer">
+            <div className="relative">
+              <input
+                type="checkbox"
+                id="public"
+                name="public"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                checked={formik.values.public}
+                className="sr-only"
+              />
+              <div className="block bg-gray-600 w-10 h-6 rounded-full"></div>
+              <div
+                className={`absolute left-1 top-1 w-4 h-4 rounded-full transition transform ${
+                  formik.values.public ? "translate-x-full bg-blue-600" : "bg-white"
+                }`}
+              ></div>
+            </div>
+            <span className="ml-3">Publish this course for public access</span>
           </label>
         </div>
 
@@ -87,14 +89,14 @@ const PublishCourse = () => {
             type="button"
             onClick={goBack}
             disabled={loading}
-            className="flex items-center gap-x-2 rounded-md bg-gray-300 py-2 px-4 font-semibold text-gray-900"
+            className="flex items-center gap-x-2 rounded-md bg-gray-300 py-2 px-4 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-400"
           >
             Back
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center gap-x-2 rounded-md bg-blue-500 py-2 px-4 font-bold text-blue-950 transition-all duration-200 hover:bg-blue-600 active:bg-blue-700"
+            className="flex items-center gap-x-2 rounded-md bg-blue-500 py-2 px-4 font-bold text-white transition-all duration-200 hover:bg-blue-600 active:bg-blue-700"
           >
             Save Changes
           </button>

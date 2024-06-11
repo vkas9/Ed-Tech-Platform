@@ -7,47 +7,46 @@ import PublishCourse from "./PublishCourse/PublishCourse";
 const steps = [
   {
     id: 1,
-    title: "Course Information",
+    title: "Course Information ‣",
   },
   {
     id: 2,
-    title: "Course Builder",
+    title: "Course Builder ‣",
   },
   {
     id: 3,
-    title: "Publish",
+    title: "Course Publish",
   },
 ];
+
 const RenderSteps = () => {
   const { step } = useSelector((store) => store.course);
   return (
     <>
-      <div className=" flex">
-        <div className="">
-          {steps.map((item) => (
-            <>
-              <div>
-                <div
-                  className={`${step === item.id}?"bg-yellow-500":bg-white/10`}
-                >
-                  {step > item.id ? <FaCheck /> : item.id}
-                </div>
+      <div className="flex ">
+        <div className="flex my-5 bg-white/10 y-2 px-3 rounded-full flex-row gap-3">
+          {steps.map((item) => {
+            const isActive = step === item.id;
+            const isCompleted = step > item.id;
+            const textColor = isActive
+              ? "text-white animate-pulse"
+              : isCompleted
+              ? "text-yellow-500"
+              : "text-white/30";
+
+            return (
+              <div key={item.id}>
+                <p className={textColor}>{item.title}</p>
               </div>
-            </>
-          ))}
-        </div>
-        <div>
-          {steps.map((item) => (
-            <div>
-              <p>{item.title}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
-      {step == 1 && <CourseInformationForm />}
+      {step === 1 && <CourseInformationForm />}
       {step === 2 && <CourseBuilderForm />}
-      {step===3 && <PublishCourse/>}
+      {step === 3 && <PublishCourse />}
     </>
   );
 };
+
 export default RenderSteps;

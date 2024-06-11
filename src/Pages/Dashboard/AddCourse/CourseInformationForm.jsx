@@ -128,15 +128,18 @@ const CourseInformationForm = () => {
 
   return (
     <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}}>
+     <h1 className="text-3xl">Course Information</h1>
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
       enableReinitialize
     >
+      
       {({ errors, touched, isSubmitting, setFieldValue }) => (
-        <Form className="space-y-8 rounded-md max-w-[700px] m-5 bg-white/10 mb-[10rem] p-6">
+        <Form className="space-y-8 mt-4 rounded-md max-w-[700px]  bg-white/10 mb-[10rem] p-6">
           {/* Course Title */}
+          
           <div className="flex flex-col space-y-1">
             <label
               className="text-md font-semibold text-white/80"
@@ -277,7 +280,7 @@ const CourseInformationForm = () => {
               type="submit"
               
               disabled={loading || isSubmitting}
-              className={`flex cursor-pointer items-center rounded-md bg-blue-500 hover:bg-blue-600 active:bg-blue-600 text-xl transition-all duration-200 py-2 px-4  text-blue-950 font-bold ${
+              className={`flex cursor-pointer items-center rounded-md bg-blue-500 hover:bg-blue-600 active:bg-blue-600 text-xl transition-all duration-200 py-2 px-4  text-white font-bold ${
                 editCourse ? "ml-auto" : ""
               }`}
             >

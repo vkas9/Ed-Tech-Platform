@@ -75,8 +75,8 @@ const CourseBuilderForm = () => {
   return (
     <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="text-white ">
       <h1 className="text-3xl">Course Builder</h1>
-      <div className="mt-8">
-        <div className="p-4 mx-5 bg-white/10 rounded-md py-6 gap-4 max-w-[700px]">
+      <div className="mt-4">
+        <div className="p-4 bg-white/10 rounded-md py-6 gap-4 max-w-[700px]">
           <Formik
             initialValues={{ sectionName: '' }}
             validationSchema={Yup.object({
@@ -101,11 +101,11 @@ const CourseBuilderForm = () => {
                 <div className="flex items-center gap-4">
                   <button
                     type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-lg max-w-[220px] font-bold text-blue-950 p-2 rounded-md flex items-center justify-center"
+                    className="bg-blue-500 hover:bg-blue-600 text-lg max-w-[220px] font-bold text-white p-2 rounded-md flex items-center justify-center"
                     disabled={isSubmitting}
                   >
                     {editSectionName ? "Edit Section Name" : "Create Section"}
-                    <MdAddCircleOutline className="ml-2 " size={20} />
+                    {/* <MdAddCircleOutline className="ml-2 " size={20} /> */}
                   </button>
                   {editSectionName && (
                     <button
@@ -136,14 +136,14 @@ const CourseBuilderForm = () => {
           </Formik>
         </div>
       </div>
-      <div className="flex justify-end gap-4 mt-2 mx-5  max-w-[700px] ">
+      <div className="flex justify-end gap-4 mt-2  max-w-[700px] ">
         <button
           onClick={goBack}
-          className="rounded-md cursor-pointer flex items-center bg-gray-500 hover:bg-gray-600 text-white p-2"
+          className="rounded-md cursor-pointer flex items-center bg-white transition-all duration-200 hover:bg-gray-400 text-black p-2"
         >
           Back
         </button>
-        <div  onClick={goToNext} className="text-blue-950 bg-blue-500 hover:bg-blue-600 text-xl font-bold p-2 rounded-md flex items-center">
+        <div  onClick={goToNext} className="text-white hover:cursor-pointer bg-blue-500 hover:bg-blue-600 text-xl font-bold p-2 rounded-md flex items-center">
         <button
          
           

@@ -30,8 +30,8 @@ const EditProfile = () => {
 
   return (
     <div>
-      <h1 className="text-3xl">Edit Profile</h1>
-      <div className="mt-8 mr-5 sm:mr-0 sm:px-0">
+      <h1 className="text-3xl">Edit Profile Picture</h1>
+      <div className="mt-4 mr-5 sm:mr-0 sm:px-0">
         <div className="p-4 flex flex-col sm:flex-row items-center bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem]">
         <div className="min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px] rounded-full overflow-hidden  max-w-[120px]   ">
             <img  src={user?.avatar} className="overflow-auto rounded-full min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px]  max-w-[120px]  object-cover" alt="" />
@@ -45,7 +45,9 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
-      <div className="mt-8 mr-5 sm:mr-0 sm:px-0">
+      <div className="w-[98%] my-6  h-[1px] bg-white/20 rounded-full" />
+      <h1 className="text-3xl">Edit Information</h1>
+      <div className="mt-4 mr-5 sm:mr-0 sm:px-0">
         <div className="p-4 relative mb-9 flex flex-col sm:flex-row  bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem]">
           <Formik
             onSubmit={handleSubmit}

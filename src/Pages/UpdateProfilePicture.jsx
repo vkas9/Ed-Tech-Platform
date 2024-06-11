@@ -40,7 +40,7 @@ const dispatch=useDispatch()
             
             <button
               type="submit"
-              className="mt-4 bg-blue-500 text-blue-950 active:bg-blue-600 sm:hover:bg-blue-600 py-1 px-4 rounded"
+              className="mt-4 bg-blue-500 text-white active:bg-blue-600 sm:hover:bg-blue-600 py-1 px-4 rounded"
               disabled={isSubmitting}
             >
               Update Profile Picture

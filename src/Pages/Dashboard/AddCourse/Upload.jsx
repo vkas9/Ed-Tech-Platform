@@ -117,7 +117,7 @@ export default function Upload({
             </div>
             <p className="mt-2 max-w-[200px] leading-8 text-center text-lg text-richblack-200">
               Drag and drop an {!video ? "image" : "video"}, or {" "}
-              <span className="font-semibold bg-white/10 hover:bg-white/20 py-1 px-2 rounded-full text-yellow-50">Browse a
+              <span className="font-semibold whitespace-nowrap bg-white/10 hover:bg-white/20 py-1 px-2 rounded-full text-yellow-50">Browse a
               file</span>
               <br />
             </p>
