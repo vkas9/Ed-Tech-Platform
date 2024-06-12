@@ -94,7 +94,26 @@ exports.signup = async (req, res) => {
   }
 };
 
+
+exports.getUserDetail=async(req,res)=>{
+  try {
+    const userId=req.user.id;
+    const registredUser = await User.findById(userId).populate({ path: "Profile"}).exec()
+    return res.status(200).json({
+      success: true,
+      message: "userDetails",
+      registredUser
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while getting user Details",
+    });
+  }
+}
 //OTP handler
+
 
 exports.otp = async (req, res) => {
   try {

@@ -629,3 +629,34 @@ export const updateDisplayProfile=async(dispatch,data)=>{
     toast.dismiss(toastId)
   }
 }
+
+
+export const deleteEnrolledCourse = async (data,signal) => {
+  const toastId = toast.loading("Loading");
+  try {
+    
+    const response = await axios.post(`${BASE_URL}/api/v1/course/deleteEnrolledCourse`,data, {
+      withCredentials: true,
+      signal: signal,
+    
+    });
+    const userDetail = await axios.get(`${BASE_URL}/api/v1/auth/getUserDetail`, {
+      withCredentials: true,
+      signal: signal,
+    });
+
+
+  
+  return {courseDetail:response.data.courseDetail,userDetail:userDetail.data.registredUser}
+  } catch (error) {
+   
+    if (axios.isCancel(error)) {
+      console.error("Request canceled", error.message);
+    } else {
+      toast.error("Error Deleting course details", error);
+    }
+   
+  } finally {
+    toast.dismiss(toastId);
+  }
+};

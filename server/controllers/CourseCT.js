@@ -345,3 +345,66 @@ exports.getAllCourseDetail = async (req, res) => {
         })
     }
 }
+exports.deleteEnrolledCourse=async(req,res)=>{
+    try {
+        const {courseId}=req.body
+    
+        const userId=req.user.id;
+        const currentCourseUser=await User.findById(userId);
+    
+        const updatedCourseUser=currentCourseUser.Courses.filter(course=>course.toString()!==courseId);
+        currentCourseUser.Courses=updatedCourseUser;
+       
+        await currentCourseUser.save();
+        var courseDetail = [];
+        for (let i = 0; i < currentCourseUser.Courses.length; i++) {
+            courseDetail.push(
+              await Course.findById(currentCourseUser.Courses[i])
+                .populate({
+                  path: "Instructor",
+                  populate: {
+                    path: "Profile",
+                  },
+                })
+                .populate({
+                  path: "Rating_N_Reviews",
+                  populate: {
+                    path: "User",
+                  },
+                })
+                .populate({
+                  path: "Catagory",
+                  populate: {
+                    path: "Course",
+                  },
+                })
+                .populate("StudentEntrolled")
+                .populate("Section")
+                .populate({
+                  path: "Section",
+                  populate: {
+                    path: "subSection",
+                  },
+                })
+                .exec()
+            );
+          }
+        courseDetail.reverse();
+
+        return res.status(200).json({
+            success:true,
+            message:"Course Successfully unenrolled",
+            courseDetail
+        })
+
+
+    } catch (error) {
+        console.log(error)
+        return res.status(200).json({
+            success:true,
+            message:"Course not unenrolled",
+    
+        })
+        
+    }
+}

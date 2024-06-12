@@ -11,6 +11,7 @@ const EnrolledCourse = () => {
   const {user:data} =  useSelector((store) => store.profile);
 //  console.log("enrolledCourse",enrolledCourse)
   useEffect(() => {
+    if (!data || data.role !== "Student") return;
     const controller = new AbortController();
     const signal = controller.signal;
 

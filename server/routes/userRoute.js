@@ -2,13 +2,14 @@ const app=require('express');
 const router=app.Router();
 
 const{auth}=require("../middlewares/middlewareAuth");
-const {login,signup,otp,changePassword, userLogOut, refreshAccessToken, forgotPasswordOTP, verifyForgotPasswordOTP, resetPassword}=require("../controllers/Auth");
+const {login,signup,otp,changePassword, userLogOut, refreshAccessToken, forgotPasswordOTP, verifyForgotPasswordOTP, resetPassword, getUserDetail}=require("../controllers/Auth");
 const {updateProfile} =require("../controllers/ProfileCT")
 router.post("/login",login);
 router.post("/signup",signup);
 router.post("/otp",otp);
 router.post("/forgotPasswordOTP",forgotPasswordOTP);
 router.post("/verifyForgotPasswordOTP",verifyForgotPasswordOTP);
+router.get("/getUserDetail",auth,getUserDetail);
 router.post("/profile",auth,updateProfile)
 router.post("/logout",userLogOut);
 router.post("/refresh-token",refreshAccessToken)
