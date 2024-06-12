@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
 import Button from "../../components/Homepage/Button";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 //
 const hero = () => {
+  const { user } = useSelector((store) => store.profile);
   
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.6,delay:.2,ease:[0,.71,.2,1.01]}} className=" mx-auto  relative lg:h-[calc(100vh-68px)]  md:pt-[15vh] text-center flex mt-[84px]   lg:min-h-[55em]  ">
@@ -39,7 +41,7 @@ const hero = () => {
         <Link to={"/login"} className=" mx-auto">
           <div className="   group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">
             <div className="flex gap-4 hover:scale-105 transition-all duration-200 items-center rounded-md px-5 py-3 ">
-              <p>Teach on MASTER</p>
+              {user?.role==="Instructor"? <Link to={"/dashboard/my-profile"}>Go To Dashboard</Link>:<Link to={"/login"} >Teach on MASTER</Link> }
               <FaArrowRight size={20}  className="animate-pulse "/>
             </div>
           </div>
