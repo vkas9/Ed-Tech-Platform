@@ -24,7 +24,7 @@ const RenderSteps = () => {
   return (
     <>
       <div className="flex ">
-        <div className="flex my-5 bg-white/10 y-2 px-3 rounded-full flex-row gap-3">
+        <div className="flex my-5 bg-white/10 y-2 px-3 rounded-md bs:rounded-full flex-col bs:flex-row gap-3">
           {steps.map((item) => {
             const isActive = step === item.id;
             const isCompleted = step > item.id;

@@ -60,7 +60,7 @@ const PublishCourse = () => {
       
     >
       <h1 className="text-3xl font-bold mb-4">Course Publish</h1>
-      <form onSubmit={formik.handleSubmit} className="space-y-8 bg-white/10 p-6 rounded-md max-w-[700px] mt-4 shadow-lg">
+      <form onSubmit={formik.handleSubmit} className="space-y-8 bg-white/10 p-6 rounded-md mr-5 max-w-[700px] mt-4 shadow-lg">
         <div className="flex items-center space-x-3">
           <label htmlFor="public" className="text-md font-semibold text-white/80 flex items-center cursor-pointer">
             <div className="relative">
@@ -84,7 +84,7 @@ const PublishCourse = () => {
           </label>
         </div>
 
-        <div className="flex justify-end gap-x-2">
+        <div className="flex flex-col-reverse gw:flex-row justify-center items-center gap-y-2 gw:justify-end gap-x-2">
           <button
             type="button"
             onClick={goBack}

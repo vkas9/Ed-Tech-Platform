@@ -9,7 +9,10 @@ export default {
       screens: {
         'xs': '300px',
         "vm":'400px',
-        "xd":"850px"
+        "xd":"850px",
+        "bs":"570px",
+        "gf":"520px",
+        "gw":"320px"
         
       },
     },

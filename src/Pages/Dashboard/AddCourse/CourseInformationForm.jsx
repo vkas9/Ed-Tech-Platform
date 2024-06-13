@@ -137,7 +137,7 @@ const CourseInformationForm = () => {
     >
       
       {({ errors, touched, isSubmitting, setFieldValue }) => (
-        <Form className="space-y-8 mt-4 rounded-md max-w-[700px]  bg-white/10 mb-[10rem] p-6">
+        <Form className="space-y-8 mt-4 mr-5 rounded-md max-w-[700px]  bg-white/10 mb-[10rem] p-6">
           {/* Course Title */}
           
           <div className="flex flex-col space-y-1">
@@ -265,14 +265,15 @@ const CourseInformationForm = () => {
           </div>
 
           {/* Next Button */}
-          <div className="flex justify-end gap-x-2">
+          <div className="flex flex-col-reverse gf:flex-row justify-center gf:justify-between items-center gap-y-2 gf:gap-x-2">
             {editCourse && (
               <button
                 type="button"
                 onClick={() => dispatch(courseAction.setStep(2))}
                 disabled={loading}
-                className="flex   text-white bg-white/10 active:hover-white/20 sm:hover:bg-white/20  cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-2 px-4 font-semibold"
-              >
+                className="flex text-white bg-white/10 active:bg-white/20 hover:bg-white/20 cursor-pointer items-center gap-x-2 rounded-md py-2 px-4 font-semibold"
+                >
+              
                 Continue Without Saving
               </button>
             )}
@@ -280,8 +281,8 @@ const CourseInformationForm = () => {
               type="submit"
               
               disabled={loading || isSubmitting}
-              className={`flex cursor-pointer items-center rounded-md bg-blue-500 hover:bg-blue-600 active:bg-blue-600 text-xl transition-all duration-200 py-2 px-4  text-white font-bold ${
-                editCourse ? "ml-auto" : ""
+              className={`flex cursor-pointer  items-center rounded-md bg-blue-500 hover:bg-blue-600 active:bg-blue-600 text-xl transition-all duration-200 py-2 px-4  text-white font-bold ${
+                editCourse ? "" : ""
               }`}
             >
               {!editCourse ? "Next" : "Save Changes"}
