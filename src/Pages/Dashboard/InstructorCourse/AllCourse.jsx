@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import CourseCard from "./MyCourseCard";
+import MyCourseCard from "./MyCourseCard";
 import { useEffect } from "react";
 import { getAllInstructorCourses } from "../../../APIs/Authapi";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,20 +53,20 @@ const AllCourse = () => {
         <span>/</span>
         <span>Dashboard</span>
         <span>/</span>
-        <span className="text-yellow-500">My Courses </span>
+        <span className="text-yellow-500 whitespace-nowrap">My Courses </span>
       </div>
 
       <h1 className="text-3xl mb-3">
         My Courses{allInstructoreCourses && <span className="ml-2">({allInstructoreCourses.length})</span>}
       </h1>
-      <div className="overflow-auto max-h-[75vh]">
+      <div className="overflow-auto pb-[8rem] max-h-[75vh]">
         {!allInstructoreCourses ? (
           <div>
             <p>Loading...</p>
           </div>
         ) : allInstructoreCourses.length ? (
           allInstructoreCourses.map((course, index) => (
-            <CourseCard course={course} key={index} />
+            <MyCourseCard course={course} key={index} />
           ))
         ) : (
           <p className="relative text-center mr-3 top-1/3 sm:top-1/2 sm:left-[2%] md:left-[20%] lg:left-[35%] text-2xl font-semibold sm:w-fit text-white/40">
