@@ -5,6 +5,7 @@ const {UploadFile} = require("../utils/fileUploader");
 const sharp=require("sharp");
 const path=require('path');
 const fs = require('fs/promises');
+const {encryptData} = require("../utils/crypto-server")
 exports.createCourse = async (req, res) => {
     try {
 
@@ -198,10 +199,7 @@ exports.editCourseDetails=async(req,res)=>{
 }
 
 exports.getAllCourse = async (req, res) => {
-    try {
-        // const allCourse = await Course.find({status:"Published"}).sort({createdAt:-1});
-        
-        
+    try {        
         var courseDetail=await Course.find({status:"Published"}).populate({
             path: "Instructor",
             populate: {
@@ -224,10 +222,11 @@ exports.getAllCourse = async (req, res) => {
             },
         }).exec();
         courseDetail.reverse();
+        const encryptCourse= encryptData(courseDetail)
         return res.status(200).json({
             success: true,
             message: "Successfully received Explore Course",
-            allCourse:courseDetail
+            allCourse:encryptCourse
         })
     } catch (error) {
         console.log(error);

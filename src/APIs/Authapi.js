@@ -5,6 +5,7 @@ import { profileAction } from "../store/profileSlice";
 import { encryptData } from "../components/core/auth/crypto";
 import { cardAction } from "../store/cardSlice";
 import { courseAction } from "../store/courseSlice";
+import {decryptData} from "../components/core/auth/crypto"
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const login = (data, navigate) => {
@@ -15,7 +16,7 @@ export const login = (data, navigate) => {
     try {
       await axios
         .post(
-          `${BASE_URL}/api/v1/auth/login`,
+          `${BASE_URL}/api/beta/auth/login`,
           {
             email: data.email,
             password: data.password,
@@ -27,18 +28,19 @@ export const login = (data, navigate) => {
         .then((res) => {
           response = res.data;
         });
+        const userd=decryptData(response.registredUser)
 
-      toast.success(`Welcome to MASTER, ${response.registredUser.FirstName}`);
+      toast.success(`Welcome to MASTER, ${userd.FirstName}`);
       dispatch(authAction.setToken(response.token));
-      // dispatch(profileAction.setProfile(response.registredUser.avatar));
+      // dispatch(profileAction.setProfile(userd.avatar));
 
-      dispatch(profileAction.setProfile(response.registredUser));
+      dispatch(profileAction.setProfile(userd));
 
       localStorage.setItem(
         import.meta.env.VITE_TOKEN,
         JSON.stringify(response.token)
       );
-      const text = encryptData(response.registredUser);
+      const text = encryptData(userd);
       localStorage.setItem(import.meta.env.VITE_USER, text);
 
       navigate("/dashboard/my-profile");
@@ -49,11 +51,10 @@ export const login = (data, navigate) => {
       } else {
         toast.error("Something went wrong or Server Offline");
       }
-    }finally{
+    } finally {
       dispatch(authAction.setLoading(false));
       toast.dismiss(toastId);
     }
-    
   };
 };
 
@@ -64,7 +65,7 @@ export const signup = (data, navigate) => {
     let response;
     try {
       await axios
-        .post(`${BASE_URL}/api/v1/auth/signup`, {
+        .post(`${BASE_URL}/api/beta/auth/signup`, {
           FirstName: data.FirstName,
           LastName: data.LastName,
           Email: data.Email,
@@ -82,10 +83,10 @@ export const signup = (data, navigate) => {
       toast.success(response.data.message);
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      dispatch(authAction.setLoading(false));
+      toast.dismiss(toastId);
     }
-    finally{
-    dispatch(authAction.setLoading(false));
-    toast.dismiss(toastId);}
   };
 };
 export const opt = (data, navigate) => {
@@ -96,13 +97,12 @@ export const opt = (data, navigate) => {
 
     try {
       await axios
-        .post(`${BASE_URL}/api/v1/auth/otp`, {
+        .post(`${BASE_URL}/api/beta/auth/otp`, {
           email: data.Email,
         })
         .then((res) => {
           response = res;
         });
-   
 
       dispatch(authAction.setSignUpData(data));
       toast.success(response.data.message);
@@ -113,10 +113,10 @@ export const opt = (data, navigate) => {
       } else {
         toast.error("Something went wrong");
       }
+    } finally {
+      dispatch(authAction.setLoading(false));
+      toast.dismiss(toastId);
     }
-    finally{
-    dispatch(authAction.setLoading(false));
-    toast.dismiss(toastId);}
   };
 };
 export const forgotPasswordOtp = async (data, navigate) => {
@@ -124,7 +124,7 @@ export const forgotPasswordOtp = async (data, navigate) => {
   let response;
   try {
     await axios
-      .post(`${BASE_URL}/api/v1/auth/forgotPasswordOTP`, {
+      .post(`${BASE_URL}/api/beta/auth/forgotPasswordOTP`, {
         email: data.email,
       })
       .then((res) => {
@@ -151,7 +151,7 @@ export const verifyForgotOTP = async (data, navigate) => {
   let response;
   try {
     await axios
-      .post(`${BASE_URL}/api/v1/auth/verifyForgotPasswordOTP`, {
+      .post(`${BASE_URL}/api/beta/auth/verifyForgotPasswordOTP`, {
         email: data.email,
         otp: String(data.data.otp),
       })
@@ -173,7 +173,7 @@ export const logout = (navigate) => {
     const toastId = toast.loading("Loading");
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/v1/auth/logout`,
+        `${BASE_URL}/api/beta/auth/logout`,
         {},
         {
           withCredentials: true,
@@ -181,16 +181,13 @@ export const logout = (navigate) => {
       );
 
       if (response.status === 200) {
-        
         localStorage.clear();
-        
-      
+
         dispatch(authAction.setToken(null));
         dispatch(profileAction.setProfile(null));
         dispatch(cardAction.reset());
         dispatch(courseAction.resetCourseState());
 
-       
         navigate("/");
 
         // Show success toast
@@ -199,20 +196,21 @@ export const logout = (navigate) => {
         toast.error("Failed to logout. Please try again.");
       }
     } catch (error) {
-      toast.error(`Logout failed: ${error.response?.data?.message || error.message}`);
+      toast.error(
+        `Logout failed: ${error.response?.data?.message || error.message}`
+      );
     } finally {
       toast.dismiss(toastId);
     }
   };
 };
 
-
 export const changePasswordAuth = (data, navigate) => {
   return async (dispatch) => {
     const toastId = toast.loading("Changing...");
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/v1/auth/changepassword`,
+        `${BASE_URL}/api/beta/auth/changepassword`,
         {
           oldpassword: data.oldPassword,
           password: data.password,
@@ -231,18 +229,22 @@ export const changePasswordAuth = (data, navigate) => {
       } else {
         toast.error("Something went wrong");
       }
-    }finally{
-    toast.dismiss(toastId);}
+    } finally {
+      toast.dismiss(toastId);
+    }
   };
 };
 export const resetPasswordOut = async (data, navigate) => {
   const toastId = toast.loading("Changing...");
   try {
-    const response = await axios.post(`${BASE_URL}/api/v1/auth/resetPassword`, {
-      email: data.email,
-      password: data.data.password,
-      ConfirmPassword: data.data.confirmPassword,
-    });
+    const response = await axios.post(
+      `${BASE_URL}/api/beta/auth/resetPassword`,
+      {
+        email: data.email,
+        password: data.data.password,
+        ConfirmPassword: data.data.confirmPassword,
+      }
+    );
     toast.success(response.data.message);
     navigate("/login");
   } catch (error) {
@@ -261,7 +263,7 @@ export const getCourseDetail = async (courseId, signal) => {
 
   try {
     const res = await axios.get(
-      `${BASE_URL}/api/v1/profile/getEnrolledCourses`,
+      `${BASE_URL}/api/beta/profile/getEnrolledCourses`,
       {
         withCredentials: true,
         signal: signal,
@@ -286,7 +288,7 @@ export const addCourseDetails = async (formData) => {
 
   try {
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/createCourse`,
+      `${BASE_URL}/api/beta/course/createCourse`,
       formData,
       {
         withCredentials: true,
@@ -307,7 +309,7 @@ export const createSection = async (data) => {
   const toastId = toast.loading("Loading");
   try {
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/createSection`,
+      `${BASE_URL}/api/beta/course/createSection`,
       {
         sectionName: data.sectionName,
         courseId: data.courseId,
@@ -332,7 +334,7 @@ export const deleteSection = async (data) => {
   try {
     // console.log("Data", data);
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/deleteSection`,
+      `${BASE_URL}/api/beta/course/deleteSection`,
       data,
       {
         withCredentials: true,
@@ -354,7 +356,7 @@ export const updateCartDetails = async (data) => {
   try {
     // console.log("Data", data);
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/updateCartDetails`,
+      `${BASE_URL}/api/beta/course/updateCartDetails`,
       {
         courseId: data.toString(),
       },
@@ -380,7 +382,7 @@ export const deleteCartDetails = async (data) => {
   const toastId = toast.loading("Deleting");
   try {
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/deleteCartDetails`,
+      `${BASE_URL}/api/beta/course/deleteCartDetails`,
       {
         courseId: data.toString(),
       },
@@ -406,13 +408,13 @@ export const getCartDetails = async (signal) => {
   const toastId = toast.loading("Fetching...");
   try {
     const response = await axios.get(
-      `${BASE_URL}/api/v1/course/getCartDetails`,
+      `${BASE_URL}/api/beta/course/getCartDetails`,
       {
         withCredentials: true,
         signal: signal,
       }
     );
-   const updatedWishlist= response.data.updatedCart.Cart;
+    const updatedWishlist = response.data.updatedCart.Cart;
     return updatedWishlist.reverse();
   } catch (error) {
     console.error("Error fetching cart", error);
@@ -427,7 +429,7 @@ export const deleteSubSection = async (data) => {
   try {
     // console.log("Data", data);
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/deleteSubSection`,
+      `${BASE_URL}/api/beta/course/deleteSubSection`,
       data,
       {
         withCredentials: true,
@@ -448,7 +450,7 @@ export const createSubSection = async (data) => {
   try {
     // console.log("Data", data);
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/createSubSection`,
+      `${BASE_URL}/api/beta/course/createSubSection`,
       data,
       {
         withCredentials: true,
@@ -469,7 +471,7 @@ export const updateSubSection = async (data) => {
   try {
     // console.log("Data", data);
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/updateSubSection`,
+      `${BASE_URL}/api/beta/course/updateSubSection`,
       data,
       {
         withCredentials: true,
@@ -491,7 +493,7 @@ export const updateSection = async (data) => {
   try {
     // console.log("Data", data);
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/updateSection`,
+      `${BASE_URL}/api/beta/course/updateSection`,
       data,
       {
         withCredentials: true,
@@ -507,11 +509,11 @@ export const updateSection = async (data) => {
     toast.dismiss(toastId);
   }
 };
-export const editCourseDetails=async(data)=>{
+export const editCourseDetails = async (data) => {
   const toastId = toast.loading("Loading");
   try {
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/editCourseDetails`,
+      `${BASE_URL}/api/beta/course/editCourseDetails`,
       data,
       {
         withCredentials: true,
@@ -525,13 +527,13 @@ export const editCourseDetails=async(data)=>{
   } finally {
     toast.dismiss(toastId);
   }
-}
+};
 export const updateCourse = async (data) => {
   const toastId = toast.loading("Loading");
   try {
     // console.log("Data", data);
     const response = await axios.post(
-      `${BASE_URL}/api/v1/course/updateCourse`,
+      `${BASE_URL}/api/beta/course/updateCourse`,
       data,
       {
         withCredentials: true,
@@ -551,7 +553,7 @@ export const getAllInstructorCourses = async (signal) => {
   const toastId = toast.loading("Loading");
   try {
     const response = await axios.get(
-      `${BASE_URL}/api/v1/profile/getAllInstructorCourses`,
+      `${BASE_URL}/api/beta/profile/getAllInstructorCourses`,
       {
         withCredentials: true,
         signal: signal,
@@ -573,89 +575,99 @@ export const getAllInstructorCourses = async (signal) => {
 export const getAllCourse = async (signal) => {
   const toastId = toast.loading("Loading");
   try {
-    const response = await axios.get(`${BASE_URL}/api/v1/course/getAllCourse`, {
-      withCredentials: true,
-      signal: signal,
-    });
+    const response = await axios.get(
+      `${BASE_URL}/api/beta/course/getAllCourse`,
+      {
+        withCredentials: true,
+        signal: signal,
+      }
+    );
 
     // console.log("res", response.data.allCourse);
-    return response.data.allCourse;
+    const coursed=decryptData(response.data.allCourse)
+    return coursed;
   } catch (error) {
     if (axios.isCancel(error)) {
       console.error("Request canceled", error.message);
     } else {
       toast.error("Error fetching course details", error);
     }
-   
   } finally {
     toast.dismiss(toastId);
   }
 };
-export const updateProfile=async( dispatch,data)=>{
+export const updateProfile = async (dispatch, data) => {
   const toastId = toast.loading("Saving");
   try {
-    const response=await axios.post(`${BASE_URL}/api/v1/profile/updateProfile`,data,{
-      withCredentials:true,
-      
-    })
+    const response = await axios.post(
+      `${BASE_URL}/api/beta/profile/updateProfile`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
     dispatch(profileAction.setProfile(response.data.registredUser));
     const text = encryptData(response.data.registredUser);
     localStorage.setItem(import.meta.env.VITE_USER, text);
-    toast.success("Saved")
-   
+    toast.success("Saved");
   } catch (error) {
-    console.log(error)
-  }finally{
-    toast.dismiss(toastId)
+    console.log(error);
+  } finally {
+    toast.dismiss(toastId);
   }
-}
+};
 
-export const updateDisplayProfile=async(dispatch,data)=>{
+export const updateDisplayProfile = async (dispatch, data) => {
   const toastId = toast.loading("Changing");
   try {
-    const response=await axios.post(`${BASE_URL}/api/v1/profile/updateDisplayProfile`,data,{
-      withCredentials:true,
-      
-    })
+    const response = await axios.post(
+      `${BASE_URL}/api/beta/profile/updateDisplayProfile`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
     dispatch(profileAction.setProfile(response.data.updatedProfile));
     const text = encryptData(response.data.updatedProfile);
     localStorage.setItem(import.meta.env.VITE_USER, text);
 
-    toast.success("Changed")
-   
+    toast.success("Changed");
   } catch (error) {
-    toast.error(error.message)
-  }finally{
-    toast.dismiss(toastId)
+    toast.error(error.message);
+  } finally {
+    toast.dismiss(toastId);
   }
-}
+};
 
-
-export const deleteEnrolledCourse = async (data,signal) => {
+export const deleteEnrolledCourse = async (data, signal) => {
   const toastId = toast.loading("Loading");
   try {
-    
-    const response = await axios.post(`${BASE_URL}/api/v1/course/deleteEnrolledCourse`,data, {
-      withCredentials: true,
-      signal: signal,
-    
-    });
-    const userDetail = await axios.get(`${BASE_URL}/api/v1/auth/getUserDetail`, {
-      withCredentials: true,
-      signal: signal,
-    });
+    const response = await axios.post(
+      `${BASE_URL}/api/beta/course/deleteEnrolledCourse`,
+      data,
+      {
+        withCredentials: true,
+        signal: signal,
+      }
+    );
+    const userDetail = await axios.get(
+      `${BASE_URL}/api/beta/auth/getUserDetail`,
+      {
+        withCredentials: true,
+        signal: signal,
+      }
+    );
 
-
-  
-  return {courseDetail:response.data.courseDetail,userDetail:userDetail.data.registredUser}
+    return {
+      courseDetail: response.data.courseDetail,
+      userDetail: userDetail.data.registredUser,
+    };
   } catch (error) {
-   
     if (axios.isCancel(error)) {
       console.error("Request canceled", error.message);
     } else {
       toast.error("Error Deleting course details", error);
     }
-   
   } finally {
     toast.dismiss(toastId);
   }

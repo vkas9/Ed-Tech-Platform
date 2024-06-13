@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api/v1": {
+      "/api/beta": {
         target:"https://ed-tech-platform-1-n5ez.onrender.com",
         changeOrigin: true,
         secure: false

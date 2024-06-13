@@ -7,6 +7,7 @@ const Profile = require("../models/Profile");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 require("dotenv").config();
+const {encryptData} = require("../utils/crypto-server")
 //sign up handler
 exports.signup = async (req, res) => {
   try {
@@ -185,9 +186,11 @@ exports.login = async (req, res) => {
         sameSite:'None',
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
       };
+
+      const encryptUser =encryptData(registredUser);
       res.cookie("__EDTat", accessToken, options).cookie("__EDTrt",refreshToken,options).status(200).json({
         success: true,
-        registredUser,
+        registredUser:encryptUser,
         token:accessToken,
         refreshToken,
         message: "Successfully Logged in",

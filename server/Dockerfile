@@ -1,12 +1,10 @@
-FROM node
+FROM node:18-alpine
 
+WORKDIR /app
 
+COPY package*.json ./
 
+RUN npm ci
 
-
-COPY .doc
-
-
-RUN npm install
-
-ENTRYPOINT ["node","index"]
+COPY . .
+RUN npm run build

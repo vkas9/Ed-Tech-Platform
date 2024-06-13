@@ -21,11 +21,13 @@ const Navbar = () => {
   const [catagory, setCatagory] = useState([]);
   const dispatch = useDispatch();
 
-  const { openNavigation,sidebarShow:show } = useSelector((store) => store.profile);
+  const { openNavigation, sidebarShow: show } = useSelector(
+    (store) => store.profile
+  );
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/api/v1/course/getAllCatagory`)
+      .get(`${BASE_URL}/api/beta/course/getAllCatagory`)
       .then((res) => {
         setCatagory(res.data.allCatagory);
       })
@@ -75,7 +77,7 @@ const Navbar = () => {
     if (e.target.innerHTML == "Log Out") {
       handleLogoutClick();
     } else {
-      if(show)dispatch(profileAction.setSidebarShow(!show))
+      if (show) dispatch(profileAction.setSidebarShow(!show));
       if (!openNavigation) return;
       toggle();
     }
@@ -172,7 +174,7 @@ const Navbar = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 openNavigation && toggle();
-                if(show)dispatch(profileAction.setSidebarShow(!show))
+                if (show) dispatch(profileAction.setSidebarShow(!show));
               }}
               className="relative "
             >
