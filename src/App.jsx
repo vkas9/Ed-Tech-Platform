@@ -40,7 +40,17 @@ function App() {
             <img src={github} alt="" width={40} />
           </a>
         </div>
-        <Toaster position="top-center" />
+        <Toaster 
+        position="top-center"
+        toastOptions={{
+          style: {
+            borderRadius: '50px',
+            background: '#333',
+            color: '#fff'
+          },
+        }} 
+      />
+
         <Router>
           <Navbar />
           <Routes>
