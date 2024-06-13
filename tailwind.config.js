@@ -12,7 +12,8 @@ export default {
         "xd":"850px",
         "bs":"570px",
         "gf":"520px",
-        "gw":"320px"
+        "gw":"320px",
+        "tr":"350px"
         
       },
     },

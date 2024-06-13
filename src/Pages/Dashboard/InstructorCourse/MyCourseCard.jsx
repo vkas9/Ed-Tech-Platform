@@ -33,11 +33,11 @@ const MyCourseCard = ({ course }) => {
         !isButtonHovered ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20" : ""
       } rounded-xl mt-4 bg-gray-300/10 max-w-[60rem] p-1  `}
     >
-      <div className="gap-3 p-2 flex-col w-full sm:flex-row  items-center flex">
+      <div className="gap-3 p-2 flex-col w-full sm:items-center sm:flex-row Z flex">
         <p
           className={`${
             course.status == "Draft" ? "text-red-500" : "text-green-500 "
-          } text-center w-[80px] sm:p-1   rounded-full font-bold`}
+          } text-center  w-full sm:w-[80px] sm:p-1   rounded-full font-bold`}
         >
           {course.status}
         </p>
@@ -56,10 +56,10 @@ const MyCourseCard = ({ course }) => {
             <p className="text-white/40 truncate text-[.9rem] ">
               {course.CourseDescription}
             </p>
-            <div className="flex overflow-x-auto justify-center gap-2 items-center">
-              {/* <span >0.0</span> */}
-              {/* <div className="flex  max-w-[80px] xs:min-w-[130px] gap-2 whitespace-nowrap overflow-x-auto items-center">
-            <span></span>
+            <div className=" hidden overflow-x-auto justify-center gap-2 items-center">
+              <span >0.0</span>
+              
+            
             <ReactStars
               className=" min-w-[120px]  whitespace-nowrap overflow-x-auto  "
               count={5}
@@ -68,7 +68,7 @@ const MyCourseCard = ({ course }) => {
               activeColor="#ffd700"
               emptyIcon={<FaRegStar />}
               fullIcon={<FaStar />}
-            /></div> */}
+            />
             </div>
           </div>
         </div>
