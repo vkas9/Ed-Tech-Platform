@@ -33,7 +33,7 @@ const ExploreCoursesCard = ({ course }) => {
     setLoading(false);
   };
 
-  const handleClick = async() => {
+  const handleClick = async(e) => {
     if (user?.Courses?.includes(course._id)){
       if(!enrolledCourse){
         const controller = new AbortController();
@@ -42,8 +42,17 @@ const ExploreCoursesCard = ({ course }) => {
       }
       navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
     }
+    else{
+      if(e.target.innerText==="Enroll Now"){
+       //Buy section
+
+      }
+      else{
+        navigate(`/dashboard/courses/${uuidv4()}/${course._id}`);
+      }
+    }
       
-    else navigate(`/dashboard/courses/${uuidv4()}/${course._id}`);
+  
   };
 
   return (
@@ -103,7 +112,7 @@ const ExploreCoursesCard = ({ course }) => {
           <div
             onClick={(e) => {
               e.stopPropagation();
-              handleClick()
+              handleClick(e)
             }}
             onMouseEnter={(e) => {
               e.stopPropagation();
