@@ -70,11 +70,11 @@ const CourseCard = ({ course }) => {
             : ""
         } bg-gray-300/10 max-w-[60rem] p-1`}
       >
-        <div className="gap-3 p-2 overflow-auto items-center flex">
+        <div className="gap-3  p-2 sm:min-w-[351px] flex-col vm:flex-row pr-[2.2rem]  overflow-auto vm:items-center flex">
           <img
             src={course.Thumbnail}
             alt="course-thumbnail"
-            className="w-[140px] vm:w-[160px] h-[110px] max-w-[160px] object-cover rounded-lg"
+            className=" h-[110px] w-full xs:w-[200px] xs:max-w-[200px] vm:w-[160px] vm:max-w-[160px] object-cover  rounded-lg"
           />
           <div className="w-[120px] md:w-[150px]">
             <h2>{course.CourseName}</h2>
@@ -84,16 +84,16 @@ const CourseCard = ({ course }) => {
           </div>
         </div>
         <div className="h-[1px] bg-white/10 mx-3 my-1" />
-        <div className="w-fit text-sm vm:text-[1.1rem] pl-4 flex items-center">
+        <div className="w-fit text-sm vm:text-[1.1rem] pl-2 mb-1 sm:pl-4 flex items-center">
           <span>
             <span className="text-white/40">Duration:</span> {course?.duration}
             5hr 45m
           </span>
         </div>
-        <div className="flex pl-4 w-fit items-center gap-7 mr-3">
+        <div className="flex pl-2 sm:pl-4 w-fit items-center gap-7 mr-3">
           <p className="text-sm vm:text-[1.1rem]">
             <span className="text-white/40">Created at: </span>
-            {course.createdAt.slice(0, 10)}
+          <span className="whitespace-nowrap"> {course.createdAt.slice(0, 10)}</span> 
           </p>
           <div
             onClick={(e) => {

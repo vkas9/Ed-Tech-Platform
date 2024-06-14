@@ -5,11 +5,12 @@ import { FaRegStar } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getCartDetails, updateCartDetails } from "../../../APIs/Authapi";
+import { PaymentComponent, enrollCourse, getCartDetails, updateCartDetails } from "../../../APIs/Authapi";
 import { useNavigate } from "react-router-dom";
 import { profileAction } from "../../../store/profileSlice";
 import { v4 as uuidv4 } from "uuid";
 import { fetchEnrollData } from "../EnrolledCourse/fetchEnrollData";
+import toast from "react-hot-toast";
 
 const ExploreCoursesCard = ({ course }) => {
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,7 @@ const ExploreCoursesCard = ({ course }) => {
   
   const { user } = useSelector((store) => store.profile);
   const { enrolledCourse } = useSelector((store) => store.card);
+
   const { user: data } = useSelector((store) => store.profile);
   const handleCart = async () => {
     setLoading(true);
@@ -32,10 +34,16 @@ const ExploreCoursesCard = ({ course }) => {
     dispatch(profileAction.setProfile(updatedUser));
     setLoading(false);
   };
+  const handleEnrollCourse = async () => {
+    setLoading(true);
+  
 
+    const updatedUser = await enrollCourse(dispatch,{courseId:course?._id},data,navigate);
+    setLoading(false);
+  };
   const handleClick = async(e) => {
     if (user?.Courses?.includes(course._id)){
-      if(!enrolledCourse){
+      if(!enrolledCourse ||enrolledCourse.length< user.Courses.length){
         const controller = new AbortController();
         const signal = controller.signal;
         await fetchEnrollData(data, dispatch, signal)
@@ -44,7 +52,10 @@ const ExploreCoursesCard = ({ course }) => {
     }
     else{
       if(e.target.innerText==="Enroll Now"){
-       //Buy section
+       const paymentResponse=await PaymentComponent({courseId:course._id});
+       if(paymentResponse.status_code===200){
+            await handleEnrollCourse()
+       }
 
       }
       else{
@@ -62,7 +73,7 @@ const ExploreCoursesCard = ({ course }) => {
         !isButtonHovered ? 'sm:hover:bg-gray-300/20' : ''
       } bg-gray-300/10 max-w-[60rem] p-1`}
     >
-      <div className="gap-3 p-2 overflow-auto items-center flex">
+      <div className="gap-3  p-2 sm:min-w-[351px] flex-col vm:flex-row pr-[2.2rem]  overflow-auto vm:items-center flex">
         <img
           src={course?.Thumbnail}
           alt="course-thumbnail"
@@ -108,7 +119,7 @@ const ExploreCoursesCard = ({ course }) => {
             </span>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center gap-1">
+        <div className="flex  md:mr-5 flex-col justify-center items-center gap-1">
           <div
             onClick={(e) => {
               e.stopPropagation();
@@ -122,7 +133,7 @@ const ExploreCoursesCard = ({ course }) => {
               e.stopPropagation();
               setIsButtonHovered(false);
             }}
-            className="text-[1.1rem] md:mr-2 w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20 box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full"
+            className="text-[1.1rem] w-[120px] bg-white/10 text-center hover:bg-white/20 active:bg-white/20 box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full"
           >
             {user?.Courses?.includes(course._id) ? (
               <span>Go to Course</span>

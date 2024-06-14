@@ -263,7 +263,7 @@ exports.updateCartDetails=async(req,res)=>{
 exports.getCartDetails=async(req,res)=>{
     try {
         const userId=req.user.id;
-        const updatedCart=await User.findById(userId).populate({path:"Cart"}).exec();
+        const updatedCart=await User.findById(userId).select("-Password").populate({path:"Cart"}).exec();
         res.status(200).json({
             success:true,
             message:"Successfully Fetched Cart",
@@ -353,8 +353,14 @@ exports.deleteEnrolledCourse=async(req,res)=>{
     
         const updatedCourseUser=currentCourseUser.Courses.filter(course=>course.toString()!==courseId);
         currentCourseUser.Courses=updatedCourseUser;
-       
+        
         await currentCourseUser.save();
+        await Course.findByIdAndUpdate(
+            courseId,
+            { $pull: { StudentEntrolled: userId } },
+            { new: true }
+          );
+       
         var courseDetail = [];
         for (let i = 0; i < currentCourseUser.Courses.length; i++) {
             courseDetail.push(

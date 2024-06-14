@@ -6,6 +6,7 @@ import { encryptData } from "../components/core/auth/crypto";
 import { cardAction } from "../store/cardSlice";
 import { courseAction } from "../store/courseSlice";
 import {decryptData} from "../components/core/auth/crypto"
+import { fetchEnrollData } from "../Pages/Dashboard/EnrolledCourse/fetchEnrollData";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const login = (data, navigate) => {
@@ -657,7 +658,7 @@ export const deleteEnrolledCourse = async (data, signal) => {
         signal: signal,
       }
     );
-
+console.log("deleteEnrolledCourse",response)
     return {
       courseDetail: response.data.courseDetail,
       userDetail: userDetail.data.registredUser,
@@ -668,6 +669,91 @@ export const deleteEnrolledCourse = async (data, signal) => {
     } else {
       toast.error("Error Deleting course details", error);
     }
+  } finally {
+    toast.dismiss(toastId);
+  }
+};
+
+
+export const PaymentComponent = async (data) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/api/beta/payment/createOrder`, data, {
+      withCredentials: true,
+    });
+
+    const res = response.data;
+    if (res.success) {
+      return new Promise((resolve, reject) => {
+        const options = {
+          key: res.key_id,
+          amount: res.amount,
+          currency: "INR",
+          name: res.courseName,
+          description: res.courseDescription,
+          image: res.thumbnail,
+          order_id: res.order_id,
+          handler: function (response) {
+            toast.success("Payment Succeeded");
+            resolve(response); // Resolve the promise with the response on success
+          },
+          prefill: {
+            contact: res.contact,
+            name: res.name,
+            email: res.email
+          },
+          notes: {
+            description: res.description
+          },
+          theme: {
+            color: "#000431",
+          }
+        };
+
+        const razorpayObject = new Razorpay(options);
+        razorpayObject.on('payment.failed', function (response) {
+          toast.error("Payment Failed");
+          reject(response); // Reject the promise with the response on failure
+        });
+        razorpayObject.open();
+      });
+    } else {
+      toast.error(res.message);
+      throw new Error(res.message);
+    }
+  } catch (error) {
+    console.error('Error creating order:', error);
+    toast.error(error.response.data.message);
+    throw error; // Ensure the error is thrown to be handled by the caller
+  }
+};
+
+
+export const enrollCourse = async (dispatch, data,enrollData=null,navigate) => {
+  const toastId = toast.loading("Enrolling");
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/beta/payment/enrollCourse`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+    const userd=decryptData(response.data.ey)
+    const updatedWishlist = userd.Cart;
+
+    const cartText=encryptData(updatedWishlist.reverse());
+     
+    dispatch(profileAction.setProfile(userd));
+      const text = encryptData(userd);
+      localStorage.setItem(import.meta.env.VITE_USER, text);
+      localStorage.setItem(import.meta.env.VITE_CART_D, cartText);
+      const controller = new AbortController();
+      const signal = controller.signal;
+      await fetchEnrollData(enrollData, dispatch, signal)
+      navigate(`/dashboard/enrolled-courses`)
+    toast.success("Enrolled");
+  } catch (error) {
+    toast.error(response.error);
   } finally {
     toast.dismiss(toastId);
   }

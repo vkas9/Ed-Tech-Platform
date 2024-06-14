@@ -41,7 +41,7 @@ ConnectToCloudinary();
 
 app.use("/api/beta/auth", userRoute);
 app.use("/api/beta/course", courseRoute);
-// app.use("/api/beta/payment",paymentRoute);
+app.use("/api/beta/payment",paymentRoute);
 app.use("/api/beta/profile", profileRoute);
 
 app.get("/", (req, res) => {

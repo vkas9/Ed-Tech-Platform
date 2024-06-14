@@ -3,18 +3,20 @@ import ReactStars from "react-stars";
 import { FaStar } from "react-icons/fa6";
 import { FaRegStar } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
-import { deleteCartDetails } from "../../../APIs/Authapi";
+import { PaymentComponent, deleteCartDetails, enrollCourse } from "../../../APIs/Authapi";
 import { profileAction } from "../../../store/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
+import { fetchEnrollData } from "../EnrolledCourse/fetchEnrollData";
 
 const WishlistCard = ({ course }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { enrolledCourse } = useSelector((store) => store.card);
   const handleCart = async () => {
     setLoading(true);
 
@@ -27,17 +29,44 @@ const WishlistCard = ({ course }) => {
       setLoading(false);
     }
   };
+  const { user: data } = useSelector((store) => store.profile);
   const { user } = useSelector((store) => store.profile);
-  const handleClick = () => {
-    if (user?.Courses?.includes(course._id))
-      navigate(`/dashboard/enrolled-courses`);
-    else navigate(`/dashboard/wishlist/${uuidv4()}/${course._id}`);
+  const handleEnrollCourse = async () => {
+    setLoading(true);
+  
+
+    const updatedUser = await enrollCourse(dispatch,{courseId:course?._id},data,navigate);
+    setLoading(false);
+  };
+  const handleClick = async(e) => {
+    if (user?.Courses?.includes(course._id)){
+      if(!enrolledCourse ||enrolledCourse.length< user.Courses.length){
+        const controller = new AbortController();
+        const signal = controller.signal;
+        await fetchEnrollData(data, dispatch, signal)
+      }
+      navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+    }
+    else{
+      if(e.target.innerText==="Enroll Now"){
+       const paymentResponse=await PaymentComponent({courseId:course._id});
+       if(paymentResponse.status_code===200){
+            await handleEnrollCourse()
+       }
+
+      }
+      else{
+        navigate(`/dashboard/wishlist/${uuidv4()}/${course._id}`);
+      }
+    }
+      
+  
   };
   return (
     <div
       onClick={(e) => {
         e.stopPropagation();
-        handleClick();
+        handleClick(e);
       }}
       className={`flex relative text-[1.1rem] overflow-x-auto justify-between flex-col sm:flex-row mr-5  rounded-xl mt-4 hover:cursor-pointer ${
         !isButtonHovered ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20" : ""
@@ -90,8 +119,9 @@ const WishlistCard = ({ course }) => {
         </div>
         <div
           onClick={(e) => {
-            e.preventDefault();
+          
             e.stopPropagation();
+            handleClick(e)
           }}
           onMouseEnter={(e) => {
             e.stopPropagation();
@@ -103,11 +133,15 @@ const WishlistCard = ({ course }) => {
           }}
           className=" text-[1.1rem] ml-1 sm:ml-7   select-none min-w-[100px] vm:w-[120px] bg-white/10 text-center sm:hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full "
         >
-          Enroll Now
+           {user?.Courses?.includes(course._id) ? (
+              <span className="whitespace-nowrap">Go to Course</span>
+            ) : (
+              "Enroll Now"
+            )}
         </div>
       </div>
 
-      <button disabled={loading} className="">
+      <button disabled={loading} className="sm:pr-4 md:pr-6 ">
         <RxCross2
           onClick={(e) => {
             e.stopPropagation();
