@@ -7,22 +7,36 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { updateProfile } from "../../../APIs/Authapi";
 import UpdateProfilePicture from "../../UpdateProfilePicture";
+import toast from "react-hot-toast";
 
 const EditProfile = () => {
   const { user } = useSelector((store) => store.profile);
   const [loading, setLoading] = useState(false);
   const[show,setShow]=useState(false)
   const dispatch=useDispatch()
+  const [showToast,isShowToast]=useState(false)
   const handleSubmit = async (values,{resetForm}) => {
-    try {
-      setLoading(true);
-      await updateProfile(dispatch,values);
-      resetForm();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+    if(values.city==''&&values.contactNumber==''&&values.gender==''&& values.dateOfBirth==null){
+      if(showToast){
+        toast.dismiss(showToast);
+        isShowToast(false);
+      }
+     const toastId=toast.error("Please fill atleast one field")
+     isShowToast(toastId);
+
     }
+    else{
+      try {
+        setLoading(true);
+        await updateProfile(dispatch,values);
+        resetForm();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
   };
   const handleUpload=()=>{
 

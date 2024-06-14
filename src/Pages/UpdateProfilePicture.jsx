@@ -4,27 +4,39 @@ import UploadProfile from "./UploadProfile"
 import { updateDisplayProfile } from "../APIs/Authapi";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 const UpdateProfilePicture = ({show,setShow}) => {
   const [loading, setLoading] = useState(false);
   const initialValues = {
     profilePicture: null,
   };
+  const [showToast,isShowToast]=useState(false)
 const dispatch=useDispatch()
   const handleSubmit = async(values) => {
-    console.log("Form values:", values.profilePicture);
-    try {
-      setLoading(true);
-      const formData = new FormData();
-      formData.append("profilePicture", values.profilePicture);
-  
-      await updateDisplayProfile(dispatch,formData);
-      setShow(!show)
+    if(values.profilePicture){
+      try {
+        setLoading(true);
+        const formData = new FormData();
+        formData.append("profilePicture", values.profilePicture);
     
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+        await updateDisplayProfile(dispatch,formData);
+        setShow(!show)
+      
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }else{
+      if(showToast){
+        toast.dismiss(showToast);
+        isShowToast(false);
+      }
+      const toastId=toast.error("Kindly upload your image");
+      isShowToast(toastId);
     }
+    
+    
   };
 
   return (
