@@ -29,7 +29,6 @@ const WishlistCard = ({ course }) => {
   };
   const { user } = useSelector((store) => store.profile);
   const handleClick = () => {
-    
     if (user?.Courses?.includes(course._id))
       navigate(`/dashboard/enrolled-courses`);
     else navigate(`/dashboard/wishlist/${uuidv4()}/${course._id}`);
@@ -40,16 +39,18 @@ const WishlistCard = ({ course }) => {
         e.stopPropagation();
         handleClick();
       }}
-      className={`flex relative text-[1.1rem] justify-between flex-col sm:flex-row mr-5  rounded-xl mt-4 hover:cursor-pointer ${!isButtonHovered?"active:bg-gray-300/20 sm:hover:bg-gray-300/20":""} bg-gray-300/10 max-w-[60rem] p-1  `}
+      className={`flex relative text-[1.1rem] overflow-x-auto justify-between flex-col sm:flex-row mr-5  rounded-xl mt-4 hover:cursor-pointer ${
+        !isButtonHovered ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20" : ""
+      } bg-gray-300/10 max-w-[60rem] p-1  `}
     >
-      <div className="gap-3 p-2 overflow-auto items-center flex">
+      <div className="gap-3  p-2 sm:min-w-[351px] flex-col vm:flex-row pr-[2.2rem]  overflow-auto vm:items-center flex">
         <img
           src={course?.Thumbnail}
           alt="course-thumbnail"
-          className="w-[160px] h-[110px] max-w-[160px] object-cover  rounded-lg "
+          className=" h-[110px] w-full xs:w-[200px] xs:max-w-[200px] vm:w-[160px] vm:max-w-[160px] object-cover  rounded-lg "
         />
 
-        <div className=" w-[200px]">
+        <div className="  max-w-[200px]">
           <h2>{course.CourseName}</h2>
           <p className="text-white/40 text-[.9rem] ">
             {course.CourseDescription}
@@ -71,7 +72,7 @@ const WishlistCard = ({ course }) => {
       <div className="h-[1px] bg-white/10 mx-3 my-1  " />
       <div className="flex  items-center gap-3 justify-between">
         <div className="vm:grid overflow-x-auto xd:w-[220px] grid-flow-col items-start  gap-9">
-          <div className=" w-fit pl-4  flex items-center ">
+          <div className=" w-fit pl-2 vm:pl-4  flex items-center ">
             <span className="">
               {" "}
               <span className="text-white/40">Duration:</span>{" "}
@@ -79,46 +80,48 @@ const WishlistCard = ({ course }) => {
             </span>
           </div>
 
-          <div className=" w-fit pl-4 flex items-center ">
+          <div className=" w-fit pl-2 vm:pl-4 flex items-center ">
             <span className="">
               {" "}
-              <span className="text-white/40">Price:</span><span className="sm:block"> ₹{course.Price}</span> 
+              <span className="text-white/40">Price:</span>
+              <span className="sm:block"> ₹{course.Price}</span>
             </span>
           </div>
         </div>
         <div
           onClick={(e) => {
-            e.preventDefault()
-            e.stopPropagation()}}
-          onMouseEnter={(e)=>{
-            e.stopPropagation()
-            setIsButtonHovered(true)
+            e.preventDefault();
+            e.stopPropagation();
           }}
-          onMouseLeave={(e)=>{
-            e.stopPropagation()
-            setIsButtonHovered(false)
+          onMouseEnter={(e) => {
+            e.stopPropagation();
+            setIsButtonHovered(true);
           }}
-          className=" text-[1.1rem] ml-7   select-none w-[80px] vm:w-[120px] bg-white/10 text-center sm:hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full "
+          onMouseLeave={(e) => {
+            e.stopPropagation();
+            setIsButtonHovered(false);
+          }}
+          className=" text-[1.1rem] ml-1 sm:ml-7   select-none min-w-[100px] vm:w-[120px] bg-white/10 text-center sm:hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full "
         >
-          Buy
+          Enroll Now
         </div>
       </div>
 
-      <button disabled={loading} className="bg-red-500"  >
+      <button disabled={loading} className="">
         <RxCross2
           onClick={(e) => {
             e.stopPropagation();
             handleCart();
           }}
-          onMouseEnter={(e)=>{
-            e.stopPropagation()
-            setIsButtonHovered(true)
+          onMouseEnter={(e) => {
+            e.stopPropagation();
+            setIsButtonHovered(true);
           }}
-          onMouseLeave={(e)=>{
-            e.stopPropagation()
-            setIsButtonHovered(false)
+          onMouseLeave={(e) => {
+            e.stopPropagation();
+            setIsButtonHovered(false);
           }}
-          className="text-[1.7rem] absolute lg:top-1 lg:right-1  top-1 right-1  sm:-top-1 sm:-right-1 hover:bg-white/10 box-content p-2 md:p-3 transition-all hover:cursor-pointer duration-150 rounded-full  "
+          className="text-[1.7rem] absolute sm:ml-3 sm:static lg:top-1 lg:right-1  top-1 right-1  sm:-top-1 sm:-right-1 hover:bg-white/10 box-content p-2 md:p-3 transition-all hover:cursor-pointer duration-150 rounded-full  "
         />
       </button>
     </div>

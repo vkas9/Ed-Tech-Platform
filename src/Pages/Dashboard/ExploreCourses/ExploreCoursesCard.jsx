@@ -109,7 +109,7 @@ const ExploreCoursesCard = ({ course }) => {
             {user?.Courses?.includes(course._id) ? (
               <span>Go to Course</span>
             ) : (
-              "Buy"
+              "Enroll Now"
             )}
           </div>
           <div

@@ -67,7 +67,7 @@ const Wishlist = () => {
         <span className="text-yellow-500">Wishlist</span>
       </div>
 
-      <h1 className="text-3xl mb-3">My Wishlist <span>({wishlist?.length}</span>)</h1>
+      <h1 className="text-3xl mb-3 w-full whitespace-nowrap ">My Wishlist <span>({wishlist?.length}</span>)</h1>
       <div className="overflow-auto  pb-[4rem]  h-[75vh] ">
         {!Wishlist ? (
           <div>
