@@ -9,6 +9,7 @@ import { getCartDetails, updateCartDetails } from "../../../APIs/Authapi";
 import { useNavigate } from "react-router-dom";
 import { profileAction } from "../../../store/profileSlice";
 import { v4 as uuidv4 } from "uuid";
+import { fetchEnrollData } from "../EnrolledCourse/fetchEnrollData";
 
 const ExploreCoursesCard = ({ course }) => {
   const [loading, setLoading] = useState(false);
@@ -17,7 +18,8 @@ const ExploreCoursesCard = ({ course }) => {
   const dispatch = useDispatch();
   
   const { user } = useSelector((store) => store.profile);
-
+  const { enrolledCourse } = useSelector((store) => store.card);
+  const { user: data } = useSelector((store) => store.profile);
   const handleCart = async () => {
     setLoading(true);
     if (user?.Cart?.includes(course._id)) {
@@ -31,9 +33,16 @@ const ExploreCoursesCard = ({ course }) => {
     setLoading(false);
   };
 
-  const handleClick = () => {
-    if (user?.Courses?.includes(course._id))
+  const handleClick = async() => {
+    if (user?.Courses?.includes(course._id)){
+      if(!enrolledCourse){
+        const controller = new AbortController();
+        const signal = controller.signal;
+        await fetchEnrollData(data, dispatch, signal)
+      }
       navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+    }
+      
     else navigate(`/dashboard/courses/${uuidv4()}/${course._id}`);
   };
 
@@ -94,7 +103,7 @@ const ExploreCoursesCard = ({ course }) => {
           <div
             onClick={(e) => {
               e.stopPropagation();
-              navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+              handleClick()
             }}
             onMouseEnter={(e) => {
               e.stopPropagation();

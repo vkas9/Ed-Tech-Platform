@@ -1,54 +1,27 @@
 import { motion } from "framer-motion";
 import CourseCard from "./CourseCard";
 import { useEffect } from "react";
-import { getCourseDetail } from "../../../APIs/Authapi";
 import { useDispatch, useSelector } from "react-redux";
-import { cardAction } from "../../../store/cardSlice";
-import {encryptData} from "../../../components/core/auth/crypto"
+import { fetchEnrollData } from "./fetchEnrollData";
+
 const EnrolledCourse = () => {
   const dispatch = useDispatch();
   const { enrolledCourse } = useSelector((store) => store.card);
-  const {user:data} =  useSelector((store) => store.profile);
-//  console.log("enrolledCourse",enrolledCourse)
+  const { user: data } = useSelector((store) => store.profile);
+
   useEffect(() => {
     if (!data || data.role !== "Student") return;
     const controller = new AbortController();
     const signal = controller.signal;
 
-    const fetchData = async () => {
-      try {
-        
-        
-        if (data && data.Courses && data.Courses.length > 0) {
-          const courseData = await getCourseDetail(data.Courses, signal);
-          // console.log("courseData->",courseData)
-          if (!signal.aborted) {
-            const text=encryptData(courseData.data.courseDetail)
-        
-            localStorage.setItem(import.meta.env.VITE_ENROLL_C,text);
-            dispatch(cardAction.setEnrolledCourse(courseData.data.courseDetail));
-          }
-        } else {
-          localStorage.setItem(import.meta.env.VITE_ENROLL_C, JSON.stringify([]));
-          dispatch(cardAction.setEnrolledCourse([]));
-        }
-      } catch (error) {
-        if (!controller.signal.aborted){
-
-        
-          toast.error("Unable to fetch Enrolled Courses");
-        }
-      }
-    };
-
     if (!enrolledCourse) {
-      fetchData();
+      fetchEnrollData(data, dispatch, signal);
     }
 
     return () => {
       controller.abort();
     };
-  }, [enrolledCourse,data, dispatch]);
+  }, [enrolledCourse, data, dispatch]);
 
   return (
     <motion.div
@@ -66,7 +39,7 @@ const EnrolledCourse = () => {
       </div>
 
       <h1 className="text-3xl mb-3">Enrolled Course</h1>
-      <div className="overflow-auto  pb-[4rem] h-[75vh]">
+      <div className="overflow-auto pb-[4rem] h-[75vh]">
         {!enrolledCourse ? (
           <div>
             <p>Loading...</p>
