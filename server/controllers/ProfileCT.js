@@ -219,7 +219,7 @@ exports.updateDisplayProfile = async (req, res) => {
       { _id: userId },
       { avatar: image.secure_url },
       { new: true }
-    );
+    ).populate({ path: "Profile"}).exec()
     
     await fs.unlink(tempCompressedPath);
     res.status(200).json({
