@@ -7,7 +7,7 @@ const Profile = require("../models/Profile");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 require("dotenv").config();
-const {encryptData} = require("../utils/crypto-server")
+const { encryptData } = require("../utils/crypto-server");
 //sign up handler
 exports.signup = async (req, res) => {
   try {
@@ -95,15 +95,16 @@ exports.signup = async (req, res) => {
   }
 };
 
-
-exports.getUserDetail=async(req,res)=>{
+exports.getUserDetail = async (req, res) => {
   try {
-    const userId=req.user.id;
-    const registredUser = await User.findById(userId).populate({ path: "Profile"}).exec()
+    const userId = req.user.id;
+    const registredUser = await User.findById(userId)
+      .populate({ path: "Profile" })
+      .exec();
     return res.status(200).json({
       success: true,
       message: "userDetails",
-      registredUser
+      registredUser,
     });
   } catch (error) {
     console.log(error);
@@ -112,9 +113,8 @@ exports.getUserDetail=async(req,res)=>{
       message: "Something went wrong while getting user Details",
     });
   }
-}
+};
 //OTP handler
-
 
 exports.otp = async (req, res) => {
   try {
@@ -135,7 +135,7 @@ exports.otp = async (req, res) => {
       specialChars: false,
     });
     const OTPmodel = await OTP.create({ email, OTP: generatedOtp });
-   
+
     res.status(200).json({
       success: true,
       message: "Successfully OTP send",
@@ -149,15 +149,14 @@ exports.otp = async (req, res) => {
   }
 };
 
-const generateAccessAndRefreshToken=async(userId)=>{
-  const user=await User.findById(userId);
-  const accessToken=user.generateAccessToken();
-  const refreshToken=user.generateRefreshToken();
-  user.refreshToken=refreshToken;
-  await user.save({validationBeforeSave:false});
-  return {accessToken,refreshToken};
-
-}
+const generateAccessAndRefreshToken = async (userId) => {
+  const user = await User.findById(userId);
+  const accessToken = user.generateAccessToken();
+  const refreshToken = user.generateRefreshToken();
+  user.refreshToken = refreshToken;
+  await user.save({ validationBeforeSave: false });
+  return { accessToken, refreshToken };
+};
 
 //log in
 exports.login = async (req, res) => {
@@ -169,7 +168,9 @@ exports.login = async (req, res) => {
         message: "Please fill all Details",
       });
     }
-    const registredUser = await User.findOne({ Email: email }).populate({ path: "Profile"}).exec()
+    const registredUser = await User.findOne({ Email: email })
+      .populate({ path: "Profile" })
+      .exec();
     if (!registredUser) {
       return res.status(401).json({
         success: false,
@@ -177,24 +178,29 @@ exports.login = async (req, res) => {
       });
     }
 
-    
     if (await bcrypt.compare(password, registredUser.Password)) {
-      const {accessToken,refreshToken}=await generateAccessAndRefreshToken(registredUser._id)
+      const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
+        registredUser._id
+      );
       const options = {
         httpOnly: true,
         secure: true,
-        sameSite:'None',
-        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+        sameSite: "None",
+        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
       };
 
-      const encryptUser =encryptData(registredUser);
-      res.cookie("__EDTat", accessToken, options).cookie("__EDTrt",refreshToken,options).status(200).json({
-        success: true,
-        registredUser:encryptUser,
-        token:accessToken,
-        refreshToken,
-        message: "Successfully Logged in",
-      });
+      const encryptUser = encryptData(registredUser);
+      res
+        .cookie("mst_ac", accessToken, options)
+        .cookie("mst_ref", refreshToken, options)
+        .status(200)
+        .json({
+          success: true,
+          registredUser: encryptUser,
+          token: accessToken,
+          refreshToken,
+          message: "Successfully Logged in",
+        });
     } else {
       return res.status(403).json({
         success: false,
@@ -210,55 +216,54 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.refreshAccessToken=async(req,res)=>{
+exports.refreshAccessToken = async (req, res) => {
   try {
-    const token=req.cookies.__EDTrt||req.body.__EDTrt;
-    console.log("refreshToken->",token);
-    if(!token){
+    const token = req.cookies.mst_ref || req.body.mst_ref;
+    console.log("refreshToken->", token);
+    if (!token) {
       return res.status(401).json({
-        success:false,
-        message:"Unauthorized Request"
-      })
+        success: false,
+        message: "Unauthorized Request",
+      });
     }
-    const decodedToken=jwt.verify(token,process.env.REFRESH_TOKEN_SECRET)
-    const user=await User.findById(decodedToken?.id);
-    if(!user){
+    const decodedToken = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+    const user = await User.findById(decodedToken?.id);
+    if (!user) {
       return res.status(401).json({
-        success:false,
-        message:"Invalid Refresh Token"
-      })
+        success: false,
+        message: "Invalid Refresh Token",
+      });
     }
-    if(token!==user?.refreshToken){
+    if (token !== user?.refreshToken) {
       return res.status(401).json({
-        success:false,
-        message:"Refresh Token has Expired or Used"
-      })
+        success: false,
+        message: "Refresh Token has Expired or Used",
+      });
     }
-    const options={
-      httpOnly:true,
-      secure:true,
-      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
-    }
-    const{refreshToken:newRefreshToken,accessToken:newAccessToken}=generateAccessAndRefreshToken(decodedToken?._id);
-    res.status(200).cookie("newRefreshToken",newRefreshToken,options).cookie("newAccessToken",newAccessToken,options).json({
-      success:true,
-      token:newAccessToken,
-      refreshToken:newRefreshToken
-
-
-    })
-
-
-
+    const options = {
+      httpOnly: true,
+      secure: true,
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    };
+    const { refreshToken: newRefreshToken, accessToken: newAccessToken } =
+      generateAccessAndRefreshToken(decodedToken?._id);
+    res
+      .status(200)
+      .cookie("newRefreshToken", newRefreshToken, options)
+      .cookie("newAccessToken", newAccessToken, options)
+      .json({
+        success: true,
+        token: newAccessToken,
+        refreshToken: newRefreshToken,
+      });
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      sucess:false,
-      message:""
-    })
-    
+      sucess: false,
+      message: "",
+    });
   }
-}
+};
 // change password
 exports.changePassword = async (req, res) => {
   try {
@@ -269,7 +274,7 @@ exports.changePassword = async (req, res) => {
         success: false,
         message: "Password do not matching!",
       });
-    const registredUser = await User.findById(req.user.id );
+    const registredUser = await User.findById(req.user.id);
     const isOldPasswordCorrect = await bcrypt.compare(
       oldpassword,
       registredUser.Password
@@ -287,17 +292,21 @@ exports.changePassword = async (req, res) => {
       { Password: newPassHash },
       { new: true }
     );
-    await sendMail(registredUser.Email,"Password Update","Password updated successfully")
+    await sendMail(
+      registredUser.Email,
+      "Password Update",
+      "Password updated successfully"
+    );
 
     return res.status(200).json({
-      success:true,
+      success: true,
       message: "Password successfully Changed",
     });
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).json({
       success: false,
-      message: "An error occurred while changing password"
+      message: "An error occurred while changing password",
     });
   }
 };
@@ -308,85 +317,83 @@ exports.verifyForgotPasswordOTP = async (req, res) => {
     console.log("otp", otp, " email->", email);
 
     const recentOtp = await OTP.find({ email })
-    .sort({ createdAt: -1 })
-    .limit(1);
-  console.log("recentOtp-->", recentOtp);
+      .sort({ createdAt: -1 })
+      .limit(1);
+    console.log("recentOtp-->", recentOtp);
 
-  if (recentOtp.length === 0 || recentOtp[0] === 0) {
-    return res.status(400).json({
-      success: false,
-      message: "OTP Expired",
+    if (recentOtp.length === 0 || recentOtp[0] === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "OTP Expired",
+      });
+    } else if (recentOtp[0].OTP !== otp) {
+      return res.status(400).json({
+        success: false,
+        message: "OTP not Matching",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Email Verified!",
     });
-  } else if (recentOtp[0].OTP !== otp) {
-    return res.status(400).json({
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
       success: false,
-      message: "OTP not Matching",
+      message: "Failed to Verify OTP",
     });
   }
-  
-  res.status(200).json({
-    success: true,
-    message: "Email Verified!",
-  });
-
-} catch (error) {
-  console.log(error);
-  res.status(500).json({
-    success: false,
-    message: "Failed to Verify OTP",
-  });
-}
 };
-
 
 exports.resetPassword = async (req, res) => {
   try {
-    const {password, ConfirmPassword,email } = req.body;
+    const { password, ConfirmPassword, email } = req.body;
     if (!email || !password || !ConfirmPassword) {
       return res.status(400).json({
         success: false,
         message: "Email, password, and confirm password are required",
       });
     }
-    const registredUser = await User.findOne({Email:email} );
-   
-    if(!registredUser){
+    const registredUser = await User.findOne({ Email: email });
+
+    if (!registredUser) {
       return res.status(400).json({
         success: false,
         message: "User Not Found!",
       });
     }
-    if (password !== ConfirmPassword){
+    if (password !== ConfirmPassword) {
       return res.status(400).json({
         success: false,
         message: "Password do not matching!",
       });
     }
-    
+
     const newPassHash = await bcrypt.hash(password, 10);
-  
+
     const updatedUser = await User.findOneAndUpdate(
-      {Email:email},
+      { Email: email },
       { Password: newPassHash },
       { new: true }
     );
-   
-    await sendMail(email,"Password Reset ","Password Reset successfully")
+
+    await sendMail(email, "Password Reset ", "Password Reset successfully");
 
     return res.status(200).json({
-      success:true,
+      success: true,
       message: "Password successfully Reset!",
     });
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).json({
       success: false,
-      message: "An error occurred while changing password"
+      message: "An error occurred while changing password",
     });
   }
 };
 
-exports.forgotPasswordOTP=async (req, res) => {
+exports.forgotPasswordOTP = async (req, res) => {
   try {
     const { email } = req.body;
     const generatedOtp = optgenerator.generate(6, {
@@ -394,8 +401,8 @@ exports.forgotPasswordOTP=async (req, res) => {
       lowerCaseAlphabets: false,
       specialChars: false,
     });
-   await OTP.create({ email, OTP: generatedOtp });
-   
+    await OTP.create({ email, OTP: generatedOtp });
+
     res.status(200).json({
       success: true,
       message: "Successfully OTP send",
@@ -411,30 +418,31 @@ exports.forgotPasswordOTP=async (req, res) => {
 
 //user log out
 
-exports.userLogOut=async(_,res)=>{
+exports.userLogOut = async (_, res) => {
   try {
     // const userId=req.user.id;
     // await User.findByIdAndUpdate(userId, {
     //     refreshToken: ""
-      
+
     // }, { new: true });
     const options = {
       httpOnly: true,
       secure: true,
-      sameSite:'None'
+      sameSite: "None",
     };
-    return res.status(200).clearCookie("__EDTat",options).clearCookie("__EDTrt",options).json({
-      success:true,
-      message:"Successfully Logged Out"
-    })
-
-    
+    return res
+      .status(200)
+      .clearCookie("mst_ac", options)
+      .clearCookie("mst_ref", options)
+      .json({
+        success: true,
+        message: "Successfully Logged Out",
+      });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
       success: false,
       message: "Something went wrong while logging out",
     });
-  
   }
-}
+};

@@ -260,23 +260,58 @@ exports.updateCartDetails=async(req,res)=>{
         })
     }
 }
-exports.getCartDetails=async(req,res)=>{
+exports.getCartDetails = async (req, res) => {
     try {
-        const userId=req.user.id;
-        const updatedCart=await User.findById(userId).select("-Password").populate({path:"Cart"}).exec();
+        const userId = req.user.id;
+        const updatedCart = await User.findById(userId)
+            .select("-Password")
+            .populate({
+                path: "Cart",
+                populate: [
+                    {
+                        path: "Instructor",
+                        populate: {
+                            path: "Profile"
+                        }
+                    },
+                    {
+                        path: "Rating_N_Reviews",
+                        populate: {
+                            path: "User"
+                        }
+                    },
+                    {
+                        path: "Catagory",
+                        populate: {
+                            path: "Course"
+                        }
+                    },
+                    {
+                        path: "StudentEntrolled"
+                    },
+                    {
+                        path: "Section",
+                        populate: {
+                            path: "subSection"
+                        }
+                    }
+                ]
+            })
+            .exec();
         res.status(200).json({
-            success:true,
-            message:"Successfully Fetched Cart",
+            success: true,
+            message: "Successfully Fetched Cart",
             updatedCart
-        })
+        });
     } catch (error) {
         console.log(error);
         return res.status(500).json({
-            success:false,
-            message:"something went wrong while fetching cart list"
-        })
+            success: false,
+            message: "Something went wrong while fetching cart list"
+        });
     }
-}
+};
+
 
 exports.deleteCartDetails=async(req,res)=>{
     try {

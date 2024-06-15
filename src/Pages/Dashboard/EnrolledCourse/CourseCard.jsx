@@ -8,6 +8,7 @@ import { encryptData } from "../../../components/core/auth/crypto";
 import { useDispatch, useSelector } from "react-redux";
 import { cardAction } from "../../../store/cardSlice";
 import { profileAction } from "../../../store/profileSlice";
+import { CaluculateDuration } from "../../../components/core/auth/CaluculateDuration";
 
 const CourseCard = ({ course }) => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const CourseCard = ({ course }) => {
   const [isButton, setIsButton] = useState(false);
   const [activeCourseId, setActiveCourseId] = useState(null);
   const [confirmationModal, openConfirmationModal] = useState(null);
+
+  let time = CaluculateDuration(course);
 
   const handleClick = () => {
     navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
@@ -86,15 +89,27 @@ const CourseCard = ({ course }) => {
         <div className="h-[1px] bg-white/10 mx-3 my-1" />
         <div className="w-fit text-sm vm:text-[1.1rem] pl-2 mb-1 sm:pl-4 flex items-center">
           <span>
-            <span className="text-white/40">Duration:</span> {course?.duration}
-            5hr 45m
+            <span className="text-white/40">Duration:</span>{" "}
+            <span className="whitespace-nowrap ">{time}</span>
           </span>
         </div>
         <div className="flex pl-2 sm:pl-4 w-fit items-center gap-7 mr-3">
-          <p className="text-sm vm:text-[1.1rem]">
-            <span className="text-white/40">Created at: </span>
-          <span className="whitespace-nowrap"> {course.createdAt.slice(0, 10)}</span> 
-          </p>
+          <div className="flex flex-col gap-1 lg:bg-white/[.03] lg:p-2 lg:rounded-xl ">
+            <p className="text-sm vm:text-[1.1rem]">
+              <span className="text-white/40">Created at: </span>
+              <span className="whitespace-nowrap">
+                {" "}
+                {course.createdAt.slice(0, 10)}
+              </span>
+            </p>
+            <p className="text-sm vm:text-[1.1rem]">
+              <span className="text-white/40">Updated at: </span>
+              <span className="whitespace-nowrap">
+                {" "}
+                {course.updatedAt.slice(0, 10)}
+              </span>
+            </p>
+          </div>
           <div
             onClick={(e) => {
               e.stopPropagation();

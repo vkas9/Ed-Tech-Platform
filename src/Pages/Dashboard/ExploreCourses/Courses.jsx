@@ -74,7 +74,7 @@ const Courses = () => {
     <CourseSwitch roll={expC}/>
     </div>
     
-      <div className="overflow-y-auto  mt-2 rounded-md pb-[4rem] h-[75vh]">
+      <div className="overflow-y-auto   mt-2 rounded-md pb-[12rem] h-[75vh]">
         {!course ? (
           <div>
             <p>Loading...</p>

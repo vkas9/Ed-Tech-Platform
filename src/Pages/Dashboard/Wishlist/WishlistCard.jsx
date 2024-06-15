@@ -3,13 +3,18 @@ import ReactStars from "react-stars";
 import { FaStar } from "react-icons/fa6";
 import { FaRegStar } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
-import { PaymentComponent, deleteCartDetails, enrollCourse } from "../../../APIs/Authapi";
+import {
+  PaymentComponent,
+  deleteCartDetails,
+  enrollCourse,
+} from "../../../APIs/Authapi";
 import { profileAction } from "../../../store/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { fetchEnrollData } from "../EnrolledCourse/fetchEnrollData";
+import { CaluculateDuration } from "../../../components/core/auth/CaluculateDuration";
 
 const WishlistCard = ({ course }) => {
   const dispatch = useDispatch();
@@ -17,6 +22,7 @@ const WishlistCard = ({ course }) => {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [loading, setLoading] = useState(false);
   const { enrolledCourse } = useSelector((store) => store.card);
+  let time = CaluculateDuration(course);
   const handleCart = async () => {
     setLoading(true);
 
@@ -33,34 +39,35 @@ const WishlistCard = ({ course }) => {
   const { user } = useSelector((store) => store.profile);
   const handleEnrollCourse = async () => {
     setLoading(true);
-  
 
-    const updatedUser = await enrollCourse(dispatch,{courseId:course?._id},data,navigate);
+    const updatedUser = await enrollCourse(
+      dispatch,
+      { courseId: course?._id },
+      data,
+      navigate
+    );
     setLoading(false);
   };
-  const handleClick = async(e) => {
-    if (user?.Courses?.includes(course._id)){
-      if(!enrolledCourse ||enrolledCourse.length< user.Courses.length){
+  const handleClick = async (e) => {
+    if (user?.Courses?.includes(course._id)) {
+      if (!enrolledCourse || enrolledCourse.length < user.Courses.length) {
         const controller = new AbortController();
         const signal = controller.signal;
-        await fetchEnrollData(data, dispatch, signal)
+        await fetchEnrollData(data, dispatch, signal);
       }
       navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
-    }
-    else{
-      if(e.target.innerText==="Enroll Now"){
-       const paymentResponse=await PaymentComponent({courseId:course._id});
-       if(paymentResponse.status_code===200){
-            await handleEnrollCourse()
-       }
-
-      }
-      else{
+    } else {
+      if (e.target.innerText === "Enroll Now") {
+        const paymentResponse = await PaymentComponent({
+          courseId: course._id,
+        });
+        if (paymentResponse.status_code === 200) {
+          await handleEnrollCourse();
+        }
+      } else {
         navigate(`/dashboard/wishlist/${uuidv4()}/${course._id}`);
       }
     }
-      
-  
   };
   return (
     <div
@@ -85,7 +92,7 @@ const WishlistCard = ({ course }) => {
             {course.CourseDescription}
           </p>
           <div className="flex gap-2 whitespace-nowrap overflow-auto items-center">
-            <span>4.8</span>
+            <span>0.0</span>
             <ReactStars
               className=" min-w-fit  whitespace-nowrap overflow-auto  "
               count={5}
@@ -102,15 +109,15 @@ const WishlistCard = ({ course }) => {
       <div className="flex  items-center gap-3 justify-between">
         <div className="vm:grid overflow-x-auto xd:w-[220px] grid-flow-col items-start  gap-9">
           <div className=" w-fit pl-2 vm:pl-4  flex items-center ">
-            <span className="">
+            <span className=" flex flex-col vm:items-center">
               {" "}
               <span className="text-white/40">Duration:</span>{" "}
-              <span className="whitespace-nowrap">5hr 45m</span>
+              <span className="whitespace-nowrap">{time}</span>
             </span>
           </div>
 
           <div className=" w-fit pl-2 vm:pl-4 flex items-center ">
-            <span className="">
+            <span className=" flex flex-col vm:items-center">
               {" "}
               <span className="text-white/40">Price:</span>
               <span className="sm:block"> ₹{course.Price}</span>
@@ -119,9 +126,8 @@ const WishlistCard = ({ course }) => {
         </div>
         <div
           onClick={(e) => {
-          
             e.stopPropagation();
-            handleClick(e)
+            handleClick(e);
           }}
           onMouseEnter={(e) => {
             e.stopPropagation();
@@ -133,11 +139,11 @@ const WishlistCard = ({ course }) => {
           }}
           className=" text-[1.1rem] ml-1 sm:ml-7   select-none min-w-[100px] vm:w-[120px] bg-white/10 text-center sm:hover:bg-white/20 active:bg-white/20  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full "
         >
-           {user?.Courses?.includes(course._id) ? (
-              <span className="whitespace-nowrap">Go to Course</span>
-            ) : (
-              "Enroll Now"
-            )}
+          {user?.Courses?.includes(course._id) ? (
+            <span className="whitespace-nowrap">Go to Course</span>
+          ) : (
+            "Enroll Now"
+          )}
         </div>
       </div>
 

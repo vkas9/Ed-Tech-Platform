@@ -39,7 +39,7 @@ const EnrolledCourse = () => {
       </div>
 
       <h1 className="text-3xl mb-3">Enrolled Course</h1>
-      <div className="overflow-auto pb-[4rem] h-[75vh]">
+      <div className="overflow-auto pb-[12rem] h-[75vh]">
         {!enrolledCourse ? (
           <div>
             <p>Loading...</p>
