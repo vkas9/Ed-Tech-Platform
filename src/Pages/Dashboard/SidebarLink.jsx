@@ -34,8 +34,8 @@ const SidebarLink = ({ name, link, icon:Icon }) => {
   return (<>
     <Link onClick={name=="Log out"?handleLogoutClick:() => (show ? dispatch(profileAction.setSidebarShow(!show)) : null)}
     to={link!=""?link:null}
-    className={`py-4 px-5 ${name=='Log out'?'hover:bg-red-900/30  transition-all duration-200 hover:border-r-4 border-red-900':'sm:hover:bg-blue-900/30 active:bg-blue-900/30 transition-all duration-200 hover:border-r-4 border-blue-900'}   ${
-        Route(link) ? "bg-gradient-to-l from-blue-900/30 to-transparent border-r-4 border-blue-900 " : ""
+    className={`py-4 px-5 ${name=='Log out'?'sm:hover:bg-red-900/30 active:bg-red-900/30  transition-all duration-200 active:border-l-4 md:active:border-l-0 md:hover:border-r-4 border-red-900':'sm:hover:bg-blue-900/30 active:bg-blue-900/30 transition-all duration-200 active:border-l-4 md:active:border-l-0  md:hover:border-r-4 border-blue-900'}   ${
+        Route(link) ? "bg-gradient-to-r md:bg-gradient-to-l from-blue-900/30 to-transparent border-l-4 md:border-l-0 md:border-r-4 border-blue-900 " : ""
       } `}
       >
       <div className="flex gap-2 text-white/90 items-center  ">
