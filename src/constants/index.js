@@ -40,7 +40,7 @@ export const navigation = [
   {
     id: "7",
     title: "Log Out",
-    url: "",
+    url: "/77",
     onlyMobile: true,
   },
 ];
