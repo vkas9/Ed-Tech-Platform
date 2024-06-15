@@ -204,8 +204,8 @@ exports.updateDisplayProfile = async (req, res) => {
     );
     await fs.mkdir(tempDir, { recursive: true });
     await sharp(photo.tempFilePath)
-      .resize(480, 480, { fit: sharp.fit.inside, withoutEnlargement: true })
-      .toFormat("jpeg", { quality: 80 })
+      .resize(1080, 1080, { fit: sharp.fit.inside, withoutEnlargement: true })
+      .toFormat("jpeg", { quality: 100 })
       .toFile(tempCompressedPath);
 
     const image = await UploadFile(tempCompressedPath, {
