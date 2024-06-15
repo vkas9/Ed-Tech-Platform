@@ -9,7 +9,7 @@ const AboutUs = () => {
           Learn. Grow. Succeed.
         </h1>
         <div  className=" mt-5">
-          <Button link={"/dashboard/courses"} className={"mx-auto rounded-md font-bold text-yellow-950 hover:bg-yellow-400 bg-yellow-500 outline-none py-2"}>
+          <Button link={"/dashboard/courses/cloud-computing"} className={"mx-auto rounded-md font-bold text-yellow-950 hover:bg-yellow-400 bg-yellow-500 outline-none py-2"}>
             Explore More
           </Button>
         </div>

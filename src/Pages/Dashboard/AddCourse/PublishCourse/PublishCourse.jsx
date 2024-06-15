@@ -12,7 +12,7 @@ const PublishCourse = () => {
   const navigate = useNavigate();
   const { course } = useSelector((store) => store.course);
   const [loading, setLoading] = useState(false);
-
+const{editCourse}=useSelector((store)=>store.course)
   const formik = useFormik({
     initialValues: {
       public: false,
@@ -84,7 +84,7 @@ const PublishCourse = () => {
           </label>
         </div>
 
-        <div className="flex flex-col-reverse gw:flex-row justify-center items-center gap-y-2 gw:justify-end gap-x-2">
+        <div className="flex absolute left-0 px-5 max-w-[700px] w-full flex-col-reverse gw:flex-row justify-center items-center gap-y-2 gw:justify-end gap-x-2">
           <button
             type="button"
             onClick={goBack}
@@ -98,7 +98,7 @@ const PublishCourse = () => {
             disabled={loading}
             className="flex items-center gap-x-2 rounded-md bg-blue-500 py-2 px-4 font-bold text-white transition-all duration-200 hover:bg-blue-600 active:bg-blue-700"
           >
-            Save Changes
+            {editCourse?"Save Changes":"Publish"}
           </button>
         </div>
       </form>

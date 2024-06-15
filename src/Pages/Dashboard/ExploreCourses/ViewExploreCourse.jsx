@@ -6,8 +6,8 @@ import { MdOutlineOndemandVideo } from "react-icons/md";
 import { motion } from "framer-motion";
 import { AiFillLock } from "react-icons/ai";
 const ViewCourse = () => {
-  const { exploreAllCourses } = useSelector((store) => store.course)
-  const {courseId} = useParams();
+  const { exploreAllCourses } = useSelector((store) => store.course);
+  const { courseId } = useParams();
   const [openSections, setOpenSections] = useState({});
   const [confirmationModal, openConfirmationModal] = useState(null);
   const handleSetOpen = (sectionId) => {
@@ -21,19 +21,15 @@ const ViewCourse = () => {
     const seconds = totalSeconds % 60;
     return `${minutes} minutes ${seconds} seconds`;
   }
-  const eCourse=exploreAllCourses.find(item=>item._id===courseId);
+  const eCourse = exploreAllCourses.find((item) => item._id === courseId);
 
-  const getTotalLectures=()=>{
-    
-    let total=0;
-    for(let temp in eCourse.Section){
-      total+=eCourse.Section[temp].subSection.length;
+  const getTotalLectures = () => {
+    let total = 0;
+    for (let temp in eCourse.Section) {
+      total += eCourse.Section[temp].subSection.length;
     }
     return total;
-  }
- 
- 
-  
+  };
 
   return (
     <motion.div
@@ -47,14 +43,16 @@ const ViewCourse = () => {
         <span>/</span>
         <span>Dashboard</span>
         <span>/</span>
-        <span>Explore_Courses</span>
+        <span className="whitespace-nowrap ">Explore Courses</span>
         <span>/</span>
         <span className="text-yellow-500 whitespace-nowrap">
           {eCourse.CourseName}
         </span>
       </div>
       <h1 className="text-3xl mb-3">Course Content</h1>
-      <h2 className="text-white/50 ">{eCourse.Section.length} Sections  • {getTotalLectures()} Lectures  </h2>
+      <h2 className="text-white/50 ">
+        {eCourse.Section.length} Sections • {getTotalLectures()} Lectures{" "}
+      </h2>
       <div className="bg-white/10 w-full md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">
         {eCourse?.Section.map((section) => (
           <details key={section._id} className="mb-2">
@@ -71,11 +69,10 @@ const ViewCourse = () => {
                 <p className="text-lg  max-w-[90px] md:max-w-none md:whitespace-normal truncate">
                   {section.SectionName}
                 </p>
-                <AiFillLock  className="text-white/70 "/>
+                <AiFillLock className="text-white/70 " />
               </div>
               <div className="flex">
                 <div className=" p-2">{section.subSection.length} Lectures</div>
-               
               </div>
             </summary>
             <div>
@@ -84,7 +81,10 @@ const ViewCourse = () => {
                   key={subsection?._id}
                   onClick={(e) => {
                     e.stopPropagation();
-                    openConfirmationModal({data:subsection.videoURL, cancel: () => openConfirmationModal(null),});
+                    openConfirmationModal({
+                      data: subsection.videoURL,
+                      cancel: () => openConfirmationModal(null),
+                    });
                   }}
                   className="px-4 py-1 hover:bg-white/20 hover:cursor-pointer bg-white/10 rounded-md ml-4 mt-2"
                 >
@@ -111,7 +111,6 @@ const ViewCourse = () => {
                       >
                         {secondsToMinutesAndSeconds(subsection.duration)}
                       </div>
-                     
                     </div>
                   </div>
                 </div>
@@ -119,7 +118,6 @@ const ViewCourse = () => {
             </div>
           </details>
         ))}
-      
       </div>
     </motion.div>
   );

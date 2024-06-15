@@ -135,7 +135,7 @@ function App() {
               />
               <Route path="wishlist" element={<Wishlist />} />
               <Route path="purchase-history" element={<PurchaseHistory />} />
-              <Route path="Courses" element={<Courses />} />
+              <Route path="Courses/:expC" element={<Courses />} />
               <Route path="Settings" element={<Settings />} />
               <Route path="create-course" element={<Indexcourse />} />
               <Route path="all-courses" element={<AllCourse />} />

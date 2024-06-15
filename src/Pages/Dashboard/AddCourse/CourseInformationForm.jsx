@@ -185,31 +185,6 @@ const CourseInformationForm = () => {
                 </span>
               )}
             </div>
-            {/* Course Price */}
-            <div className="flex flex-col space-y-1">
-              <label
-                className="text-md font-semibold text-white/80"
-                htmlFor="coursePrice"
-              >
-                Course Price <sup className="text-red-300">*</sup>
-              </label>
-              <div className="relative">
-                <Field
-                  id="coursePrice"
-                  name="coursePrice"
-                  placeholder="Enter Course Price"
-                  className="bg-white/10 text-xl w-full max-w-[650px] rounded-md p-2 outline-none pl-12"
-                  type="number"
-                />
-                <MdOutlineCurrencyRupee className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl text-richblack-400" />
-              </div>
-              {errors.coursePrice && touched.coursePrice && (
-                <span className="ml-2 text-xs tracking-wide text-red-300">
-                  {errors.coursePrice}
-                </span>
-              )}
-            </div>
-            {/* Course Category */}
             <div className="flex flex-col space-y-1">
               <label
                 className="text-md font-semibold text-white/80"
@@ -243,12 +218,33 @@ const CourseInformationForm = () => {
                 </span>
               )}
             </div>
-            <Upload
-              name="courseImage"
-              label="Course Thumbnail"
-              errors={errors}
-              editData={editCourse ? course.Thumbnail : null}
-            />
+            {/* Course Price */}
+            <div className="flex flex-col space-y-1">
+              <label
+                className="text-md font-semibold text-white/80"
+                htmlFor="coursePrice"
+              >
+                Course Price <sup className="text-red-300">*</sup>
+              </label>
+              <div className="relative">
+                <Field
+                  id="coursePrice"
+                  name="coursePrice"
+                  placeholder="Enter Course Price"
+                  className="bg-white/10 text-xl w-full max-w-[650px] rounded-md p-2 outline-none pl-12"
+                  type="number"
+                />
+                <MdOutlineCurrencyRupee className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xl text-richblack-400" />
+              </div>
+              {errors.coursePrice && touched.coursePrice && (
+                <span className="ml-2 text-xs tracking-wide text-red-300">
+                  {errors.coursePrice}
+                </span>
+              )}
+            </div>
+            {/* Course Category */}
+            
+           
             {/* Benefits of the course */}
             <div className="flex flex-col space-y-1">
               <label
@@ -270,9 +266,15 @@ const CourseInformationForm = () => {
                 </span>
               )}
             </div>
+            <Upload
+              name="courseImage"
+              label="Course Thumbnail"
+              errors={errors}
+              editData={editCourse ? course.Thumbnail : null}
+            />
 
             {/* Next Button */}
-            <div className="flex flex-col-reverse gf:flex-row justify-center gf:justify-between items-center gap-y-2 gf:gap-x-2">
+            <div className="flex absolute left-0 px-5 max-w-[700px] w-full  flex-col-reverse gf:flex-row justify-center gf:justify-between items-center gap-y-2 gf:gap-x-2">
               {editCourse && (
                 <button
                   type="button"

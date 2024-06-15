@@ -749,7 +749,7 @@ export const enrollCourse = async (dispatch, data,enrollData=null,navigate) => {
       localStorage.setItem(import.meta.env.VITE_CART_D, cartText);
       const controller = new AbortController();
       const signal = controller.signal;
-      await fetchEnrollData(enrollData, dispatch, signal)
+      await fetchEnrollData(enrollData, dispatch, signal,true)
       navigate(`/dashboard/enrolled-courses`)
     toast.success("Enrolled");
   } catch (error) {

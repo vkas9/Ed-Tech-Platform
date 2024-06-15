@@ -43,7 +43,7 @@ export const Profile = [
   {
     id: "4",
     title: "Explore Courses",
-    url: "/dashboard/courses",
+    url: "/dashboard/courses/cloud-computing",
     role: "Student",
     icon:PiGraduationCap
   },

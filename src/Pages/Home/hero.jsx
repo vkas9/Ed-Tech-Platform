@@ -56,7 +56,7 @@ const hero = () => {
             Learn More
           </Button>
           <Button
-            link={"/dashboard/courses"}
+            link={"/dashboard/courses/cloud-computing"}
             className={
               " outline-none  rounded-md bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-3"
             }

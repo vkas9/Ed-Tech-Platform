@@ -46,7 +46,9 @@ const ExploreCoursesCard = ({ course }) => {
       if(!enrolledCourse ||enrolledCourse.length< user.Courses.length){
         const controller = new AbortController();
         const signal = controller.signal;
+        
         await fetchEnrollData(data, dispatch, signal)
+       
       }
       navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
     }
@@ -69,7 +71,7 @@ const ExploreCoursesCard = ({ course }) => {
   return (
     <div
       onClick={handleClick}
-      className={`flex relative text-[1.1rem] justify-between flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
+      className={`flex relative text-[1.1rem] justify-between overflow-x-auto flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
         !isButtonHovered ? 'sm:hover:bg-gray-300/20' : ''
       } bg-gray-300/10 max-w-[60rem] p-1`}
     >

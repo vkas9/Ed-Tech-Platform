@@ -6,16 +6,16 @@ import { courseAction } from "../../../store/courseSlice";
 import ExploreCoursesCard from "./ExploreCoursesCard";
 import { encryptData } from "../../../components/core/auth/crypto";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import CourseSwitch from "./CourseSwitch";
 const Courses = () => {
   const navigate=useNavigate()
   const { token } = useSelector((store) => store.auth);
-  
+  const {expC}=useParams()
   const dispatch = useDispatch();
   const { exploreAllCourses } = useSelector((store) => store.course);
   
   const [course, setCourses] = useState(exploreAllCourses);
-
 
   useEffect(() => {
     if (!token) {
@@ -70,14 +70,18 @@ const Courses = () => {
         <span className="text-yellow-500 ">Courses</span>
       </div>
     <h1 className="text-3xl mb-3">Explore Courses</h1>
-      <div className="overflow-auto  pb-[4rem] h-[75vh]">
+    <div className="flex mr-5 rounded-lg overflow-x-auto items-center justify-start ">
+    <CourseSwitch roll={expC}/>
+    </div>
+    
+      <div className="overflow-auto pb-[4rem] h-[75vh]">
         {!course ? (
           <div>
             <p>Loading...</p>
           </div>
         ) : course.length ? (
-          course.map((course, index) => (
-            course.status=="Published"&& <ExploreCoursesCard course={course} key={index} />
+          course.map((courseItem, index) => (
+            courseItem.status=="Published" &&courseItem.Catagory.titleCourse===expC&& <ExploreCoursesCard course={courseItem} key={index} />
           ))
         ) : (
           <p className="relative text-center mr-3 top-1/3 sm:top-1/2 sm:left-[35%] text-2xl font-semibold sm:w-fit text-white/40">
