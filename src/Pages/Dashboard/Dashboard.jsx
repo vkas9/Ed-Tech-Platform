@@ -39,7 +39,7 @@ const Dashboard = () => {
         <motion.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }} onClick={(e)=>{dispatch(profileAction.setSidebarShow(!show))}} className={` bg-[#333] md:hidden   rounded-full p-2 text-end w-fit fixed bottom-[4.5rem] right-0 mr-5`}><IoIosArrowForward className="text-3xl "/></motion.div>
+      transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }} onClick={(e)=>{dispatch(profileAction.setSidebarShow(!show))}} className={` bg-[#333] md:hidden   rounded-full p-2 text-end w-fit fixed bottom-[5rem] right-0 mr-[1.3rem]`}><IoIosArrowForward className="text-3xl "/></motion.div>
         </div>
         
       </div>
