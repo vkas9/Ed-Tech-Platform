@@ -13,6 +13,7 @@ import Pricing from "./Pricing"
 import AboutUs from "./AboutUs";
 import Footer from "../../components/Homepage/Footer";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 const fadeIn={
   initial:{
     opacity:0,
@@ -54,6 +55,9 @@ const List=[
 ]
 
 const Home = () => {
+  useEffect(()=>{
+    document.title="MASTER - an EdTech Platform"
+  },[])
   return (
     <div className=" overflow-hidden  ">
       <Hero />

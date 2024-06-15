@@ -77,7 +77,7 @@ const EditProfile = () => {
                 <div className="flex flex-col">
                   <label className="text-md text-white/80">City Name</label>
                   <Field
-                    className="bg-white/20 w-full  sm:w-[350px] rounded-md p-2 outline-none"
+                    className="bg-white/10 w-full  sm:w-[350px] rounded-md p-2 outline-none"
                     type="text"
                     placeholder="Enter City"
                     name="city"
@@ -88,7 +88,7 @@ const EditProfile = () => {
                     Contact Number
                   </label>
                   <Field
-                    className="bg-white/20 w-full sm:max-w-[350px] rounded-md p-2 outline-none"
+                    className="bg-white/10 w-full sm:max-w-[350px] rounded-md p-2 outline-none"
                     type="text"
                     maxLength="10"
                     placeholder="Enter Mobile Number"
@@ -97,10 +97,10 @@ const EditProfile = () => {
                 </div>
                 <div>
                   <label className="text-md text-white/80">Gender</label>
-                  <div className="bg-white/20  w-full  sm:w-[350px] rounded-md p-2 outline-none flex items-center gap-4">
+                  <div className="bg-white/10  w-full  sm:w-[350px] rounded-md p-2 outline-none flex items-center gap-4">
                     <div className="gap-1 flex items-center">
                       <Field
-                        className="bg-white/20 rounded-md p-2 outline-none"
+                        className="bg-white/10 rounded-md p-2 outline-none"
                         type="radio"
                         name="gender"
                         value="Female"
@@ -112,7 +112,7 @@ const EditProfile = () => {
                     </div>
                     <div className="gap-1 flex items-center">
                       <Field
-                        className="bg-white/20 rounded-md p-2 outline-none"
+                        className="bg-white/10 rounded-md p-2 outline-none"
                         type="radio"
                         name="gender"
                         value="Male"
@@ -126,7 +126,7 @@ const EditProfile = () => {
                 </div>
                 <div className="flex flex-col">
                   <label className="text-md text-white/80">Date of Birth</label>
-                  <div className="bg-white/20 w-full sm:w-[350px] rounded-md p-2 outline-none">
+                  <div className="bg-white/10 w-full sm:w-[350px] rounded-md p-2 outline-none">
                     <DatePicker
                       className="w-full bg-transparent outline-none"
                       selected={values.dateOfBirth}

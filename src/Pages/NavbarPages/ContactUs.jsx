@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
@@ -12,6 +12,9 @@ const ContactUs = () => {
     email: '',
     message: '',
   };
+  useEffect(()=>{
+    document.title="Contact us - MASTER - an EdTech Platform"
+  },[])
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Name is required'),

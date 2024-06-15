@@ -1,7 +1,8 @@
 import { GoCheckCircleFill } from "react-icons/go";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const PricingCard = ({ title, price, description, className }) => {
+    const navigate=useNavigate()
     return (
 
         <div className="border-solid border p-4 border-gray-400/30 max-w-[25rem] rounded-2xl  ">
@@ -51,7 +52,11 @@ const PricingCard = ({ title, price, description, className }) => {
             </div>
             <div className="mt-[4rem] ">
                 <div className=" text-5xl lg:text-6xl font-bold "><span className="text-4xl">₹</span> {price}</div>
-                <div  className="select-none w-full text-center text-black bg-white rounded-xl py-2 mt-8 text-3xl font-bold hover:cursor-pointer active:text-yellow-950 active:bg-yellow-500 md:hover:text-yellow-950 md:hover:bg-yellow-500  transition-all duration-200  ">
+                <div onClick={(e)=>{
+                    e.stopPropagation()
+                    e.preventDefault()
+                    navigate("/dashboard/courses/cloud-computing")
+                }}  className="select-none w-full text-center text-black bg-white rounded-xl py-2 mt-8 text-3xl font-bold hover:cursor-pointer active:text-yellow-950 active:bg-yellow-500 md:hover:text-yellow-950 md:hover:bg-yellow-500  transition-all duration-200  ">
                     <Link to="/dashboard/courses/cloud-computing">Enroll Now</Link>
                 </div>
 

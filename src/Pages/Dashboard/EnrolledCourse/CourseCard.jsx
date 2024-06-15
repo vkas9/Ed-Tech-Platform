@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cardAction } from "../../../store/cardSlice";
 import { profileAction } from "../../../store/profileSlice";
 import { CaluculateDuration } from "../../../components/core/auth/CaluculateDuration";
+import toast from "react-hot-toast";
 
 const CourseCard = ({ course }) => {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ const CourseCard = ({ course }) => {
       dispatch(profileAction.setProfile(data.userDetail));
       localStorage.setItem(import.meta.env.VITE_ENROLL_C, enrolledText);
       localStorage.setItem(import.meta.env.VITE_USER, userDetail);
+      toast.success("Course Unenrolled!")
     } catch (error) {
       console.log(error);
     } finally {

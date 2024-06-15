@@ -13,6 +13,7 @@ const Dashboard = () => {
   const { token } = useSelector((store) => store.auth);
   const{sidebarShow:show}=useSelector((store)=>store.profile)
   useEffect(() => {
+    document.title="Dashboard - MASTER - an EdTech Platform"
     if (!token) {
       navigate("/login");
     }

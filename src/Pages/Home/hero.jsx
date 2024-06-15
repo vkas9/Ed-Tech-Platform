@@ -23,7 +23,7 @@ const hero = () => {
             }
 
           >
-            Coding Skills{" "}
+              <span className="xs:whitespace-nowrap"> Coding Skills</span>
             <img
               
               src={curve1}

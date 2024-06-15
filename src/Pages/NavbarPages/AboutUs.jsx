@@ -1,5 +1,9 @@
 import {motion} from "framer-motion"
+import { useEffect } from "react";
 const AboutUs = () => {
+  useEffect(()=>{
+    document.title="About us - MASTER - an EdTech Platform"
+  },[])
   return (
     <motion.div
     initial={{ opacity: 0, x: -20 }}
