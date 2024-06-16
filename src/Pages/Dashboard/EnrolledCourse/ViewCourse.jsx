@@ -19,7 +19,7 @@ const ViewCourse = () => {
   function secondsToMinutesAndSeconds(totalSeconds) {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-    return `${minutes} minutes ${seconds} seconds`;
+    return `${minutes}m ${seconds}s`;
   }
   const eCourse = enrolledCourse.find((item) => item._id === courseId);
   const getTotalLectures = () => {
@@ -89,7 +89,7 @@ const ViewCourse = () => {
                       <div className="flex items-center gap-2">
                         <MdOutlineOndemandVideo />
 
-                        <p className="max-w-[70px] truncate md:max-w-none md:whitespace-normal">
+                        <p className="w-[70px] xs:w-[100px] vm:w-[120px] gf:w-[200px] max-w-[300] truncate md:max-w-none md:whitespace-normal">
                           {subsection.title}
                         </p>
                       </div>

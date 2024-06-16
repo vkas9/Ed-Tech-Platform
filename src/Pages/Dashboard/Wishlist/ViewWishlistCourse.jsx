@@ -21,7 +21,7 @@ const ViewCourse = () => {
   function secondsToMinutesAndSeconds(totalSeconds) {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-    return `${minutes} minutes ${seconds} seconds`;
+    return `${minutes}m ${seconds}s`;
   }
   const eCourse=exploreAllCourses.find(item=>item._id===courseId);
   const getTotalLectures=()=>{
@@ -41,7 +41,7 @@ const ViewCourse = () => {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
-      className="flex font-semibold flex-col text-lg pt-2 px-5"
+      className="flex  font-semibold flex-col text-lg pt-2 px-5"
     >
       <div className="flex gap-1 text-white/50 overflow-x-auto">
         <span>Home</span>
@@ -56,7 +56,7 @@ const ViewCourse = () => {
       </div>
       <h1 className="text-3xl mb-3">Course Content</h1>
       <h2 className="text-white/50 ">{eCourse.Section.length} Sections  • {getTotalLectures()} Lectures  </h2>
-      <div className="bg-white/10 overflow-y-auto max-h-[calc(100vh-13rem)] w-full md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">
+      <div className="bg-white/10 overflow-y-auto   max-h-[calc(100vh-13rem)] w-full md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">
         {eCourse?.Section.map((section) => (
           <details key={section._id} className="mb-2">
             <summary

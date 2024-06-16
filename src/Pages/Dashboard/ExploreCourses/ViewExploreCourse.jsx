@@ -19,7 +19,7 @@ const ViewCourse = () => {
   function secondsToMinutesAndSeconds(totalSeconds) {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
-    return `${minutes} minutes ${seconds} seconds`;
+    return `${minutes}m ${seconds}s`;
   }
   const eCourse = exploreAllCourses.find((item) => item._id === courseId);
 
