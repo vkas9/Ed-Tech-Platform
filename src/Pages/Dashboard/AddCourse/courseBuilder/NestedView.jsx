@@ -33,7 +33,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
         sectionId: sectionId,
         courseId: course._id,
       });
-      const decryptDeleteSection=decryptData(response.data.updateCourse)
+      const decryptDeleteSection=decryptData(updated.updateCourse)
 
       if (updated.success) {
         dispatch(courseAction.setCourse(decryptDeleteSection));

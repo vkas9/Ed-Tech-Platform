@@ -16,6 +16,8 @@ import { courseAction } from "../../store/courseSlice";
 import { logout } from "../../APIs/Authapi";
 import ConfirmModal from "../../Pages/Dashboard/ConfirmModal";
 import { profileAction } from "../../store/profileSlice";
+import { decryptData } from "../core/auth/crypto";
+
 const Navbar = () => {
   const [name, setName] = useState(null);
   const [catagory, setCatagory] = useState([]);
@@ -29,7 +31,8 @@ const Navbar = () => {
     axios
       .get(`${BASE_URL}/api/beta/course/getAllCatagory`)
       .then((res) => {
-        setCatagory(res.data.allCatagory);
+        const decryptAllCategory=decryptData(res.data.allCatagory)
+        setCatagory(decryptAllCategory);
       })
       .catch((error) => {
         console.error("error", error);

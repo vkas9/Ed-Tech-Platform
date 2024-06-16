@@ -1,4 +1,5 @@
 const catagory = require("../models/Catagory");
+const { encryptData } = require("../utils/crypto-server");
 
 exports.createCatagory = async (req, res) => {
     try {
@@ -26,9 +27,10 @@ exports.createCatagory = async (req, res) => {
 exports.getAllCatagory = async (req, res) => {
     try {
         const allCatagory= await catagory.find({}, { name: true, description: true ,link:true});
+        const encryptGetAllCategory=encryptData(allCatagory)
         res.status(200).json({
             success: true,
-            allCatagory,
+            allCatagory:encryptGetAllCategory,
             message: "Successfully Received all catagory"
         })
     } catch (error) {

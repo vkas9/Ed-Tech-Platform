@@ -440,7 +440,8 @@ export const deleteSubSection = async (data) => {
     );
     toast.success("Sub Section Deleted Successfully");
     // console.log("Sub Section Delete response:", response.data);
-    return response.data;
+    const decryptCreateSubSection=decryptData(response.data.updatedCourse)
+    return decryptCreateSubSection;
   } catch (error) {
     console.error("Error Deleting Sub Section", error);
     toast.error(error.response.data.message);
@@ -461,7 +462,8 @@ export const createSubSection = async (data) => {
     );
     toast.success("Sub Section Created Successfully");
     // console.log("Sub Section Create response:", response.data);
-    return response.data;
+    const decryptCreateSubSection=decryptData(response.data.updatedCourse)
+    return decryptCreateSubSection;
   } catch (error) {
     console.error("Error Creating Sub Section", error);
     toast.error(error.response.data.message);
@@ -482,7 +484,8 @@ export const updateSubSection = async (data) => {
     );
     toast.success("Sub Section updated Successfully");
     // console.log("Sub Section updated response:", response.data);
-    return response.data;
+    const decryptCreateSubSection=decryptData(response.data.updatedCourse)
+    return decryptCreateSubSection;
   } catch (error) {
     console.error("Error updating Sub Section", error);
     toast.error(error.response.data.message);

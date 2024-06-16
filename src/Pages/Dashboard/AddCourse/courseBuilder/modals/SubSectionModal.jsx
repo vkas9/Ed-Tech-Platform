@@ -65,7 +65,7 @@ const SubSectionModal = ({
         const newSubSection = await updateSubSection(formData);
         if (newSubSection) {
            
-            dispatch(courseAction.setCourse(newSubSection.updatedCourse));
+            dispatch(courseAction.setCourse(newSubSection));
         }
 
         setModalData(null);
@@ -100,7 +100,7 @@ const SubSectionModal = ({
     
             if (result) {
                 // console.log("result->",result)
-                dispatch(courseAction.setCourse(result.updatedCourse));
+                dispatch(courseAction.setCourse(result));
             }
         } catch (error) {
             console.error(error)

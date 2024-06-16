@@ -13,6 +13,7 @@ import {
 } from "../../../APIs/Authapi";
 import Upload from "./Upload";
 import { motion } from "framer-motion";
+import { decryptData } from "../../../components/core/auth/crypto";
 
 const CourseInformationForm = () => {
   const { course, editCourse } = useSelector((state) => state.course);
@@ -35,7 +36,8 @@ const CourseInformationForm = () => {
         const response = await axios.get(
           `${BASE_URL}/api/beta/course/getAllCatagory`
         );
-        setCourseCategories(response.data.allCatagory);
+        const decryptAllCategory=decryptData(response.data.allCatagory)
+        setCourseCategories(decryptAllCategory);
       } catch (error) {
         console.error("Error fetching categories:", error);
       } finally {

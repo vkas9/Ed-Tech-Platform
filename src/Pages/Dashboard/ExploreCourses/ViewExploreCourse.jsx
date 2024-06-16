@@ -53,7 +53,7 @@ const ViewCourse = () => {
       <h2 className="text-white/50 ">
         {eCourse.Section.length} Sections • {getTotalLectures()} Lectures{" "}
       </h2>
-      <div className="bg-white/10 w-full md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">
+      <div className="bg-white/10 overflow-y-auto max-h-[calc(100vh-13rem)] w-full md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">
         {eCourse?.Section.map((section) => (
           <details key={section._id} className="mb-2">
             <summary

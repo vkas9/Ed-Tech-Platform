@@ -1,7 +1,8 @@
 const section=require("../models/Section");
 const subSection=require("../models/Sub-Section");
 const {UploadFile}=require("../utils/fileUploader");
-const course=require("../models/Courses")
+const course=require("../models/Courses");
+const { encryptData } = require("../utils/crypto-server");
 exports.createSubSection=async(req,res)=>{
     try {
         const {title,description,sectionId,courseId}=req.body;
@@ -40,10 +41,12 @@ exports.createSubSection=async(req,res)=>{
 			},
 		})
 		.exec();
+
+        const encryptCreateSubSection=encryptData(updatedCourse)
         res.status(200).json({
             success:true,
             message:"Successfully created Sub-section",
-            updatedCourse
+            updatedCourse:encryptCreateSubSection
         })
     } catch (error) {
         console.log(error)
@@ -115,11 +118,11 @@ exports.updateSubSection=async(req,res)=>{
           },
         })
         .exec()
-
+        const encryptUpdateSubSection=encryptData(updatedCourse)
         res.status(200).json({
             success:true,
             message:"Successfully updated Sub-section",
-            updatedCourse
+            updatedCourse:encryptUpdateSubSection
         })
 
     } catch (error) {
@@ -157,10 +160,11 @@ exports.deleteSubSection=async(req,res)=>{
 			},
 		})
 		.exec();
+        const encryptDeleteSubSection=encryptData(updatedCourse)
         res.status(200).json({
             success:true,
             message:"Successfully Sub Section Deleted",
-            updatedCourse
+            updatedCourse:encryptDeleteSubSection
             
 
         })

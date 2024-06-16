@@ -10,12 +10,14 @@ import { courseAction } from "../../../store/courseSlice";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { FaAngleDown } from "react-icons/fa6";
+import { CaluculateDuration } from "../../../components/core/auth/CaluculateDuration";
 
 const MyCourseCard = ({ course }) => {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  let time = CaluculateDuration(course);
   // const{course:currentCourse}=useSelector((store) => store.course);
   const handleEdit = () => {
     dispatch(courseAction.setCourse(course));
@@ -75,12 +77,10 @@ const MyCourseCard = ({ course }) => {
         <div className="h-[1px] w-full sm:h-[90px] sm:w-[1px] sm:hidden    bg-white/10 mx-3 sm:my-1  " />
       </div>
       <div className="sm:w-fit text-sm w-full mb-1 vm:text-[1.1rem] pl-[.6rem]  flex items-center">
-        <span className="gap-1">
+        <span className="gap-1 flex flex-col items-center">
           <span className="text-white/40">Duration:</span>{" "}
           <span className="whitespace-nowrap ">
-            {" "}
-            {course?.duration}
-            5hr 45m
+            {time}
           </span>
         </span>
       </div>
