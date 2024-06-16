@@ -566,20 +566,22 @@ export const getAllInstructorCourses = async (signal) => {
       }
     );
     localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, response.data.iCourses);
-    const deccryptAllInstructorCourses=decryptData(response.data.iCourses);
+    const decryptAllInstructorCourses = decryptData(response.data.iCourses);
     toast.success("All Courses Fetched Successfully");
-    
-    return deccryptAllInstructorCourses;
+
+    return decryptAllInstructorCourses;
   } catch (error) {
     if (axios.isCancel(error)) {
       console.error("Request canceled", error.message);
     } else {
+      toast.error("Error fetching course details");
       console.error("Error fetching course details", error);
     }
   } finally {
     toast.dismiss(toastId);
   }
 };
+
 
 export const getAllCourse = async (signal) => {
   const toastId = toast.loading("Loading");
@@ -688,6 +690,11 @@ export const deleteEnrolledCourse = async (data, signal) => {
 
 
 export const PaymentComponent = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
+
   try {
     const response = await axios.post(`${BASE_URL}/api/beta/payment/createOrder`, data, {
       withCredentials: true,
@@ -734,10 +741,11 @@ export const PaymentComponent = async (data) => {
     }
   } catch (error) {
     console.error('Error creating order:', error);
-    toast.error(error.response.data.message);
+    toast.error(error.response?.data?.message || "An error occurred during payment");
     throw error; // Ensure the error is thrown to be handled by the caller
   }
 };
+
 
 
 export const enrollCourse = async (dispatch, data,enrollData=null,navigate) => {
