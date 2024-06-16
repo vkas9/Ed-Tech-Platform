@@ -84,14 +84,24 @@ const MyCourseCard = ({ course }) => {
           </span>
         </span>
       </div>
-      <div className="flex pl-[.6rem]    w-full sm:w-fit items-center gap-7 sm:mr-3">
-        <p className="text-sm vm:text-[1.1rem] pr-3">
+      <div className="flex sm:pl-[3rem] pl-[.6rem]     w-full sm:w-fit items-center gap-7 sm:mr-3">
+        <div className=" flex flex-col  items-start gap-1 sm:gap-3">
+        <p className="text-sm text-center vm:text-[1.1rem] ">
           <span className="text-white/40 gap-1">Created at: </span>
-          <span className="whitespace-nowrap ">
+          <span className="sm:whitespace-nowrap ">
             {" "}
             {course.createdAt.slice(0, 10)}
           </span>
         </p>
+        <div className="h-[1px] w-full hidden sm:flex   bg-white/10   " />
+        <p className="text-sm text-center  vm:text-[1.1rem] ">
+          <span className="text-white/40 gap-1 sm:flex flex-col whitespace-nowrap"> Updated at:</span>
+          <span className="sm:whitespace-nowrap   ">
+            {" "}
+            {course.updatedAt.slice(0, 10)}
+          </span>
+        </p>
+        </div>
         <div className="h-[1px] w-full sm:h-[90px] sm:w-[1px] hidden sm:flex   bg-white/10 sm:my-1  " />
         <div className="flex items-center gap-2">
           <MdOutlineEdit

@@ -20,9 +20,7 @@ const AllCourse = () => {
       try {
         const courseData = await getAllInstructorCourses(signal);
         if (!signal.aborted) {
-          const text = encryptData(courseData.instructorCourses);
-          localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, text);
-          dispatch(courseAction.setIC(courseData.instructorCourses));
+          dispatch(courseAction.setIC(courseData));
         }
       } catch (error) {
         if (error.name !== 'AbortError') {

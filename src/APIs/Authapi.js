@@ -297,8 +297,9 @@ export const addCourseDetails = async (formData) => {
     );
 
     toast.success("Course Details Added Successfully");
+    const decryptCourse=decryptData(response.data.data)
     // console.log("Course creation response:", response.data);
-    return response.data;
+    return decryptCourse;
   } catch (error) {
     console.error("Error creating course:", error);
     toast.error("Something went wrong while creating course");
@@ -320,8 +321,9 @@ export const createSection = async (data) => {
       }
     );
     toast.success("Section Details Added Successfully");
+    const decryptCreateSection=decryptData(response.data.uCourse)
     // console.log("Section creation response:", response.data);
-    return response.data;
+    return decryptCreateSection;
   } catch (error) {
     console.error("Error creating Section", error);
     toast.error(error.response.data.message);
@@ -365,13 +367,13 @@ export const updateCartDetails = async (data) => {
         withCredentials: true,
       }
     );
-
-    const text = encryptData(response.data.updatedUser);
-    localStorage.setItem(import.meta.env.VITE_USER, text);
+    localStorage.setItem(import.meta.env.VITE_USER, response.data.uu);
+    const decuu = decryptData(response.data.uu);
+  
 
     toast.success("Course Added to Cart");
     // console.log("Course Added to Cart", response.data);
-    return response.data.updatedUser;
+    return decuu;
   } catch (error) {
     console.error("Error Course Added to Cart", error);
     toast.error(error.response.data.message);
@@ -391,13 +393,11 @@ export const deleteCartDetails = async (data) => {
         withCredentials: true,
       }
     );
-
-    const text = encryptData(response.data.updatedUser);
-    localStorage.setItem(import.meta.env.VITE_USER, text);
-
+    localStorage.setItem(import.meta.env.VITE_USER, response.data.uUser);
+    const decu = decryptData(response.data.uUser);
     toast.success("Course Deleted from Wishlist");
 
-    return response.data.updatedUser;
+    return decu;
   } catch (error) {
     console.error("Error Course Deleting from Cart", error);
     toast.error(error.response.data.message);
@@ -415,7 +415,9 @@ export const getCartDetails = async (signal) => {
         signal: signal,
       }
     );
-    const updatedWishlist = response.data.updatedCart.Cart;
+    const decryptUpdatedCart= decryptData(response.data.uCart)
+    const updatedWishlist = decryptUpdatedCart.Cart;
+    console.log("updatedWishlist",updatedWishlist)
     return updatedWishlist.reverse();
   } catch (error) {
     console.error("Error fetching cart", error);
@@ -501,8 +503,9 @@ export const updateSection = async (data) => {
       }
     );
     toast.success(" Section updated Successfully");
+    const decryptUpdateSection=decryptData(response.data.upCourse)
     // console.log(" Section updated response:", response.data);
-    return response.data;
+    return decryptUpdateSection;
   } catch (error) {
     console.error("Error  updating Section", error);
     toast.error(error.response.data.message);
@@ -521,7 +524,8 @@ export const editCourseDetails = async (data) => {
       }
     );
     toast.success(" Course updated Successfully");
-    return response.data;
+    const decryptupdatedCourse=decryptData(response.data.course)
+    return decryptupdatedCourse;
   } catch (error) {
     console.error("Error  updating Course", error);
     toast.error(error.response.data.message);
@@ -542,6 +546,7 @@ export const updateCourse = async (data) => {
     );
     toast.success(" Course updated Successfully");
     // console.log(" Course updated response:", response.data);
+    // const deccryptupdatedCourse=decryptData(response.data);
     return response.data;
   } catch (error) {
     console.error("Error  updating Section", error);
@@ -560,8 +565,11 @@ export const getAllInstructorCourses = async (signal) => {
         signal: signal,
       }
     );
+    localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, response.data.iCourses);
+    const deccryptAllInstructorCourses=decryptData(response.data.iCourses);
     toast.success("All Courses Fetched Successfully");
-    return response.data;
+    
+    return deccryptAllInstructorCourses;
   } catch (error) {
     if (axios.isCancel(error)) {
       console.error("Request canceled", error.message);
@@ -607,9 +615,12 @@ export const updateProfile = async (dispatch, data) => {
         withCredentials: true,
       }
     );
-    dispatch(profileAction.setProfile(response.data.registredUser));
-    const text = encryptData(response.data.registredUser);
-    localStorage.setItem(import.meta.env.VITE_USER, text);
+    const decryptUser=decryptData(response.data.registredUser)
+
+
+    dispatch(profileAction.setProfile(decryptUser));
+    
+    localStorage.setItem(import.meta.env.VITE_USER, decryptUser);
     toast.success("Saved");
   } catch (error) {
     console.log(error);
@@ -628,9 +639,9 @@ export const updateDisplayProfile = async (dispatch, data) => {
         withCredentials: true,
       }
     );
-    dispatch(profileAction.setProfile(response.data.updatedProfile));
-    const text = encryptData(response.data.updatedProfile);
-    localStorage.setItem(import.meta.env.VITE_USER, text);
+    localStorage.setItem(import.meta.env.VITE_USER, response.data.updatedProfile);
+    const decryptUpdateDisplayProfile=decryptData(response.data.updatedProfile)
+    dispatch(profileAction.setProfile(decryptUpdateDisplayProfile));
 
     toast.success("Changed");
   } catch (error) {
@@ -658,10 +669,11 @@ export const deleteEnrolledCourse = async (data, signal) => {
         signal: signal,
       }
     );
-console.log("deleteEnrolledCourse",response)
+    const decu=decryptData(userDetail.data.rs)
+    const decCourseDetail=decryptData(response.data.courseDetail)
     return {
-      courseDetail: response.data.courseDetail,
-      userDetail: userDetail.data.registredUser,
+      courseDetail: decCourseDetail,
+      userDetail: decu,
     };
   } catch (error) {
     if (axios.isCancel(error)) {

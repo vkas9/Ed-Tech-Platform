@@ -13,7 +13,8 @@ export default {
         "bs":"570px",
         "gf":"520px",
         "gw":"320px",
-        "tr":"350px"
+        "tr":"350px",
+        "hg":"910px"
         
       },
     },

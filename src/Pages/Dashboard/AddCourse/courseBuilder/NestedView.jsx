@@ -8,6 +8,7 @@ import { courseAction } from "../../../../store/courseSlice";
 import { IoMdAdd } from "react-icons/io";
 import SubSectionModal from "./modals/SubSectionModal";
 import { MdOutlineOndemandVideo } from "react-icons/md";
+import { decryptData } from "../../../../components/core/auth/crypto";
 
 const NestedView = ({ handleChangeEditSectionName }) => {
   const { course } = useSelector((store) => store.course);
@@ -32,9 +33,10 @@ const NestedView = ({ handleChangeEditSectionName }) => {
         sectionId: sectionId,
         courseId: course._id,
       });
+      const decryptDeleteSection=decryptData(response.data.updateCourse)
 
       if (updated.success) {
-        dispatch(courseAction.setCourse(updated.updateCourse));
+        dispatch(courseAction.setCourse(decryptDeleteSection));
       } else {
         console.error("Failed to delete section:", updated.message);
       }

@@ -115,6 +115,7 @@ const CourseCard = ({ course }) => {
           <div
             onClick={(e) => {
               e.stopPropagation();
+              
               setIsButtonHovered(true);
               handleIconClick(course._id);
             }}
@@ -127,7 +128,7 @@ const CourseCard = ({ course }) => {
               setIsButtonHovered(false);
               setIsButton(false);
             }}
-            className="text-[1.7rem] absolute md:relative top-1 -right-1 hover:bg-white/10 box-content p-2 md:p-3 transition-all hover:cursor-pointer duration-150 rounded-full"
+            className="text-[1.7rem] absolute md:relative top-1 -right-1 active:bg-white/10 md:hover:bg-white/10 box-content p-2 md:p-3 transition-all hover:cursor-pointer duration-150 rounded-full"
           >
             <FiMoreVertical />
             {isButton && activeCourseId === course._id && (
@@ -143,7 +144,7 @@ const CourseCard = ({ course }) => {
                     setIsButtonHovered(false);
                     setIsButton(false);
                   }}
-                  className="py-3 px-5 xl:mr-4 bg-white xl:bg-white/10 hover:bg-white/20 text-black xl:text-white rounded-xl right-[3rem] xl:-right-[9rem] -bottom-[0rem]"
+                  className="py-3 px-5 xl:mr-4 bg-[#333] xl:bg-white/10 hover:bg-[#333]/60 text-white xl:text-white rounded-xl right-[3rem] xl:-right-[9rem] -bottom-[0rem]"
                 >
                   Unenroll
                 </div>

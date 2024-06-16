@@ -84,7 +84,8 @@ const{editCourse}=useSelector((store)=>store.course)
           </label>
         </div>
 
-        <div className="flex absolute left-0 px-5 max-w-[700px] w-full flex-col-reverse gw:flex-row justify-center items-center gap-y-2 gw:justify-end gap-x-2">
+        <div className="flex absolute
+         left-0 px-5 hg:px-0 hg:ml-5  max-w-[700px] w-full flex-col-reverse gw:flex-row justify-center items-center gap-y-2 gw:justify-end gap-x-2">
           <button
             type="button"
             onClick={goBack}

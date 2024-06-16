@@ -83,8 +83,7 @@ exports.signup = async (req, res) => {
     console.log("userDB", userDB);
     return res.status(200).json({
       success: true,
-      message: "Successfully Account Created",
-      userData: userDB,
+      message: "Successfully Account Created"
     });
   } catch (error) {
     console.log(error);
@@ -101,10 +100,11 @@ exports.getUserDetail = async (req, res) => {
     const registredUser = await User.findById(userId)
       .populate({ path: "Profile" })
       .exec();
+      const encu=encryptData(registredUser)
     return res.status(200).json({
       success: true,
-      message: "userDetails",
-      registredUser,
+      message: "Successfull get Data",
+      rs:encu
     });
   } catch (error) {
     console.log(error);

@@ -95,7 +95,7 @@ const CourseInformationForm = () => {
 
         if (result) {
           dispatch(courseAction.setStep(2));
-          dispatch(courseAction.setCourse(result.course));
+          dispatch(courseAction.setCourse(result));
         } else {
           console.error("Edit course details failed");
         }
@@ -110,12 +110,12 @@ const CourseInformationForm = () => {
 
         setLoading(true);
 
-        const result = await addCourseDetails(formData);
+        const resultCourse = await addCourseDetails(formData);
         setLoading(false);
 
-        if (result) {
+        if (resultCourse) {
           dispatch(courseAction.setStep(2));
-          dispatch(courseAction.setCourse(result.data));
+          dispatch(courseAction.setCourse(resultCourse));
         } else {
           console.error("Create course details failed");
         }
@@ -274,7 +274,7 @@ const CourseInformationForm = () => {
             />
 
             {/* Next Button */}
-            <div className="flex absolute left-0 px-5 max-w-[700px] w-full  flex-col-reverse gf:flex-row justify-center gf:justify-between items-center gap-y-2 gf:gap-x-2">
+            <div className="flex absolute left-0  px-5 hg:px-0 hg:ml-5 max-w-[700px] w-full  flex-col-reverse gf:flex-row justify-center gf:justify-between items-center gap-y-2 gf:gap-x-2">
               {editCourse && (
                 <button
                   type="button"

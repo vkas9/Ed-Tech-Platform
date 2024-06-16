@@ -1,5 +1,6 @@
 const section=require("../models/Section");
-const course=require("../models/Courses")
+const course=require("../models/Courses");
+const { encryptData } = require("../utils/crypto-server");
 exports.createSection=async(req,res)=>{
     try {
         const {sectionName,courseId}=req.body;
@@ -19,11 +20,11 @@ exports.createSection=async(req,res)=>{
             },
         })
         .exec();
-       
+        const encryptCreateSection=encryptData(updatedCourse)
         res.status(200).json({
             success:true,
             message:"Successfully created Section",
-            updatedCourse
+            uCourse:encryptCreateSection
         })
     } catch (error) {
         console.log(error);
@@ -46,10 +47,11 @@ exports.updateSection=async(req,res)=>{
 			},
 		})
 		.exec();
+        const encryptUpdateSection=encryptData(updatedCourse)
         res.status(200).json({
             success:true,
             message:"Successfully updated Section",
-            updatedCourse
+            upCourse:encryptUpdateSection
         }) 
     } catch (error) {
         console.log(error)
@@ -84,10 +86,11 @@ exports.deleteSection=async(req,res)=>{
                 message: "Course not found."
             });
         }
+        const encryptDeleteSection=encryptData(updateCourse)
         res.status(200).json({
             success:true,
             message:"Successfully Delete Section",
-            updateSection,updateCourse
+            updateCourse:encryptDeleteSection
         })
     } catch (error) {
         console.log(error)

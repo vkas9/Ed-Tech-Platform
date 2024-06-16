@@ -39,7 +39,7 @@ const CourseBuilderForm = () => {
     }
 
     if (result) {
-      dispatch(courseAction.setCourse(result.updatedCourse));
+      dispatch(courseAction.setCourse(result));
       setEditSectionName(null);
       resetForm();
     }

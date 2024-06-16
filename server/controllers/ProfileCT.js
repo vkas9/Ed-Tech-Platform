@@ -5,6 +5,7 @@ const { UploadFile } = require("../utils/fileUploader");
 const fs = require('fs/promises');
 const sharp=require("sharp");
 const path=require('path');
+const { encryptData } = require("../utils/crypto-server");
 exports.updateProfile = async (req, res) => {
   try {
     const { contactNumber, city, gender, dateOfBirth } = req.body;
@@ -25,11 +26,13 @@ exports.updateProfile = async (req, res) => {
       profileDetail.gender = gender;
     }
     await profileDetail.save();
-    const registredUser = await user.findById(userId).populate({ path: "Profile"}).exec()
+    const registredUser = await user.findById(userId).select("-Password").populate({ path: "Profile"}).exec()
+
+    const encryptUser=encryptData(registredUser)
     return res.status(200).json({
       success: true,
       message: "successfully update user Profile",
-      registredUser
+      registredUser:encryptUser
     });
   } catch (error) {
     console.log(error);
@@ -78,10 +81,11 @@ exports.getEnrolledCourses = async (req, res) => {
       );
     }
     courseDetail.reverse();
+    const encryptEnrolledCourses=encryptData(courseDetail)
     return res.status(200).json({
       success: true,
       message: "successfully Received Course Detail",
-      courseDetail,
+      courseDetail:encryptEnrolledCourses,
     });
   } catch (error) {
     console.log(error);
@@ -130,10 +134,11 @@ exports.getAllInstructorCourses = async (req, res) => {
       );
     }
     instructorCourses.reverse();
+    const encryptInstructorCourses=encryptData(instructorCourses)
     res.status(200).json({
       success: true,
       message: "Successfully Received Intructor All Courses",
-      instructorCourses,
+      iCourses:encryptInstructorCourses,
     });
   } catch (error) {
     console.log(error);
@@ -219,13 +224,15 @@ exports.updateDisplayProfile = async (req, res) => {
       { _id: userId },
       { avatar: image.secure_url },
       { new: true }
-    ).populate({ path: "Profile"}).exec()
+    ).select("-Password").populate({ path: "Profile"}).exec()
     
     await fs.unlink(tempCompressedPath);
+
+    const encryptUpdateDisplayProfile=encryptData(updatedProfile)
     res.status(200).json({
       status: "true",
       message: "Successfully updated Profile image",
-      updatedProfile,
+      updatedProfile:encryptUpdateDisplayProfile,
       
     });
   } catch (error) {

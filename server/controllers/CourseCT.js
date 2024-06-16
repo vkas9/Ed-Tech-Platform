@@ -50,14 +50,14 @@ exports.createCourse = async (req, res) => {
 
         await fs.unlink(tempCompressedPath);
 
-       
+       const encryptCourse=encryptData(newCourse)
         await User.findByIdAndUpdate(req.user.id, { $push: { Courses: newCourse._id } }, { new: true });
         await Catagory.findByIdAndUpdate(category, { $push: { Course: newCourse._id } }, { new: true });
 
         res.status(200).json({
             success: true,
             message: "Successfully created Course",
-            data: newCourse
+            data: encryptCourse
         });
     } catch (error) {
         console.error("Error creating course:", error);
@@ -105,7 +105,6 @@ exports.updateCourse=async(req,res)=>{
         res.status(200).json({
             success: true,
             message: "Successfully created Course",
-            updatedCourse
         })
 
         
@@ -180,10 +179,11 @@ exports.editCourseDetails=async(req,res)=>{
           },
         })
         .exec()
+        const encryptupdatedCourse=encryptData(updatedCourse)
         res.status(200).json({
         success:true,
         message:"course Updated",
-        course:updatedCourse
+        course:encryptupdatedCourse
        })
 
 
@@ -242,12 +242,13 @@ exports.updateCartDetails=async(req,res)=>{
         console.log("courseId",courseId)
         const userId=req.user.id;
         
-        const updatedUser=await User.findByIdAndUpdate(userId,{$push:{Cart:courseId}},{new:true});
-        console.log("updatedUser",updatedUser)
+        const updatedUser=await User.findByIdAndUpdate(userId,{$push:{Cart:courseId}},{new:true}).select("-Password");
+        // console.log("updatedUser",updatedUser)
+        const encryptCourse= encryptData(updatedUser)
         res.status(200).json({
             success:true,
             message:"Successfully Course added to Cart",
-            updatedUser
+            uu:encryptCourse
         })
 
 
@@ -298,10 +299,11 @@ exports.getCartDetails = async (req, res) => {
                 ]
             })
             .exec();
+            const encryptUpdatedCart= encryptData(updatedCart)
         res.status(200).json({
             success: true,
             message: "Successfully Fetched Cart",
-            updatedCart
+            uCart:encryptUpdatedCart
         });
     } catch (error) {
         console.log(error);
@@ -319,12 +321,13 @@ exports.deleteCartDetails=async(req,res)=>{
         console.log("courseId",courseId)
         const userId=req.user.id;
         
-        const updatedUser=await User.findByIdAndUpdate(userId,{$pull:{Cart:courseId}},{new:true});
-        console.log("updatedUser",updatedUser)
+        const updatedUser=await User.findByIdAndUpdate(userId,{$pull:{Cart:courseId}},{new:true}).select("-Password");
+        // console.log("updatedUser",updatedUser)
+        const encryptUpdatedUser= encryptData(updatedUser)
         res.status(200).json({
             success:true,
             message:"Successfully Course deleted from Wishlist",
-            updatedUser
+            uUser:encryptUpdatedUser
         })
 
 
@@ -430,11 +433,11 @@ exports.deleteEnrolledCourse=async(req,res)=>{
             );
           }
         courseDetail.reverse();
-
+        const encryptCourseDetail= encryptData(courseDetail)
         return res.status(200).json({
             success:true,
             message:"Course Successfully unenrolled",
-            courseDetail
+            courseDetail:encryptCourseDetail
         })
 
 
