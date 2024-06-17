@@ -15,7 +15,7 @@ app.use(
     origin: [
       "https://master-ed-new.netlify.app",
       "http://localhost:5173",
-      "https://ed-tech-platform-client.onrender.com","https://mv.vkas.me"
+      "https://ed-tech-platform-client.onrender.com","https://mv.vkas.me","https://test999.vkas.me"
     ],
     credentials: true,
   })
