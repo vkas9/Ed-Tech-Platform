@@ -49,10 +49,10 @@ const CourseCard = ({ course }) => {
     }
   };
 
-  const handleLogoutClick = () => {
+  const handleCourseClick = () => {
     openConfirmationModal({
       text1: "Are You Sure?",
-      text2: "You will permanently lose this course",
+      text2: "You will permanently lose access to this course!",
       btn1Text: "Unenroll",
       btn2Text: "Cancel",
       btn1Handler: handleUnenrollCourse,
@@ -62,7 +62,7 @@ const CourseCard = ({ course }) => {
 
   const handleOption = (e) => {
     e.stopPropagation();
-    handleLogoutClick();
+    handleCourseClick();
   };
 
   return (

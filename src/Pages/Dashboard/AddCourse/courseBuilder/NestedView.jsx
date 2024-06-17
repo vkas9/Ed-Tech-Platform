@@ -33,7 +33,7 @@ const NestedView = ({ handleChangeEditSectionName }) => {
         sectionId: sectionId,
         courseId: course._id,
       });
-      const decryptDeleteSection=decryptData(updated.updateCourse)
+      const decryptDeleteSection = decryptData(updated.updateCourse);
 
       if (updated.success) {
         dispatch(courseAction.setCourse(decryptDeleteSection));
@@ -51,7 +51,6 @@ const NestedView = ({ handleChangeEditSectionName }) => {
       const updated = await deleteSubSection({ ...data, courseId: course._id });
 
       if (updated.success) {
-        
         dispatch(courseAction.setCourse(updated.updatedCourse));
       } else {
         console.error("Failed to delete Sub section:", updated.message);
@@ -71,17 +70,21 @@ const NestedView = ({ handleChangeEditSectionName }) => {
             <details key={section._id} className="mb-2">
               <summary
                 onClick={() => handleSetOpen(section._id)}
-                className={`cursor-pointer flex items-center justify-between p-2 ${!isButtonHovered?"hover:bg-white/30":""} bg-white/20 rounded-md `}
+                className={`cursor-pointer flex items-center justify-between p-2 ${
+                  !isButtonHovered ? "hover:bg-white/30" : ""
+                } relative py-3 bg-white/20 rounded-md `}
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center truncate mr-[5rem]  gap-2">
                   {openSections[section._id] ? (
-                    <IoMdArrowDropdown className="text-lg" />
+                    <IoMdArrowDropdown className="text-lg min-w-[20px]" />
                   ) : (
-                    <IoMdArrowDropright className="text-lg" />
+                    <IoMdArrowDropright className="text-lg min-w-[20px]" />
                   )}
-                  <p className="text-lg  max-w-[90px] md:max-w-none md:whitespace-normal truncate">{section.SectionName}</p>
+                  <p className="text-lg whitespace-nowrap truncate    max-w-[450px]">
+                    {section.SectionName}
+                  </p>
                 </div>
-                <div className="flex">
+                <div className="flex absolute bottom-2 right-0">
                   <div
                     onClick={(e) => {
                       e.stopPropagation();
@@ -90,17 +93,16 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                         section.SectionName
                       );
                     }}
-                    onMouseEnter={(e)=>{
-                      e.stopPropagation()
-                      setIsButtonHovered(true)
+                    onMouseEnter={(e) => {
+                      e.stopPropagation();
+                      setIsButtonHovered(true);
                     }}
-                    onMouseLeave={(e)=>{
-                      e.stopPropagation()
-                      setIsButtonHovered(false)
+                    onMouseLeave={(e) => {
+                      e.stopPropagation();
+                      setIsButtonHovered(false);
                     }}
                     className="hover:bg-white/20 rounded-full p-2"
                   >
-                    
                     <MdEdit className="text-xl" />
                   </div>
                   <div
@@ -118,13 +120,13 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                         btn2Handler: () => openConfirmationModal(null),
                       });
                     }}
-                    onMouseEnter={(e)=>{
-                      e.stopPropagation()
-                      setIsButtonHovered(true)
+                    onMouseEnter={(e) => {
+                      e.stopPropagation();
+                      setIsButtonHovered(true);
                     }}
-                    onMouseLeave={(e)=>{
-                      e.stopPropagation()
-                      setIsButtonHovered(false)
+                    onMouseLeave={(e) => {
+                      e.stopPropagation();
+                      setIsButtonHovered(false);
                     }}
                     className="hover:bg-white/20 rounded-full p-2"
                   >
@@ -137,66 +139,72 @@ const NestedView = ({ handleChangeEditSectionName }) => {
                   <div
                     key={subsection?._id}
                     onClick={() => setViewSubSection(subsection)}
-                    className={`px-4 py-1 ${!isButtonHovered?"hover:bg-white/20 active:bg-white/20":""} hover:cursor-pointer bg-white/10 rounded-md ml-4 mt-2`}
+                    className={`px-4 py-1 ${
+                      !isButtonHovered
+                        ? "hover:bg-white/20 active:bg-white/20"
+                        : ""
+                    }   hover:cursor-pointer   bg-white/10 py-2 relative rounded-md ml-4 mt-2`}
                   >
-                    <div className="flex items-center justify-between">
-                      <div>
-                      <div className="flex items-center gap-2">
-                        <MdOutlineOndemandVideo/>
-                      
-                        <p className="max-w-[70px] truncate md:max-w-none md:whitespace-normal">{subsection.title}</p> 
-                         </div>
-                      </div>
-                      <div className="flex">
-                        <div
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setEditSubSection({
-                              ...subsection,
-                              sectionId: section._id,
-                            });
-                          }}
-                          onMouseEnter={(e)=>{
-                            e.stopPropagation()
-                            setIsButtonHovered(true)
-                          }}
-                          onMouseLeave={(e)=>{
-                            e.stopPropagation()
-                            setIsButtonHovered(false)
-                          }}
-                          className="hover:bg-white/20 rounded-full p-2"
-                        >
-                          <MdEdit className="text-xl" />
+                    <div className="flex items-center  justify-between">
+                      <div className="w-full">
+                        <div className="flex  items-center gap-2 mr-[4rem]">
+                          <MdOutlineOndemandVideo className=" min-w-[20px]" />
+
+                          <p className=" whitespace-nowrap truncate    max-w-[350px]  ">
+                            {subsection.title}
+                          </p>
                         </div>
-                        <div
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            openConfirmationModal({
-                              text1: "Delete This Sub Section",
-                              text2:
-                                "This lectures in this Section will be deleted",
-                              btn1Text: "Delete",
-                              btn2Text: "Cancel",
-                              btn1Handler: () => {
-                                handleDeleteSubSection({
-                                  subSectionId: subsection._id,
-                                  sectionId: section._id,
-                                });
-                              },
-                              btn2Handler: () => openConfirmationModal(null),
-                            });
-                          }}
-                          onMouseEnter={(e)=>{
-                            e.stopPropagation()
-                            setIsButtonHovered(true)
-                          }}
-                          onMouseLeave={(e)=>{
-                            e.stopPropagation()
-                            setIsButtonHovered(false)
-                          }}
-                          className="hover:bg-white/20 rounded-full p-2"
-                        >
-                          <MdDelete className="text-xl" />
+                        <div className="flex absolute bottom-1 right-0 ">
+                          <div
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setEditSubSection({
+                                ...subsection,
+                                sectionId: section._id,
+                              });
+                            }}
+                            onMouseEnter={(e) => {
+                              e.stopPropagation();
+                              setIsButtonHovered(true);
+                            }}
+                            onMouseLeave={(e) => {
+                              e.stopPropagation();
+                              setIsButtonHovered(false);
+                            }}
+                            className="hover:bg-white/20 rounded-full p-2"
+                          >
+                            <MdEdit className="text-xl" />
+                          </div>
+                          <div
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              openConfirmationModal({
+                                text1: "Delete This Sub Section",
+                                text2:
+                                  "This lectures in this Section will be deleted",
+                                btn1Text: "Delete",
+                                btn2Text: "Cancel",
+                                btn1Handler: () => {
+                                  handleDeleteSubSection({
+                                    subSectionId: subsection._id,
+                                    sectionId: section._id,
+                                  });
+                                },
+                                btn2Handler: () => openConfirmationModal(null),
+                              });
+                            }}
+                            onMouseEnter={(e) => {
+                              e.stopPropagation();
+                              setIsButtonHovered(true);
+                            }}
+                            onMouseLeave={(e) => {
+                              e.stopPropagation();
+                              setIsButtonHovered(false);
+                            }}
+                            className="hover:bg-white/20 rounded-full p-2"
+                          >
+                            <MdDelete className="text-xl" />
+                          </div>
                         </div>
                       </div>
                     </div>
