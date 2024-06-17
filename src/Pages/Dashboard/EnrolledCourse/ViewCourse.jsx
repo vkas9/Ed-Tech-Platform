@@ -43,9 +43,13 @@ const ViewCourse = () => {
         <span>/</span>
         <span>Dashboard</span>
         <span>/</span>
-        <span className="whitespace-nowrap">{user?.role==="Instructor"?"All Courses":"Enrolled Courses"}</span>
+        <span className="whitespace-nowrap">
+          {user?.role === "Instructor" ? "All Courses" : "Enrolled Courses"}
+        </span>
         <span>/</span>
-        <span className="text-yellow-500 whitespace-nowrap">{eCourse.CourseName}</span>
+        <span className="text-yellow-500 whitespace-nowrap">
+          {eCourse.CourseName}
+        </span>
       </div>
       <h1 className="text-3xl mb-3">Course Content</h1>
       <h2 className="text-white/50 mb-1 ">
@@ -56,20 +60,20 @@ const ViewCourse = () => {
           <details key={section._id} className="mb-2">
             <summary
               onClick={() => handleSetOpen(section._id)}
-              className="cursor-pointer flex items-center justify-between p-2 bg-white/20 rounded-md hover:bg-white/30"
+              className="cursor-pointer flex items-center  justify-between px-2 py-3 bg-white/20 relative rounded-md hover:bg-white/30"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex truncate mr-[6rem] items-center gap-2">
                 {openSections[section._id] ? (
-                  <IoMdArrowDropdown className="text-lg" />
+                  <IoMdArrowDropdown className="text-lg min-w-[20px]" />
                 ) : (
-                  <IoMdArrowDropright className="text-lg" />
+                  <IoMdArrowDropright className="text-lg min-w-[20px]" />
                 )}
-                <p className="text-lg  max-w-[90px] md:max-w-none md:whitespace-normal truncate">
+                <p className="text-lg   whitespace-nowrap max-w-[450px]  truncate">
                   {section.SectionName}
                 </p>
               </div>
-              <div className="flex">
-                <div className=" p-2">{section.subSection.length} Lectures</div>
+              <div className="flex  absolute bottom-2 sm:bottom-1 right-0">
+                <div className=" p-2 text-sm sm:text-lg">{section.subSection.length} Lectures</div>
               </div>
             </summary>
             <div>
@@ -83,19 +87,19 @@ const ViewCourse = () => {
                       cancel: () => openConfirmationModal(null),
                     });
                   }}
-                  className="px-4 py-1 hover:bg-white/20 hover:cursor-pointer bg-white/10 rounded-md ml-4 mt-2"
+                  className="px-4  hover:bg-white/20 hover:cursor-pointer relative py-2 bg-white/10 rounded-md ml-4 mt-2"
                 >
                   <div className="flex items-center justify-between">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <MdOutlineOndemandVideo />
+                    <div className="truncate  mr-[5rem]">
+                      <div className="  flex items-center gap-2">
+                        <MdOutlineOndemandVideo className="min-w-[20px]" />
 
-                        <p className="w-[70px] xs:w-[100px] vm:w-[120px] gf:w-[200px] max-w-[300] truncate md:max-w-none md:whitespace-normal">
+                        <p className=" whitespace-nowrap max-w-[450px]  truncate">
                           {subsection.title}
                         </p>
                       </div>
                     </div>
-                    <div className="  flex">
+                    <div className="  flex absolute bottom-1 right-2">
                       <div className="py-2 select-none text-sm text-white/50">
                         {secondsToMinutesAndSeconds(subsection.duration)}
                       </div>
