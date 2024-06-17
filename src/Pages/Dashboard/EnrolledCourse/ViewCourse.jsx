@@ -10,6 +10,7 @@ const ViewCourse = () => {
   const { courseId } = useParams();
   const [openSections, setOpenSections] = useState({});
   const [confirmationModal, openConfirmationModal] = useState(null);
+  const { user } = useSelector((store) => store.profile);
   const handleSetOpen = (sectionId) => {
     setOpenSections((prevState) => ({
       ...prevState,
@@ -42,7 +43,7 @@ const ViewCourse = () => {
         <span>/</span>
         <span>Dashboard</span>
         <span>/</span>
-        <span className="whitespace-nowrap">Enrolled Courses</span>
+        <span className="whitespace-nowrap">{user?.role==="Instructor"?"All Courses":"Enrolled Courses"}</span>
         <span>/</span>
         <span className="text-yellow-500 whitespace-nowrap">{eCourse.CourseName}</span>
       </div>

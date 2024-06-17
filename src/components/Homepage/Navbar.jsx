@@ -51,6 +51,9 @@ const Navbar = () => {
   };
 
   const handleClick2 = () => {
+    if(user&&user.role==="Instructor"){
+      navigate("/dashboard/courses/cloud-computing")
+    }
     if (!name) {
       setName("dfd");
     } else {
@@ -115,9 +118,13 @@ const Navbar = () => {
                 {item.title === "Learn" ? (
                   <div
                     key={index}
+                    onMouseEnter={()=>{
+                      setName("sfsdaf")
+                    }}
                     onMouseLeave={() => {
                       setName(null);
                     }}
+                   // 
                     onClick={handleClick2}
                     className={`flex items-center gap-2  relative font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
@@ -125,9 +132,9 @@ const Navbar = () => {
                       item.onlyMobile ? "lg:hidden" : ""
                     } px-2 py-6 md:py-4  lg:text-xl lg:font-bold group lg:leading-5 lg:hover:text-white xl:px-6  `}
                   >
-                    <p className="select-none">{item.title}</p>
-                    <IoIosArrowDown />
-                    {name == null ? <SubTitle catagory={catagory} /> : null}
+                    <p className="select-none">{user &&user.role=="Instructor"?"All Courses":item.title}</p>
+                    {user &&user.role=="Instructor"?null:<IoIosArrowDown />}
+                   {user &&user.role==="Instructor"?null :(name ? <SubTitle catagory={catagory} /> : null)}
                   </div>
                 ) : user ? (
                   <Link
@@ -136,7 +143,7 @@ const Navbar = () => {
                     onClick={handleClick}
                     className={`block relative  font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
-                    }   transition-colors lg:hover:cursor-pointer ${
+                    }   transition-colors lg:hover:cursor-pointer ${user?.role==="Instructor" &&item.title==="Pricing"&&"hidden"} ${
                       item.title === "New Account" || item.title === "Sign in"
                         ? "hidden"
                         : ""

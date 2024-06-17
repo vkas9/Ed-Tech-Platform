@@ -14,7 +14,7 @@ const Courses = () => {
   const {expC}=useParams()
   const dispatch = useDispatch();
   const { exploreAllCourses } = useSelector((store) => store.course);
-  
+  const { user } = useSelector((store) => store.profile);
   const [course, setCourses] = useState(exploreAllCourses);
 
   useEffect(() => {
@@ -67,9 +67,9 @@ const Courses = () => {
         <span>/</span>
         <span>Dashboard</span>
         <span>/</span>
-        <span className="text-yellow-500 ">Courses</span>
+        <span className="text-yellow-500 "> {user?.role==="Instructor"?"All Courses":"Courses"}</span>
       </div>
-    <h1 className="text-3xl mb-3">Explore Courses</h1>
+    <h1 className="text-3xl mb-3"> {user?.role==="Instructor"?"All Courses":"Explore Courses"}</h1>
     <div className="flex mr-5 rounded-lg overflow-x-auto items-center justify-start ">
     <CourseSwitch roll={expC}/>
     </div>

@@ -6,7 +6,9 @@ const courseRoute = require("./routes/courseRoute");
 const paymentRoute = require("./routes/paymentRoute");
 const profileRoute = require("./routes/profileRoute");
 const userRoute = require("./routes/userRoute");
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 const cors = require("cors");
 app.use(
   cors({

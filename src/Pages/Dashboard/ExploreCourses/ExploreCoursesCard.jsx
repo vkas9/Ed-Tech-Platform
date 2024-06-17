@@ -137,7 +137,7 @@ const ExploreCoursesCard = ({ course }) => {
             </span>
           </div>
         </div>
-        <div className="flex   md:mr-5 flex-col justify-center items-center gap-1">
+        <div className={`flex ${user?.role==="Instructor"&&"hidden"}   md:mr-5 flex-col justify-center items-center gap-1`}>
           <div
             onClick={(e) => {
               e.stopPropagation();
@@ -174,7 +174,7 @@ const ExploreCoursesCard = ({ course }) => {
             }}
             className={`text-[1.1rem] ${
               user?.Courses?.includes(course._id) ? "hidden" : null
-            } hover:text-white text-white/30 box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full`}
+            } hover:text-white text-white/30 ${user?.role==="Instructor"&&"hidden"} box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full`}
           >
             {user?.Cart?.includes(course._id) ? "Go to Cart" : "Add to Cart"}
           </div>

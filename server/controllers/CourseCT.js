@@ -242,7 +242,9 @@ exports.updateCartDetails=async(req,res)=>{
         console.log("courseId",courseId)
         const userId=req.user.id;
         
-        const updatedUser=await User.findByIdAndUpdate(userId,{$push:{Cart:courseId}},{new:true}).select("-Password");
+        const updatedUser=await User.findByIdAndUpdate(userId,{$push:{Cart:courseId}},{new:true}).select("-Password").populate({
+            path:"Profile"
+        }).exec();
         // console.log("updatedUser",updatedUser)
         const encryptCourse= encryptData(updatedUser)
         res.status(200).json({
@@ -321,7 +323,9 @@ exports.deleteCartDetails=async(req,res)=>{
         console.log("courseId",courseId)
         const userId=req.user.id;
         
-        const updatedUser=await User.findByIdAndUpdate(userId,{$pull:{Cart:courseId}},{new:true}).select("-Password");
+        const updatedUser=await User.findByIdAndUpdate(userId,{$pull:{Cart:courseId}},{new:true}).select("-Password").populate({
+            path:"Profile"
+        }).exec();
         // console.log("updatedUser",updatedUser)
         const encryptUpdatedUser= encryptData(updatedUser)
         res.status(200).json({
