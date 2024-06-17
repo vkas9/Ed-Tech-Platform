@@ -53,7 +53,8 @@ const Navbar = () => {
   const handleClick2 = () => {
     if(user&&user.role==="Instructor"){
       navigate("/dashboard/courses/cloud-computing")
-      toggle()
+
+      openNavigation&&toggle()
     }
     if (!name) {
       setName("dfd");

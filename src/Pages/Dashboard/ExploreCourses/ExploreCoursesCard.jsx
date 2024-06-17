@@ -81,8 +81,9 @@ const ExploreCoursesCard = ({ course }) => {
         !isButtonHovered ? "sm:hover:bg-gray-300/20" : ""
       } bg-gray-300/10 max-w-[60rem] p-1`}
     >
-      <div className="gap-3  p-2 sm:min-w-[351px] flex-col vm:flex-row pr-[2.2rem]  overflow-auto vm:items-center flex">
-        <img
+      <div className="gap-1  p-2 sm:min-w-[351px] flex-col  pr-[2.2rem] overflow-auto  vm:items-center flex">
+        <div className="flex gap-3 flex-col  w-full vm:flex-row vm:items-center">
+          <img
           src={course?.Thumbnail}
           alt="course-thumbnail"
           className="w-[160px] h-[110px] max-w-[160px] object-cover rounded-lg"
@@ -106,6 +107,12 @@ const ExploreCoursesCard = ({ course }) => {
             />
           </div>
         </div>
+        </div>
+
+        <div className=" w-full">
+          <span className="text-white/50 text-sm">Created By: <span className="text-white whitespace-nowrap"> {course?.Instructor?.FirstName} {course?.Instructor?.LastName}</span></span>
+        </div>
+        
       </div>
       <div className="h-[1px] bg-white/10 mx-3 my-1" />
 
