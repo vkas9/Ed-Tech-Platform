@@ -51,8 +51,8 @@ const MyCourseCard = ({ course }) => {
             className=" w-[170px] max-w-[170px] xs:w-[120px] xs:max-w-[120px] h-[90px]  object-cover  rounded-lg "
           />
 
-          <div className="max-w-[250px] md:w-[150px]">
-            <h2 className=" hover:overflow-x-auto truncate ">
+          <div className="w-[120px] tsr:w-[180px] oi:w-[280px] bs:w-[380px] sm:w-[120px]  sm:max-w-[220px] lg:w-[120px] xl:w-[180px]">
+            <h2 className="  truncate ">
               {course.CourseName}
             </h2>
             <p className="text-white/40 truncate text-[.9rem] ">
@@ -77,7 +77,7 @@ const MyCourseCard = ({ course }) => {
         <div className="h-[1px] w-full sm:h-[90px] sm:w-[1px] sm:hidden    bg-white/10 mx-3 sm:my-1  " />
       </div>
       <div className="sm:w-fit text-sm w-full mb-1 vm:text-[1.1rem] pl-[.6rem]  flex items-center">
-        <span className="gap-1 flex flex-col items-center">
+        <span className="gap-1 flex  sm:items-center">
           <span className="text-white/40">Duration:</span>{" "}
           <span className="whitespace-nowrap ">
             {time}

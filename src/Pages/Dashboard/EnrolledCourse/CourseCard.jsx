@@ -82,9 +82,9 @@ const CourseCard = ({ course }) => {
             alt="course-thumbnail"
             className=" h-[110px] w-full xs:w-[200px] xs:max-w-[200px] vm:w-[160px] vm:max-w-[160px] object-cover  rounded-lg"
           />
-          <div className="w-[120px] md:w-[150px]">
-            <h2>{course.CourseName}</h2>
-            <p className="text-white/40 text-[.9rem]">
+          <div className="vm:w-[120px] w-full  md:max-w-[220px] lg:w-[220px] ">
+            <h2 className="truncate">{course.CourseName}</h2>
+            <p className="text-white/40 truncate text-[.9rem]">
               {course.CourseDescription}
             </p>
           </div>
@@ -102,15 +102,15 @@ const CourseCard = ({ course }) => {
           </span>
         </div>
         <div className="flex pl-2 sm:pl-4 w-fit items-center gap-7 mr-3">
-          <div className="flex flex-col gap-1 lg:bg-white/[.03] lg:p-2 lg:rounded-xl ">
-            <p className="text-sm vm:text-[1.1rem]">
+          <div className="flex flex-col gap-1 lg:bg-white/[.03]  lg:p-2 lg:rounded-xl ">
+            <p className="text-sm sm:text-center vm:text-[1.1rem]">
               <span className="text-white/40">Created at: </span>
               <span className="whitespace-nowrap">
                 {" "}
                 {course.createdAt.slice(0, 10)}
               </span>
             </p>
-            <p className="text-sm vm:text-[1.1rem]">
+            <p className="text-sm sm:text-center vm:text-[1.1rem]">
               <span className="text-white/40">Updated at: </span>
               <span className="whitespace-nowrap">
                 {" "}

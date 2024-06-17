@@ -111,15 +111,15 @@ const WishlistCard = ({ course }) => {
       <div className="h-[1px] bg-white/10 mx-3 my-1" />
       <div className="flex items-center gap-3 justify-between">
         <div className="vm:grid overflow-x-auto xd:w-[220px] grid-flow-col items-start gap-9">
-          <div className="w-fit pl-2 vm:pl-4 flex items-center">
-            <span className="flex flex-col vm:items-center">
+          <div className="w-fit pl-2 vm:pl-4 flex  items-center">
+            <span className="flex flex-col sm:items-center">
               <span className="text-white/40">Duration:</span>
               <span className="whitespace-nowrap">{time}</span>
             </span>
           </div>
 
           <div className="w-fit pl-2 vm:pl-4 flex items-center">
-            <span className="flex flex-col vm:items-center">
+            <span className="flex flex-col sm:items-center">
               <span className="text-white/40">Price:</span>
               <span className="sm:block"> ₹{course.Price}</span>
             </span>

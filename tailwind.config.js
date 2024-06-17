@@ -14,7 +14,9 @@ export default {
         "gf":"520px",
         "gw":"320px",
         "tr":"350px",
-        "hg":"910px"
+        "hg":"910px",
+        "oi":"470px",
+        "tsr":"370px",
         
       },
     },

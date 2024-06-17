@@ -89,15 +89,15 @@ const ExploreCoursesCard = ({ course }) => {
           className="w-[160px] h-[110px] max-w-[160px] object-cover rounded-lg"
         />
 
-        <div className="w-[200px]">
-          <h2>{course.CourseName}</h2>
-          <p className="text-white/40 text-[.9rem]">
+        <div className="vm:w-[120px] w-full  md:max-w-[220px] lg:w-[220px]">
+          <h2 className="truncate">{course.CourseName}</h2>
+          <p className="text-white/40 truncate text-[.9rem]">
             {course.CourseDescription}
           </p>
-          <div className="flex gap-2 whitespace-nowrap overflow-auto items-center">
+          <div className="flex gap-2  whitespace-nowrap overflow-auto items-center">
             <span>0.0</span>
             <ReactStars
-              className="min-w-fit hidden xs:flex whitespace-nowrap overflow-auto"
+              className="min-w-fit hidden truncate xs:flex whitespace-nowrap overflow-auto"
               count={5}
               size={25}
               edit={false}
@@ -119,7 +119,7 @@ const ExploreCoursesCard = ({ course }) => {
       <div className="flex xs:items-center gap-1 vm:gap-5 justify-between">
         <div className="vm:grid overflow-x-auto xd:w-[320px] grid-flow-col items-start gap-2">
           <div className="w-fit pl-2 vm:pl-4 sm:pl-0 flex items-center">
-            <span className=" flex flex-col items-center">
+            <span className=" flex flex-col sm:items-center">
               <span className="text-white/40">Created at:</span>
               <span className="whitespace-nowrap">
                 <span className="sm:block">
@@ -129,7 +129,7 @@ const ExploreCoursesCard = ({ course }) => {
             </span>
           </div>
           <div className="w-fit pl-2 vm:pl-4 sm:pl-0 flex items-center">
-            <span className=" flex flex-col vm:items-center">
+            <span className=" flex flex-col sm:items-center">
               <span className="text-white/40">Duration:</span>
               <span className="whitespace-nowrap">
                 <span className="sm:block">{time}</span>
@@ -138,7 +138,7 @@ const ExploreCoursesCard = ({ course }) => {
           </div>
 
           <div className="w-fit pl-2 vm:pl-4 flex items-center">
-            <span className=" flex flex-col vm:items-center">
+            <span className=" flex flex-col sm:items-center">
               <span className="text-white/40">Price:</span>{" "}
               <span className="sm:block"> ₹{course.Price}</span>
             </span>
