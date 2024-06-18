@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { courseAction } from "../../../store/courseSlice";
 import { encryptData } from "../../../components/core/auth/crypto";
 
-const AllCourse = () => {
+const MyCourses = () => {
   const dispatch = useDispatch();
   const { allInstructoreCourses, creatingCourse } = useSelector((store) => store.course);
   const { user: data } = useSelector((store) => store.profile);
@@ -76,4 +76,4 @@ const AllCourse = () => {
   );
 };
 
-export default AllCourse;
+export default MyCourses;

@@ -50,7 +50,7 @@ export const Profile = [
   {
     id:"5",
     title: "My Courses",
-    url: "/dashboard/all-courses",
+    url: "/dashboard/my-courses",
     role: "Instructor",
     icon: PiGraduationCap,
   },{

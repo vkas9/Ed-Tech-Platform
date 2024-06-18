@@ -92,7 +92,7 @@ const ViewCourse = () => {
                   <div className="flex items-center justify-between">
                     <div  className="truncate  mr-[5rem]">
                       <div className="flex items-center gap-2">
-                        <MdOutlineOndemandVideo  className="min-w-[20px]"  />
+                        <MdOutlineOndemandVideo  className=" min-w-[20px]"  />
 
                         <p className="whitespace-nowrap max-w-[450px]  truncate">
                           {subsection.title}

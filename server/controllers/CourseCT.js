@@ -455,3 +455,89 @@ exports.deleteEnrolledCourse=async(req,res)=>{
         
     }
 }
+exports.deleteInstructorCourse = async (req, res) => {
+    try {
+      const { courseId } = req.body;
+      const userId = req.user.id;
+  
+      if (!courseId) {
+        return res.status(400).json({
+          success: false,
+          message: "Course ID is required"
+        });
+      }
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { $pull: { Courses: courseId,Cart:courseId } },
+        { new: true }
+      ).select("-Password").populate({
+        path: "Profile"
+      }).exec()
+  
+      if (!updatedUser) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found"
+        });
+      }
+
+      const deletedCourse = await Course.findByIdAndDelete(courseId);
+      if (!deletedCourse) {
+        return res.status(404).json({
+          success: false,
+          message: "Course not found"
+        });
+      }
+
+      const coursePromises= updatedUser.Courses.map(courseid=>
+        Course.findById(courseid)
+        .populate({
+            path: "Instructor",
+            populate: {
+              path: "Profile",
+            },
+          })
+          .populate({
+            path: "Rating_N_Reviews",
+            populate: {
+              path: "User",
+            },
+          })
+          .populate({
+            path: "Catagory",
+            populate: {
+              path: "Course",
+            },
+          })
+          .populate("StudentEntrolled")
+          .populate("Section")
+          .populate({
+            path: "Section",
+            populate: {
+              path: "subSection",
+            },
+          })
+          .exec()
+      )
+      let courseDetail = await Promise.all(coursePromises);
+      courseDetail = courseDetail.reverse();
+  
+      // Encrypt the updated user data
+      const encryptedCourse = encryptData(updatedUser);
+      const encryptedCourseDetail = encryptData(courseDetail);
+  
+      // Send the response
+      return res.status(200).json({
+        success: true,
+        message: "Successfully deleted course",
+        uur: encryptedCourse,
+        imc:encryptedCourseDetail
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        success: false,
+        message: "Problem with deleting course"
+      });
+    }
+  };

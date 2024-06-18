@@ -59,7 +59,14 @@ const ExploreCoursesCard = ({ course }) => {
 
         await fetchEnrollData(data, dispatch, signal);
       }
-      navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+      if(user?.role==="Instructor"){
+        navigate(`/dashboard/my-courses/${uuidv4()}/${course._id}`);
+
+      }
+      else{
+        navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+      }
+     
     } else {
       if (e.target.innerText === "Enroll Now") {
         const paymentResponse = await PaymentComponent({
@@ -131,7 +138,7 @@ const ExploreCoursesCard = ({ course }) => {
           <div className="w-fit pl-2 vm:pl-4 sm:pl-0 flex items-center">
             <span className=" flex flex-col sm:items-center">
               <span className="text-white/40">Duration:</span>
-              <span className="whitespace-nowrap">
+            <span className="whitespace-nowrap">
                 <span className="sm:block">{time}</span>
               </span>
             </span>

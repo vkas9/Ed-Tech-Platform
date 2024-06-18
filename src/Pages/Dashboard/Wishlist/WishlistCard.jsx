@@ -79,7 +79,7 @@ const WishlistCard = ({ course }) => {
         !isButtonHovered ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20" : ""
       } bg-gray-300/10 max-w-[60rem] p-1`}
     >
-      <div className="gap-1 p-2 sm:min-w-[351px] flex-col  pr-[2.2rem] overflow-auto vm:items-center flex">
+      <div className="gap-1 p-2 sm:min-w-[351px] flex-col   pr-[2.2rem] overflow-auto vm:items-center flex">
         <div className="flex gap-3 flex-col  w-full vm:flex-row vm:items-center">
         <img
           src={course?.Thumbnail}
@@ -87,9 +87,9 @@ const WishlistCard = ({ course }) => {
           className="h-[110px] w-full xs:w-[200px] xs:max-w-[200px] vm:w-[160px] vm:max-w-[160px] object-cover rounded-lg"
         />
 
-        <div className="max-w-[200px]">
-          <h2>{course.CourseName}</h2>
-          <p className="text-white/40 text-[.9rem]">{course.CourseDescription}</p>
+        <div className="vm:w-[120px] oi:w-[180px] ow:w-[220px] sm:w-[170px]   md:max-w-[220px] lg:w-[170px]">
+          <h2 className="truncate">{course.CourseName}</h2>
+          <p className="text-white/40 truncate text-[.9rem]">{course.CourseDescription}</p>
           <div className="flex gap-2 whitespace-nowrap overflow-auto items-center">
             <span>0.0</span>
             <ReactStars

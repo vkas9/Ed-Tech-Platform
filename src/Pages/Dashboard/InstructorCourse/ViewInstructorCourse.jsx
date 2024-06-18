@@ -55,20 +55,20 @@ const ViewInstructorCourse = () => {
           <details key={section._id} className="mb-2">
             <summary
               onClick={() => handleSetOpen(section._id)}
-              className="cursor-pointer flex items-center justify-between p-2 bg-white/20 rounded-md hover:bg-white/30"
+              className="cursor-pointer flex items-center justify-between px-2 py-3 bg-white/20 rounded-md relative hover:bg-white/30"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex truncate mr-[6rem] items-center gap-2">
                 {openSections[section._id] ? (
-                  <IoMdArrowDropdown className="text-lg" />
+                  <IoMdArrowDropdown className="text-lg min-w-[20px]" />
                 ) : (
-                  <IoMdArrowDropright className="text-lg" />
+                  <IoMdArrowDropright className="text-lg min-w-[20px]" />
                 )}
-                <p className="text-lg  max-w-[90px] md:max-w-none md:whitespace-normal truncate">
+                <p className="text-lg   whitespace-nowrap max-w-[450px]  truncate">
                   {section.SectionName}
                 </p>
               </div>
-              <div className="flex">
-                <div className=" p-2">{section.subSection.length} Lectures</div>
+              <div className="flex  absolute bottom-2 sm:bottom-1 right-0">
+                <div className="  p-2 text-sm sm:text-lg ">{section.subSection.length} Lectures</div>
               </div>
             </summary>
             <div>
@@ -82,19 +82,19 @@ const ViewInstructorCourse = () => {
                       cancel: () => openConfirmationModal(null),
                     });
                   }}
-                  className="px-4 py-1 hover:bg-white/20 hover:cursor-pointer bg-white/10 rounded-md ml-4 mt-2"
+                  className="px-4 py-2 hover:bg-white/20 relative hover:cursor-pointer bg-white/10 rounded-md ml-4 mt-2"
                 >
                   <div className="flex items-center justify-between">
-                    <div>
+                    <div  className="truncate  mr-[5rem]">
                       <div className="flex items-center gap-2">
-                        <MdOutlineOndemandVideo />
+                        <MdOutlineOndemandVideo  className=" min-w-[20px]" />
 
-                        <p className="max-w-[70px] truncate md:max-w-none md:whitespace-normal">
+                        <p className="whitespace-nowrap max-w-[450px]  truncate">
                           {subsection.title}
                         </p>
                       </div>
                     </div>
-                    <div className="  flex">
+                    <div className="   flex absolute bottom-1 right-2">
                       <div className="py-2 select-none text-sm text-white/50">
                         {secondsToMinutesAndSeconds(subsection.duration)}
                       </div>

@@ -17,7 +17,9 @@ export default {
         "hg":"910px",
         "oi":"470px",
         "tsr":"370px",
-        "cn":"580px"
+        "cn":"580px",
+        "ge":"245px",
+        "ow":"500px"
         
       },
     },

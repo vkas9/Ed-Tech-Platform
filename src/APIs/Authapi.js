@@ -781,3 +781,29 @@ export const enrollCourse = async (dispatch, data,enrollData=null,navigate) => {
     toast.dismiss(toastId);
   }
 };
+export const deleteInstructorCourse=async(dispatch,data)=>{
+  const toastId = toast.loading("Deleting...");
+  let response;
+  try {
+    response = await axios.post(
+      `${BASE_URL}/api/beta/course/deleteInstructorCourse`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+    localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, response.data.imc);
+    localStorage.setItem(import.meta.env.VITE_USER, response.data.uur);
+    const userd=decryptData(response.data.uur)
+    const userinc=decryptData(response.data.imc)
+    dispatch(profileAction.setProfile(userd));
+    dispatch(courseAction.setIC(userinc));
+    toast.success(response.data.message)
+    
+  } catch (error) {
+    console.log("error->",error)
+    toast.error(error.response.data.message);
+  } finally {
+    toast.dismiss(toastId);
+  }
+}

@@ -48,7 +48,7 @@ const{editCourse}=useSelector((store)=>store.course)
     dispatch(courseAction.resetCourseState());
 
     toast.success("Course Created!");
-    navigate("/dashboard/all-courses");
+    navigate("/dashboard/my-courses");
   };
 
   return (

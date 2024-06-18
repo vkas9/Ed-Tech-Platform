@@ -16,7 +16,6 @@ import PurchaseHistory from "./Pages/Dashboard/PurchaseHistory";
 import Courses from "./Pages/Dashboard/ExploreCourses/Courses";
 import Settings from "./Pages/Dashboard/Settings";
 import Indexcourse from "./Pages/Dashboard/AddCourse/Indexcourse";
-import AllCourse from "./Pages/Dashboard/InstructorCourse/AllCourse";
 import ViewCourse from "./Pages/Dashboard/EnrolledCourse/ViewCourse";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import ChangePassword from "./Pages/ForgotPassword/ResetPasswordOut";
@@ -26,6 +25,7 @@ import AboutUs from "./Pages/NavbarPages/AboutUs";
 import ContactUs from "./Pages/NavbarPages/ContactUs";
 import ViewInstructorCourse from "./Pages/Dashboard/InstructorCourse/ViewInstructorCourse";
 import OpenInstructor from "./components/core/auth/OpenInstructor";
+import MyCourses from "./Pages/Dashboard/InstructorCourse/MyCourses";
 
 
 function App() {
@@ -122,7 +122,7 @@ function App() {
                 element={<ViewCourse />}
               />
               <Route
-                path="all-courses/:ud/:courseId"
+                path="my-courses/:ud/:courseId"
                 element={<ViewInstructorCourse />}
               />
               <Route
@@ -138,7 +138,7 @@ function App() {
               <Route path="Courses/:expC" element={<Courses />} />
               <Route path="Settings" element={<Settings />} />
               <Route path="create-course" element={<Indexcourse />} />
-              <Route path="all-courses" element={<AllCourse />} />
+              <Route path="my-courses" element={<MyCourses />} />
             </Route>
           </Routes>
           {/* <Footer /> */}
