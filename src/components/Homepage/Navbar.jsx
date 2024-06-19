@@ -163,7 +163,8 @@ const Navbar = () => {
                     ) : null}
                   </div>
                 ) : user ? (
-                  <Link
+                  item.title !== "Pricing"?
+                   <Link
                     key={index}
                     to={item.title !== "Log Out" && item.url}
                     onClick={handleClick}
@@ -182,9 +183,27 @@ const Navbar = () => {
                     } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
                   >
                     {item.title}
-                  </Link>
+                  </Link>:<ScrollLink
+                        to="pricing-section"
+                        smooth={true}
+                        duration={500}
+                        className={`block relative font-bold text-2xl uppercase ${
+                          Route(item.url) ? "text-white" : "text-gray-500"
+                        }   transition-colors lg:hover:cursor-pointer ${
+                          item.title === "Log Out" ? "hidden" : ""
+                        } ${
+                          item.onlyMobile ? "lg:hidden" : ""
+                        } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
+                        onClick={() => {
+                          openNavigation && toggle();
+                          navigate("/");
+                        }}
+                      >
+                        Pricing
+                      </ScrollLink>
                 ) : (
-                  <Link
+                  item.title !== "Pricing"?
+                   <Link
                     key={index}
                     to={item.url}
                     onClick={handleClick}
@@ -196,11 +215,22 @@ const Navbar = () => {
                       item.onlyMobile ? "lg:hidden" : ""
                     } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
                   >
-                    {item.title === "Pricing" ? (
-                      <ScrollLink
+                  
+                     
+                   
+                      {item.title}
+                  
+                  </Link>: <ScrollLink
                         to="pricing-section"
                         smooth={true}
                         duration={500}
+                        className={`block relative font-bold text-2xl uppercase ${
+                          Route(item.url) ? "text-white" : "text-gray-500"
+                        }   transition-colors lg:hover:cursor-pointer ${
+                          item.title === "Log Out" ? "hidden" : ""
+                        } ${
+                          item.onlyMobile ? "lg:hidden" : ""
+                        } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
                         onClick={() => {
                           openNavigation && toggle();
                           navigate("/");
@@ -208,10 +238,6 @@ const Navbar = () => {
                       >
                         Pricing
                       </ScrollLink>
-                    ) : (
-                      item.title
-                    )}
-                  </Link>
                 )}
               </div>
             ))}
