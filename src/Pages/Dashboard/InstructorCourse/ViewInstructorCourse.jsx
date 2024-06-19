@@ -21,11 +21,11 @@ const ViewInstructorCourse = () => {
     const seconds = totalSeconds % 60;
     return `${minutes}m ${seconds}s`;
   }
-  const eCourse = allInstructoreCourses.find((item) => item._id === courseId);
+  const eCourse = allInstructoreCourses?.find((item) => item._id === courseId);
   const getTotalLectures = () => {
     let total = 0;
-    for (let temp in eCourse.Section) {
-      total += eCourse.Section[temp].subSection.length;
+    for (let temp in eCourse?.Section) {
+      total += eCourse.Section[temp]?.subSection?.length;
     }
     return total;
   };
@@ -44,11 +44,11 @@ const ViewInstructorCourse = () => {
         <span>/</span>
         <span className="whitespace-nowrap">My Courses</span>
         <span>/</span>
-        <span className="text-yellow-500 whitespace-nowrap">{eCourse.CourseName}</span>
+        <span className="text-yellow-500 whitespace-nowrap">{eCourse?.CourseName}</span>
       </div>
       <h1 className="text-3xl mb-3">Course Content</h1>
       <h2 className="text-white/50 mb-1 ">
-        {eCourse.Section.length} Sections • {getTotalLectures()} Lectures{" "}
+        {eCourse?.Section?.length} Sections • {getTotalLectures()} Lectures{" "}
       </h2>
       <div className="bg-white/10 overflow-y-auto max-h-[calc(100vh-13rem)] w-full md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">
         {eCourse?.Section.map((section) => (

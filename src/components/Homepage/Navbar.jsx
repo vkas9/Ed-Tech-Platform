@@ -14,17 +14,18 @@ import axios from "axios";
 import { CiLogout } from "react-icons/ci";
 import SubTitle from "./SubTitle";
 import { courseAction } from "../../store/courseSlice";
-import { logout } from "../../APIs/Authapi";
+import { getAllInstructorCourses, logout } from "../../APIs/Authapi";
 import ConfirmModal from "../../Pages/Dashboard/ConfirmModal";
 import { profileAction } from "../../store/profileSlice";
 import { decryptData } from "../core/auth/crypto";
 import toast from "react-hot-toast";
 
+
 const Navbar = () => {
   const [name, setName] = useState(null);
   const [catagory, setCatagory] = useState([]);
   const dispatch = useDispatch();
-
+  const { exploreAllCourses } = useSelector((store) => store.course);
   const { openNavigation, sidebarShow: show } = useSelector(
     (store) => store.profile
   );
@@ -52,11 +53,18 @@ const Navbar = () => {
     return matchPath({ path: route }, location.pathname);
   };
 
-  const handleClick2 = () => {
+  const handleClick2 = async() => {
     if (user && user.role === "Instructor") {
       // toast("To purchase these courses, you must switch to Student mode", {
       //   icon: '',
       // });
+      if(!exploreAllCourses){
+        const controller = new AbortController();
+        const signal = controller.signal;
+        const courseData =await getAllInstructorCourses(signal)
+        dispatch(courseAction.setIC(courseData));
+      }
+      
       navigate("/dashboard/courses/cloud-computing");
 
       openNavigation && toggle();
@@ -110,17 +118,20 @@ const Navbar = () => {
           className="block w-[12rem ] flex items-center  xl:mr-8 "
         >
           <ScrollLink
-                        to="home-section"
-                        smooth={true}
-                        duration={500}
-                        onClick={() => {
-                          openNavigation && toggle();
-                          navigate("/");
-                        }}
-                      >
-                        <img src={image} className="lg:w-[200px]  w-[140px] " alt="MASTER" />
-                      </ScrollLink>
-          
+            to="home-section"
+            smooth={true}
+            duration={500}
+            onClick={() => {
+              openNavigation && toggle();
+              navigate("/");
+            }}
+          >
+            <img
+              src={image}
+              className="lg:w-[200px]  w-[140px] "
+              alt="MASTER"
+            />
+          </ScrollLink>
         </Link>
         {/* top-[70px] */}
         <nav
@@ -163,47 +174,53 @@ const Navbar = () => {
                     ) : null}
                   </div>
                 ) : user ? (
-                  item.title !== "Pricing"?
-                   <Link
-                    key={index}
-                    to={item.title !== "Log Out" && item.url}
-                    onClick={handleClick}
-                    className={`block relative  font-bold text-2xl uppercase ${
-                      Route(item.url) ? "text-white" : "text-gray-500"
-                    }   transition-colors lg:hover:cursor-pointer ${
-                      user?.role === "Instructor" &&
-                      item.title === "Pricing" &&
-                      "hidden"
-                    } ${
-                      item.title === "New Account" || item.title === "Sign in"
-                        ? "hidden"
-                        : ""
-                    } ${
-                      item.onlyMobile ? "lg:hidden" : ""
-                    } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
-                  >
-                    {item.title}
-                  </Link>:<ScrollLink
-                        to="pricing-section"
-                        smooth={true}
-                        duration={500}
-                        className={`block relative font-bold text-2xl uppercase ${
-                          Route(item.url) ? "text-white" : "text-gray-500"
-                        }   transition-colors lg:hover:cursor-pointer ${
-                          item.title === "Log Out" ? "hidden" : ""
-                        } ${
-                          item.onlyMobile ? "lg:hidden" : ""
-                        } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
-                        onClick={() => {
-                          openNavigation && toggle();
-                          navigate("/");
-                        }}
-                      >
-                        Pricing
-                      </ScrollLink>
-                ) : (
-                  item.title !== "Pricing"?
-                   <Link
+                  item.title !== "Pricing" ?
+                   (
+                    <Link
+                      key={index}
+                      to={item.title !== "Log Out" && item.url}
+                      onClick={handleClick}
+                      className={`block relative  font-bold text-2xl uppercase ${
+                        Route(item.url) ? "text-white" : "text-gray-500"
+                      }   transition-colors lg:hover:cursor-pointer ${
+                        user?.role === "Instructor" &&
+                        item.title === "Pricing" &&
+                        "hidden"
+                      } ${
+                        item.title === "New Account" || item.title === "Sign in"
+                          ? "hidden"
+                          : ""
+                      } ${
+                        item.onlyMobile ? "lg:hidden" : ""
+                      } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
+                    >
+                      {item.title}
+                    </Link>
+                  ) : 
+
+                  (
+                    <ScrollLink
+                      to="pricing-section"
+                      smooth={true}
+                      duration={500}
+                      className={`block relative font-bold text-2xl uppercase ${user?.role==="Instructor"&&"hidden"} ${
+                        Route(item.url) ? "text-white" : "text-gray-500"
+                      }   transition-colors lg:hover:cursor-pointer ${
+                        item.title === "Log Out" ? "hidden" : ""
+                      } ${
+                        item.onlyMobile ? "lg:hidden" : ""
+                      } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
+                      onClick={() => {
+                        openNavigation && toggle();
+                        navigate("/");
+                      }}
+                    >
+                      Pricing
+                    </ScrollLink>
+                  )
+                ) : item.title !== "Pricing" ?
+                 (
+                  <Link
                     key={index}
                     to={item.url}
                     onClick={handleClick}
@@ -215,30 +232,31 @@ const Navbar = () => {
                       item.onlyMobile ? "lg:hidden" : ""
                     } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
                   >
-                  
-                     
-                   
-                      {item.title}
-                  
-                  </Link>: <ScrollLink
-                        to="pricing-section"
-                        smooth={true}
-                        duration={500}
-                        className={`block relative font-bold text-2xl uppercase ${
-                          Route(item.url) ? "text-white" : "text-gray-500"
-                        }   transition-colors lg:hover:cursor-pointer ${
-                          item.title === "Log Out" ? "hidden" : ""
-                        } ${
-                          item.onlyMobile ? "lg:hidden" : ""
-                        } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
-                        onClick={() => {
-                          openNavigation && toggle();
-                          navigate("/");
-                        }}
-                      >
-                        Pricing
-                      </ScrollLink>
-                )}
+                    {item.title}
+                  </Link>
+                ) : 
+                (
+                  <ScrollLink
+                    to="pricing-section"
+                    smooth={true}
+                    duration={500}
+                    className={`block relative font-bold text-2xl uppercase  ${user?.role==="Instructor"&&"hidden"} ${
+                      Route(item.url) ? "text-white" : "text-gray-500"
+                    }   transition-colors lg:hover:cursor-pointer ${
+                      item.title === "Log Out" ? "hidden" : ""
+                    } ${
+                      item.onlyMobile ? "lg:hidden" : ""
+                    } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
+                    onClick={() => {
+                      openNavigation && toggle();
+                      navigate("/");
+                    }}
+                  >
+                    Pricing
+                  </ScrollLink>
+                )
+                
+                }
               </div>
             ))}
           </div>

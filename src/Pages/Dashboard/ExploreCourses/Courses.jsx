@@ -67,9 +67,9 @@ const Courses = () => {
         <span>/</span>
         <span>Dashboard</span>
         <span>/</span>
-        <span className="text-yellow-500 "> {user?.role==="Instructor"?"All Courses":"Courses"}</span>
+        <span className="text-yellow-500  whitespace-nowrap"> {user?.role==="Instructor"?"All Courses":"Courses"}</span>
       </div>
-    <h1 className="text-3xl mb-3"> {user?.role==="Instructor"?"All Courses":"Explore Courses"}</h1>
+    <h1 className="text-3xl mb-3 whitespace-nowrap overflow-x-auto mr-5"> {user?.role==="Instructor"?"All Courses":"Explore Courses"} <span className=" text-[1.3rem] text-white/50">(To enroll in a course, please switch to the Student role)</span> </h1>
     <div className="flex mr-5 rounded-lg overflow-x-auto items-center justify-start ">
     <CourseSwitch roll={expC}/>
     </div>
