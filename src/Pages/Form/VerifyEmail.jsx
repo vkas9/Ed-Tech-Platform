@@ -17,6 +17,7 @@ const VerifyEmail = () => {
   const [otp, setOtp] = useState("");
   const [missing, setMissing] = useState(false);
   const [toastShow, setToastShow] = useState(false);
+  const [sendingOTP, setSendingOTP] = useState(false);
 
   const { signupdata, forgotPassword, userEmail } = useSelector(
     (store) => store.auth
@@ -77,7 +78,7 @@ const VerifyEmail = () => {
           onChange={handleChange}
           numInputs={6}
           shouldAutoFocus
-          isInputNum
+          inputType={"tel"}
           renderInput={(props) => <input {...props} />}
           inputStyle="bg-white/20 py-2  font-bold text-center max-w-[25px]  vm:w-[25px] rounded-md md:min-w-[60px] h-[50px] text-4xl  box-content overflow-hidden p-1 sm:p-3 outline-none"
           containerStyle={{ gap: ".5rem" }}
@@ -87,12 +88,19 @@ const VerifyEmail = () => {
             if (!forgotPassword) {
               dispatch(opt(signupdata, navigate));
             } else {
+              
+              if(sendingOTP){
+                return 
+              }
+              setSendingOTP(true)
               await forgotPasswordOtp({ email: userEmail }, navigate);
+              setSendingOTP(false)
+
             }
           }}
           className="absolute right-2 -bottom-8 font-semibold text-lg"
         >
-          <button className="text-white/60 sm:hover:text-white active:text-white">
+          <button className="text-white/50  sm:hover:text-white active:text-white">
             Resend OTP
           </button>
         </div>
