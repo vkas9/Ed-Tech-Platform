@@ -14,12 +14,11 @@ import axios from "axios";
 import { CiLogout } from "react-icons/ci";
 import SubTitle from "./SubTitle";
 import { courseAction } from "../../store/courseSlice";
-import { getAllInstructorCourses, logout } from "../../APIs/Authapi";
+import { getAllInstructorCourses, logout } from "../../APIs/mainAPI";
 import ConfirmModal from "../../Pages/Dashboard/ConfirmModal";
 import { profileAction } from "../../store/profileSlice";
 import { decryptData } from "../core/auth/crypto";
 import toast from "react-hot-toast";
-
 
 const Navbar = () => {
   const [name, setName] = useState(null);
@@ -53,18 +52,18 @@ const Navbar = () => {
     return matchPath({ path: route }, location.pathname);
   };
 
-  const handleClick2 = async() => {
+  const handleClick2 = async () => {
     if (user && user.role === "Instructor") {
       // toast("To purchase these courses, you must switch to Student mode", {
       //   icon: '',
       // });
-      if(!exploreAllCourses){
+      if (!exploreAllCourses) {
         const controller = new AbortController();
         const signal = controller.signal;
-        const courseData =await getAllInstructorCourses(signal)
+        const courseData = await getAllInstructorCourses(signal);
         dispatch(courseAction.setIC(courseData));
       }
-      
+
       navigate("/dashboard/courses/cloud-computing");
 
       openNavigation && toggle();
@@ -174,8 +173,7 @@ const Navbar = () => {
                     ) : null}
                   </div>
                 ) : user ? (
-                  item.title !== "Pricing" ?
-                   (
+                  item.title !== "Pricing" ? (
                     <Link
                       key={index}
                       to={item.title !== "Log Out" && item.url}
@@ -196,14 +194,14 @@ const Navbar = () => {
                     >
                       {item.title}
                     </Link>
-                  ) : 
-
-                  (
+                  ) : (
                     <ScrollLink
                       to="pricing-section"
                       smooth={true}
                       duration={500}
-                      className={`block relative font-bold text-2xl uppercase ${user?.role==="Instructor"&&"hidden"} ${
+                      className={`block relative font-bold text-2xl uppercase ${
+                        user?.role === "Instructor" && "hidden"
+                      } ${
                         Route(item.url) ? "text-white" : "text-gray-500"
                       }   transition-colors lg:hover:cursor-pointer ${
                         item.title === "Log Out" ? "hidden" : ""
@@ -218,8 +216,7 @@ const Navbar = () => {
                       Pricing
                     </ScrollLink>
                   )
-                ) : item.title !== "Pricing" ?
-                 (
+                ) : item.title !== "Pricing" ? (
                   <Link
                     key={index}
                     to={item.url}
@@ -234,13 +231,14 @@ const Navbar = () => {
                   >
                     {item.title}
                   </Link>
-                ) : 
-                (
+                ) : (
                   <ScrollLink
                     to="pricing-section"
                     smooth={true}
                     duration={500}
-                    className={`block relative font-bold text-2xl uppercase  ${user?.role==="Instructor"&&"hidden"} ${
+                    className={`block relative font-bold text-2xl uppercase  ${
+                      user?.role === "Instructor" && "hidden"
+                    } ${
                       Route(item.url) ? "text-white" : "text-gray-500"
                     }   transition-colors lg:hover:cursor-pointer ${
                       item.title === "Log Out" ? "hidden" : ""
@@ -254,9 +252,7 @@ const Navbar = () => {
                   >
                     Pricing
                   </ScrollLink>
-                )
-                
-                }
+                )}
               </div>
             ))}
           </div>

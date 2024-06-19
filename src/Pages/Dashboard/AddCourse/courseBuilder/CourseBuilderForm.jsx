@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import React, { useEffect, useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { MdAddCircleOutline } from "react-icons/md";
 import { FaAngleRight } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useDispatch, useSelector } from 'react-redux';
-import { courseAction } from '../../../../store/courseSlice';
-import { toast } from 'react-hot-toast';
-import { createSection, updateSection } from '../../../../APIs/Authapi';
-import NestedView from './NestedView';
+import { useDispatch, useSelector } from "react-redux";
+import { courseAction } from "../../../../store/courseSlice";
+import { toast } from "react-hot-toast";
+import { createSection, updateSection } from "../../../../APIs/mainAPI";
+import NestedView from "./NestedView";
 
 const CourseBuilderForm = () => {
   const [editSectionName, setEditSectionName] = useState(null);
@@ -73,21 +73,30 @@ const CourseBuilderForm = () => {
   };
 
   return (
-    <motion.div initial={{opacity:0,x:-20}} animate={{opacity:1,x:0}} exit={{opacity:0}} transition={{duration:.4,delay:.2,ease:[0,.71,.2,1.01]}} className="text-white ">
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
+      className="text-white "
+    >
       <h1 className="text-3xl">Course Builder</h1>
       <div className="mt-4 mr-5">
         <div className="p-4 bg-white/10 rounded-md py-6 gap-4 max-w-[700px]">
           <Formik
-            initialValues={{ sectionName: '' }}
+            initialValues={{ sectionName: "" }}
             validationSchema={Yup.object({
-              sectionName: Yup.string().required('Section Name is required'),
+              sectionName: Yup.string().required("Section Name is required"),
             })}
             onSubmit={handleSubmit}
           >
             {({ isSubmitting, resetForm, setValues }) => (
               <Form className="flex flex-col gap-4">
-                <div className='flex flex-col'>
-                  <label htmlFor="sectionName" className="text-xl text-white/80">
+                <div className="flex flex-col">
+                  <label
+                    htmlFor="sectionName"
+                    className="text-xl text-white/80"
+                  >
                     Section name <sup>*</sup>
                   </label>
                   <Field
@@ -96,7 +105,11 @@ const CourseBuilderForm = () => {
                     placeholder="Add section name"
                     className="bg-white/20 w-full outline-none max-w-[350px] rounded-md p-2 text-xl text-white"
                   />
-                  <ErrorMessage name="sectionName" component="span" className="text-red-500" />
+                  <ErrorMessage
+                    name="sectionName"
+                    component="span"
+                    className="text-red-500"
+                  />
                 </div>
                 <div className="flex items-center gap-4">
                   <button
@@ -118,19 +131,18 @@ const CourseBuilderForm = () => {
                   )}
                 </div>
                 {course?.Section?.length > 0 && (
-                <NestedView
-                  handleChangeEditSectionName={(sectionId, sectionName) => {
-                    if (editSectionName === sectionId) {
-                      cancelEdit(resetForm);
-                      return;
-                    }
+                  <NestedView
+                    handleChangeEditSectionName={(sectionId, sectionName) => {
+                      if (editSectionName === sectionId) {
+                        cancelEdit(resetForm);
+                        return;
+                      }
 
-                    setEditSectionName(sectionId);
-                    setValues({ sectionName });
-                  }}
-                />
-              )}
-
+                      setEditSectionName(sectionId);
+                      setValues({ sectionName });
+                    }}
+                  />
+                )}
               </Form>
             )}
           </Formik>
@@ -143,16 +155,13 @@ const CourseBuilderForm = () => {
         >
           Back
         </button>
-        <div  onClick={goToNext} className="text-white hover:cursor-pointer bg-blue-500 hover:bg-blue-600 text-xl font-bold p-2 rounded-md flex items-center">
-        <button
-         
-          
+        <div
+          onClick={goToNext}
+          className="text-white hover:cursor-pointer bg-blue-500 hover:bg-blue-600 text-xl font-bold p-2 rounded-md flex items-center"
         >
-          Next
-        </button>
-        <FaAngleRight className="ml-1 text-2xl" />
+          <button>Next</button>
+          <FaAngleRight className="ml-1 text-2xl" />
         </div>
-        
       </div>
     </motion.div>
   );

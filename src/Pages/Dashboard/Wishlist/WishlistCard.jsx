@@ -6,7 +6,7 @@ import {
   PaymentComponent,
   deleteCartDetails,
   enrollCourse,
-} from "../../../APIs/Authapi";
+} from "../../../APIs/mainAPI";
 import { profileAction } from "../../../store/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const WishlistCard = ({ course }) => {
 
   const { enrolledCourse } = useSelector((store) => store.card);
   const { user: data, user } = useSelector((store) => store.profile);
-  
+
   let time = CaluculateDuration(course);
 
   const handleCart = async () => {
@@ -41,7 +41,12 @@ const WishlistCard = ({ course }) => {
   const handleEnrollCourse = async () => {
     setLoading(true);
     try {
-      const updatedUser = await enrollCourse(dispatch, { courseId: course?._id }, data, navigate);
+      const updatedUser = await enrollCourse(
+        dispatch,
+        { courseId: course?._id },
+        data,
+        navigate
+      );
       dispatch(profileAction.setProfile(updatedUser));
     } catch (error) {
       console.error(error);
@@ -62,7 +67,9 @@ const WishlistCard = ({ course }) => {
       navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
     } else {
       if (e.target.innerText === "Enroll Now") {
-        const paymentResponse = await PaymentComponent({ courseId: course._id });
+        const paymentResponse = await PaymentComponent({
+          courseId: course._id,
+        });
         if (paymentResponse.status_code === 200) {
           await handleEnrollCourse();
         }
@@ -81,31 +88,39 @@ const WishlistCard = ({ course }) => {
     >
       <div className="gap-1 p-2 sm:min-w-[351px] flex-col   pr-[2.2rem] overflow-auto vm:items-center flex">
         <div className="flex gap-3 flex-col  w-full vm:flex-row vm:items-center">
-        <img
-          src={course?.Thumbnail}
-          alt="course-thumbnail"
-          className="h-[110px] w-full xs:w-[200px] xs:max-w-[200px] vm:w-[160px] vm:max-w-[160px] object-cover rounded-lg"
-        />
+          <img
+            src={course?.Thumbnail}
+            alt="course-thumbnail"
+            className="h-[110px] w-full xs:w-[200px] xs:max-w-[200px] vm:w-[160px] vm:max-w-[160px] object-cover rounded-lg"
+          />
 
-        <div className="vm:w-[120px] oi:w-[180px] ow:w-[220px] sm:w-[170px]   md:max-w-[220px] lg:w-[170px]">
-          <h2 className="truncate">{course.CourseName}</h2>
-          <p className="text-white/40 truncate text-[.9rem]">{course.CourseDescription}</p>
-          <div className="flex gap-2 whitespace-nowrap overflow-auto items-center">
-            <span>0.0</span>
-            <ReactStars
-              className="min-w-fit whitespace-nowrap overflow-auto"
-              count={5}
-              size={25}
-              edit={false}
-              activeColor="#ffd700"
-              emptyIcon={<FaRegStar />}
-              fullIcon={<FaStar />}
-            />
+          <div className="vm:w-[120px] oi:w-[180px] ow:w-[220px] sm:w-[170px]   md:max-w-[220px] lg:w-[170px]">
+            <h2 className="truncate">{course.CourseName}</h2>
+            <p className="text-white/40 truncate text-[.9rem]">
+              {course.CourseDescription}
+            </p>
+            <div className="flex gap-2 whitespace-nowrap overflow-auto items-center">
+              <span>0.0</span>
+              <ReactStars
+                className="min-w-fit whitespace-nowrap overflow-auto"
+                count={5}
+                size={25}
+                edit={false}
+                activeColor="#ffd700"
+                emptyIcon={<FaRegStar />}
+                fullIcon={<FaStar />}
+              />
+            </div>
           </div>
-        </div> 
         </div>
         <div className=" w-full">
-          <span className="text-white/50 text-sm">Created By: <span className="text-white whitespace-nowrap"> {course?.Instructor?.FirstName} {course?.Instructor?.LastName}</span></span>
+          <span className="text-white/50 text-sm">
+            Created By:{" "}
+            <span className="text-white whitespace-nowrap">
+              {" "}
+              {course?.Instructor?.FirstName} {course?.Instructor?.LastName}
+            </span>
+          </span>
         </div>
       </div>
       <div className="h-[1px] bg-white/10 mx-3 my-1" />

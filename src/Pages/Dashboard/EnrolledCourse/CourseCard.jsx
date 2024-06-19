@@ -3,7 +3,7 @@ import { FiMoreVertical } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ConfirmModal from "../ConfirmModal";
-import { deleteEnrolledCourse } from "../../../APIs/Authapi";
+import { deleteEnrolledCourse } from "../../../APIs/mainAPI";
 import { encryptData } from "../../../components/core/auth/crypto";
 import { useDispatch, useSelector } from "react-redux";
 import { cardAction } from "../../../store/cardSlice";
@@ -41,7 +41,7 @@ const CourseCard = ({ course }) => {
       dispatch(profileAction.setProfile(data.userDetail));
       localStorage.setItem(import.meta.env.VITE_ENROLL_C, enrolledText);
       localStorage.setItem(import.meta.env.VITE_USER, userDetail);
-      toast.success("Course Unenrolled!")
+      toast.success("Course Unenrolled!");
     } catch (error) {
       console.log(error);
     } finally {
@@ -77,22 +77,28 @@ const CourseCard = ({ course }) => {
       >
         <div className="gap-1  p-2 sm:min-w-[351px] flex-col  pr-[2.2rem] overflow-auto  vm:items-center flex">
           <div className="flex gap-3 flex-col  w-full vm:flex-row vm:items-center">
-          <img
-            src={course.Thumbnail}
-            alt="course-thumbnail"
-            className=" h-[110px] w-full xs:w-[200px] xs:max-w-[200px] vm:w-[160px] vm:max-w-[160px] object-cover  rounded-lg"
-          />
-          <div className="vm:w-[120px] w-full  md:max-w-[220px] lg:w-[220px] ">
-            <h2 className="truncate">{course.CourseName}</h2>
-            <p className="text-white/40 truncate text-[.9rem]">
-              {course.CourseDescription}
-            </p>
-          </div>
+            <img
+              src={course.Thumbnail}
+              alt="course-thumbnail"
+              className=" h-[110px] w-full xs:w-[200px] xs:max-w-[200px] vm:w-[160px] vm:max-w-[160px] object-cover  rounded-lg"
+            />
+            <div className="vm:w-[120px] w-full  md:max-w-[220px] lg:w-[220px] ">
+              <h2 className="truncate">{course.CourseName}</h2>
+              <p className="text-white/40 truncate text-[.9rem]">
+                {course.CourseDescription}
+              </p>
+            </div>
           </div>
 
           <div className=" w-full">
-          <span className="text-white/50 text-sm">Created By: <span className="text-white whitespace-nowrap"> {course?.Instructor?.FirstName} {course?.Instructor?.LastName}</span></span>
-        </div>
+            <span className="text-white/50 text-sm">
+              Created By:{" "}
+              <span className="text-white whitespace-nowrap">
+                {" "}
+                {course?.Instructor?.FirstName} {course?.Instructor?.LastName}
+              </span>
+            </span>
+          </div>
         </div>
         <div className="h-[1px] bg-white/10 mx-3 my-1" />
         <div className="w-fit text-sm vm:text-[1.1rem] pl-2 mb-1 sm:pl-4 flex items-center">
@@ -121,7 +127,7 @@ const CourseCard = ({ course }) => {
           <div
             onClick={(e) => {
               e.stopPropagation();
-              
+
               setIsButtonHovered(true);
               handleIconClick(course._id);
             }}
@@ -163,9 +169,8 @@ const CourseCard = ({ course }) => {
         
         <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 font-bold text-xl bg-white/10 p-3 rounded-xl text-red-500 -translate-y-1/2">Course Deleted</span>
         </div> */}
-
       </div>
-     
+
       {confirmationModal && <ConfirmModal modalData={confirmationModal} />}
     </>
   );

@@ -2,54 +2,53 @@ import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useNavigation } from "react-router-dom";
-import { resetPasswordOut } from "../../APIs/Authapi";
+import { resetPasswordOut } from "../../APIs/mainAPI";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 const ResetPasswordOut = () => {
   const [loading, setLoading] = useState(false);
-  const {userEmail,forgotPassword}=useSelector((store)=>store.auth);
-  const navigate=useNavigate()
-  
+  const { userEmail, forgotPassword } = useSelector((store) => store.auth);
+  const navigate = useNavigate();
+
   useEffect(() => {
-   
     if (!forgotPassword) {
       navigate("/login");
     }
   }, []);
-  const handleSubmit=async(data)=>{
+  const handleSubmit = async (data) => {
     setLoading(true);
     // console.log("dat",data)
-    
+
     if (data.password !== data.confirmPassword) {
       toast.error("Password Not Matching");
-      setLoading(false)
+      setLoading(false);
       return;
     }
     // console.log("data->", data);
-    
-    
-    
-   try {
-     await resetPasswordOut({data,email:userEmail}, navigate)
-   } catch (error) {
-    console.error(error)
-   }finally{
-    setLoading(false);}
 
-  }
-  
+    try {
+      await resetPasswordOut({ data, email: userEmail }, navigate);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <motion.div
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ opacity: 1, x: 0 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }} className="h-screen  relative flex flex-col overflow-x-hidden items-center justify-center w-full mx-auto">
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
+      className="h-screen  relative flex flex-col overflow-x-hidden items-center justify-center w-full mx-auto"
+    >
       <h1 className="text-[2.7rem] overflow-hidden  md:text-[4em] -mt-[8rem] bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center">
         Reset Password
       </h1>
 
       <Formik
-      onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         initialValues={{
           password: "",
           confirmPassword: "",

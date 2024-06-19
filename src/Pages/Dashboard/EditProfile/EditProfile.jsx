@@ -5,30 +5,33 @@ import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
-import { updateProfile } from "../../../APIs/Authapi";
+import { updateProfile } from "../../../APIs/mainAPI";
 import UpdateProfilePicture from "../../UpdateProfilePicture";
 import toast from "react-hot-toast";
 
 const EditProfile = () => {
   const { user } = useSelector((store) => store.profile);
   const [loading, setLoading] = useState(false);
-  const[show,setShow]=useState(false)
-  const dispatch=useDispatch()
-  const [showToast,isShowToast]=useState(false)
-  const handleSubmit = async (values,{resetForm}) => {
-    if(values.city==''&&values.contactNumber==''&&values.gender==''&& values.dateOfBirth==null){
-      if(showToast){
+  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+  const [showToast, isShowToast] = useState(false);
+  const handleSubmit = async (values, { resetForm }) => {
+    if (
+      values.city == "" &&
+      values.contactNumber == "" &&
+      values.gender == "" &&
+      values.dateOfBirth == null
+    ) {
+      if (showToast) {
         toast.dismiss(showToast);
         isShowToast(false);
       }
-     const toastId=toast.error("Please fill atleast one field")
-     isShowToast(toastId);
-
-    }
-    else{
+      const toastId = toast.error("Please fill atleast one field");
+      isShowToast(toastId);
+    } else {
       try {
         setLoading(true);
-        await updateProfile(dispatch,values);
+        await updateProfile(dispatch, values);
         resetForm();
       } catch (error) {
         console.error(error);
@@ -36,24 +39,26 @@ const EditProfile = () => {
         setLoading(false);
       }
     }
-    
   };
-  const handleUpload=()=>{
-
-  }
+  const handleUpload = () => {};
 
   return (
     <div>
       <h1 className="text-3xl">Edit Profile Picture</h1>
       <div className="mt-4 mr-5 sm:mr-0 sm:px-0">
         <div className="p-4 flex flex-col sm:flex-row items-center bg-white/10 rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem]">
-        <div className="min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px] rounded-full overflow-hidden  max-w-[120px]   ">
-            <img  src={user?.avatar} className="overflow-auto rounded-full min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px]  max-w-[120px]  object-cover" alt="" />
+          <div className="min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px] rounded-full overflow-hidden  max-w-[120px]   ">
+            <img
+              src={user?.avatar}
+              className="overflow-auto rounded-full min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px]  max-w-[120px]  object-cover"
+              alt=""
+            />
           </div>
           <div className="flex gap-2">
-            
-            
-            <button  onClick={()=>setShow(!show)} className="bg-white/10 hover:bg-white/20 text-xl w-[100px] font-bold text-white p-2 rounded-md">
+            <button
+              onClick={() => setShow(!show)}
+              className="bg-white/10 hover:bg-white/20 text-xl w-[100px] font-bold text-white p-2 rounded-md"
+            >
               Change
             </button>
           </div>
@@ -72,7 +77,7 @@ const EditProfile = () => {
               dateOfBirth: null,
             }}
           >
-            {({ setFieldValue, values,resetForm }) => (
+            {({ setFieldValue, values, resetForm }) => (
               <Form className="flex gap-2  flex-col md:flex-row flex-wrap">
                 <div className="flex flex-col">
                   <label className="text-md text-white/80">City Name</label>
@@ -152,7 +157,7 @@ const EditProfile = () => {
           </Formik>
         </div>
       </div>
-      {show &&  <UpdateProfilePicture show={show} setShow={setShow} />}
+      {show && <UpdateProfilePicture show={show} setShow={setShow} />}
     </div>
   );
 };

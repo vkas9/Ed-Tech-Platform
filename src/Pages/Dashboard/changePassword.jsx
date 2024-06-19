@@ -2,16 +2,16 @@ import { Formik, Form, Field } from "formik";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { changePasswordAuth } from "../../APIs/Authapi";
+import { changePasswordAuth } from "../../APIs/mainAPI";
 import { useState } from "react";
 
 const changePassword = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleSubmit = async(data) => {
+  const handleSubmit = async (data) => {
     setLoading(true);
-    
+
     if (data.password !== data.confirmPassword) {
       toast.error("Password Not Matching");
       return;
@@ -20,9 +20,10 @@ const changePassword = () => {
     try {
       await dispatch(changePasswordAuth(data, navigate));
     } catch (error) {
-      console.error(error)
-    }finally{
-    setLoading(false);}
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="mb-[3rem]">
@@ -40,7 +41,9 @@ const changePassword = () => {
           <div className="p-4 bg-white/10 rounded-md   sm:w-[100%] lg:max-w-[55rem] w-full">
             <div className="flex flex-col gap-4 ">
               <div className=" flex flex-col ">
-              <label className=" text-md  text-white/80">Current Password </label>
+                <label className=" text-md  text-white/80">
+                  Current Password{" "}
+                </label>
                 <Field
                   className="bg-white/10 w-full max-w-[350px] rounded-md p-2 outline-none"
                   type="password"
@@ -50,7 +53,7 @@ const changePassword = () => {
                 ></Field>
               </div>
               <div className="flex flex-col ">
-              <label className=" text-md  text-white/80">New Password</label>
+                <label className=" text-md  text-white/80">New Password</label>
                 <Field
                   className="bg-white/10 w-full max-w-[350px]  rounded-md p-2 outline-none"
                   type="password"
@@ -60,7 +63,9 @@ const changePassword = () => {
                 ></Field>
               </div>
               <div className="flex flex-col ">
-              <label className=" text-md  text-white/80">Confirm New Password</label>
+                <label className=" text-md  text-white/80">
+                  Confirm New Password
+                </label>
                 <Field
                   className="bg-white/10 w-full max-w-[350px]  rounded-md p-2 outline-none"
                   type="password"
@@ -74,9 +79,11 @@ const changePassword = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`mt-2 md:hover:bg-yellow-400 active:bg-yellow-400 ${loading?"opacity-50 cursor-not-allowed":" "}  transition-all duration-200 bg-yellow-500 p-1 rounded-lg w-[130px] text-black text-2xl `}
+            className={`mt-2 md:hover:bg-yellow-400 active:bg-yellow-400 ${
+              loading ? "opacity-50 cursor-not-allowed" : " "
+            }  transition-all duration-200 bg-yellow-500 p-1 rounded-lg w-[130px] text-black text-2xl `}
           >
-           {loading?"Changing...":"Change"}
+            {loading ? "Changing..." : "Change"}
           </button>
         </Form>
       </Formik>

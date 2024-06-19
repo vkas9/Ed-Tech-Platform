@@ -1,7 +1,7 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { opt } from "../../../APIs/Authapi";
+import { opt } from "../../../APIs/mainAPI";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -11,8 +11,8 @@ import { authAction } from "../../../store/authSlice";
 import Switch from "./Switch";
 
 const SignupForm = () => {
-  let {roll}=useParams();
-  const temp=roll.charAt(0).toUpperCase() + roll.slice(1).toLowerCase();
+  let { roll } = useParams();
+  const temp = roll.charAt(0).toUpperCase() + roll.slice(1).toLowerCase();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -44,9 +44,9 @@ const SignupForm = () => {
       setLoading(false);
     } catch (error) {
       console.error("Signup failed:", error);
-      
+
       toast.error("Signup failed. Please try again.");
-    }finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -62,7 +62,7 @@ const SignupForm = () => {
       <h1 className="text-[2.5rem] mt-[1rem] mx-2 md:text-[4em] bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center">
         Create Master Account
       </h1>
-     
+
       <Formik
         initialValues={{
           FirstName: "",
@@ -71,81 +71,98 @@ const SignupForm = () => {
           Contact_Number: "",
           Password: "",
           ConfirmPassword: "",
-          role:temp,
+          role: temp,
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         <Form className="  ">
-        <div  className=" w-full ">
-          <Switch roll={temp}/>
-        </div>
+          <div className=" w-full ">
+            <Switch roll={temp} />
+          </div>
           <div className="w-screen xs:w-full p-6 rounded-3xl flex flex-col gap-2 xs:gap-5">
             <div className="flex w-full flex-col xs:flex-row justify-center gap-2 xs:gap-2">
               <div>
                 <Field
                   className="bg-white/10 outline-none p-3 w-full md:w-[20rem] rounded-md font-semibold text-sm sm:text-xl"
                   placeholder="Enter First Name"
-                  
                   name="FirstName"
                   type="text"
                 />
-                <ErrorMessage name="FirstName" component="div" className="text-red-400 text-sm" />
+                <ErrorMessage
+                  name="FirstName"
+                  component="div"
+                  className="text-red-400 text-sm"
+                />
               </div>
               <div>
                 <Field
                   className="bg-white/10 outline-none p-3 w-full md:w-[20rem] rounded-md font-semibold text-sm sm:text-xl"
                   placeholder="Enter Last Name"
-                  
                   name="LastName"
                   type="text"
                 />
-                <ErrorMessage name="LastName" component="div" className="text-red-400 text-sm" />
+                <ErrorMessage
+                  name="LastName"
+                  component="div"
+                  className="text-red-400 text-sm"
+                />
               </div>
             </div>
             <div>
               <Field
                 className="bg-white/10 outline-none p-3 w-full rounded-md font-semibold text-sm sm:text-xl"
                 placeholder="Enter Email"
-                
                 name="Email"
                 type="email"
               />
-              <ErrorMessage name="Email" component="div" className="text-red-400 text-sm" />
+              <ErrorMessage
+                name="Email"
+                component="div"
+                className="text-red-400 text-sm"
+              />
             </div>
             <div>
               <Field
                 className="bg-white/10 outline-none p-3 w-full rounded-md font-semibold text-sm sm:text-xl"
                 placeholder="Enter Contact Number"
-                
                 name="Contact_Number"
                 type="number"
                 maxLength={10}
-          inputProps={{ maxLength: 10 }}
-                
+                inputProps={{ maxLength: 10 }}
               />
-              <ErrorMessage name="Contact_Number" component="div" className="text-red-400 text-sm" />
+              <ErrorMessage
+                name="Contact_Number"
+                component="div"
+                className="text-red-400 text-sm"
+              />
             </div>
             <div className="flex flex-col vm:flex-row justify-center gap-2 xs:gap-5 vm:gap-2 ">
               <div>
                 <Field
-                  
                   className="bg-white/10 outline-none p-3 w-full md:w-[20rem] rounded-md font-semibold text-sm sm:text-xl"
                   placeholder="Enter Password"
                   name="Password"
                   type="password"
                 />
-                <ErrorMessage name="Password" component="div" className="text-red-400 text-sm" />
+                <ErrorMessage
+                  name="Password"
+                  component="div"
+                  className="text-red-400 text-sm"
+                />
               </div>
               <div>
                 <Field
-                  
                   className="truncate bg-white/10 outline-none p-3 w-full md:w-[20rem] rounded-md font-semibold text-sm sm:text-xl"
                   placeholder="Enter Confirm Password"
                   name="ConfirmPassword"
                   type="password"
                 />
-                <ErrorMessage name="ConfirmPassword" component="div" className="text-red-400 text-sm" />
+                <ErrorMessage
+                  name="ConfirmPassword"
+                  component="div"
+                  className="text-red-400 text-sm"
+                />
               </div>
             </div>
             <button

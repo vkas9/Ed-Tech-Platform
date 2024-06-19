@@ -12,7 +12,7 @@ import {
   getPurchaseHistory,
   updateCartDetails,
   updatePurchaseHistory,
-} from "../../../APIs/Authapi";
+} from "../../../APIs/mainAPI";
 import { useNavigate } from "react-router-dom";
 import { profileAction } from "../../../store/profileSlice";
 import { v4 as uuidv4 } from "uuid";
@@ -61,14 +61,11 @@ const ExploreCoursesCard = ({ course }) => {
 
         await fetchEnrollData(data, dispatch, signal);
       }
-      if(user?.role==="Instructor"){
+      if (user?.role === "Instructor") {
         navigate(`/dashboard/my-courses/${uuidv4()}/${course._id}`);
-
-      }
-      else{
+      } else {
         navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
       }
-     
     } else {
       if (e.target.innerText === "Enroll Now") {
         const paymentResponse = await PaymentComponent({
@@ -76,7 +73,7 @@ const ExploreCoursesCard = ({ course }) => {
         });
         if (paymentResponse.status_code === 200) {
           await handleEnrollCourse();
-          await updatePurchaseHistory({courseId:course._id})
+          await updatePurchaseHistory({ courseId: course._id });
           await getPurchaseHistory(dispatch);
         }
       } else {
@@ -95,35 +92,40 @@ const ExploreCoursesCard = ({ course }) => {
       <div className="gap-1  p-2 sm:min-w-[351px] flex-col  pr-[2.2rem] overflow-auto  vm:items-center flex">
         <div className="flex gap-3 flex-col  w-full vm:flex-row vm:items-center">
           <img
-          src={course?.Thumbnail}
-          alt="course-thumbnail"
-          className="w-[160px] h-[110px] max-w-[160px] object-cover rounded-lg"
-        />
+            src={course?.Thumbnail}
+            alt="course-thumbnail"
+            className="w-[160px] h-[110px] max-w-[160px] object-cover rounded-lg"
+          />
 
-        <div className="vm:w-[120px] w-full  md:max-w-[220px] lg:w-[220px]">
-          <h2 className="truncate">{course.CourseName}</h2>
-          <p className="text-white/40 truncate text-[.9rem]">
-            {course.CourseDescription}
-          </p>
-          <div className="flex gap-2  whitespace-nowrap overflow-auto items-center">
-            <span>0.0</span>
-            <ReactStars
-              className="min-w-fit hidden truncate xs:flex whitespace-nowrap overflow-auto"
-              count={5}
-              size={25}
-              edit={false}
-              activeColor="#ffd700"
-              emptyIcon={<FaRegStar />}
-              fullIcon={<FaStar />}
-            />
+          <div className="vm:w-[120px] w-full  md:max-w-[220px] lg:w-[220px]">
+            <h2 className="truncate">{course.CourseName}</h2>
+            <p className="text-white/40 truncate text-[.9rem]">
+              {course.CourseDescription}
+            </p>
+            <div className="flex gap-2  whitespace-nowrap overflow-auto items-center">
+              <span>0.0</span>
+              <ReactStars
+                className="min-w-fit hidden truncate xs:flex whitespace-nowrap overflow-auto"
+                count={5}
+                size={25}
+                edit={false}
+                activeColor="#ffd700"
+                emptyIcon={<FaRegStar />}
+                fullIcon={<FaStar />}
+              />
+            </div>
           </div>
-        </div>
         </div>
 
         <div className=" w-full">
-          <span className="text-white/50 text-sm">Created By: <span className="text-white whitespace-nowrap"> {course?.Instructor?.FirstName} {course?.Instructor?.LastName}</span></span>
+          <span className="text-white/50 text-sm">
+            Created By:{" "}
+            <span className="text-white whitespace-nowrap">
+              {" "}
+              {course?.Instructor?.FirstName} {course?.Instructor?.LastName}
+            </span>
+          </span>
         </div>
-        
       </div>
       <div className="h-[1px] bg-white/10 mx-3 my-1" />
 
@@ -142,7 +144,7 @@ const ExploreCoursesCard = ({ course }) => {
           <div className="w-fit pl-2 vm:pl-4 sm:pl-0 flex items-center">
             <span className=" flex flex-col sm:items-center">
               <span className="text-white/40">Duration:</span>
-            <span className="whitespace-nowrap">
+              <span className="whitespace-nowrap">
                 <span className="sm:block">{time}</span>
               </span>
             </span>
@@ -155,7 +157,11 @@ const ExploreCoursesCard = ({ course }) => {
             </span>
           </div>
         </div>
-        <div className={`flex ${user?.role==="Instructor"&&"hidden"}   md:mr-5 flex-col justify-center items-center gap-1`}>
+        <div
+          className={`flex ${
+            user?.role === "Instructor" && "hidden"
+          }   md:mr-5 flex-col justify-center items-center gap-1`}
+        >
           <div
             onClick={(e) => {
               e.stopPropagation();
@@ -192,7 +198,9 @@ const ExploreCoursesCard = ({ course }) => {
             }}
             className={`text-[1.1rem] ${
               user?.Courses?.includes(course._id) ? "hidden" : null
-            } hover:text-white text-white/30 ${user?.role==="Instructor"&&"hidden"} box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full`}
+            } hover:text-white text-white/30 ${
+              user?.role === "Instructor" && "hidden"
+            } box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full`}
           >
             {user?.Cart?.includes(course._id) ? "Go to Cart" : "Add to Cart"}
           </div>

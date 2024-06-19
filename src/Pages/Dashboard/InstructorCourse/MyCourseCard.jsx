@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 import { FaAngleDown } from "react-icons/fa6";
 import { CaluculateDuration } from "../../../components/core/auth/CaluculateDuration";
 import ConfirmModal from "../ConfirmModal";
-import { deleteInstructorCourse } from "../../../APIs/Authapi";
+import { deleteInstructorCourse } from "../../../APIs/mainAPI";
 
 const MyCourseCard = ({ course }) => {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
@@ -35,8 +35,7 @@ const MyCourseCard = ({ course }) => {
     const controller = new AbortController();
     const signal = controller.signal;
     try {
- await deleteInstructorCourse(dispatch,{courseId:course._id});
-      
+      await deleteInstructorCourse(dispatch, { courseId: course._id });
     } catch (error) {
       console.log(error);
     } finally {

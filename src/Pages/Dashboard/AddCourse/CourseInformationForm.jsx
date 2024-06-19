@@ -10,7 +10,7 @@ import {
   addCourseDetails,
   editCourseDetails,
   updateCourse,
-} from "../../../APIs/Authapi";
+} from "../../../APIs/mainAPI";
 import Upload from "./Upload";
 import { motion } from "framer-motion";
 import { decryptData } from "../../../components/core/auth/crypto";
@@ -36,7 +36,7 @@ const CourseInformationForm = () => {
         const response = await axios.get(
           `${BASE_URL}/api/beta/course/getAllCatagory`
         );
-        const decryptAllCategory=decryptData(response.data.allCatagory)
+        const decryptAllCategory = decryptData(response.data.allCatagory);
         setCourseCategories(decryptAllCategory);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -245,8 +245,7 @@ const CourseInformationForm = () => {
               )}
             </div>
             {/* Course Category */}
-            
-           
+
             {/* Benefits of the course */}
             <div className="flex flex-col space-y-1">
               <label

@@ -1,31 +1,34 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { getAllCourse, getCartDetails, getCourseDetail } from "../../../APIs/Authapi";
+import {
+  getAllCourse,
+  getCartDetails,
+  getCourseDetail,
+} from "../../../APIs/mainAPI";
 import WishlistCard from "./WishlistCard";
 import { cardAction } from "../../../store/cardSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {encryptData} from "./../../../components/core/auth/crypto" 
+import { encryptData } from "./../../../components/core/auth/crypto";
 import { courseAction } from "../../../store/courseSlice";
 import toast from "react-hot-toast";
 const Wishlist = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.profile);
   const { wishlist } = useSelector((store) => store.card);
-  const {user:data} =  useSelector((store) => store.profile);
+  const { user: data } = useSelector((store) => store.profile);
   const [Wishlist, setWishlist] = useState(wishlist);
   useEffect(() => {
-    const controller=new AbortController();
-    const signal=controller.signal;
+    const controller = new AbortController();
+    const signal = controller.signal;
     const fetchData = async () => {
       try {
-       
         if (data && data.Cart && data.Cart.length > 0) {
           const cartData = await getCartDetails(signal);
           const courseData = await getAllCourse(signal);
-          const cartText=encryptData(cartData);
-          const courseText=encryptData(courseData);
+          const cartText = encryptData(cartData);
+          const courseText = encryptData(courseData);
           localStorage.setItem(import.meta.env.VITE_CART_D, cartText);
-          localStorage.setItem(import.meta.env.VITE_ALL_C,courseText);
+          localStorage.setItem(import.meta.env.VITE_ALL_C, courseText);
           dispatch(cardAction.setWishlist(cartData));
           dispatch(courseAction.setExploreAllCourses(courseData));
         } else {
@@ -37,16 +40,15 @@ const Wishlist = () => {
           toast.error("Unable to fetch wishlist courses");
         }
       }
-      
     };
 
-    if (wishlist===null ||wishlist?.length!==user?.Cart?.length) {
+    if (wishlist === null || wishlist?.length !== user?.Cart?.length) {
       fetchData();
     }
-    return ()=>{
+    return () => {
       controller.abort();
-    }
-  }, [user?.Cart?.length ,user]);
+    };
+  }, [user?.Cart?.length, user]);
 
   // useEffect(() => {
   //   setWishlist(wishlist);
@@ -67,7 +69,9 @@ const Wishlist = () => {
         <span className="text-yellow-500">Wishlist</span>
       </div>
 
-      <h1 className="text-3xl mb-3 w-full whitespace-nowrap ">My Wishlist <span>({wishlist?.length}</span>)</h1>
+      <h1 className="text-3xl mb-3 w-full whitespace-nowrap ">
+        My Wishlist <span>({wishlist?.length}</span>)
+      </h1>
       <div className="overflow-auto  pb-[12rem]  h-[75vh] ">
         {!wishlist ? (
           <div>
@@ -75,7 +79,7 @@ const Wishlist = () => {
           </div>
         ) : wishlist.length ? (
           wishlist.map((course, index) => (
-            <WishlistCard course={course} key={index}  />
+            <WishlistCard course={course} key={index} />
           ))
         ) : (
           <p className="relative text-center mr-3 top-1/3 sm:top-1/2 sm:left-[35%] text-2xl font-semibold sm:w-fit text-white/40">

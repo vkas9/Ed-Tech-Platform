@@ -1,14 +1,16 @@
 import { motion } from "framer-motion";
 import MyCourseCard from "./MyCourseCard";
 import { useEffect } from "react";
-import { getAllInstructorCourses } from "../../../APIs/Authapi";
+import { getAllInstructorCourses } from "../../../APIs/mainAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { courseAction } from "../../../store/courseSlice";
 import { encryptData } from "../../../components/core/auth/crypto";
 
 const MyCourses = () => {
   const dispatch = useDispatch();
-  const { allInstructoreCourses, creatingCourse } = useSelector((store) => store.course);
+  const { allInstructoreCourses, creatingCourse } = useSelector(
+    (store) => store.course
+  );
   const { user: data } = useSelector((store) => store.profile);
   useEffect(() => {
     if (!data || data.role !== "Instructor") return; // Exit early if not an instructor or no user data
@@ -23,7 +25,7 @@ const MyCourses = () => {
           dispatch(courseAction.setIC(courseData));
         }
       } catch (error) {
-        if (error.name !== 'AbortError') {
+        if (error.name !== "AbortError") {
           console.log("Unable to fetch enrolled courses");
         }
       }
@@ -55,7 +57,10 @@ const MyCourses = () => {
       </div>
 
       <h1 className="text-3xl mb-3">
-        My Courses{allInstructoreCourses && <span className="ml-2">({allInstructoreCourses.length})</span>}
+        My Courses
+        {allInstructoreCourses && (
+          <span className="ml-2">({allInstructoreCourses.length})</span>
+        )}
       </h1>
       <div className="overflow-auto pb-[8rem] max-h-[75vh]">
         {!allInstructoreCourses ? (

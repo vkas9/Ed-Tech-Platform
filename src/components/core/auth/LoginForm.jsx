@@ -2,7 +2,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../../APIs/Authapi";
+import { login } from "../../../APIs/mainAPI";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
@@ -11,7 +11,6 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -43,41 +42,45 @@ const LoginForm = () => {
       </h1>
       <Formik
         initialValues={{ email: "", password: "" }}
-        validationSchema={validationSchema} 
-        onSubmit={ handleSubmit}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
       >
         <Form className="mt-8 w-full backdrop-blur-sm px-3 max-w-[30rem] ">
           <div className="flex flex-col gap-2">
             <div>
-
-           
-            <Field
-              
-              className="outline-offset-0 bg-white/10 outline-none p-3 w-full rounded-md font-semibold text-xl sm:text-2xl"
-              placeholder="Enter email address"
-              name="email"
-              type="email"
-            />
-            <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
+              <Field
+                className="outline-offset-0 bg-white/10 outline-none p-3 w-full rounded-md font-semibold text-xl sm:text-2xl"
+                placeholder="Enter email address"
+                name="email"
+                type="email"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="text-red-500 text-sm"
+              />
             </div>
             <div>
-
-          
-            <Field
-              
-              className="bg-white/10 p-3 outline-offset-0 w-full outline-none rounded-md text-xl sm:text-2xl font-semibold"
-              placeholder="Enter password"
-              name="password"
-              type="password"
-            />
-            <ErrorMessage name="password" component="div" className="text-red-500 text-sm" />
+              <Field
+                className="bg-white/10 p-3 outline-offset-0 w-full outline-none rounded-md text-xl sm:text-2xl font-semibold"
+                placeholder="Enter password"
+                name="password"
+                type="password"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="text-red-500 text-sm"
+              />
             </div>
           </div>
-          <div
-            
-            className="block mt-1 font-semibold text-end"
-          >
-            <Link to={"/reset-password"} className=" text-white/50 hover:text-white">Forgot Password?</Link>
+          <div className="block mt-1 font-semibold text-end">
+            <Link
+              to={"/reset-password"}
+              className=" text-white/50 hover:text-white"
+            >
+              Forgot Password?
+            </Link>
           </div>
           <button
             disabled={loading}
