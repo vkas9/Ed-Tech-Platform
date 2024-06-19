@@ -1,13 +1,13 @@
 const User = require("../models/User");
 const OTP = require("../models/OTP");
 const bcrypt = require("bcrypt");
-
 const optgenerator = require("otp-generator");
 const Profile = require("../models/Profile");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 require("dotenv").config();
 const { encryptData } = require("../utils/crypto-server");
+const feedbackMail = require("../utils/feedbackMail");
 //sign up handler
 exports.signup = async (req, res) => {
   try {
@@ -446,3 +446,17 @@ exports.userLogOut = async (_, res) => {
     });
   }
 };
+
+
+exports.formSubmit = async   (req, res) => {
+  try {
+    const { formData } = req.body;
+    await feedbackMail(formData)
+  
+      res.status(200).json({ message: 'Feedback sent successfully' });
+   
+  } catch (error) {
+    console.log("error",error)
+    res.status(500).json({ success:false,message: 'Problem with Sending Feedback' });
+  }
+}
