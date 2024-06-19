@@ -57,7 +57,7 @@ const userModel = new mongoose.Schema({
     }],
     role:{
         type:String,
-        enum:["Admin","Student","Instructor"]
+        enum:["Student","Instructor"]
     },
     Cart:[{
         type:mongoose.Schema.Types.ObjectId,

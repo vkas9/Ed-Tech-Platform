@@ -78,24 +78,3 @@ exports.isInstructor = async (req, res, next) => {
     });
   }
 };
-
-//isAdmin
-exports.isAdmin = async (req, res, next) => {
-  try {
-    const { role } = req.user;
-    console.log("role", role);
-
-    if (role !== "Admin") {
-      return res.status(400).json({
-        success: false,
-        message: "This is protected route for Admin",
-      });
-    }
-    next();
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Something went wrong while checking Admin route",
-    });
-  }
-};

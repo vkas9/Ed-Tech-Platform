@@ -56,7 +56,7 @@ exports.signup = async (req, res) => {
       return res.status(400).json({
         success: false,
 
-        message: "OTP not Matching",
+        message: "Incorrect OTP",
       });
     }
     const hashedPassword = await bcrypt.hash(Password, 10);
