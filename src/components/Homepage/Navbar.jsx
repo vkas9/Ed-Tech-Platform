@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import image from "../../assets/master.png";
 import { navigation } from "../../constants";
 import Button from "./Button";
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
@@ -32,7 +33,7 @@ const Navbar = () => {
     axios
       .get(`${BASE_URL}/api/beta/course/getAllCatagory`)
       .then((res) => {
-        const decryptAllCategory=decryptData(res.data.allCatagory)
+        const decryptAllCategory = decryptData(res.data.allCatagory);
         setCatagory(decryptAllCategory);
       })
       .catch((error) => {
@@ -52,13 +53,13 @@ const Navbar = () => {
   };
 
   const handleClick2 = () => {
-    if(user&&user.role==="Instructor"){
+    if (user && user.role === "Instructor") {
       // toast("To purchase these courses, you must switch to Student mode", {
       //   icon: '',
       // });
-      navigate("/dashboard/courses/cloud-computing")
+      navigate("/dashboard/courses/cloud-computing");
 
-      openNavigation&&toggle()
+      openNavigation && toggle();
     }
     if (!name) {
       setName("dfd");
@@ -108,7 +109,18 @@ const Navbar = () => {
           onClick={handleClick}
           className="block w-[12rem ] flex items-center  xl:mr-8 "
         >
-          <img src={image} className="lg:w-[200px]  w-[140px] " alt="MASTER" />
+          <ScrollLink
+                        to="home-section"
+                        smooth={true}
+                        duration={500}
+                        onClick={() => {
+                          openNavigation && toggle();
+                          navigate("/");
+                        }}
+                      >
+                        <img src={image} className="lg:w-[200px]  w-[140px] " alt="MASTER" />
+                      </ScrollLink>
+          
         </Link>
         {/* top-[70px] */}
         <nav
@@ -124,13 +136,13 @@ const Navbar = () => {
                 {item.title === "Learn" ? (
                   <div
                     key={index}
-                    onMouseEnter={()=>{
-                      setName("sfsdaf")
+                    onMouseEnter={() => {
+                      setName("sfsdaf");
                     }}
                     onMouseLeave={() => {
                       setName(null);
                     }}
-                   // 
+                    //
                     onClick={handleClick2}
                     className={`flex items-center gap-2  relative font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
@@ -138,9 +150,17 @@ const Navbar = () => {
                       item.onlyMobile ? "lg:hidden" : ""
                     } px-2 py-6 md:py-4  lg:text-xl lg:font-bold group lg:leading-5 lg:hover:text-white xl:px-6  `}
                   >
-                    <p className="select-none">{user &&user.role=="Instructor"?"All Courses":item.title}</p>
-                    {user &&user.role=="Instructor"?null:<IoIosArrowDown />}
-                   {user &&user.role==="Instructor"?null :(name ? <SubTitle catagory={catagory} /> : null)}
+                    <p className="select-none">
+                      {user && user.role == "Instructor"
+                        ? "All Courses"
+                        : item.title}
+                    </p>
+                    {user && user.role == "Instructor" ? null : (
+                      <IoIosArrowDown />
+                    )}
+                    {user && user.role === "Instructor" ? null : name ? (
+                      <SubTitle catagory={catagory} />
+                    ) : null}
                   </div>
                 ) : user ? (
                   <Link
@@ -149,7 +169,11 @@ const Navbar = () => {
                     onClick={handleClick}
                     className={`block relative  font-bold text-2xl uppercase ${
                       Route(item.url) ? "text-white" : "text-gray-500"
-                    }   transition-colors lg:hover:cursor-pointer ${user?.role==="Instructor" &&item.title==="Pricing"&&"hidden"} ${
+                    }   transition-colors lg:hover:cursor-pointer ${
+                      user?.role === "Instructor" &&
+                      item.title === "Pricing" &&
+                      "hidden"
+                    } ${
                       item.title === "New Account" || item.title === "Sign in"
                         ? "hidden"
                         : ""
@@ -172,7 +196,21 @@ const Navbar = () => {
                       item.onlyMobile ? "lg:hidden" : ""
                     } px-2 py-6 md:py-4  lg:text-xl lg:font-bold  lg:leading-5 lg:hover:text-white xl:px-6`}
                   >
-                    {item.title}
+                    {item.title === "Pricing" ? (
+                      <ScrollLink
+                        to="pricing-section"
+                        smooth={true}
+                        duration={500}
+                        onClick={() => {
+                          openNavigation && toggle();
+                          navigate("/");
+                        }}
+                      >
+                        Pricing
+                      </ScrollLink>
+                    ) : (
+                      item.title
+                    )}
                   </Link>
                 )}
               </div>
@@ -209,6 +247,7 @@ const Navbar = () => {
               </p>
             )
           )}
+
           {token === null ? (
             <div className="flex gap-4 font-bold items-center py-3 ">
               <Button

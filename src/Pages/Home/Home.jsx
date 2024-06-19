@@ -1,6 +1,6 @@
 
 import { DiRedis } from "react-icons/di";
-
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import { IoLogoNodejs } from "react-icons/io5";
 import { FaReact } from "react-icons/fa6";
 import { SiTailwindcss } from "react-icons/si";
@@ -59,7 +59,7 @@ const Home = () => {
     document.title="MASTER - an EdTech Platform"
   },[])
   return (
-    <div className=" overflow-hidden  ">
+    <div id="home-section" className=" overflow-hidden  ">
       <Hero />
       <div className=" relative flex text-center  flex-col gap-[4rem] mt-[8rem] lg:mt-[2em] items-center">
         <p className="tracking-[5px] font-sans uppercase bg-gradient-to-br   md:bg-gradient-to-b from-white via-white to-black/40 bg-clip-text text-transparent select-none font-bold text-lg">
@@ -81,8 +81,9 @@ const Home = () => {
       </div>
       <CodeBlocks />
       <SkillSection/>
-      <Pricing/>
+      <Pricing />
       <AboutUs/>
+     
       <Footer />
     </div>
   );
