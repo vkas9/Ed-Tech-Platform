@@ -10,7 +10,13 @@ import { fetchEnrollData } from "../Pages/Dashboard/EnrolledCourse/fetchEnrollDa
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const login = (data, navigate) => {
+  
   return async (dispatch) => {
+    if (!navigator.onLine) {
+      toast.error("No internet connection");
+      throw new Error("No internet connection");
+      
+    }
     const toastId = toast.loading("Logging in...");
     dispatch(authAction.setLoading(true));
     let response;
@@ -46,7 +52,6 @@ export const login = (data, navigate) => {
 
       navigate("/dashboard/my-profile");
     } catch (error) {
-      console.log("Login api error", error.response.data.message);
       if (error.response.data.message) {
         toast.error(error.response.data.message);
       } else {
@@ -60,6 +65,10 @@ export const login = (data, navigate) => {
 };
 
 export const signup = (data, navigate) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   return async (dispatch) => {
     const toastId = toast.loading("Signing up...");
     dispatch(authAction.setLoading(true));
@@ -91,6 +100,10 @@ export const signup = (data, navigate) => {
   };
 };
 export const opt = (data, navigate) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   return async (dispatch) => {
     const toastId = toast.loading("Loading");
     dispatch(authAction.setLoading(true));
@@ -121,6 +134,10 @@ export const opt = (data, navigate) => {
   };
 };
 export const forgotPasswordOtp = async (data, navigate) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading");
   let response;
   try {
@@ -147,6 +164,10 @@ export const forgotPasswordOtp = async (data, navigate) => {
 };
 
 export const verifyForgotOTP = async (data, navigate) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading...");
 
   let response;
@@ -170,6 +191,10 @@ export const verifyForgotOTP = async (data, navigate) => {
   }
 };
 export const logout = (navigate) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   return async (dispatch) => {
     const toastId = toast.loading("Loading");
     try {
@@ -207,6 +232,10 @@ export const logout = (navigate) => {
 };
 
 export const changePasswordAuth = (data, navigate) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   return async (dispatch) => {
     const toastId = toast.loading("Changing...");
     try {
@@ -236,6 +265,10 @@ export const changePasswordAuth = (data, navigate) => {
   };
 };
 export const resetPasswordOut = async (data, navigate) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Changing...");
   try {
     const response = await axios.post(
@@ -259,6 +292,10 @@ export const resetPasswordOut = async (data, navigate) => {
   }
 };
 export const getCourseDetail = async (courseId, signal) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading");
   let response;
 
@@ -285,6 +322,10 @@ export const getCourseDetail = async (courseId, signal) => {
 };
 
 export const addCourseDetails = async (formData) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading");
 
   try {
@@ -308,6 +349,10 @@ export const addCourseDetails = async (formData) => {
   }
 };
 export const createSection = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading");
   try {
     const response = await axios.post(
@@ -333,6 +378,10 @@ export const createSection = async (data) => {
 };
 
 export const deleteSection = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Deleting");
   try {
     // console.log("Data", data);
@@ -355,6 +404,10 @@ export const deleteSection = async (data) => {
 };
 
 export const updateCartDetails = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Adding");
   try {
     // console.log("Data", data);
@@ -382,6 +435,10 @@ export const updateCartDetails = async (data) => {
   }
 };
 export const deleteCartDetails = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Deleting");
   try {
     const response = await axios.post(
@@ -406,6 +463,10 @@ export const deleteCartDetails = async (data) => {
   }
 };
 export const getCartDetails = async (signal) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Fetching...");
   try {
     const response = await axios.get(
@@ -417,10 +478,9 @@ export const getCartDetails = async (signal) => {
     );
     const decryptUpdatedCart= decryptData(response.data.uCart)
     const updatedWishlist = decryptUpdatedCart.Cart;
-    console.log("updatedWishlist",updatedWishlist)
     return updatedWishlist.reverse();
   } catch (error) {
-    console.error("Error fetching cart", error);
+   
     toast.error(error.response.data.message);
   } finally {
     toast.dismiss(toastId);
@@ -428,6 +488,10 @@ export const getCartDetails = async (signal) => {
 };
 
 export const deleteSubSection = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Deleting");
   try {
     // console.log("Data", data);
@@ -450,6 +514,10 @@ export const deleteSubSection = async (data) => {
   }
 };
 export const createSubSection = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Uploading...");
   try {
     // console.log("Data", data);
@@ -472,6 +540,10 @@ export const createSubSection = async (data) => {
   }
 };
 export const updateSubSection = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Uploading...");
   try {
     // console.log("Data", data);
@@ -495,6 +567,10 @@ export const updateSubSection = async (data) => {
 };
 
 export const updateSection = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading");
   try {
     // console.log("Data", data);
@@ -517,6 +593,10 @@ export const updateSection = async (data) => {
   }
 };
 export const editCourseDetails = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading");
   try {
     const response = await axios.post(
@@ -537,6 +617,10 @@ export const editCourseDetails = async (data) => {
   }
 };
 export const updateCourse = async (data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading");
   try {
     // console.log("Data", data);
@@ -559,6 +643,10 @@ export const updateCourse = async (data) => {
   }
 };
 export const getAllInstructorCourses = async (signal) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading");
   try {
     const response = await axios.get(
@@ -587,6 +675,10 @@ export const getAllInstructorCourses = async (signal) => {
 
 
 export const getAllCourse = async (signal) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading");
   try {
     const response = await axios.get(
@@ -611,6 +703,10 @@ export const getAllCourse = async (signal) => {
   }
 };
 export const updateProfile = async (dispatch, data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Saving");
   try {
     const response = await axios.post(
@@ -635,6 +731,10 @@ export const updateProfile = async (dispatch, data) => {
 };
 
 export const updateDisplayProfile = async (dispatch, data) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Changing");
   try {
     const response = await axios.post(
@@ -657,6 +757,10 @@ export const updateDisplayProfile = async (dispatch, data) => {
 };
 
 export const deleteEnrolledCourse = async (data, signal) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Loading");
   try {
     const response = await axios.post(
@@ -693,6 +797,7 @@ export const deleteEnrolledCourse = async (data, signal) => {
 
 
 export const PaymentComponent = async (data) => {
+  
   if (!navigator.onLine) {
     toast.error("No internet connection");
     throw new Error("No internet connection");
@@ -752,6 +857,10 @@ export const PaymentComponent = async (data) => {
 
 
 export const enrollCourse = async (dispatch, data,enrollData=null,navigate) => {
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Enrolling");
   try {
     const response = await axios.post(
@@ -782,6 +891,10 @@ export const enrollCourse = async (dispatch, data,enrollData=null,navigate) => {
   }
 };
 export const deleteInstructorCourse=async(dispatch,data)=>{
+  if (!navigator.onLine) {
+    toast.error("No internet connection");
+    throw new Error("No internet connection");
+  }
   const toastId = toast.loading("Deleting...");
   let response;
   try {
@@ -805,5 +918,37 @@ export const deleteInstructorCourse=async(dispatch,data)=>{
     toast.error(error.response.data.message);
   } finally {
     toast.dismiss(toastId);
+  }
+}
+
+export const updatePurchaseHistory=async(data)=>{
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/api/beta/profile/updatePurchaseHistory`,data,
+      {
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const getPurchaseHistory=async(dispatch)=>{
+  const toastId = toast.loading("loading...");
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/api/beta/profile/getPurchaseHistory`,
+      {
+        withCredentials: true,
+      }
+    );
+    localStorage.setItem(import.meta.env.VITE_PURCHASE_HISTORY,response.data.purhc);
+    const text=decryptData(response.data.purhc);
+    dispatch(courseAction.setPurchaseHistory(text));
+    
+  } catch (error) {
+    console.log(error)
+  }finally{
+    toast.dismiss(toastId)
   }
 }

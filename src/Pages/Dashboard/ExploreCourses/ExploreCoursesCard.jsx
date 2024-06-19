@@ -9,7 +9,9 @@ import {
   PaymentComponent,
   enrollCourse,
   getCartDetails,
+  getPurchaseHistory,
   updateCartDetails,
+  updatePurchaseHistory,
 } from "../../../APIs/Authapi";
 import { useNavigate } from "react-router-dom";
 import { profileAction } from "../../../store/profileSlice";
@@ -74,6 +76,8 @@ const ExploreCoursesCard = ({ course }) => {
         });
         if (paymentResponse.status_code === 200) {
           await handleEnrollCourse();
+          await updatePurchaseHistory({courseId:course._id})
+          await getPurchaseHistory(dispatch);
         }
       } else {
         navigate(`/dashboard/courses/${uuidv4()}/${course._id}`);

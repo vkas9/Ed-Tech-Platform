@@ -12,6 +12,9 @@ const initialState = {
   exploreAllCourses:localStorage.getItem(import.meta.env.VITE_ALL_C)
   ? decryptData(localStorage.getItem(import.meta.env.VITE_ALL_C))
   : null,
+  allPurchaseHistory:localStorage.getItem(import.meta.env.VITE_PURCHASE_HISTORY)
+  ? decryptData(localStorage.getItem(import.meta.env.VITE_PURCHASE_HISTORY))
+  : null
 };
 const courseSlice = createSlice({
   name: "course",
@@ -31,7 +34,8 @@ const courseSlice = createSlice({
       state.editCourse = false;
       state.course = {};
       state.allInstructoreCourses=null,
-      state.exploreAllCourses=null
+      state.exploreAllCourses=null,
+      state.allPurchaseHistory=null
      
     },setIC(state, action) {
       state.allInstructoreCourses = action.payload;
@@ -41,6 +45,9 @@ const courseSlice = createSlice({
     },
     setExploreAllCourses(state,action){
       state.exploreAllCourses=action.payload;
+    },
+    setPurchaseHistory(state,action){
+      state.allPurchaseHistory=action.payload;
     }
   },
 });

@@ -62,6 +62,17 @@ const userModel = new mongoose.Schema({
     Cart:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Course"
+    }],
+    purchaseHistory:[{
+        courseId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Course",
+            required: true
+        },
+        purchasedAt: {
+            type: Date,
+            default: Date.now
+        }
     }]
     
 },{timestamps:true})

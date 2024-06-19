@@ -40,17 +40,17 @@ const Wishlist = () => {
       
     };
 
-    if (!Wishlist ||wishlist?.length!==user?.Cart?.length) {
+    if (wishlist===null ||wishlist?.length!==user?.Cart?.length) {
       fetchData();
     }
     return ()=>{
       controller.abort();
     }
-  }, [Wishlist, dispatch,user]);
+  }, [user?.Cart?.length ,user]);
 
-  useEffect(() => {
-    setWishlist(wishlist);
-  }, [wishlist]);
+  // useEffect(() => {
+  //   setWishlist(wishlist);
+  // }, [wishlist]);
 
   return (
     <motion.div
@@ -69,12 +69,12 @@ const Wishlist = () => {
 
       <h1 className="text-3xl mb-3 w-full whitespace-nowrap ">My Wishlist <span>({wishlist?.length}</span>)</h1>
       <div className="overflow-auto  pb-[12rem]  h-[75vh] ">
-        {!Wishlist ? (
+        {!wishlist ? (
           <div>
             <p>Loading...</p>
           </div>
-        ) : Wishlist.length ? (
-          Wishlist.map((course, index) => (
+        ) : wishlist.length ? (
+          wishlist.map((course, index) => (
             <WishlistCard course={course} key={index}  />
           ))
         ) : (

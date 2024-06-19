@@ -3,6 +3,7 @@ const profile = require("../models/Profile");
 const Courses = require("../models/Courses");
 const { UploadFile } = require("../utils/fileUploader");
 const fs = require('fs/promises');
+const mongoose=require("mongoose")
 const sharp=require("sharp");
 const path=require('path');
 const { encryptData } = require("../utils/crypto-server");
@@ -243,3 +244,61 @@ exports.updateDisplayProfile = async (req, res) => {
     });
   }
 };
+
+exports.updatePurchaseHistory=async(req,res)=>{
+  try {
+    const {courseId}=req.body;
+    const userId=req.user.id;
+    
+    // const objectId = new mongoose.Types.ObjectId(courseId)
+    // console.log("objectId-:>",objectId)
+    const purchaseItem = {
+      courseId: courseId,
+      purchasedAt: new Date()
+    };
+
+    const usr=await user.findByIdAndUpdate(userId,{$push:{purchaseHistory:purchaseItem}},{new:true});
+    console.log("usr",usr)
+    res.status(200).json({
+      success:true,
+      message:"updated"
+    })
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      success:false,
+      message:"not updated"
+    })
+  }
+}
+exports.getPurchaseHistory=async(req,res)=>{
+  try {
+    const userId = req.user.id;
+    const userDetails = await user.findById(userId)
+  .select("-Password -refreshToken")
+  .populate({
+    path: "purchaseHistory.courseId",
+    populate: [
+      { path: "Instructor" },
+      { 
+        path: "Section",
+        populate: { path: "subSection" }
+      }
+    ]
+  })
+  .exec();
+    const encryptUserDetails=encryptData(userDetails)
+    res.status(200).json({
+      success:true,
+      purhc:encryptUserDetails
+
+    })
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      success:false
+    })
+  }
+}

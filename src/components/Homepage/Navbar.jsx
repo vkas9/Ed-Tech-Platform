@@ -17,6 +17,7 @@ import { logout } from "../../APIs/Authapi";
 import ConfirmModal from "../../Pages/Dashboard/ConfirmModal";
 import { profileAction } from "../../store/profileSlice";
 import { decryptData } from "../core/auth/crypto";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [name, setName] = useState(null);
@@ -52,6 +53,9 @@ const Navbar = () => {
 
   const handleClick2 = () => {
     if(user&&user.role==="Instructor"){
+      // toast("To purchase these courses, you must switch to Student mode", {
+      //   icon: '',
+      // });
       navigate("/dashboard/courses/cloud-computing")
 
       openNavigation&&toggle()
