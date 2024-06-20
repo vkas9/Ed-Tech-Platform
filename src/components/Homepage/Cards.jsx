@@ -7,10 +7,10 @@ const Cards=({head})=>{
         <div className="relative bg-white/[.07] backdrop-blur-md overflow-visible border-solid border border-white/10 min-h-[17rem] outline-none max-h-[40rem] max-w-[30rem] gap-6 rounded-2xl px-4 mx-3 py-2  flex flex-col justify-between">
           <div className="flex  flex-col  gap-6 ">
             <h3 className="  overflow-hidden text-[1.7rem] md:text-[2.5rem] font-bold ">
-              {head}
+              {head.title}
             </h3>
             <p className=" text-gray-400 text-md font-semibold ">
-            Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you.
+           {head.description}
             </p>
           </div>
           <div className="flex mb-2    items-center justify-between ">

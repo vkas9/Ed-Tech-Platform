@@ -16,13 +16,20 @@ const Courses = () => {
   const { exploreAllCourses } = useSelector((store) => store.course);
   const { user } = useSelector((store) => store.profile);
   const [course, setCourses] = useState(exploreAllCourses);
+
+
+
+
 useEffect(()=>{
-  if(user?.role!=="Instructor")
-  toast('You can buy these courses without spending real money', {
-    style: {
-      textAlign: 'center'
-    }
-  });
+  if(user&&user.role!=="Instructor"){
+    toast('You can buy these courses without spending real money', {
+      style: {
+        textAlign: 'center'
+  }})
+  
+  }
+  
+
 },[])
   useEffect(() => {
     if (!token) {
