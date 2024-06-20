@@ -19,7 +19,8 @@ export default {
         "tsr":"370px",
         "cn":"580px",
         "ge":"245px",
-        "ow":"500px"
+        "ow":"500px",
+        "bn":"320px",
         
       },
     },
