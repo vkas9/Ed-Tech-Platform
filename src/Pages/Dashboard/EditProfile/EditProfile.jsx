@@ -147,7 +147,7 @@ const EditProfile = () => {
                     type="submit"
                     className={`mt-2 ${
                       loading ? "bg-yellow-600" : "bg-yellow-400"
-                    } md:hover:bg-yellow-500 active:bg-yellow-500 transition-all duration-200  p-1 rounded-lg w-[130px] text-black text-2xl`}
+                    } md:hover:bg-yellow-500 font-bold active:bg-yellow-500 text-yellow-950 transition-all duration-200  p-1 rounded-lg w-[130px] text-2xl`}
                   >
                     {loading?"Saving...":"Save"}
                   </button>
