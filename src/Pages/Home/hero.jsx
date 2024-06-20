@@ -46,11 +46,11 @@ const hero = () => {
             </div>
           </div>
         </Link>
-        <div className="flex  select-none flex-col mx-auto sm:flex-row gap-5 ">
+        <div className="flex py-1 select-none flex-col mx-auto sm:flex-row gap-5 ">
           <Link
             to={"/signup/i/student"}
             className={
-              " outline-none rounded-md text-[1.2rem]  font-semibold  hover-none text-black md:hover:bg-yellow-400 py-2 bg-yellow-500  "
+              " outline-none rounded-md text-[1.2rem]  font-semibold  hover-none text-black md:hover:bg-yellow-400 py-2 sm:px-3 bg-yellow-500  "
             }
           >
             Learn More
@@ -58,7 +58,7 @@ const hero = () => {
           <Link
             to={"/dashboard/courses/cloud-computing"}
             className={
-              " outline-none text-[1.2rem] font-semibold rounded-md bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-2 px-2"
+              " outline-none text-[1.2rem] font-semibold rounded-md bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-2 px-2 sm:px-3"
             }
           >
             Explore Courses
