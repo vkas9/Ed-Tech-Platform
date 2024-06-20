@@ -20,11 +20,12 @@ const CodeBlocks = () => {
   const cardHeadings = ["Web Development", "Machine Learning", "MERN Stack", "Cloud Computing"];
   return (
     <div className=" relative mx-auto      ">
-      <div className="tracking-[3px] max-w-[50rem] mx-auto  font-sans uppercase  bg-gradient-to-br   md:bg-gradient-to-b from-white via-white to-black/40 bg-clip-text text-transparent select-none font-bold text-sm lg:text-lg mb-[5rem] lg:mb-[6rem] mt-[5rem]">
-        <h2 className="text-center ">
-          Unlock your coding potential with our online courses
-        </h2>
-      </div>
+     <div className={`tracking-[3px] max-w-[50rem] mx-auto font-sans uppercase  ${window.innerWidth >= 590 ? 'bg-gradient-to-b from-white via-white to-black/40 bg-clip-text text-transparent' : 'text-white'} select-none font-bold text-sm lg:text-lg mb-[5rem] lg:mb-[6rem] mt-[5rem]`}>
+          <h2 className="text-center">
+            Unlock your coding potential with our online courses
+          </h2>
+        </div>
+
       <div className=" flex flex-wrap max-w-[1200px]  gap-10 justify-center mx-auto ">
       {
         cardHeadings.map((value,index)=>(

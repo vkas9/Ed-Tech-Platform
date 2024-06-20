@@ -50,7 +50,7 @@ const hero = () => {
           <Link
             to={"/signup/i/student"}
             className={
-              " outline-none rounded-md text-[1.5rem]  font-semibold  hover-none text-black md:hover:bg-yellow-400 py-3 px-4 bg-yellow-500  "
+              " outline-none rounded-md text-[1.2rem]  font-semibold  hover-none text-black md:hover:bg-yellow-400 py-2 bg-yellow-500  "
             }
           >
             Learn More
@@ -58,7 +58,7 @@ const hero = () => {
           <Link
             to={"/dashboard/courses/cloud-computing"}
             className={
-              " outline-none text-[1.5rem] font-semibold rounded-md bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-3 px-4"
+              " outline-none text-[1.2rem] font-semibold rounded-md bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-2 px-2"
             }
           >
             Explore Courses
