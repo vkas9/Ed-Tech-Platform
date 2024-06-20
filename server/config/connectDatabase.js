@@ -7,7 +7,7 @@ exports.dbConnect = () => {
       console.log("Successfully Connected to DB");
     })
     .catch((error) => {
-      console.log("Can't Connect to DB, Something went wrong");
+      console.log("Unable to connect to the database. Please try again later.");
       console.log(error);
       process.exit(1);
     });

@@ -8,7 +8,6 @@ const sendMail = require("../utils/sendMail");
 require("dotenv").config();
 const { encryptData } = require("../utils/crypto-server");
 const feedbackMail = require("../utils/feedbackMail");
-//sign up handler
 exports.signup = async (req, res) => {
   try {
     const {
@@ -68,7 +67,6 @@ exports.signup = async (req, res) => {
       about: null,
       dateOfBirth: null,
     });
-    //creating entry in DB
 
     const userDB = await User.create({
       FirstName,
@@ -114,7 +112,6 @@ exports.getUserDetail = async (req, res) => {
     });
   }
 };
-//OTP handler
 
 exports.otp = async (req, res) => {
   try {
@@ -158,7 +155,6 @@ const generateAccessAndRefreshToken = async (userId) => {
   return { accessToken, refreshToken };
 };
 
-//log in
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;

@@ -13,9 +13,9 @@ const cors = require("cors");
 app.use(
   cors({
     origin: [
-      "https://master-ed-new.netlify.app",
-      "http://localhost:5173",
-      "https://ed-tech-platform-client.onrender.com","https://mv.vkas.me","https://test999.vkas.me"
+      process.env.NETHOST,
+      process.env.LOCALHOST,
+      process.env.RENDERHOST,process.env.MVHOST,process.env.TEST999
     ],
     credentials: true,
   })
@@ -41,14 +41,14 @@ dbConnect();
 const { ConnectToCloudinary } = require("./config/cloudinaryConnect");
 ConnectToCloudinary();
 
-app.use("/api/beta/auth", userRoute);
-app.use("/api/beta/course", courseRoute);
-app.use("/api/beta/payment",paymentRoute);
-app.use("/api/beta/profile", profileRoute);
 
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.use("/api/beta/auth", userRoute);
+app.use("/api/beta/course", courseRoute);
+app.use("/api/beta/payment",paymentRoute);
+app.use("/api/beta/profile", profileRoute);
 
 app.listen(PORT, () => {
   console.log(`Server Started at Port no. ${PORT}`);

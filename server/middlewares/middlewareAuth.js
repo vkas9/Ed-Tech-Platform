@@ -1,5 +1,3 @@
-//auth
-
 const user = require("../models/User");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -41,7 +39,7 @@ exports.auth = async (req, res, next) => {
     });
   }
 };
-//isStudent
+
 exports.isStudent = async (req, res, next) => {
   try {
     if (req.user.role !== "Student") {
@@ -59,7 +57,6 @@ exports.isStudent = async (req, res, next) => {
   }
 };
 
-//isInstructor
 exports.isInstructor = async (req, res, next) => {
   try {
     const { role } = req.user;
