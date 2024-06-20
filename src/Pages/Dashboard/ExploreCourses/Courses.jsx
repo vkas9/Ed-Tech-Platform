@@ -16,11 +16,16 @@ const Courses = () => {
   const { exploreAllCourses } = useSelector((store) => store.course);
   const { user } = useSelector((store) => store.profile);
   const [course, setCourses] = useState(exploreAllCourses);
-
+useEffect(()=>{
+  toast('You can buy these courses without spending real money', {
+    className:"text-center"
+  });
+},[])
   useEffect(() => {
     if (!token) {
       navigate("/login");
     } else {
+      
       const controller = new AbortController();
       const signal = controller.signal;
       const fetchData = async () => {
