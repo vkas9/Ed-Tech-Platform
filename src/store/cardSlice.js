@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {decryptData} from "./../components/core/auth/crypto"
+import { decryptData } from "./../components/core/auth/crypto";
+
 const initialState = {
   totalItems: localStorage.getItem("totalItems")
     ? JSON.parse(localStorage.getItem("totalItems"))
@@ -28,6 +29,7 @@ const cardSlice = createSlice({
     reset(state) {
       state.wishlist = null;
       state.enrolledCourse = null;
+      state.totalItems = 0;
     },
   },
 });

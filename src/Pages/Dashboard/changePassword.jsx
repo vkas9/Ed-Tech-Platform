@@ -79,9 +79,9 @@ const changePassword = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`mt-2 md:hover:bg-yellow-400 active:bg-yellow-400 ${
+            className={`mt-2 md:hover:bg-yellow-500 active:bg-yellow-500 ${
               loading ? "opacity-50 cursor-not-allowed" : " "
-            }  transition-all duration-200 bg-yellow-500 p-1 rounded-lg w-[130px] text-black text-2xl `}
+            }  transition-all duration-200 bg-yellow-400 p-1 rounded-lg w-[130px] text-black text-2xl `}
           >
             {loading ? "Changing..." : "Change"}
           </button>

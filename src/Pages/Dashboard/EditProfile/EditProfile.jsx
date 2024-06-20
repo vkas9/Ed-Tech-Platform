@@ -57,7 +57,7 @@ const EditProfile = () => {
           <div className="flex gap-2">
             <button
               onClick={() => setShow(!show)}
-              className="bg-white/10 hover:bg-white/20 text-xl w-[100px] font-bold text-white p-2 rounded-md"
+              className="bg-yellow-400 active:bg-yellow-500 transition-all duration-150 sm:hover:bg-yellow-500 text-xl w-[100px] font-bold text-yellow-950 p-2 rounded-md"
             >
               Change
             </button>
@@ -146,10 +146,10 @@ const EditProfile = () => {
                     disabled={loading}
                     type="submit"
                     className={`mt-2 ${
-                      loading ? "bg-yellow-600" : "bg-yellow-500"
-                    } md:hover:bg-yellow-400 active:bg-yellow-400 transition-all duration-200  p-1 rounded-lg w-[130px] text-black text-2xl`}
+                      loading ? "bg-yellow-600" : "bg-yellow-400"
+                    } md:hover:bg-yellow-500 active:bg-yellow-500 transition-all duration-200  p-1 rounded-lg w-[130px] text-black text-2xl`}
                   >
-                    Save
+                    {loading?"Saving...":"Save"}
                   </button>
                 </div>
               </Form>
