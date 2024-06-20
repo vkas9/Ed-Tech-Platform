@@ -15,7 +15,7 @@ import Wishlist from "./Pages/Dashboard/Wishlist/Wishlist";
 import PurchaseHistory from "./Pages/Dashboard/PurchaseHistory/PurchaseHistory";
 import Courses from "./Pages/Dashboard/ExploreCourses/Courses";
 import Settings from "./Pages/Dashboard/Settings";
-import Indexcourse from "./Pages/Dashboard/AddCourse/Indexcourse";
+import RootCreateCourse from "./Pages/Dashboard/CreateCourse/RootCreateCourse";
 import ViewCourse from "./Pages/Dashboard/EnrolledCourse/ViewCourse";
 import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 import ChangePassword from "./Pages/ForgotPassword/ResetPasswordOut";
@@ -26,7 +26,7 @@ import ContactUs from "./Pages/NavbarPages/ContactUs";
 import ViewInstructorCourse from "./Pages/Dashboard/InstructorCourse/ViewInstructorCourse";
 import OpenInstructor from "./components/core/auth/OpenInstructor";
 import MyCourses from "./Pages/Dashboard/InstructorCourse/MyCourses";
-
+import NotFound from "./components/core/Back/NotFound/NotFound";
 
 function App() {
   return (
@@ -40,16 +40,16 @@ function App() {
             <img src={github} alt="" width={43} />
           </a>
         </div>
-        <Toaster 
-        position="top-center"
-        toastOptions={{
-          style: {
-            borderRadius: '50px',
-            background: '#333',
-            color: '#fff'
-          },
-        }} 
-      />
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              borderRadius: "50px",
+              background: "#333",
+              color: "#fff",
+            },
+          }}
+        />
 
         <Router>
           <Navbar />
@@ -58,7 +58,7 @@ function App() {
               path="/"
               element={
                 <OpenInstructor>
-                  <Home/>
+                  <Home />
                 </OpenInstructor>
               }
             />
@@ -137,9 +137,10 @@ function App() {
               <Route path="purchase-history" element={<PurchaseHistory />} />
               <Route path="Courses/:expC" element={<Courses />} />
               <Route path="Settings" element={<Settings />} />
-              <Route path="create-course" element={<Indexcourse />} />
+              <Route path="create-course" element={<RootCreateCourse />} />
               <Route path="my-courses" element={<MyCourses />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
           {/* <Footer /> */}
         </Router>

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { FaCheck } from "react-icons/fa6";
 import CourseInformationForm from "./CourseInformationForm";
-import CourseBuilderForm from "./courseBuilder/CourseBuilderForm";
+import CourseCreatorForm from "./courseBuilder/CourseCreatorForm";
 import PublishCourse from "./PublishCourse/PublishCourse";
 
 const steps = [
@@ -11,7 +11,7 @@ const steps = [
   },
   {
     id: 2,
-    title: "Course Builder ‣",
+    title: "Course Creator ‣",
   },
   {
     id: 3,
@@ -19,7 +19,7 @@ const steps = [
   },
 ];
 
-const RenderSteps = () => {
+const CourseSteps = () => {
   const { step } = useSelector((store) => store.course);
   return (
     <>
@@ -43,10 +43,10 @@ const RenderSteps = () => {
         </div>
       </div>
       {step === 1 && <CourseInformationForm />}
-      {step === 2 && <CourseBuilderForm />}
+      {step === 2 && <CourseCreatorForm />}
       {step === 3 && <PublishCourse />}
     </>
   );
 };
 
-export default RenderSteps;
+export default CourseSteps;

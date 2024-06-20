@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate,Navigate, useLocation } from "react-router-dom";
 import {profileAction} from "../../store/profileSlice"
 import ProfileDashboard from "./ProfileDashboard";
 import { IoIosArrowForward } from "react-icons/io";
@@ -18,13 +18,15 @@ const Dashboard = () => {
       navigate("/login");
     }
   }, []);
+  const location = useLocation();
   
   return (
     <div className="text-white flex fixed top-0  left-0  w-screen bg-gradient-to-br from-[#000435] via-gray-950/100 to-black pt-[70px] md:pt-[84px] min-h-[calc(100vh-(85px))] ">
       <Sidebar data={show} />
 
       <div className="w-full   h-screen scrollbar-hidden md:w-[85%]">
-
+       {(location.pathname==="/dashboard" || location.pathname==="/dashboard/")&&<Navigate to="my-profile" />}
+      
         
         <div
           style={{ overflow: "auto" }}

@@ -10,7 +10,7 @@ import SubSectionModal from "./modals/SubSectionModal";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import { decryptData } from "../../../../components/core/auth/crypto";
 
-const NestedView = ({ handleChangeEditSectionName }) => {
+const ViewCourseCreation = ({ handleChangeEditSectionName }) => {
   const { course } = useSelector((store) => store.course);
   const dispatch = useDispatch();
   const [isButtonHovered, setIsButtonHovered] = useState(false);
@@ -247,4 +247,4 @@ const NestedView = ({ handleChangeEditSectionName }) => {
   );
 };
 
-export default NestedView;
+export default ViewCourseCreation;

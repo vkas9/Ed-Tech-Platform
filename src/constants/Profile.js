@@ -5,13 +5,9 @@ import { LuBookMarked } from "react-icons/lu";
 
 import { FiBookmark } from "react-icons/fi";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { MdOutlineSpaceDashboard } from "react-icons/md";
-
 
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { PiGraduationCap } from "react-icons/pi";
-import { CiSettings } from "react-icons/ci";
-import { CiLogout } from "react-icons/ci";
 export const Profile = [
   {
     id: "0",

@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 import { useField } from "formik";
 import { IoIosCloudUpload } from "react-icons/io";
 import ReactPlayer from "react-player";
-import { toast } from "react-hot-toast"; // Assuming you're using toast for notifications
+import { toast } from "react-hot-toast";
 
 export default function Upload({
   name,

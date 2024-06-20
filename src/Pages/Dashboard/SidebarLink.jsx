@@ -50,7 +50,7 @@ const SidebarLink = ({ name, link, icon: Icon }) => {
         } `}
       >
         <div className="flex gap-2 text-white/90 items-center  ">
-          <Icon size={25} />
+          <Icon size={25} className="min-w-[20px]" />
           <span className="overflow-x-auto ">{name}</span>
         </div>
       </Link>

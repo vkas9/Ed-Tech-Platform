@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { courseAction } from "../../../../store/courseSlice";
 import { toast } from "react-hot-toast";
 import { createSection, updateSection } from "../../../../APIs/mainAPI";
-import NestedView from "./NestedView";
+import ViewCourseCreation from "./ViewCourseCreation";
 
-const CourseBuilderForm = () => {
+const CourseCreatorForm = () => {
   const [editSectionName, setEditSectionName] = useState(null);
   const { course, step } = useSelector((store) => store.course);
   const dispatch = useDispatch();
@@ -80,7 +80,7 @@ const CourseBuilderForm = () => {
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
       className="text-white "
     >
-      <h1 className="text-3xl">Course Builder</h1>
+      <h1 className="text-3xl">Course Creator</h1>
       <div className="mt-4 mr-5">
         <div className="p-4 bg-white/10 rounded-md py-6 gap-4 max-w-[700px]">
           <Formik
@@ -131,7 +131,7 @@ const CourseBuilderForm = () => {
                   )}
                 </div>
                 {course?.Section?.length > 0 && (
-                  <NestedView
+                  <ViewCourseCreation
                     handleChangeEditSectionName={(sectionId, sectionName) => {
                       if (editSectionName === sectionId) {
                         cancelEdit(resetForm);
@@ -167,4 +167,4 @@ const CourseBuilderForm = () => {
   );
 };
 
-export default CourseBuilderForm;
+export default CourseCreatorForm;
