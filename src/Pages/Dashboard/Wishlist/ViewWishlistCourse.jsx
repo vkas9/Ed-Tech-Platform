@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import { motion } from "framer-motion";
 import { MdLock } from "react-icons/md";
@@ -44,11 +44,11 @@ const ViewCourse = () => {
       className="flex  font-semibold flex-col text-lg pt-2 px-5"
     >
       <div className="flex gap-1 text-white/50 overflow-x-auto">
-        <span>Home</span>
+        <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
         <span>/</span>
-        <span>Dashboard</span>
+        <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white " >Dashboard</Link>
         <span>/</span>
-        <span>Wishlist</span>
+        <Link to={"/dashboard/wishlist"} className="underline active:text-white  sm:hover:text-white ">Wishlist</Link>
         <span>/</span>
         <span className="text-yellow-500 whitespace-nowrap">
           {eCourse.CourseName}

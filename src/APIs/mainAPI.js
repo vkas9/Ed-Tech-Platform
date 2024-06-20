@@ -657,7 +657,7 @@ export const getAllInstructorCourses = async (signal) => {
       response.data.iCourses
     );
     const decryptAllInstructorCourses = decryptData(response.data.iCourses);
-    toast.success("All Courses Fetched Successfully");
+    // toast.success("All Courses Fetched Successfully");
 
     return decryptAllInstructorCourses;
   } catch (error) {

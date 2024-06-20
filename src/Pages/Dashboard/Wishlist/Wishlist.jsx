@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { encryptData } from "./../../../components/core/auth/crypto";
 import { courseAction } from "../../../store/courseSlice";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 const Wishlist = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((store) => store.profile);
@@ -67,9 +68,9 @@ const Wishlist = () => {
       className="flex font-semibold flex-col text-lg pt-2 pl-5"
     >
       <div className="flex gap-1 text-white/50 overflow-x-auto items-center">
-        <span>Home</span>
+      <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
         <span>/</span>
-        <span>Dashboard</span>
+        <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white " >Dashboard</Link>
         <span>/</span>
         <span className="text-yellow-500">Wishlist</span>
       </div>

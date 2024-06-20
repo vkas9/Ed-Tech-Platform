@@ -3,6 +3,7 @@ import CourseCard from "./CourseCard";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEnrollData } from "./fetchEnrollData";
+import { Link } from "react-router-dom";
 
 const EnrolledCourse = () => {
   const dispatch = useDispatch();
@@ -31,9 +32,9 @@ const EnrolledCourse = () => {
       className="flex font-semibold flex-col text-lg pt-2 pl-5"
     >
       <div className="flex gap-1 text-white/50 overflow-x-auto">
-        <span>Home</span>
+      <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
         <span>/</span>
-        <span>Dashboard</span>
+        <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white " >Dashboard</Link>
         <span>/</span>
         <span className="text-yellow-500 whitespace-nowrap">Enrolled Courses</span>
       </div>

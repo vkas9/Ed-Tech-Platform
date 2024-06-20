@@ -5,7 +5,7 @@ import { courseAction } from "../../../store/courseSlice";
 import PurchaseCard from "./PurchaseCard";
 import { decryptData, encryptData } from "../../../components/core/auth/crypto";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getPurchaseHistory } from "../../../APIs/mainAPI";
 const PurchaseHistory = () => {
   const navigate = useNavigate();
@@ -52,9 +52,9 @@ const PurchaseHistory = () => {
       className="flex font-semibold flex-col text-lg  pt-2 pl-5 "
     >
       <div className="flex gap-1 text-white/50 overflow-x-auto items-center ">
-        <span>Home</span>
+      <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
         <span>/</span>
-        <span>Dashboard</span>
+        <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white " >Dashboard</Link>
         <span>/</span>
         <span className="text-yellow-500 ">Purchase History</span>
       </div>

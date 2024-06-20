@@ -5,6 +5,7 @@ import { getAllInstructorCourses } from "../../../APIs/mainAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { courseAction } from "../../../store/courseSlice";
 import { encryptData } from "../../../components/core/auth/crypto";
+import { Link } from "react-router-dom";
 
 const MyCourses = () => {
   const dispatch = useDispatch();
@@ -49,9 +50,9 @@ const MyCourses = () => {
       className="flex font-semibold flex-col text-lg pt-2 pl-5"
     >
       <div className="flex gap-1 text-white/50 overflow-x-auto">
-        <span>Home</span>
+      <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
         <span>/</span>
-        <span>Dashboard</span>
+        <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white " >Dashboard</Link>
         <span>/</span>
         <span className="text-yellow-500 whitespace-nowrap">My Courses </span>
       </div>

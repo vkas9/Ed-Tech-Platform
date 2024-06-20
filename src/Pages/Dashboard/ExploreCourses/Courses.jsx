@@ -6,7 +6,7 @@ import { courseAction } from "../../../store/courseSlice";
 import ExploreCoursesCard from "./ExploreCoursesCard";
 import { encryptData } from "../../../components/core/auth/crypto";
 import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import CourseSwitch from "./CourseSwitch";
 const Courses = () => {
   const navigate = useNavigate();
@@ -17,8 +17,11 @@ const Courses = () => {
   const { user } = useSelector((store) => store.profile);
   const [course, setCourses] = useState(exploreAllCourses);
 useEffect(()=>{
+  if(user?.role!=="Instructor")
   toast('You can buy these courses without spending real money', {
-    className:"text-center"
+    style: {
+      textAlign: 'center'
+    }
   });
 },[])
   useEffect(() => {
@@ -62,13 +65,13 @@ useEffect(()=>{
       className="flex font-semibold flex-col text-lg  pt-2 pl-5 "
     >
       <div className="flex gap-1 text-white/50 overflow-x-auto items-center ">
-        <span>Home</span>
+      <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
         <span>/</span>
-        <span>Dashboard</span>
+        <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white " >Dashboard</Link>
         <span>/</span>
         <span className="text-yellow-500  whitespace-nowrap">
           {" "}
-          {user?.role === "Instructor" ? "All Courses" : "Courses"}
+          {user?.role === "Instructor" ? "All Courses" : "Explore Courses"}
         </span>
       </div>
       <h1 className="text-3xl mb-3 py-1 whitespace-nowrap overflow-x-auto mr-5">
