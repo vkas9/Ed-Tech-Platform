@@ -56,7 +56,7 @@ const PricingCard = ({ title, price, description, className }) => {
                     e.stopPropagation()
                     e.preventDefault()
                     navigate("/dashboard/courses/cloud-computing")
-                }}  className="select-none w-full text-center text-black bg-white rounded-xl py-2 mt-8 text-3xl font-bold hover:cursor-pointer active:text-yellow-950 active:bg-yellow-500 md:hover:text-yellow-950 md:hover:bg-yellow-500  transition-all duration-200  ">
+                }}  className="select-none w-full text-center text-black bg-white rounded-xl py-2 mt-8 text-3xl font-bold hover:cursor-pointer active:text-[#07214a]  hover:text-[#07214a] active:bg-gradient-to-br sm:hover:bg-gradient-to-br from-[#13498a]  to-[#34b7eb]  transition-all duration-200  ">
                     <Link to="/dashboard/courses/cloud-computing">Enroll Now</Link>
                 </div>
 

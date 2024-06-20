@@ -21,6 +21,7 @@ export default {
         "ge":"245px",
         "ow":"500px",
         "bn":"320px",
+        "qi":"623px"
         
       },
     },

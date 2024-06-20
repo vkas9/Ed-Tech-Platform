@@ -36,27 +36,27 @@ const InfoSection = () => {
         <ul className=" text-xl lg:text-2xl font-semibold flex flex-col items-start  mx-auto  sm:text-start mb-11 md:mb-[5rem] max-w-[24rem]">
           <li className="mb-3   text-center">
             <div className="flex justify-center   items-center mb-2 gap-5">
-              <FaHandPointRight className="text-purple-500" />
+              <FaHandPointRight className="text-[#34d2eb]" />
               <h6>Comprehensive Curriculum</h6>
             </div>
             {/* <p className="text-sm text-gray-300/50">With interactive courses and cutting-edge security, it's the perfect solution for aspiring developers aiming to excel in programming.</p> */}
           </li>
           <li className="mb-3 ">
             <div className="flex justify-center items-center mb-2 gap-5">
-              <FaHandPointRight className="text-purple-500" />
+              <FaHandPointRight className="text-[#34d2eb]" />
               <h6>Interactive Courses</h6>
             </div>
           </li>
           <li className="mb-3 ">
             <div className="flex justify-center items-center mb-2 gap-5">
-              <FaHandPointRight className="text-purple-500" />
+              <FaHandPointRight className="text-[#34d2eb]" />
               <h6>Cutting-Edge Security</h6>
             </div>
           </li>
         </ul>
         <div
           className={
-            "outline-none text-2xl rounded-md mx-auto text-black   bg-yellow-500 sm:hover:bg-yellow-400 py-2 px-4  hover:cursor-pointer font-bold"
+            "outline-none text-2xl rounded-md mx-auto text-[#0b2442]   bg-gradient-to-br from-[#13498a]  to-[#34b7eb]   py-2 px-4  hover:cursor-pointer font-bold"
           }
         >
           <Link to="/signup/i/student"> Learn More</Link>

@@ -17,14 +17,14 @@ const Cards=({head})=>{
             <Button
             link={"/dashboard/courses/cloud-computing"}
               className={
-                "outline-none rounded-md py-2 text-center text-black font-bold text-[1rem] lg:text-[1.4rem] bg-yellow-500 active:bg-yellow-400 lg:hover:bg-yellow-400"
+                "outline-none rounded-md py-2 text-center text-[#0b2442] font-bold text-[1rem] lg:text-[1.4rem]  bg-gradient-to-br from-[#13498a]  to-[#34b7eb] active:bg-[#34b7eb] lg:hover:bg-[#34b7eb]"
               }
             >
               Explore More
             </Button>
             <IoCodeSlashSharp className="text-4xl text-white/50" />
           </div>
-          <div className="h-[200px] hidden sm:flex w-[300px]  absolute -left-4 opacity-40 -top-4 -z-10 lg:blur-[70px] blur-[50px] "><img src={gradient} className="rotate-12 " alt="" /></div>
+          <div className="h-[200px] flex w-[300px]  absolute -left-4 opacity-40 -top-4 -z-10 lg:blur-[70px] blur-[50px] "><img src={gradient} className="rotate-12 " alt="" /></div>
         </div>
     );
 }

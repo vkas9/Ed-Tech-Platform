@@ -39,7 +39,7 @@ const hero = () => {
         Upgrade your Coding Skills with MASTER Today for Success.{" "}
         </p>
         <Link to={"/login"} className=" mx-auto">
-          <div className="   group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-gray-800/70 rounded-md w-fit ">
+          <div className="   group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-white/10 backdrop-blur-sm rounded-md w-fit ">
             <div className="flex gap-4 hover:scale-105 transition-all duration-200 items-center rounded-md px-5 py-3 ">
               {user?.role==="Instructor"? <Link to={"/dashboard/my-profile"}>Go To Dashboard</Link>:<Link to={"/login"} >Teach on MASTER</Link> }
               <FaArrowRight size={20}  className="animate-pulse "/>
@@ -50,7 +50,7 @@ const hero = () => {
           <Link
             to={"/signup/i/student"}
             className={
-              " outline-none rounded-md text-[1.2rem]  font-semibold  hover-none text-black md:hover:bg-yellow-400 py-2 sm:px-3 bg-yellow-500  "
+              " outline-none rounded-md text-[1.2rem]  font-bold  hover-none text-[#0b2442] md:hover:bg-[#34b7eb] py-2 sm:px-3 bg-gradient-to-br from-[#13498a]  to-[#34b7eb]  "
             }
           >
             Learn More
@@ -58,7 +58,7 @@ const hero = () => {
           <Link
             to={"/dashboard/courses/cloud-computing"}
             className={
-              " outline-none text-[1.2rem] font-semibold rounded-md bg-gray-800/80 hover:shadow-inner transition-all duration-400  py-2 px-2 sm:px-3"
+              " outline-none text-[1.2rem] font-semibold rounded-md bg-white/10 backdrop-blur-sm hover:shadow-inner transition-all duration-400  py-2 px-2 sm:px-3"
             }
           >
             Explore Courses
