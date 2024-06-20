@@ -15,15 +15,15 @@ const hero = () => {
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:.6,delay:.2,ease:[0,.71,.2,1.01]}} className=" mx-auto  relative lg:h-[calc(100vh-68px)]  md:pt-[15vh] text-center flex mt-[84px]   lg:min-h-[55em]  ">
      <div className="  mx-auto h-fit  flex flex-col px-[1px] md:px-8  mt-[calc(6rem-68px)]    z-10 gap-[3rem] lg:gap-[4rem] ">
-        <h1 className="text-[45px] relative md:text-6xl  lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
-          Empower Your Future with{" "}
+        <h1 className="text-[35px] px-2 vm:text-[45px] relative md:text-6xl  lg:text-7xl font-bold mx-auto max-w-[57rem]  ">
+        Unlock Your Potential with{" "}
           <HightlightText
             className={
               "bg-gradient-to-r from-red-500 via-purple-400 to-blue-500  text-transparent bg-clip-text relative  "
             }
 
           >
-              <span className="xs:whitespace-nowrap"> Coding Skills</span>
+              <span className="xs:whitespace-nowrap">Power of Coding</span>
             <img
               
               src={curve1}
