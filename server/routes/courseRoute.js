@@ -6,9 +6,28 @@ const {
   isInstructor,
   isStudent,
 } = require("../middlewares/middlewareAuth");
-const { createCourse, getAllCourseDetail, updateCourse,getAllCourse, getCartDetails, updateCartDetails, deleteCartDetails, editCourseDetails, deleteEnrolledCourse, deleteInstructorCourse } = require("../controllers/CourseCT");
-const { createSection, deleteSection, updateSection } = require("../controllers/SectionCT");
-const { createSubSection, deleteSubSection,updateSubSection } = require("../controllers/Sub-SectionCT");
+const {
+  createCourse,
+  getAllCourseDetail,
+  updateCourse,
+  getAllCourse,
+  getWishlistDetails,
+  updateWishlistDetails,
+  deleteWishlistDetails,
+  editCourseDetails,
+  deleteEnrolledCourse,
+  deleteInstructorCourse,
+} = require("../controllers/CourseCT");
+const {
+  createSection,
+  deleteSection,
+  updateSection,
+} = require("../controllers/SectionCT");
+const {
+  createSubSection,
+  deleteSubSection,
+  updateSubSection,
+} = require("../controllers/Sub-SectionCT");
 const {
   createRating,
   getAverageRating,
@@ -28,11 +47,16 @@ router.post("/createCourse", auth, isInstructor, createCourse);
 router.get("/getAllCourseDetail", auth, isInstructor, getAllCourseDetail);
 router.post("/createSection", auth, isInstructor, createSection);
 
-router.post("/updateCartDetails", auth, updateCartDetails);
-router.get("/getCartDetails", auth, getCartDetails);
-router.post("/deleteCartDetails", auth, deleteCartDetails);
+router.post("/updateWishlistDetails", auth, updateWishlistDetails);
+router.get("/getWishlistDetails", auth, getWishlistDetails);
+router.post("/deleteWishlistDetails", auth, deleteWishlistDetails);
 router.post("/deleteEnrolledCourse", auth, deleteEnrolledCourse);
-router.post("/deleteInstructorCourse", auth, isInstructor, deleteInstructorCourse);
+router.post(
+  "/deleteInstructorCourse",
+  auth,
+  isInstructor,
+  deleteInstructorCourse
+);
 router.post("/createRating", auth, isStudent, createRating);
 router.get("/getAverageRating", getAverageRating);
 router.get("/getAllRating", getAllRating);

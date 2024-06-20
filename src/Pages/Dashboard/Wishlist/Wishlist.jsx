@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
   getAllCourse,
-  getCartDetails,
+  getWishlistDetails,
   getCourseDetail,
 } from "../../../APIs/mainAPI";
 import WishlistCard from "./WishlistCard";
@@ -17,18 +17,18 @@ const Wishlist = () => {
   const { wishlist } = useSelector((store) => store.card);
   const { user: data } = useSelector((store) => store.profile);
   const [Wishlist, setWishlist] = useState(wishlist);
-  useEffect(()=>{
-    toast('You can buy these courses without spending real money', {
-      className:"text-center"
+  useEffect(() => {
+    toast("You can buy these courses without spending real money", {
+      className: "text-center",
     });
-  },[])
+  }, []);
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
     const fetchData = async () => {
       try {
-        if (data && data.Cart && data.Cart.length > 0) {
-          const cartData = await getCartDetails(signal);
+        if (data && data.Wishlist && data.Wishlist.length > 0) {
+          const cartData = await getWishlistDetails(signal);
           const courseData = await getAllCourse(signal);
           const cartText = encryptData(cartData);
           const courseText = encryptData(courseData);
@@ -47,13 +47,13 @@ const Wishlist = () => {
       }
     };
 
-    if (wishlist === null || wishlist?.length !== user?.Cart?.length) {
+    if (wishlist === null || wishlist?.length !== user?.Wishlist?.length) {
       fetchData();
     }
     return () => {
       controller.abort();
     };
-  }, [user?.Cart?.length, user]);
+  }, [user?.Wishlist?.length, user]);
 
   // useEffect(() => {
   //   setWishlist(wishlist);

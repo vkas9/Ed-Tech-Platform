@@ -8,9 +8,9 @@ import { useState } from "react";
 import {
   PaymentComponent,
   enrollCourse,
-  getCartDetails,
+  getWishlistDetails,
   getPurchaseHistory,
-  updateCartDetails,
+  updateWishlistDetails,
   updatePurchaseHistory,
 } from "../../../APIs/mainAPI";
 import { useNavigate } from "react-router-dom";
@@ -30,15 +30,15 @@ const ExploreCoursesCard = ({ course }) => {
   const { enrolledCourse } = useSelector((store) => store.card);
   let time = CaluculateDuration(course);
   const { user: data } = useSelector((store) => store.profile);
-  const handleCart = async () => {
+  const handleWishlist = async () => {
     setLoading(true);
-    if (user?.Cart?.includes(course._id)) {
+    if (user?.Wishlist?.includes(course._id)) {
       navigate("/dashboard/wishlist");
       setLoading(false);
       return;
     }
 
-    const updatedUser = await updateCartDetails(course?._id);
+    const updatedUser = await updateWishlistDetails(course?._id);
     dispatch(profileAction.setProfile(updatedUser));
     setLoading(false);
   };
@@ -186,7 +186,7 @@ const ExploreCoursesCard = ({ course }) => {
           <div
             onClick={(e) => {
               e.stopPropagation();
-              handleCart();
+              handleWishlist();
             }}
             onMouseEnter={(e) => {
               e.stopPropagation();
@@ -200,9 +200,11 @@ const ExploreCoursesCard = ({ course }) => {
               user?.Courses?.includes(course._id) ? "hidden" : null
             } hover:text-white text-white/30 ${
               user?.role === "Instructor" && "hidden"
-            } box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full`}
+            } box-content p-2 whitespace-nowrap transition-all hover:cursor-pointer duration-150 rounded-full`}
           >
-            {user?.Cart?.includes(course._id) ? "Go to Cart" : "Add to Cart"}
+            {user?.Wishlist?.includes(course._id)
+              ? "Go to Wishlist"
+              : "Add to Wishlist"}
           </div>
         </div>
       </div>

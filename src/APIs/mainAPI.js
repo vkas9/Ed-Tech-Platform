@@ -5,17 +5,15 @@ import { profileAction } from "../store/profileSlice";
 import { encryptData } from "../components/core/auth/crypto";
 import { cardAction } from "../store/cardSlice";
 import { courseAction } from "../store/courseSlice";
-import {decryptData} from "../components/core/auth/crypto"
+import { decryptData } from "../components/core/auth/crypto";
 import { fetchEnrollData } from "../Pages/Dashboard/EnrolledCourse/fetchEnrollData";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const login = (data, navigate) => {
-  
   return async (dispatch) => {
     if (!navigator.onLine) {
       toast.error("No internet connection");
       throw new Error("No internet connection");
-      
     }
     const toastId = toast.loading("Logging in...");
     dispatch(authAction.setLoading(true));
@@ -35,7 +33,7 @@ export const login = (data, navigate) => {
         .then((res) => {
           response = res.data;
         });
-        const userd=decryptData(response.registredUser)
+      const userd = decryptData(response.registredUser);
 
       toast.success(`Welcome to MASTER, ${userd.FirstName}`);
       dispatch(authAction.setToken(response.token));
@@ -338,7 +336,7 @@ export const addCourseDetails = async (formData) => {
     );
 
     toast.success("Course Details Added Successfully");
-    const decryptCourse=decryptData(response.data.data)
+    const decryptCourse = decryptData(response.data.data);
     // console.log("Course creation response:", response.data);
     return decryptCourse;
   } catch (error) {
@@ -366,7 +364,7 @@ export const createSection = async (data) => {
       }
     );
     toast.success("Section Details Added Successfully");
-    const decryptCreateSection=decryptData(response.data.uCourse)
+    const decryptCreateSection = decryptData(response.data.uCourse);
     // console.log("Section creation response:", response.data);
     return decryptCreateSection;
   } catch (error) {
@@ -403,7 +401,7 @@ export const deleteSection = async (data) => {
   }
 };
 
-export const updateCartDetails = async (data) => {
+export const updateWishlistDetails = async (data) => {
   if (!navigator.onLine) {
     toast.error("No internet connection");
     throw new Error("No internet connection");
@@ -412,7 +410,7 @@ export const updateCartDetails = async (data) => {
   try {
     // console.log("Data", data);
     const response = await axios.post(
-      `${BASE_URL}/api/beta/course/updateCartDetails`,
+      `${BASE_URL}/api/beta/course/updateWishlistDetails`,
       {
         courseId: data.toString(),
       },
@@ -422,19 +420,18 @@ export const updateCartDetails = async (data) => {
     );
     localStorage.setItem(import.meta.env.VITE_USER, response.data.uu);
     const decuu = decryptData(response.data.uu);
-  
 
-    toast.success("Course Added to Cart");
-    // console.log("Course Added to Cart", response.data);
+    toast.success("Course Added to Wishlist");
+    // console.log("Course Added to Wishlist", response.data);
     return decuu;
   } catch (error) {
-    console.error("Error Course Added to Cart", error);
+    console.error("Error Course Added to Wishlist", error);
     toast.error(error.response.data.message);
   } finally {
     toast.dismiss(toastId);
   }
 };
-export const deleteCartDetails = async (data) => {
+export const deleteWishlistDetails = async (data) => {
   if (!navigator.onLine) {
     toast.error("No internet connection");
     throw new Error("No internet connection");
@@ -442,7 +439,7 @@ export const deleteCartDetails = async (data) => {
   const toastId = toast.loading("Deleting");
   try {
     const response = await axios.post(
-      `${BASE_URL}/api/beta/course/deleteCartDetails`,
+      `${BASE_URL}/api/beta/course/deleteWishlistDetails`,
       {
         courseId: data.toString(),
       },
@@ -456,13 +453,13 @@ export const deleteCartDetails = async (data) => {
 
     return decu;
   } catch (error) {
-    console.error("Error Course Deleting from Cart", error);
+    console.error("Error Course Deleting from Wishlist", error);
     toast.error(error.response.data.message);
   } finally {
     toast.dismiss(toastId);
   }
 };
-export const getCartDetails = async (signal) => {
+export const getWishlistDetails = async (signal) => {
   if (!navigator.onLine) {
     toast.error("No internet connection");
     throw new Error("No internet connection");
@@ -470,17 +467,16 @@ export const getCartDetails = async (signal) => {
   const toastId = toast.loading("Fetching...");
   try {
     const response = await axios.get(
-      `${BASE_URL}/api/beta/course/getCartDetails`,
+      `${BASE_URL}/api/beta/course/getWishlistDetails`,
       {
         withCredentials: true,
         signal: signal,
       }
     );
-    const decryptUpdatedCart= decryptData(response.data.uCart)
-    const updatedWishlist = decryptUpdatedCart.Cart;
+    const decryptUpdatedWishlist = decryptData(response.data.uWishlist);
+    const updatedWishlist = decryptUpdatedWishlist.Wishlist;
     return updatedWishlist.reverse();
   } catch (error) {
-   
     toast.error(error.response.data.message);
   } finally {
     toast.dismiss(toastId);
@@ -504,7 +500,7 @@ export const deleteSubSection = async (data) => {
     );
     toast.success("Sub Section Deleted Successfully");
     // console.log("Sub Section Delete response:", response.data);
-    const decryptCreateSubSection=decryptData(response.data.updatedCourse)
+    const decryptCreateSubSection = decryptData(response.data.updatedCourse);
     return decryptCreateSubSection;
   } catch (error) {
     console.error("Error Deleting Sub Section", error);
@@ -530,7 +526,7 @@ export const createSubSection = async (data) => {
     );
     toast.success("Sub Section Created Successfully");
     // console.log("Sub Section Create response:", response.data);
-    const decryptCreateSubSection=decryptData(response.data.updatedCourse)
+    const decryptCreateSubSection = decryptData(response.data.updatedCourse);
     return decryptCreateSubSection;
   } catch (error) {
     console.error("Error Creating Sub Section", error);
@@ -556,7 +552,7 @@ export const updateSubSection = async (data) => {
     );
     toast.success("Sub Section updated Successfully");
     // console.log("Sub Section updated response:", response.data);
-    const decryptCreateSubSection=decryptData(response.data.updatedCourse)
+    const decryptCreateSubSection = decryptData(response.data.updatedCourse);
     return decryptCreateSubSection;
   } catch (error) {
     console.error("Error updating Sub Section", error);
@@ -582,7 +578,7 @@ export const updateSection = async (data) => {
       }
     );
     toast.success(" Section updated Successfully");
-    const decryptUpdateSection=decryptData(response.data.upCourse)
+    const decryptUpdateSection = decryptData(response.data.upCourse);
     // console.log(" Section updated response:", response.data);
     return decryptUpdateSection;
   } catch (error) {
@@ -607,7 +603,7 @@ export const editCourseDetails = async (data) => {
       }
     );
     toast.success(" Course updated Successfully");
-    const decryptupdatedCourse=decryptData(response.data.course)
+    const decryptupdatedCourse = decryptData(response.data.course);
     return decryptupdatedCourse;
   } catch (error) {
     console.error("Error  updating Course", error);
@@ -656,7 +652,10 @@ export const getAllInstructorCourses = async (signal) => {
         signal: signal,
       }
     );
-    localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, response.data.iCourses);
+    localStorage.setItem(
+      import.meta.env.VITE_INSTRUCT_ALL_C,
+      response.data.iCourses
+    );
     const decryptAllInstructorCourses = decryptData(response.data.iCourses);
     toast.success("All Courses Fetched Successfully");
 
@@ -672,7 +671,6 @@ export const getAllInstructorCourses = async (signal) => {
     toast.dismiss(toastId);
   }
 };
-
 
 export const getAllCourse = async (signal) => {
   if (!navigator.onLine) {
@@ -690,7 +688,7 @@ export const getAllCourse = async (signal) => {
     );
 
     // console.log("res", response.data.allCourse);
-    const coursed=decryptData(response.data.allCourse)
+    const coursed = decryptData(response.data.allCourse);
     return coursed;
   } catch (error) {
     if (axios.isCancel(error)) {
@@ -716,11 +714,10 @@ export const updateProfile = async (dispatch, data) => {
         withCredentials: true,
       }
     );
-    const decryptUser=decryptData(response.data.registredUser)
-
+    const decryptUser = decryptData(response.data.registredUser);
 
     dispatch(profileAction.setProfile(decryptUser));
-    
+
     localStorage.setItem(import.meta.env.VITE_USER, decryptUser);
     toast.success("Saved");
   } catch (error) {
@@ -744,8 +741,13 @@ export const updateDisplayProfile = async (dispatch, data) => {
         withCredentials: true,
       }
     );
-    localStorage.setItem(import.meta.env.VITE_USER, response.data.updatedProfile);
-    const decryptUpdateDisplayProfile=decryptData(response.data.updatedProfile)
+    localStorage.setItem(
+      import.meta.env.VITE_USER,
+      response.data.updatedProfile
+    );
+    const decryptUpdateDisplayProfile = decryptData(
+      response.data.updatedProfile
+    );
     dispatch(profileAction.setProfile(decryptUpdateDisplayProfile));
 
     toast.success("Changed");
@@ -778,8 +780,8 @@ export const deleteEnrolledCourse = async (data, signal) => {
         signal: signal,
       }
     );
-    const decu=decryptData(userDetail.data.rs)
-    const decCourseDetail=decryptData(response.data.courseDetail)
+    const decu = decryptData(userDetail.data.rs);
+    const decCourseDetail = decryptData(response.data.courseDetail);
     return {
       courseDetail: decCourseDetail,
       userDetail: decu,
@@ -795,18 +797,20 @@ export const deleteEnrolledCourse = async (data, signal) => {
   }
 };
 
-
 export const PaymentComponent = async (data) => {
-  
   if (!navigator.onLine) {
     toast.error("No internet connection");
     throw new Error("No internet connection");
   }
 
   try {
-    const response = await axios.post(`${BASE_URL}/api/beta/payment/createOrder`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.post(
+      `${BASE_URL}/api/beta/payment/createOrder`,
+      data,
+      {
+        withCredentials: true,
+      }
+    );
 
     const res = response.data;
     if (res.success) {
@@ -826,18 +830,18 @@ export const PaymentComponent = async (data) => {
           prefill: {
             contact: res.contact,
             name: res.name,
-            email: res.email
+            email: res.email,
           },
           notes: {
-            description: res.description
+            description: res.description,
           },
           theme: {
             color: "#000431",
-          }
+          },
         };
 
         const razorpayObject = new Razorpay(options);
-        razorpayObject.on('payment.failed', function (response) {
+        razorpayObject.on("payment.failed", function (response) {
           toast.error("Payment Failed");
           reject(response); // Reject the promise with the response on failure
         });
@@ -848,15 +852,20 @@ export const PaymentComponent = async (data) => {
       throw new Error(res.message);
     }
   } catch (error) {
-    console.error('Error creating order:', error);
-    toast.error(error.response?.data?.message || "An error occurred during payment");
+    console.error("Error creating order:", error);
+    toast.error(
+      error.response?.data?.message || "An error occurred during payment"
+    );
     throw error; // Ensure the error is thrown to be handled by the caller
   }
 };
 
-
-
-export const enrollCourse = async (dispatch, data,enrollData=null,navigate) => {
+export const enrollCourse = async (
+  dispatch,
+  data,
+  enrollData = null,
+  navigate
+) => {
   if (!navigator.onLine) {
     toast.error("No internet connection");
     throw new Error("No internet connection");
@@ -870,19 +879,19 @@ export const enrollCourse = async (dispatch, data,enrollData=null,navigate) => {
         withCredentials: true,
       }
     );
-    const userd=decryptData(response.data.ey)
-    const updatedWishlist = userd.Cart;
+    const userd = decryptData(response.data.ey);
+    const updatedWishlist = userd.Wishlist;
 
-    const cartText=encryptData(updatedWishlist.reverse());
-     
+    const cartText = encryptData(updatedWishlist.reverse());
+
     dispatch(profileAction.setProfile(userd));
-      const text = encryptData(userd);
-      localStorage.setItem(import.meta.env.VITE_USER, text);
-      localStorage.setItem(import.meta.env.VITE_CART_D, cartText);
-      const controller = new AbortController();
-      const signal = controller.signal;
-      await fetchEnrollData(enrollData, dispatch, signal,true)
-      navigate(`/dashboard/enrolled-courses`)
+    const text = encryptData(userd);
+    localStorage.setItem(import.meta.env.VITE_USER, text);
+    localStorage.setItem(import.meta.env.VITE_CART_D, cartText);
+    const controller = new AbortController();
+    const signal = controller.signal;
+    await fetchEnrollData(enrollData, dispatch, signal, true);
+    navigate(`/dashboard/enrolled-courses`);
     toast.success("Enrolled");
   } catch (error) {
     toast.error(response.error);
@@ -890,7 +899,7 @@ export const enrollCourse = async (dispatch, data,enrollData=null,navigate) => {
     toast.dismiss(toastId);
   }
 };
-export const deleteInstructorCourse=async(dispatch,data)=>{
+export const deleteInstructorCourse = async (dispatch, data) => {
   if (!navigator.onLine) {
     toast.error("No internet connection");
     throw new Error("No internet connection");
@@ -905,35 +914,38 @@ export const deleteInstructorCourse=async(dispatch,data)=>{
         withCredentials: true,
       }
     );
-    localStorage.setItem(import.meta.env.VITE_INSTRUCT_ALL_C, response.data.imc);
+    localStorage.setItem(
+      import.meta.env.VITE_INSTRUCT_ALL_C,
+      response.data.imc
+    );
     localStorage.setItem(import.meta.env.VITE_USER, response.data.uur);
-    const userd=decryptData(response.data.uur)
-    const userinc=decryptData(response.data.imc)
+    const userd = decryptData(response.data.uur);
+    const userinc = decryptData(response.data.imc);
     dispatch(profileAction.setProfile(userd));
     dispatch(courseAction.setIC(userinc));
-    toast.success(response.data.message)
-    
+    toast.success(response.data.message);
   } catch (error) {
-    console.log("error->",error)
+    console.log("error->", error);
     toast.error(error.response.data.message);
   } finally {
     toast.dismiss(toastId);
   }
-}
+};
 
-export const updatePurchaseHistory=async(data)=>{
+export const updatePurchaseHistory = async (data) => {
   try {
     const response = await axios.post(
-      `${BASE_URL}/api/beta/profile/updatePurchaseHistory`,data,
+      `${BASE_URL}/api/beta/profile/updatePurchaseHistory`,
+      data,
       {
         withCredentials: true,
       }
     );
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
-export const getPurchaseHistory=async(dispatch)=>{
+};
+export const getPurchaseHistory = async (dispatch) => {
   const toastId = toast.loading("loading...");
   try {
     const response = await axios.get(
@@ -942,13 +954,15 @@ export const getPurchaseHistory=async(dispatch)=>{
         withCredentials: true,
       }
     );
-    localStorage.setItem(import.meta.env.VITE_PURCHASE_HISTORY,response.data.purhc);
-    const text=decryptData(response.data.purhc);
+    localStorage.setItem(
+      import.meta.env.VITE_PURCHASE_HISTORY,
+      response.data.purhc
+    );
+    const text = decryptData(response.data.purhc);
     dispatch(courseAction.setPurchaseHistory(text));
-    
   } catch (error) {
-    console.log(error)
-  }finally{
-    toast.dismiss(toastId)
+    console.log(error);
+  } finally {
+    toast.dismiss(toastId);
   }
-}
+};

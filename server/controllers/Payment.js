@@ -38,8 +38,8 @@ exports.createOrder = async (req, res) => {
         message: error.message,
       });
     }
-    
-    const userG=await user.findById(userId);
+
+    const userG = await user.findById(userId);
     const amount = course.Price;
     const currency = "INR";
     const options = {
@@ -51,37 +51,35 @@ exports.createOrder = async (req, res) => {
         userId,
       },
     };
-   
-      const paymentRespone = razorpayInstance.orders.create(options,(err,order)=>{
-        
-        if(!err){
+
+    const paymentRespone = razorpayInstance.orders.create(
+      options,
+      (err, order) => {
+        if (!err) {
           return res.status(200).json({
             success: true,
             courseName: course.CourseName,
             courseDescription: course.CourseDescription,
             thumbnail: course.Thumbnail,
             order_id: order.id,
-            key_id:razorpayInstance.key_id,
+            key_id: razorpayInstance.key_id,
             currency: order.currency,
             amount: order.amount,
-            contact:userG.Contact_Number,
-            name:userG.FirstName,
-            email:userG.Email,
+            contact: userG.Contact_Number,
+            name: userG.FirstName,
+            email: userG.Email,
             message: "Successfully received response from RazorPay!",
           });
-        }
-        else{
-          console.log("err",err);
+        } else {
+          console.log("err", err);
           return res.json({
             success: false,
             message: err.message,
           });
         }
-      });
-    console.log("paymentRespone",paymentRespone)
-    
-      
-    
+      }
+    );
+    console.log("paymentRespone", paymentRespone);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -93,48 +91,46 @@ exports.createOrder = async (req, res) => {
 
 exports.enrollCourse = async (req, res) => {
   try {
-    
     const userId = req.user.id;
-    const {courseId} = req.body;
-     
-        
-        const updatedCourse = await Course.findByIdAndUpdate(
-          courseId,
-          { $push: { StudentEntrolled: userId } },
-          { new: true }
-        );
-        if (!updatedCourse) {
-          return res.status(500).json({
-            success: false,
-            message: "Course Not Found",
-          });
-        }
-        const enrolledStudent = await user.findByIdAndUpdate(
-          userId,
-          { $push: { Courses: courseId } },
-          { new: true }
-        ).select("-Password").populate({ path: "Profile"}).populate({path:"Cart"}).exec()
-        const encryptUser =encryptData(enrolledStudent);
-       await sendmail(
-          enrolledStudent.Email,
-          "Congratulations from MASTER",
-          `Congratulations you have successfully Enrolled ${updatedCourse.CourseName} Course`
-        );
-        return res.status(200).json({
-          success: true,
-          message: "Payment Successfull",
-          ey:encryptUser
-        });
-      } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-          success: false,
-          message: "Something went wrong while Enrolling course",
-        });
-      }
-    
-  
-  
+    const { courseId } = req.body;
+
+    const updatedCourse = await Course.findByIdAndUpdate(
+      courseId,
+      { $push: { StudentEntrolled: userId } },
+      { new: true }
+    );
+    if (!updatedCourse) {
+      return res.status(500).json({
+        success: false,
+        message: "Course Not Found",
+      });
+    }
+    const enrolledStudent = await user
+      .findByIdAndUpdate(
+        userId,
+        { $push: { Courses: courseId } },
+        { new: true }
+      )
+      .select("-Password")
+      .populate({ path: "Profile" })
+      .populate({ path: "Wishlist" })
+      .exec();
+    const encryptUser = encryptData(enrolledStudent);
+    await sendmail(
+      enrolledStudent.Email,
+      "Congratulations from MASTER",
+      `Congratulations you have successfully Enrolled ${updatedCourse.CourseName} Course`
+    );
+    return res.status(200).json({
+      success: true,
+      message: "Payment Successfull",
+      ey: encryptUser,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while Enrolling course",
+    });
+  }
 };
-
-

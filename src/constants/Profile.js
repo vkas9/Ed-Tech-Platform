@@ -1,4 +1,3 @@
-
 import { BsPerson } from "react-icons/bs";
 
 import { LuBookMarked } from "react-icons/lu";
@@ -13,21 +12,21 @@ export const Profile = [
     id: "0",
     title: "My Profile",
     url: "/dashboard/my-profile",
-    icon:BsPerson
+    icon: BsPerson,
   },
   {
     id: "1",
     title: "Enrolled Courses",
     url: "/dashboard/enrolled-courses",
     role: "Student",
-    icon:LuBookMarked
+    icon: LuBookMarked,
   },
   {
     id: "2",
     title: "Wishlist",
     url: "/dashboard/wishlist",
     role: "Student",
-    icon:FiBookmark
+    icon: FiBookmark,
   },
   {
     id: "3",
@@ -41,19 +40,20 @@ export const Profile = [
     title: "Explore Courses",
     url: "/dashboard/courses/cloud-computing",
     role: "Student",
-    icon:PiGraduationCap
+    icon: PiGraduationCap,
   },
   {
-    id:"5",
+    id: "5",
     title: "My Courses",
     url: "/dashboard/my-courses",
     role: "Instructor",
     icon: PiGraduationCap,
-  },{
+  },
+  {
     id: "6",
     title: "Create Course",
     url: "/dashboard/create-course",
     role: "Instructor",
     icon: IoIosAddCircleOutline,
-  }
+  },
 ];

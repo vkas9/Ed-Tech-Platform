@@ -273,9 +273,9 @@ const Navbar = () => {
               className="relative "
             >
               <FaCartShopping size={20} />
-              {user?.Cart?.length > 0 ? (
+              {user?.Wishlist?.length > 0 ? (
                 <span className="absolute -top-[11px] -right-[11px] ">
-                  {user?.Cart?.length}
+                  {user?.Wishlist?.length}
                 </span>
               ) : null}
             </Link>

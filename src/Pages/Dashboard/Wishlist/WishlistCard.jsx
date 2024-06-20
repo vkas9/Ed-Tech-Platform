@@ -4,7 +4,7 @@ import { FaStar, FaRegStar } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import {
   PaymentComponent,
-  deleteCartDetails,
+  deleteWishlistDetails,
   enrollCourse,
 } from "../../../APIs/mainAPI";
 import { profileAction } from "../../../store/profileSlice";
@@ -26,10 +26,10 @@ const WishlistCard = ({ course }) => {
 
   let time = CaluculateDuration(course);
 
-  const handleCart = async () => {
+  const handleWishlist = async () => {
     setLoading(true);
     try {
-      const updatedUser = await deleteCartDetails(course?._id);
+      const updatedUser = await deleteWishlistDetails(course?._id);
       dispatch(profileAction.setProfile(updatedUser));
     } catch (error) {
       console.error(error);
@@ -158,7 +158,7 @@ const WishlistCard = ({ course }) => {
         <RxCross2
           onClick={(e) => {
             e.stopPropagation();
-            handleCart();
+            handleWishlist();
           }}
           onMouseEnter={() => setIsButtonHovered(true)}
           onMouseLeave={() => setIsButtonHovered(false)}
