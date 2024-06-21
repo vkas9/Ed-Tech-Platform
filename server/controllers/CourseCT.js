@@ -157,6 +157,7 @@ exports.editCourseDetails = async (req, res) => {
     course.WhatYouWillLearn = whatYouWillLearn;
     course.Catagory = category;
     course.Price = price;
+    console.log("uploadThumbnail.publicUrl",uploadThumbnail)
     course.Thumbnail = thumbnailImage || uploadThumbnail.publicUrl;
     await course.save();
     const updatedCourse = await Course.findById(courseId)
