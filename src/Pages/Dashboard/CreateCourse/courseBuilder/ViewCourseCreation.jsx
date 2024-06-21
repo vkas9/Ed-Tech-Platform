@@ -49,11 +49,10 @@ const ViewCourseCreation = ({ handleChangeEditSectionName }) => {
   const handleDeleteSubSection = async (data) => {
     try {
       const updated = await deleteSubSection({ ...data, courseId: course._id });
-
-      if (updated.success) {
-        dispatch(courseAction.setCourse(updated.updatedCourse));
+      if (updated) {
+        dispatch(courseAction.setCourse(updated));
       } else {
-        console.error("Failed to delete Sub section:", updated.message);
+        console.error("Failed to delete Sub section:");
       }
     } catch (error) {
       console.error("Error deleting Sub Section:", error.message);
