@@ -38,9 +38,6 @@ app.use(
 
 const { dbConnect } = require("./config/connectDatabase");
 dbConnect();
-const { ConnectToCloudinary } = require("./config/cloudinaryConnect");
-ConnectToCloudinary();
-
 
 app.get("/", (req, res) => {
   res.render("index");
