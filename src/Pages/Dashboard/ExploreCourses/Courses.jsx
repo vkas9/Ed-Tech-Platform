@@ -71,7 +71,7 @@ useEffect(()=>{
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
       className="flex font-semibold flex-col text-lg  pt-2 pl-5 "
     >
-      <div className="flex gap-1 text-white/50 overflow-x-auto items-center ">
+      <div className="flex gap-1 text-white/50 overflow-x-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center ">
       <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
         <span>/</span>
         <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white " >Dashboard</Link>
@@ -81,7 +81,7 @@ useEffect(()=>{
           {user?.role === "Instructor" ? "All Courses" : "Explore Courses"}
         </span>
       </div>
-      <h1 className="text-3xl mb-3 py-1 whitespace-nowrap overflow-x-auto mr-5">
+      <h1 className="text-3xl mb-3 py-1 whitespace-nowrap overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full mr-5">
         {" "}
         {user?.role === "Instructor" ? "All Courses" : "Explore Courses"}{" "}
         {user?.role === "Instructor" && (
@@ -90,11 +90,11 @@ useEffect(()=>{
           </span>
         )}{" "}
       </h1>
-      <div className="flex mr-5 rounded-lg overflow-x-auto items-center justify-start ">
+      <div className="flex mr-5 rounded-lg overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center justify-start ">
         <CourseSwitch roll={expC} />
       </div>
 
-      <div className="overflow-y-auto   mt-2 rounded-md pb-[12rem] h-[75vh]">
+      <div className="overflow-y-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full  mt-2 rounded-md pb-[12rem] h-[75vh]">
         {!course ? (
           <div>
             <p>Loading...</p>

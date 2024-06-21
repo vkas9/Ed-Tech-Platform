@@ -24,8 +24,18 @@ export default {
         "qi":"623px"
         
       },
+      colors: {
+        'scrollbar-bg':"transparent", 
+        'scrollbar-thumb': '#4f4f4f',
+      },
     },
   },
+  variants: {
+    scrollbar: ['rounded'],
+  },
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }
 
 

@@ -19,11 +19,11 @@ const navigate=useNavigate()
   return (
     <div
       onClick={()=>{ navigate(`/dashboard/enrolled-courses`)}}
-      className={`flex relative text-[1.1rem] justify-between overflow-x-auto flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
+      className={`flex relative text-[1.1rem] justify-between overflow-x-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
         !isButtonHovered ? "sm:hover:bg-gray-300/20" : ""
       } bg-gray-300/10 max-w-[60rem] p-1`}
     >
-      <div className="gap-1  p-2 sm:min-w-[351px] flex-col  pr-[2.2rem] overflow-auto  vm:items-center flex">
+      <div className="gap-1  p-2 sm:min-w-[351px] flex-col  pr-[2.2rem] overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full  vm:items-center flex">
         <div className="flex gap-3 flex-col  w-full vm:flex-row vm:items-center">
           <img
           src={course?.courseId?.Thumbnail}
@@ -36,10 +36,10 @@ const navigate=useNavigate()
           <p className="text-white/40 truncate text-[.9rem]">
             {course?.courseId?.CourseDescription}
           </p>
-          <div className="flex gap-2  whitespace-nowrap overflow-auto items-center">
+          <div className="flex gap-2  whitespace-nowrap overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center">
             <span>0.0</span>
             <ReactStars
-              className="min-w-fit hidden truncate xs:flex whitespace-nowrap overflow-auto"
+              className="min-w-fit hidden truncate xs:flex whitespace-nowrap scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full overflow-auto"
               count={5}
               size={25}
               edit={false}
@@ -59,7 +59,7 @@ const navigate=useNavigate()
       <div className="h-[1px] bg-white/10 mx-3 my-1" />
 
       <div className="flex xs:items-center gap-1 vm:gap-5 justify-between">
-        <div className="vm:grid overflow-x-auto xd:w-[320px] grid-flow-col items-start gap-2">
+        <div className="vm:grid overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full xd:w-[320px] grid-flow-col items-start gap-2">
           <div className="w-fit pl-2 vm:pl-4 sm:pl-0 flex items-center">
             <span className=" flex flex-col sm:items-center">
               <span className="text-white/40">Created at:</span>

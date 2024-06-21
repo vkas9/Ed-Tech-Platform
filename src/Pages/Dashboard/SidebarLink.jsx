@@ -51,7 +51,7 @@ const SidebarLink = ({ name, link, icon: Icon }) => {
       >
         <div className="flex gap-2 text-white/90 items-center  ">
           <Icon size={25} className="min-w-[20px]" />
-          <span className="overflow-x-auto ">{name}</span>
+          <span className="overflow-x-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full">{name}</span>
         </div>
       </Link>
       {confirmationModal && <ConfirmModal modalData={confirmationModal} />}

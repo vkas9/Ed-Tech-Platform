@@ -70,7 +70,7 @@ const Wishlist = () => {
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
       className="flex font-semibold flex-col text-lg pt-2 pl-5"
     >
-      <div className="flex gap-1 text-white/50 overflow-x-auto items-center">
+      <div className="flex gap-1 text-white/50 overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center">
       <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
         <span>/</span>
         <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white " >Dashboard</Link>
@@ -81,7 +81,7 @@ const Wishlist = () => {
       <h1 className="text-3xl mb-3 w-full whitespace-nowrap ">
         My Wishlist <span>({wishlist?.length}</span>)
       </h1>
-      <div className="overflow-auto  pb-[12rem]  h-[75vh] ">
+      <div className="overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full pb-[12rem]  h-[75vh] ">
         {!wishlist ? (
           <div>
             <p>Loading...</p>

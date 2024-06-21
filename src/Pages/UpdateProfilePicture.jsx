@@ -44,7 +44,7 @@ const UpdateProfilePicture = ({ show, setShow }) => {
       onClick={() => {
         setShow(!show);
       }}
-      className="h-screen z-[10] overflow-y-auto   px-2 w-screen fixed top-0 left-0 bg-black/80 flex items-start sm:items-center justify-center"
+      className="h-screen z-[10] overflow-y-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full  px-2 w-screen fixed top-0 left-0 bg-black/80 flex items-start sm:items-center justify-center"
     >
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({ isSubmitting }) => (

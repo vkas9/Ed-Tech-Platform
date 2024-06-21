@@ -136,7 +136,7 @@ const Navbar = () => {
         <nav
           className={`${
             openNavigation
-              ? "flex overflow-y-auto bg-gradient-to-br from-blue-950 via-gray-950 to-black"
+              ? "flex overflow-y-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full bg-gradient-to-br from-blue-950 via-gray-950 to-black"
               : "hidden"
           } fixed top-[70px] md:top-[84px] rounded-t-[2.5rem]  left-0 right-0 bottom-0  lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >

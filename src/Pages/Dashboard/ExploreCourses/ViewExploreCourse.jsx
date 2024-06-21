@@ -39,7 +39,7 @@ const ViewCourse = () => {
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
       className="flex font-semibold flex-col text-lg pt-2 px-5"
     >
-      <div className="flex gap-1 text-white/50 overflow-x-auto">
+      <div className="flex gap-1 text-white/50 overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full">
       <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
         <span>/</span>
         <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white" >Dashboard</Link>
@@ -54,7 +54,7 @@ const ViewCourse = () => {
       <h2 className="text-white/50 ">
         {eCourse.Section.length} Sections • {getTotalLectures()} Lectures{" "}
       </h2>
-      <div className="bg-white/10 overflow-y-auto max-h-[calc(100vh-13rem)] w-full  md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">
+      <div className="bg-white/10 overflow-y-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full max-h-[calc(100vh-13rem)] w-full  md:max-w-[700px] p-2  md:p-4 rounded-md shadow-md">
         {eCourse?.Section.map((section) => (
           <details key={section._id} className="mb-2">
             <summary

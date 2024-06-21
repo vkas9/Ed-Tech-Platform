@@ -63,7 +63,7 @@ const MyCourseCard = ({ course }) => {
     <>
       <div
         onClick={handleClick}
-        className={`relative flex text-[1.1rem] justify-between overflow-x-auto flex-col sm:flex-row mr-5 items-center hover:cursor-pointer ${
+        className={`relative flex text-[1.1rem] justify-between overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full flex-col sm:flex-row mr-5 items-center hover:cursor-pointer ${
           !isButtonHovered
             ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20"
             : ""
@@ -90,11 +90,11 @@ const MyCourseCard = ({ course }) => {
               <p className="text-white/40 truncate text-[.9rem] ">
                 {course.CourseDescription}
               </p>
-              <div className=" hidden overflow-x-auto justify-center gap-2 items-center">
+              <div className=" hidden overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full justify-center gap-2 items-center">
                 <span>0.0</span>
 
                 <ReactStars
-                  className=" min-w-[120px]  whitespace-nowrap overflow-x-auto  "
+                  className=" min-w-[120px]  whitespace-nowrap overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full  "
                   count={5}
                   size={25}
                   edit={false}

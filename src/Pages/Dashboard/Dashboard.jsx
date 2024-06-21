@@ -30,7 +30,7 @@ const Dashboard = () => {
         
         <div
           style={{ overflow: "auto" }}
-          className=" relative overflow-y-auto scroll-smooth   h-screen"
+          className=" relative overflow-y-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full h-screen"
         >
           <Outlet />
           

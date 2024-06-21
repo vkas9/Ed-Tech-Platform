@@ -80,7 +80,7 @@ const UploadProfile = ({ name, label, video = false, viewData = null, editData =
               <img
                 src={previewSource}
                 alt="Preview"
-                className="max-h-[200px] h-[150px] w-[150px] vm:h-[200px] vm:w-[200px] max-w-[200px] overflow-auto rounded-full object-cover"
+                className="max-h-[200px] h-[150px] w-[150px] vm:h-[200px] vm:w-[200px] max-w-[200px] overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-full object-cover"
               />
             ) : (
               <ReactPlayer

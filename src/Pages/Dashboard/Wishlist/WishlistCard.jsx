@@ -82,11 +82,11 @@ const WishlistCard = ({ course }) => {
   return (
     <div
       onClick={handleClick}
-      className={`flex relative text-[1.1rem] overflow-x-auto justify-between flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
+      className={`flex relative text-[1.1rem] overflow-x-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full justify-between flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
         !isButtonHovered ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20" : ""
       } bg-gray-300/10 max-w-[60rem] p-1`}
     >
-      <div className="gap-1 p-2 sm:min-w-[351px] flex-col   pr-[2.2rem] overflow-auto vm:items-center flex">
+      <div className="gap-1 p-2 sm:min-w-[351px] flex-col   pr-[2.2rem] overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full vm:items-center flex">
         <div className="flex gap-3 flex-col  w-full vm:flex-row vm:items-center">
           <img
             src={course?.Thumbnail}
@@ -99,10 +99,10 @@ const WishlistCard = ({ course }) => {
             <p className="text-white/40 truncate text-[.9rem]">
               {course.CourseDescription}
             </p>
-            <div className="flex gap-2 whitespace-nowrap overflow-auto items-center">
+            <div className="flex gap-2 whitespace-nowrap overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center">
               <span>0.0</span>
               <ReactStars
-                className="min-w-fit whitespace-nowrap overflow-auto"
+                className="min-w-fit whitespace-nowrap overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full"
                 count={5}
                 size={25}
                 edit={false}
@@ -125,7 +125,7 @@ const WishlistCard = ({ course }) => {
       </div>
       <div className="h-[1px] bg-white/10 mx-3 my-1" />
       <div className="flex items-center gap-3 justify-between">
-        <div className="vm:grid overflow-x-auto xd:w-[220px] grid-flow-col items-start gap-9">
+        <div className="vm:grid overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full xd:w-[220px] grid-flow-col items-start gap-9">
           <div className="w-fit pl-2 vm:pl-4 flex  items-center">
             <span className="flex flex-col sm:items-center">
               <span className="text-white/40">Duration:</span>
