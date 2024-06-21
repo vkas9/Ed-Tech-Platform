@@ -1,7 +1,7 @@
 const user = require("../models/User");
 const profile = require("../models/Profile");
 const Courses = require("../models/Courses");
-const { UploadFile } = require("../utils/fileUploader");
+const {uploadDigital } = require("../utils/fileUploader");
 const fs = require('fs/promises');
 const mongoose=require("mongoose")
 const sharp=require("sharp");
@@ -214,16 +214,12 @@ exports.updateDisplayProfile = async (req, res) => {
       .toFormat("jpeg", { quality: 100 })
       .toFile(tempCompressedPath);
 
-    const image = await UploadFile(tempCompressedPath, {
-      folder: "VikasFolder",
-      transformation: [{ quality: "auto:good" }, { fetch_format: "auto" }],
-      resource_type: "auto",
-    });
+    const image = await uploadDigital(tempCompressedPath)
 
    
     const updatedProfile = await user.findByIdAndUpdate(
       { _id: userId },
-      { avatar: image.secure_url },
+      { avatar: image.publicUrl },
       { new: true }
     ).select("-Password").populate({ path: "Profile"}).exec()
     

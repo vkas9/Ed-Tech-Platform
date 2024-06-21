@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const Catagory = require("../models/Catagory");
 const Course = require("../models/Courses");
-const { UploadFile } = require("../utils/fileUploader");
+const {uploadDigital } = require("../utils/fileUploader");
 const sharp = require("sharp");
 const path = require("path");
 const fs = require("fs/promises");
@@ -39,11 +39,7 @@ exports.createCourse = async (req, res) => {
       .toFormat("jpeg", { quality: 80 })
       .toFile(tempCompressedPath);
 
-    const uploadThumbnail = await UploadFile(tempCompressedPath, {
-      folder: "VikasFolder",
-      transformation: [{ quality: "auto:good" }, { fetch_format: "auto" }],
-      resource_type: "auto",
-    });
+    const uploadThumbnail= await uploadDigital(tempCompressedPath)
 
     const newCourse = await Course.create({
       CourseName: courseName,
@@ -51,7 +47,7 @@ exports.createCourse = async (req, res) => {
       WhatYouWillLearn: whatYouWillLearn,
       Price: price,
       Catagory: category,
-      Thumbnail: uploadThumbnail.secure_url,
+      Thumbnail: uploadThumbnail.publicUrl,
       Instructor: req.user.id,
     });
 
@@ -97,11 +93,8 @@ exports.updateCourse = async (req, res) => {
     }
     if (req.files) {
       const thumbnail = req.files.thumbnailImage;
-      const uploadThumbnail = await UploadFile(thumbnail.tempFilePath, {
-        folder: "VikasFolder",
-        resource_type: "auto",
-      });
-      course.Thumbnail = uploadThumbnail.secure_url;
+      const uploadThumbnail = await uploadDigital(thumbnail.tempFilePath)
+      course.Thumbnail = uploadThumbnail.publicUrl;
     }
 
     for (const key in updates) {
@@ -155,11 +148,7 @@ exports.editCourseDetails = async (req, res) => {
         .toFormat("jpeg", { quality: 80 })
         .toFile(tempCompressedPath);
 
-      uploadThumbnail = await UploadFile(tempCompressedPath, {
-        folder: "VikasFolder",
-        transformation: [{ quality: "auto:good" }, { fetch_format: "auto" }],
-        resource_type: "auto",
-      });
+      uploadThumbnail = await uploadDigital(tempCompressedPath)
       await fs.unlink(tempCompressedPath);
     }
 
@@ -168,7 +157,7 @@ exports.editCourseDetails = async (req, res) => {
     course.WhatYouWillLearn = whatYouWillLearn;
     course.Catagory = category;
     course.Price = price;
-    course.Thumbnail = thumbnailImage || uploadThumbnail.secure_url;
+    course.Thumbnail = thumbnailImage || uploadThumbnail.publicUrl;
     await course.save();
     const updatedCourse = await Course.findById(courseId)
       .populate({

@@ -1,6 +1,6 @@
 const section=require("../models/Section");
 const subSection=require("../models/Sub-Section");
-const {UploadFile}=require("../utils/fileUploader");
+const { uploadDigital}=require("../utils/fileUploader");
 const course=require("../models/Courses");
 const { encryptData } = require("../utils/crypto-server");
 exports.createSubSection=async(req,res)=>{
@@ -25,13 +25,15 @@ exports.createSubSection=async(req,res)=>{
                 message: "Video file is too large"
             });
         }
-        const VideoFile=await UploadFile(video.tempFilePath,{folder: "VikasFolder",resource_type:"auto"});
-       
-        if(!VideoFile ||!VideoFile.secure_url){
-            throw new Error("Failed to upload video to Cloudinary");
+       const VideoFile= await uploadDigital(video.tempFilePath)
+        
+        if(!VideoFile ){
+            throw new Error("Failed to upload video");
         }
+       
+        
         const videoDuration=VideoFile.duration?Math.ceil(VideoFile.duration).toString():"0";
-        const subSectionObject=await subSection.create({title,description,videoURL:VideoFile.secure_url,duration:videoDuration});
+        const subSectionObject=await subSection.create({title,description,videoURL:VideoFile.publicUrl,duration:videoDuration});
         await section.findByIdAndUpdate(sectionId,{$push:{subSection:subSectionObject._id}},{new:true});
         const updatedCourse = await course.findById(courseId)
 		.populate({
@@ -75,15 +77,15 @@ exports.updateSubSection=async(req,res)=>{
           }
           
          if (video) {
-            const VideoFile=await UploadFile(video.tempFilePath,{folder: "VikasFolder",resource_type:"auto"});
+            const VideoFile=await uploadDigital(video.tempFilePath)
             
             console.log("VideoFile->",VideoFile)
-            if(!VideoFile ||!VideoFile.secure_url){
-                throw new Error("Failed to upload video to Cloudinary");
+            if(!VideoFile){
+                throw new Error("Failed to upload video");
             }
             const videoDuration=VideoFile.duration?Math.ceil(VideoFile.duration).toString():"0";
             subSectionDetail.duration=videoDuration
-            subSectionDetail.videoURL=VideoFile.secure_url
+            subSectionDetail.videoURL=VideoFile.publicUrl
         }
         
         
