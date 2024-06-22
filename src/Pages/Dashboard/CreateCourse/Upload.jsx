@@ -118,7 +118,9 @@ export default function Upload({
               Drag and drop an {!video ? "image" : "video"}, or{" "}
               <span
                 className="font-semibold whitespace-nowrap bg-white/10 hover:bg-white/20 py-1 px-2 rounded-full text-yellow-50"
-                onClick={handleBrowseClick}
+                onClick={(e)=>{
+                  e.stopPropagation();
+                  handleBrowseClick()}}
               >
                 Browse a file
               </span>
