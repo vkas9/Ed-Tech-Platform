@@ -18,7 +18,7 @@ const VerifyEmail = () => {
   const [missing, setMissing] = useState(false);
   const [toastShow, setToastShow] = useState(false);
   const [sendingOTP, setSendingOTP] = useState(false);
-
+  const [loading,setLoading]=useState(false)
   const { signupdata, forgotPassword, userEmail } = useSelector(
     (store) => store.auth
   );
@@ -35,24 +35,32 @@ const VerifyEmail = () => {
   };
 
   const handleSubmit = async () => {
-    if (otp.length !== 6) {
-      setMissing(true);
-      if (toastShow) {
-        toast.dismiss(toastShow);
-        setToastShow(false);
+    setLoading(true)
+    try {
+      if (otp.length !== 6) {
+        setMissing(true);
+        if (toastShow) {
+          toast.dismiss(toastShow);
+          setToastShow(false);
+        }
+        const toastId = toast.error("Please fill all inputs");
+        setToastShow(toastId);
+        return;
       }
-      const toastId = toast.error("Please fill all inputs");
-      setToastShow(toastId);
-      return;
+  
+      const userInput = Number(otp);
+      const data = { ...signupdata, otp: userInput };
+  
+      if (!forgotPassword) {
+        dispatch(signup(data, navigate));
+      } else {
+        await verifyForgotOTP({ data, email: userEmail }, navigate);
+      }
+    } catch (error) {
+      console.log(error);
     }
-
-    const userInput = Number(otp);
-    const data = { ...signupdata, otp: userInput };
-
-    if (!forgotPassword) {
-      dispatch(signup(data, navigate));
-    } else {
-      await verifyForgotOTP({ data, email: userEmail }, navigate);
+    finally{
+      setLoading(false)
     }
   };
 
@@ -109,10 +117,18 @@ const VerifyEmail = () => {
         </div>
       </div>
       <button
-        onClick={handleSubmit}
-        className="sm:text-md mt-10 px-[30px] md:px-[50px] py-[12px] text-2xl text-white hover:bg-purple-700 transition-all outline-none duration-200 rounded-md bg-purple-800 font-bold uppercase"
+        onClick={()=>{
+          if(!loading){
+            handleSubmit()
+          }
+         
+        }}
+        disabled={loading}
+        className={`sm:text-md mt-10 px-[30px] md:px-[50px] py-[6px] text-2xl  transition-all outline-none duration-200 rounded-md bg-yellow-500 hover:bg-yellow-600 text-yellow-950 font-bold uppercase ${
+          loading ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
-        Verify
+         {loading ? "Verify..." : "Verify"}
       </button>
     </motion.div>
   );
