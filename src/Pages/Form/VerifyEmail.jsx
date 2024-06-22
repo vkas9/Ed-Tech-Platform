@@ -72,7 +72,7 @@ const VerifyEmail = () => {
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
       className="flex flex-col h-[100vh] items-center justify-center"
     >
-      <h1 className=" text-[1.5rem] px-1 oi:text-[2.7rem] overflow-hidden  md:text-[4em] -mt-[8rem] bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center">
+      <h1 className=" text-[2.1rem] vm:text-[2.3rem] oi:text-[2.7rem] px-1 overflow-hidden  md:text-[4em] -mt-[8rem] bg-gradient-to-r from-red-500 via-purple-400 to-blue-500 bg-clip-text text-transparent font-bold text-center">
       Enter verification code
       </h1>
       <div
