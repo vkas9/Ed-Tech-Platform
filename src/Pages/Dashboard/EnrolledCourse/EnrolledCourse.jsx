@@ -39,8 +39,8 @@ const EnrolledCourse = () => {
         <span className="text-yellow-500 whitespace-nowrap">Enrolled Courses</span>
       </div>
 
-      <h1 className="text-3xl mb-3">Enrolled Course</h1>
-      <div className="overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full pb-[12rem] h-[75vh]">
+      <h1 className="text-3xl mb-3">Enrolled Course <span>({enrolledCourse?.length})</span></h1>
+      <div className="overflow-y-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full pb-[12rem] sm:pb-[10rem] max-h-[calc(100vh-11rem)]">
         {!enrolledCourse ? (
           <div>
             <p>Loading...</p>

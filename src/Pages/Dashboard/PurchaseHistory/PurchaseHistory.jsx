@@ -63,7 +63,7 @@ const PurchaseHistory = () => {
       </h1>
       <div className="flex mr-5 rounded-lg overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center justify-start "></div>
 
-      <div className="overflow-y-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full   mt-2 rounded-md pb-[12rem] h-[75vh]">
+      <div className="overflow-y-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full   mt-2 rounded-md pb-[12rem] max-h-[calc(100vh-11.5rem)]">
         {!course ? (
           <div>
             <p>Loading...</p>

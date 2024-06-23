@@ -5,12 +5,8 @@ const initialState = {
   totalItems: localStorage.getItem("totalItems")
     ? JSON.parse(localStorage.getItem("totalItems"))
     : 0,
-  enrolledCourse: localStorage.getItem(import.meta.env.VITE_ENROLL_C)
-    ? decryptData(localStorage.getItem(import.meta.env.VITE_ENROLL_C))
-    : null,
-  wishlist: localStorage.getItem(import.meta.env.VITE_CART_D)
-    ? decryptData(localStorage.getItem(import.meta.env.VITE_CART_D))
-    : null
+  enrolledCourse: null,
+  wishlist: null
 };
 
 const cardSlice = createSlice({

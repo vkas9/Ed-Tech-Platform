@@ -68,9 +68,13 @@ const CourseCard = ({ course }) => {
   return (
     <>
       <div
-        onClick={handleClick}
+        onClick={()=>{
+          if(course?.isActive){
+            handleClick()
+          }
+         }}
         className={`flex relative text-[1.1rem] justify-between flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
-          !isButtonHovered
+          !isButtonHovered && course?.isActive
             ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20"
             : ""
         } bg-gray-300/10 max-w-[60rem] p-1`}
@@ -164,11 +168,11 @@ const CourseCard = ({ course }) => {
             )}
           </div>
         </div>
-        {/* <div className="absolute top-0 rounded-xl left-0 w-full h-full backdrop-blur-sm bg-black/40">
+        {!course?.isActive&&<div className="absolute top-0 rounded-xl left-0 w-full h-full backdrop-blur-sm bg-black/40">
 
         
-        <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 font-bold text-xl bg-white/10 p-3 rounded-xl text-red-500 -translate-y-1/2">Course Deleted</span>
-        </div> */}
+        <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 font-bold text-xl bg-white/10 p-3 rounded-xl text-red-500 -translate-y-1/2">This course is no longer available</span>
+        </div>}
       </div>
 
       {confirmationModal && <ConfirmModal modalData={confirmationModal} />}

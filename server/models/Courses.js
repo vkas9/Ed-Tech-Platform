@@ -14,7 +14,7 @@ const CoursesSchema = new mongoose.Schema({
     },
     WhatYouWillLearn:{
         type:String,
-        time:true
+        trim:true
     }
     ,
     Instructor:{
@@ -42,7 +42,7 @@ const CoursesSchema = new mongoose.Schema({
     StudentEntrolled:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        require:true
+        required:true
     }],
     Section:[{
         type:mongoose.Schema.Types.ObjectId,
@@ -52,6 +52,37 @@ const CoursesSchema = new mongoose.Schema({
         type:String,
         enum:["Draft","Published"],
         default:"Draft"
+    },
+    isActive:{
+        type:Boolean,
+        default:true,
     }
 },{timestamps:true})
+
+
+
+CoursesSchema.pre('remove', async function(next) {
+    const courseId = this._id;
+  
+    try {
+      console.log(`Pre-remove middleware triggered for course: ${courseId}`);
+  
+    
+      const updatedUsers = await mongoose.model('User').updateMany(
+        { 
+          $or: [{ Courses: courseId }, { Wishlist: courseId }] 
+        },
+        { 
+          $pull: { Courses: courseId, Wishlist: courseId } 
+        }
+      );
+  
+      console.log(`Updated users:`, updatedUsers);
+  
+      next();
+    } catch (err) {
+      console.error('Error in pre-remove middleware:', err);
+      next(err);
+    }
+  });
 module.exports=mongoose.model("Course",CoursesSchema);

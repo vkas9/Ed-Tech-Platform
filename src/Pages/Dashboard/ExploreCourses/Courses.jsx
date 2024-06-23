@@ -8,6 +8,7 @@ import { encryptData } from "../../../components/core/auth/crypto";
 import toast from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CourseSwitch from "./CourseSwitch";
+
 const Courses = () => {
   const navigate = useNavigate();
   const { token } = useSelector((store) => store.auth);
@@ -16,28 +17,13 @@ const Courses = () => {
   const { exploreAllCourses } = useSelector((store) => store.course);
   const { user } = useSelector((store) => store.profile);
   const [course, setCourses] = useState(exploreAllCourses);
-
-
-
-
-useEffect(()=>{
-  if(user&&user.role!=="Instructor"){
-    toast('You can buy these courses without spending real money', {
-      style: {
-        textAlign: 'center'
-  }})
-  
-  }
-  
-
-},[])
   useEffect(() => {
     if (!token) {
       navigate("/login");
     } else {
-      
       const controller = new AbortController();
       const signal = controller.signal;
+
       const fetchData = async () => {
         try {
           const courseData = await getAllCourse(signal);
@@ -51,46 +37,66 @@ useEffect(()=>{
         }
       };
 
-      if (!course) {
-        fetchData();
+      if(!course){
+        fetchData()
       }
+     // Always fetch data on component mount
+
       return () => {
         controller.abort();
       };
     }
-  }, [course, dispatch]);
+  }, [token, dispatch, navigate]);
 
   useEffect(() => {
     setCourses(exploreAllCourses);
   }, [exploreAllCourses]);
+
+  useEffect(() => {
+    if (user && user.role !== "Instructor") {
+      toast("You can buy these courses without spending real money", {
+        style: {
+          textAlign: "center",
+        },
+      });
+    }
+  }, [user]);
 
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.4, delay: 0.2, ease: [0, 0.71, 0.2, 1.01] }}
-      className="flex font-semibold flex-col text-lg  pt-2 pl-5 "
+      className="flex font-semibold flex-col text-lg pt-2 pl-5"
     >
-      <div className="flex gap-1 text-white/50 overflow-x-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center ">
-      <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
+      <div className="flex gap-1 text-white/50 overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center">
+        <Link
+          to={"/"}
+          className="underline active:text-white sm:hover:text-white"
+        >
+          Home
+        </Link>
         <span>/</span>
-        <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white " >Dashboard</Link>
+        <Link
+          to={"/dashboard/my-profile"}
+          className="underline active:text-white sm:hover:text-white"
+        >
+          Dashboard
+        </Link>
         <span>/</span>
-        <span className="text-yellow-500  whitespace-nowrap">
-          {" "}
+        <span className="text-yellow-500 whitespace-nowrap">
           {user?.role === "Instructor" ? "All Courses" : "Explore Courses"}
         </span>
       </div>
       <h1 className="text-3xl mb-3 py-1 whitespace-nowrap overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full mr-5">
-        {" "}
         {user?.role === "Instructor" ? "All Courses" : "Explore Courses"}{" "}
         {user?.role === "Instructor" && (
-          <span className=" text-[1.3rem] text-white/50">
+          <span className="text-[1.3rem] text-white/50">
             (To enroll in a course, please switch to the Student role)
           </span>
-        )}{" "}
+        )}
       </h1>
-      <div className="flex mr-5 rounded-lg overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center justify-start ">
+      <div className="flex mr-5 rounded-lg overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center justify-start">
         <CourseSwitch roll={expC} />
       </div>
 
@@ -102,7 +108,7 @@ useEffect(()=>{
         ) : course.length ? (
           course.map(
             (courseItem, index) =>
-              courseItem.status == "Published" &&
+              courseItem?.isActive&&courseItem.status == "Published" &&
               courseItem.Catagory.titleCourse === expC && (
                 <ExploreCoursesCard course={courseItem} key={index} />
               )
@@ -116,4 +122,5 @@ useEffect(()=>{
     </motion.div>
   );
 };
+
 export default Courses;

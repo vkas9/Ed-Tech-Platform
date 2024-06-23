@@ -19,7 +19,7 @@ const Wishlist = () => {
   const { user: data } = useSelector((store) => store.profile);
   const [Wishlist, setWishlist] = useState(wishlist);
   useEffect(()=>{
-    if(user&&user.role!=="Instructor"){
+    if(user&&user.role!=="Instructor"&&wishlist?.length){
       toast('You can buy these courses without spending real money', {
         style: {
           textAlign: 'center'
@@ -79,7 +79,7 @@ const Wishlist = () => {
       </div>
 
       <h1 className="text-3xl mb-3 w-full whitespace-nowrap ">
-        My Wishlist <span>({wishlist?.length}</span>)
+        My Wishlist <span>({wishlist?.length})</span>
       </h1>
       <div className="overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full pb-[12rem]  h-[75vh] ">
         {!wishlist ? (

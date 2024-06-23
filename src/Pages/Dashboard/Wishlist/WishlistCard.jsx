@@ -81,9 +81,13 @@ const WishlistCard = ({ course }) => {
 
   return (
     <div
-      onClick={handleClick}
+    onClick={()=>{
+      if(course?.isActive){
+        handleClick()
+      }
+     }}
       className={`flex relative text-[1.1rem] overflow-x-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full justify-between flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
-        !isButtonHovered ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20" : ""
+        !isButtonHovered && course?.isActive ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20" : ""
       } bg-gray-300/10 max-w-[60rem] p-1`}
     >
       <div className="gap-1 p-2 sm:min-w-[351px] flex-col   pr-[2.2rem] overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full vm:items-center flex">
@@ -165,6 +169,11 @@ const WishlistCard = ({ course }) => {
           className="text-[1.7rem] absolute sm:ml-3 sm:static lg:top-1 lg:right-1 top-1 right-1 sm:-top-1 sm:-right-1 hover:bg-white/10 box-content p-2 md:p-3 transition-all hover:cursor-pointer duration-150 rounded-full"
         />
       </button>
+      {!course?.isActive&&<div className="absolute top-0 rounded-xl left-0 w-full h-full backdrop-blur-sm bg-black/40">
+
+        
+<span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 font-bold text-xl bg-white/10 p-3 rounded-xl text-red-500 -translate-y-1/2">This course is no longer available</span>
+</div>}
     </div>
   );
 };

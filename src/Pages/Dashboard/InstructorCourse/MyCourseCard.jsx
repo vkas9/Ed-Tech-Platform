@@ -34,7 +34,7 @@ const MyCourseCard = ({ course }) => {
   const handleInstructorCourse = async () => {
     const controller = new AbortController();
     const signal = controller.signal;
-    try {
+    try {  
       await deleteInstructorCourse(dispatch, { courseId: course._id });
     } catch (error) {
       console.log(error);

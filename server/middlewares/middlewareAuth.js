@@ -8,7 +8,7 @@ exports.auth = async (req, res, next) => {
     if (!token) {
       return res.status(400).json({
         success: false,
-        message: "Token is missing",
+        message: "Session Expired",
       });
     }
     try {
@@ -21,7 +21,7 @@ exports.auth = async (req, res, next) => {
       if (error.name == "TokenExpiredError") {
         return res.status(401).json({
           success: false,
-          message: "Token has Expired",
+          message: "Session Expired",
         });
       } else {
         return res.status(501).json({

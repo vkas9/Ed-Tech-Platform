@@ -5,16 +5,10 @@ const initialState = {
   step: 1,
   course: {},
   editCourse: false,
-  allInstructoreCourses:localStorage.getItem(import.meta.env.VITE_INSTRUCT_ALL_C)
-  ? decryptData(localStorage.getItem(import.meta.env.VITE_INSTRUCT_ALL_C))
-  : null,
+  allInstructoreCourses:null,
   creatingCourse:false,
-  exploreAllCourses:localStorage.getItem(import.meta.env.VITE_ALL_C)
-  ? decryptData(localStorage.getItem(import.meta.env.VITE_ALL_C))
-  : null,
-  allPurchaseHistory:localStorage.getItem(import.meta.env.VITE_PURCHASE_HISTORY)
-  ? decryptData(localStorage.getItem(import.meta.env.VITE_PURCHASE_HISTORY))
-  : null
+  exploreAllCourses:null,
+  allPurchaseHistory:null
 };
 const courseSlice = createSlice({
   name: "course",

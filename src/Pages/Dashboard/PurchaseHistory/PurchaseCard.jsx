@@ -18,9 +18,9 @@ const navigate=useNavigate()
 
   return (
     <div
-      onClick={()=>{ navigate(`/dashboard/enrolled-courses`)}}
+      onClick={()=>{ if(course?.courseId?.isActive) navigate(`/dashboard/enrolled-courses`)}}
       className={`flex relative text-[1.1rem] justify-between overflow-x-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
-        !isButtonHovered ? "sm:hover:bg-gray-300/20" : ""
+        !isButtonHovered &&course?.courseId?.isActive ? "sm:hover:bg-gray-300/20" : ""
       } bg-gray-300/10 max-w-[60rem] p-1`}
     >
       <div className="gap-1  p-2 sm:min-w-[351px] flex-col  pr-[2.2rem] overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full  vm:items-center flex">
@@ -96,7 +96,13 @@ const navigate=useNavigate()
           </div>
           
         </div>
-      </div>
+        
+      </div>{!course?.courseId?.isActive&&<div className="absolute top-0 rounded-xl left-0 w-full h-full backdrop-blur-sm bg-black/40">
+
+        
+<span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 font-bold text-xl bg-white/10 p-3 rounded-xl text-red-500 -translate-y-1/2">This course is no longer available</span>
+</div>}
+      
     </div>
   );
 };

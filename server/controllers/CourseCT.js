@@ -488,6 +488,7 @@ exports.deleteInstructorCourse = async (req, res) => {
         message: "Course ID is required",
       });
     }
+
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { $pull: { Courses: courseId, Wishlist: courseId } },
@@ -506,13 +507,14 @@ exports.deleteInstructorCourse = async (req, res) => {
       });
     }
 
-    const deletedCourse = await Course.findByIdAndDelete(courseId);
-    if (!deletedCourse) {
+    const course = await Course.findById(courseId);
+    if (!course) {
       return res.status(404).json({
         success: false,
         message: "Course not found",
       });
     }
+    await Course.findByIdAndUpdate(courseId,{isActive:false});
 
     const coursePromises = updatedUser.Courses.map((courseid) =>
       Course.findById(courseid)
@@ -559,7 +561,7 @@ exports.deleteInstructorCourse = async (req, res) => {
       imc: encryptedCourseDetail,
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error deleting course:", error);
     return res.status(500).json({
       success: false,
       message: "Problem with deleting course",
