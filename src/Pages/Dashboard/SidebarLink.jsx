@@ -11,9 +11,17 @@ const SidebarLink = ({ name, link, icon: Icon }) => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const [confirmationModal, openConfirmationModal] = useState(null);
+  const [loading,setLoading]=useState(false);
   const handleLogout = (e) => {
     e.preventDefault();
-    dispatch(logout(navigation));
+    setLoading(true)
+    try {
+      !loading&&dispatch(logout(navigation));
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setLoading(false)
+    }
   };
 
   const Route = (route) => {

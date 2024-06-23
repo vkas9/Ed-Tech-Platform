@@ -39,10 +39,10 @@ const hero = () => {
         Elevate Your Coding Skills with MASTER and Unlock Your Path to Success Today!{" "}
         </p>
         <Link to={"/login"} className=" mx-auto">
-          <div className="   group font-bold  hover:scale-105 transition-all duration-200 mx-auto bg-white/10 backdrop-blur-sm rounded-md w-fit ">
-            <div className="flex gap-4 hover:scale-105 transition-all duration-200 items-center rounded-md px-5 py-3 ">
+          <div className="   group font-bold active:hover:bg-white/20 sm:hover:bg-white/20 transition-all duration-200 mx-auto bg-white/10 backdrop-blur-sm rounded-md w-fit ">
+            <div className="flex gap-4  transition-all duration-200 items-center rounded-md px-5 py-3 ">
               {user?.role==="Instructor"? <Link to={"/dashboard/my-profile"}>Go To Dashboard</Link>:<Link to={"/login"} >Teach on MASTER</Link> }
-              <FaArrowRight size={20}  className="animate-pulse "/>
+              <FaArrowRight size={20}  className=" -translate-x-1 duration-200 group-active:translate-x-1 sm:group-hover:translate-x-1"/>
             </div>
           </div>
         </Link>
