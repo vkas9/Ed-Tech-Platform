@@ -15,7 +15,7 @@ app.use(
     origin: [
       process.env.NETHOST,
       process.env.LOCALHOST,
-      process.env.RENDERHOST,process.env.MVHOST,process.env.TEST999
+      process.env.RENDERHOST,process.env.MVHOST,process.env.TEST999,process.env.LIVEHOST
     ],
     credentials: true,
   })
