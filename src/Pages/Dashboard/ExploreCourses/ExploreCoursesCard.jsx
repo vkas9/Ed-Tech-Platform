@@ -94,7 +94,7 @@ const ExploreCoursesCard = ({ course }) => {
           <img
             src={course?.Thumbnail}
             alt="course-thumbnail"
-            className="w-[160px] h-[110px] max-w-[160px] object-cover rounded-lg"
+            className="h-[110px] w-full xs:w-[200px] xs:max-w-[200px] vm:w-[160px] vm:max-w-[160px] object-cover  rounded-lg"
           />
 
           <div className="vm:w-[120px] w-full  md:max-w-[220px] lg:w-[220px]">
@@ -130,22 +130,37 @@ const ExploreCoursesCard = ({ course }) => {
       <div className="h-[1px] bg-white/10 mx-3 my-1" />
 
       <div className="flex xs:items-center gap-1 vm:gap-5 justify-between">
-        <div className="vm:grid overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full xd:w-[320px] grid-flow-col items-start gap-2">
-          <div className="w-fit pl-2 vm:pl-4 sm:pl-0 flex items-center">
-            <span className=" flex flex-col sm:items-center">
-              <span className="text-white/40">Created at:</span>
+        <div className="vm:grid overflow-x-auto  items-center scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full xd:w-[320px] grid-flow-col  gap-2">
+          <div className=" flex flex-col  items-center mr-5">
+
+          
+          <div className="w-fit pl-2 vm:pl-4 sm:pl-0 flex items-start vm:items-center">
+            <span className=" flex flex-col flex-start vm:items-center">
+              <span className="text-white/40  flex-start vm:text-center">Created at:</span>
               <span className="whitespace-nowrap">
-                <span className="sm:block">
+                <span className="sm:block ">
                   {course.createdAt.slice(0, 10)}
                 </span>
               </span>
             </span>
           </div>
-          <div className="w-fit pl-2 vm:pl-4 sm:pl-0 flex items-center">
-            <span className=" flex flex-col sm:items-center">
+          <div className="hidden vm:flex h-[1px] bg-white/10 my-1 w-full" />
+          <div className="w-fit pl-2 vm:pl-4 sm:pl-0 flex  flex-start vm:items-center">
+            <span className=" flex flex-col  flex-start vm:items-center">
+              <span className="text-white/40 text-center">Upldated at:</span>
+              <span className="whitespace-nowrap">
+                <span className="sm:block text-center">
+                  {course.updatedAt.slice(0, 10)}
+                </span>
+              </span>
+            </span>
+          </div>
+          </div>
+          <div className="w-fit  pl-2 vm:pl-4 sm:pl-0 flex  items-center">
+            <span className=" flex flex-col sm :items-center">
               <span className="text-white/40">Duration:</span>
               <span className="whitespace-nowrap">
-                <span className="sm:block">{time}</span>
+                <span className="sm:block vm:text-center">{time}</span>
               </span>
             </span>
           </div>
