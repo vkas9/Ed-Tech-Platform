@@ -89,7 +89,7 @@ const Courses = () => {
         </span>
       </div>
       <h1 className="text-3xl mb-3 py-1 whitespace-nowrap overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full mr-5">
-        {user?.role === "Instructor" ? "All Courses" : "Explore Courses"}{" "} <span className="text-xs text-white/50">(Disclaimer: These courses are for testing purposes only and are not available for sale)</span>
+        {user?.role === "Instructor" ? "All Courses" : "Explore Courses"}{" "} <span className="text-xs text-white/50">(Disclaimer: The courses and videos provided on this platform are intended solely for testing purposes.)</span>
         {user?.role === "Instructor" && (
           <span className="text-[1.3rem] text-white/50">
             (To enroll in a course, please switch to the Student role)
