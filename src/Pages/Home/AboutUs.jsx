@@ -16,7 +16,7 @@ const AboutUs = () => {
       </div>
       <div className="absolute overflow-hidden  rounded-2xl h-full mx-auto  top-0">
         <video
-          src={"https://res.cloudinary.com/dwtcqxkxt/video/upload/v1717518892/VikasFolder/particle_krsbor.mp4"}
+          src={"https://master.blr1.cdn.digitaloceanspaces.com/particle_krsbor.webm"}
           muted
           loop
           autoPlay

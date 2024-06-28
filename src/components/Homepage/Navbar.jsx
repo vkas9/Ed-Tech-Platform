@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import image from "../../assets/master.png";
+import image from "../../assets/master.webp";
 import { navigation } from "../../constants";
 import Button from "./Button";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";

@@ -1,6 +1,6 @@
 import { FaHandPointRight } from "react-icons/fa";
 import Button from "../../components/Homepage/Button";
-import techimage from "../../assets/tech.png";
+import techimage from "../../assets/tech.webp";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 const fadeIn = {

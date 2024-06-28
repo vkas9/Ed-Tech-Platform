@@ -1,6 +1,6 @@
 import Button from "../../components/Homepage/Button";
 import { IoCodeSlashSharp } from "react-icons/io5";
-import gradient from "../../assets/gradient.jpg";
+import gradient from "../../assets/gradient.webp";
 
 const Cards=({head})=>{
     return (

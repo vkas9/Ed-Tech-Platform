@@ -1,6 +1,6 @@
-import curve1 from "../../assets/curve1.png";
-import g2 from "../../assets/g2.png";
-import ud from "../../assets/UD.png";
+import curve1 from "../../assets/curve1.webp";
+import g2 from "../../assets/g2.webp";
+import ud from "../../assets/UD.webp";
 
 import HightlightText from "../../components/Homepage/HightlightText";
 import { Link } from "react-router-dom";
@@ -68,7 +68,7 @@ const hero = () => {
 
       <div className=" hidden  w-full   lg:flex   items-center rounded-t-[3rem] overflow-hidden mx-auto absolute bottom-0 top-0 ">
         <video
-          src={`https://res.cloudinary.com/dwtcqxkxt/video/upload/v1717518684/VikasFolder/video_mmswrj.mp4`}
+          src={`https://master.blr1.cdn.digitaloceanspaces.com/video_mmswrj.webm`}
           preload="auto"
           muted
           loop
