@@ -19,13 +19,15 @@ import { v4 as uuidv4 } from "uuid";
 import { fetchEnrollData } from "../EnrolledCourse/fetchEnrollData";
 import toast from "react-hot-toast";
 import { CaluculateDuration } from "../../../components/core/auth/CaluculateDuration";
+import StarRating from "../../../components/core/ReusableComponents/StarRating";
 
 const ExploreCoursesCard = ({ course }) => {
   const [loading, setLoading] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [count, setCount] = useState(0);
+  const [starCount, setStarCount] = useState(0);
   const { user } = useSelector((store) => store.profile);
   const { enrolledCourse } = useSelector((store) => store.card);
   let time = CaluculateDuration(course);
@@ -103,16 +105,23 @@ const ExploreCoursesCard = ({ course }) => {
               {course.CourseDescription}
             </p>
             <div className="flex gap-2  whitespace-nowrap overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center">
-              <span>0.0</span>
-              <ReactStars
-                className="min-w-fit hidden truncate xs:flex whitespace-nowrap scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full overflow-auto"
-                count={5}
-                size={25}
-                edit={false}
-                activeColor="#ffd700"
-                emptyIcon={<FaRegStar />}
-                fullIcon={<FaStar />}
+              <span>3.9</span>
+              <span onClick={(e)=>e.stopPropagation()} onMouseEnter={(e) => {
+              e.stopPropagation();
+              setIsButtonHovered(true);
+            }}
+            onMouseLeave={(e) => {
+              e.stopPropagation();
+              setIsButtonHovered(false);
+            }} >
+
+              <StarRating
+              
+              flag={true}
+              starCount="4"
+              
               />
+              </span>
             </div>
           </div>
         </div>
