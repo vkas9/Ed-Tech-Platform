@@ -111,8 +111,10 @@ const UploadProfile = ({ name, label, video = false, viewData = null, editData =
             <p className="mt-2 max-w-[200px] leading-8 text-center text-lg text-richblack-200">
               Drag and drop an {!video ? "image" : "video"}, or{" "}
               <span
-                className="font-semibold bg-white/10 hover:bg-white/20 whitespace-nowrap py-1 px-2 rounded-full text-yellow-50"
-                onClick={handleBrowseClick}
+                className="font-semibold bg-white/10 active:bg-white/20 transition-all duration-150 sm:hover:bg-white/20 whitespace-nowrap py-1 px-2 rounded-full text-yellow-50"
+                onClick={(e)=>{
+                  e.stopPropagation()
+                  handleBrowseClick()}}
               >
                 Browse a file
               </span>
