@@ -11,6 +11,7 @@ const sendMail = async (email, title, body) => {
             html:  `<h1>${body}</h1>`
         })
         
+        
     } catch (error) {
         console.log("There is a error in sending Mail",error);
         
