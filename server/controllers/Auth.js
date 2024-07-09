@@ -392,6 +392,13 @@ exports.resetPassword = async (req, res) => {
 exports.forgotPasswordOTP = async (req, res) => {
   try {
     const { email } = req.body;
+    const isUserExist=await User.findOne({Email:email});
+    if(!isUserExist){
+      return res.status(404).json({
+        success:false,
+        message:"User not Registered"
+      })
+    }
     const generatedOtp = optgenerator.generate(6, {
       upperCaseAlphabets: false,
       lowerCaseAlphabets: false,
