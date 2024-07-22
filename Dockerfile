@@ -4,5 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --silent
 COPY . .
-EXPOSE 3000
-CMD ["npm","start"]
+EXPOSE 8080
+
+
+CMD ["npm", "run", "start"]
