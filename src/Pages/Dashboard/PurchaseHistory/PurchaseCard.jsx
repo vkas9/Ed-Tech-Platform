@@ -6,6 +6,7 @@ import { useState } from "react";
 import { CaluculateDuration } from "../../../components/core/auth/CaluculateDuration";
 
 import { useNavigate } from "react-router-dom";
+import formatDate from "../../../components/core/ReusableComponents/formatDate";
 
 
 const PurchaseCard = ({ course }) => {
@@ -65,7 +66,7 @@ const navigate=useNavigate()
               <span className="text-white/40">Created at:</span>
               <span className="whitespace-nowrap">
                 <span className="sm:block">
-                  {course?.courseId?.createdAt.slice(0, 10)}
+                  {formatDate(course?.courseId?.createdAt.slice(0, 10))}
                 </span>
               </span>
             </span>
@@ -92,7 +93,7 @@ const navigate=useNavigate()
             
             className="text-[1.1rem] w-[120px] text-center text-white/40  box-content p-2 transition-all hover:cursor-pointer duration-150 rounded-full"
           >
-            Purchase at: <span className="text-white">{course?.purchasedAt.slice(0, 10)}</span>
+            Purchase at: <span className="text-white">{formatDate(course?.purchasedAt.slice(0, 10))}</span>
           </div>
           
         </div>

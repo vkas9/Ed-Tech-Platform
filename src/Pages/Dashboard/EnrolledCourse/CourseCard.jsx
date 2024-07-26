@@ -10,6 +10,7 @@ import { cardAction } from "../../../store/cardSlice";
 import { profileAction } from "../../../store/profileSlice";
 import { CaluculateDuration } from "../../../components/core/auth/CaluculateDuration";
 import toast from "react-hot-toast";
+import formatDate from "../../../components/core/ReusableComponents/formatDate";
 
 const CourseCard = ({ course }) => {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ const CourseCard = ({ course }) => {
             handleClick()
           }
          }}
-        className={`flex relative text-[1.1rem] justify-between flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
+        className={`flex relative ${!course?.isActive?"pointer-events-none select-none":""}   text-[1.1rem] justify-between flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
           !isButtonHovered && course?.isActive
             ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20"
             : ""
@@ -117,14 +118,14 @@ const CourseCard = ({ course }) => {
               <span className="text-white/40">Created at: </span>
               <span className="whitespace-nowrap">
                 {" "}
-                {course.createdAt.slice(0, 10)}
+                {formatDate(course.createdAt.slice(0, 10))}
               </span>
             </p>
             <p className="text-sm sm:text-center vm:text-[1.1rem]">
               <span className="text-white/40">Updated at: </span>
               <span className="whitespace-nowrap">
                 {" "}
-                {course.updatedAt.slice(0, 10)}
+                {formatDate(course.updatedAt.slice(0, 10))}
               </span>
             </p>
           </div>
@@ -168,7 +169,7 @@ const CourseCard = ({ course }) => {
             )}
           </div>
         </div>
-        {!course?.isActive&&<div className="absolute top-0 rounded-xl text-center left-0 w-full h-full backdrop-blur-sm bg-black/40">
+        {!course?.isActive&&<div className="absolute  pointer-events-none top-0 rounded-xl text-center left-0 w-full h-full backdrop-blur-sm bg-black/40">
 
         
         <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 font-bold text-xl bg-white/10 p-3 rounded-xl text-red-500 -translate-y-1/2">This course is no longer available</span>

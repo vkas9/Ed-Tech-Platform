@@ -20,6 +20,7 @@ import { fetchEnrollData } from "../EnrolledCourse/fetchEnrollData";
 import toast from "react-hot-toast";
 import { CaluculateDuration } from "../../../components/core/auth/CaluculateDuration";
 import StarRating from "../../../components/core/ReusableComponents/StarRating";
+import formatDate from "../../../components/core/ReusableComponents/formatDate";
 
 const ExploreCoursesCard = ({ course }) => {
   const [loading, setLoading] = useState(false);
@@ -83,7 +84,7 @@ const ExploreCoursesCard = ({ course }) => {
       }
     }
   };
-
+  
   return (
     <div
       onClick={handleClick}
@@ -148,7 +149,7 @@ const ExploreCoursesCard = ({ course }) => {
               <span className="text-white/40  flex-start vm:text-center">Created at:</span>
               <span className="whitespace-nowrap">
                 <span className="sm:block ">
-                  {course.createdAt.slice(0, 10)}
+                  {formatDate(course.createdAt.slice(0, 10))}
                 </span>
               </span>
             </span>
@@ -159,7 +160,7 @@ const ExploreCoursesCard = ({ course }) => {
               <span className="text-white/40 text-center">Upldated at:</span>
               <span className="whitespace-nowrap">
                 <span className="sm:block text-center">
-                  {course.updatedAt.slice(0, 10)}
+                  {formatDate(course.updatedAt.slice(0, 10))}
                 </span>
               </span>
             </span>

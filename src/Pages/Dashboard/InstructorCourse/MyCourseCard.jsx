@@ -13,6 +13,7 @@ import { FaAngleDown } from "react-icons/fa6";
 import { CaluculateDuration } from "../../../components/core/auth/CaluculateDuration";
 import ConfirmModal from "../ConfirmModal";
 import { deleteInstructorCourse } from "../../../APIs/mainAPI";
+import formatDate from "../../../components/core/ReusableComponents/formatDate";
 
 const MyCourseCard = ({ course }) => {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
@@ -119,7 +120,7 @@ const MyCourseCard = ({ course }) => {
               <span className="text-white/40 gap-1">Created at: </span>
               <span className="sm:whitespace-nowrap ">
                 {" "}
-                {course.createdAt.slice(0, 10)}
+                {formatDate(course.createdAt.slice(0, 10))}
               </span>
             </p>
             <div className="h-[1px] w-full hidden sm:flex   bg-white/10   " />
@@ -130,7 +131,7 @@ const MyCourseCard = ({ course }) => {
               </span>
               <span className="sm:whitespace-nowrap   ">
                 {" "}
-                {course.updatedAt.slice(0, 10)}
+                {formatDate(course.updatedAt.slice(0, 10))}
               </span>
             </p>
           </div>

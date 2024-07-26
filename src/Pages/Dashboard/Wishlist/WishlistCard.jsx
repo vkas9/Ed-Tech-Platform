@@ -81,9 +81,9 @@ const WishlistCard = ({ course }) => {
 
   return (
     <div
-    onClick={()=>{
+    onClick={(e)=>{
       if(course?.isActive){
-        handleClick()
+        handleClick(e)
       }
      }}
       className={`flex relative text-[1.1rem] overflow-x-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full justify-between flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
