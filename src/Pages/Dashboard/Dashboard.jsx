@@ -38,7 +38,7 @@ const Dashboard = () => {
           dispatch(profileAction.setSidebarShow(!show))
           
           }} 
-          className={`${show?"bg-black/50":"hidden"}  w-full h-full fixed top-0 right-0 pt-5  `} />
+          className={`${show?"bg-black/50":"hidden"} z-[1]  w-full h-full fixed top-0 right-0 pt-5  `} />
         <motion.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
