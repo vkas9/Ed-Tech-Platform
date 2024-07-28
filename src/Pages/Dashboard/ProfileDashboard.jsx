@@ -24,9 +24,11 @@ const ProfileDashboard = () => {
         <h1 className="text-[2.5rem] font-semibold ">My Profile</h1>
       </div>
       <div className="mt-8  px-3 sm:px-0  ">
-        <div className=" p-4 flex flex-col sm:flex-row items-center  bg-white/10 rounded-md py-6 gap-1 w-full sm:w-[95%] lg:max-w-[55rem] sm:ml-5">
+        <div className=" p-4 flex flex-col sm:flex-row items-center relative  bg-black/20 rounded-md py-6 gap-1 w-full sm:w-[95%] lg:max-w-[55rem] sm:ml-5">
+        <div className="absolute w-full h-full sm:bg-gradient-to-r -z-[1] from-black via-transparent to-transparent  left-0 top-0 " ></div>
+        <div class="absolute bg-right bg-cover inset-1 h-full w-full top-0 left-0 rounded-md opacity-20 sm:opacity-35  -z-[2] " style={{backgroundImage:`url(${user?.avatar})`}}></div>
           <div className="min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px] max-w-[120px] rounded-full overflow-hidden    ">
-            <img  src={user?.avatar} className="overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-full min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px] max-w-[120px] object-cover" alt="" />
+            <img  src={user?.avatar} className="overflow-auto pointer-events-none scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-full min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px] max-w-[120px] object-cover" alt="" />
           </div>
           <div className="flex  flex-col sm:flex-row text-center sm:text-start ml-3 w-full justify-between ">
             <div className="flex flex-col ">
@@ -36,7 +38,7 @@ const ProfileDashboard = () => {
               <span className="text-gray-200/50 overflow-x-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full">{user.Email}</span>
             </div>
             <Link to="/dashboard/settings">
-            <div className="sm:flex select-none text-xl gap-2 items-center p-2 border hidden  active:bg-gray-100/10 lg:hover:bg-gray-100/10 hover:cursor-pointer border-gray-400/50 rounded-lg font-semibold ">
+            <div className="sm:flex select-none text-xl gap-2 items-center p-2 border hidden bg-black/30  active:bg-black/40 lg:hover:bg-black/40 hover:cursor-pointer border-gray-400/50 rounded-lg font-semibold ">
               <MdOutlineEdit className="text-lg" />
               <span>Edit</span>
             </div>
