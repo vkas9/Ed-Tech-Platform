@@ -2,6 +2,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import { Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
+import formatDate from "../../components/core/ReusableComponents/formatDate"
 import { profileAction } from "../../store/profileSlice";
 const ProfileDashboard = () => {
  
@@ -24,8 +25,8 @@ const ProfileDashboard = () => {
         <h1 className="text-[2.5rem] font-semibold ">My Profile</h1>
       </div>
       <div className="mt-8  px-3 sm:px-0  ">
-        <div className=" p-4 flex flex-col sm:flex-row items-center relative  bg-black/20 rounded-md py-6 gap-1 w-full sm:w-[95%] lg:max-w-[55rem] sm:ml-5">
-        <div className="absolute w-full h-full sm:bg-gradient-to-r -z-[1] from-black via-transparent to-transparent  left-0 top-0 " ></div>
+        <div className=" p-4 flex flex-col sm:flex-row items-center relative overflow-hidden bg-black/20 rounded-md py-6 gap-1 w-full sm:w-[95%] lg:max-w-[55rem] sm:ml-5">
+        <div className="absolute w-full h-full bg-gradient-to-t  sm:bg-gradient-to-r -z-[1] from-black via-transparent to-transparent  left-0 top-0 " ></div>
         <div class="absolute bg-right bg-cover inset-1 h-full w-full top-0 left-0 rounded-md opacity-20 sm:opacity-35  -z-[2] " style={{backgroundImage:`url(${user?.avatar})`}}></div>
           <div className="min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px] max-w-[120px] rounded-full overflow-hidden    ">
             <img  src={user?.avatar} className="overflow-auto pointer-events-none scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full rounded-full min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px] max-w-[120px] object-cover" alt="" />
@@ -86,7 +87,7 @@ const ProfileDashboard = () => {
               </div>
               <div className="flex flex-col ">
                 <span className="text-gray-400 overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full">Date Of Birth</span>
-                <span className="capitalize overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">{user.Profile.dateOfBirth?user.Profile.dateOfBirth.slice(0,10):"NIL"}</span>
+                <span className="capitalize overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">{user.Profile.dateOfBirth? formatDate(user.Profile.dateOfBirth.slice(0,10)) :"NIL"}</span>
               </div>
             </div>
           </div>

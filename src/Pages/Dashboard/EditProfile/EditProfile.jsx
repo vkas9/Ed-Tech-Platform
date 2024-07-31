@@ -47,7 +47,7 @@ const EditProfile = () => {
       <h1 className="text-3xl">Edit Profile Picture</h1>
       <div className="mt-4 mr-5 sm:mr-0 sm:px-0">  
         <div  className={`p-4 relative overflow-hidden  z-[1] flex flex-col sm:flex-row items-center  rounded-md py-6 gap-4 w-full sm:w-[95%] lg:max-w-[55rem]`}>
-        <div className="absolute w-full h-full sm:bg-gradient-to-r -z-[1] from-black via-transparent to-transparent  left-0 top-0 " ></div>
+        <div className="absolute w-full h-full bg-gradient-to-t sm:bg-gradient-to-r -z-[1] from-black via-transparent to-transparent  left-0 top-0 " ></div>
         <div class="absolute bg-right bg-cover inset-1 h-full w-full top-0 left-0 rounded-md opacity-20 sm:opacity-35  -z-[2] " style={{backgroundImage:`url(${user?.avatar})`}}></div>
           <div className="min-h-[120px] min-w-[120px] max-h-[120px] sm:min-h-[100px] sm:min-w-[100px] sm:max-h-[100px] sm:max-w-[100px] rounded-full overflow-hidden  max-w-[120px]   ">
             <img
