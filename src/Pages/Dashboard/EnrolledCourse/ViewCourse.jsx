@@ -1,16 +1,18 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import { motion } from "framer-motion";
 import VideoModal from "./VideoModal/VideoModal";
+import { fetchEnrollData } from "./fetchEnrollData";
 const ViewCourse = () => {
   const { enrolledCourse } = useSelector((store) => store.card);
   const { courseId } = useParams();
   const [openSections, setOpenSections] = useState({});
   const [confirmationModal, openConfirmationModal] = useState(null);
   const { user } = useSelector((store) => store.profile);
+  const dispatch = useDispatch();
   const handleSetOpen = (sectionId) => {
     setOpenSections((prevState) => ({
       ...prevState,
@@ -22,7 +24,20 @@ const ViewCourse = () => {
     const seconds = totalSeconds % 60;
     return `${minutes}m ${seconds}s`;
   }
-  const eCourse = enrolledCourse.find((item) => item._id === courseId);
+  useEffect(() => {
+    if (!user || user.role !== "Student") return;
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    if (!enrolledCourse) {
+      fetchEnrollData(user, dispatch, signal);
+    }
+
+    return () => {
+      controller.abort();
+    };
+  }, [enrolledCourse, user, dispatch]);
+  const eCourse = enrolledCourse?.find((item) => item._id === courseId);
   const getTotalLectures = () => {
     let total = 0;
     for (let temp in eCourse.Section) {
@@ -30,6 +45,9 @@ const ViewCourse = () => {
     }
     return total;
   };
+  if (!eCourse) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <motion.div

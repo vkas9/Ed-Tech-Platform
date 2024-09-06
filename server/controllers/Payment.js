@@ -8,6 +8,7 @@ require("dotenv").config();
 exports.createOrder = async (req, res) => {
   try {
     const { courseId } = req.body;
+
     const userId = req.user.id;
     if (!courseId) {
       return res.json({
@@ -88,7 +89,6 @@ exports.createOrder = async (req, res) => {
     });
   }
 };
-
 exports.enrollCourse = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -99,38 +99,68 @@ exports.enrollCourse = async (req, res) => {
       { $push: { StudentEntrolled: userId } },
       { new: true }
     );
+
     if (!updatedCourse) {
-      return res.status(500).json({
+      return res.status(404).json({
         success: false,
-        message: "Course Not Found",
+        message: "Course not found",
       });
     }
-    const enrolledStudent = await user
-      .findByIdAndUpdate(
-        userId,
-        { $push: { Courses: courseId } },
-        { new: true }
-      )
+
+    const enrolledStudent = await user.findByIdAndUpdate(
+      userId,
+      { $push: { Courses: courseId } },
+      { new: true }
+    )
       .select("-Password")
-      .populate({ path: "Profile" })
-      .populate({ path: "Wishlist" })
-      .exec();
+      .populate({
+        path: "Profile",
+      })
+      .populate({
+        path: "Wishlist",
+        populate: [
+          {
+            path: "Instructor",
+            populate: { path: "Profile" },
+          },
+          {
+            path: "Rating_N_Reviews",
+            populate: { path: "User" },
+          },
+          {
+            path: "Catagory",
+            populate: { path: "Course" },
+          },
+          {
+            path: "StudentEntrolled",
+          },
+          {
+            path: "Section",
+            populate: { path: "subSection" },
+          },
+        ],
+      });
+
     const encryptUser = encryptData(enrolledStudent);
+
+
     await sendmail(
       enrolledStudent.Email,
       "Congratulations from MASTER",
-      `Congratulations you have successfully Enrolled ${updatedCourse.CourseName} Course`
+      `Congratulations, you have successfully enrolled in the ${updatedCourse.CourseName} course.`
     );
+
     return res.status(200).json({
       success: true,
-      message: "Payment Successfull",
-      ey: encryptUser,
+      message: "Enrollment successful",
+      ey: encryptUser
     });
+
   } catch (error) {
-    console.log(error);
+    console.error("Enrollment error:", error);
     return res.status(500).json({
       success: false,
-      message: "Something went wrong while Enrolling course",
+      message: "Something went wrong while Enrolling in the course.",
     });
   }
 };

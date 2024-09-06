@@ -74,7 +74,7 @@ const ExploreCoursesCard = ({ course }) => {
         const paymentResponse = await PaymentComponent({
           courseId: course._id,
         });
-        if (paymentResponse.status_code === 200) {
+        if (paymentResponse.statusCode === 200) {
           await handleEnrollCourse();
           await updatePurchaseHistory({ courseId: course._id });
           await getPurchaseHistory(dispatch);

@@ -1,16 +1,24 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useNavigation, useParams } from "react-router-dom";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import { motion } from "framer-motion";
 import { AiFillLock } from "react-icons/ai";
+import { fetchEnrollData } from "../EnrolledCourse/fetchEnrollData";
+import { getAllCourse } from "../../../APIs/mainAPI";
+import { encryptData } from "../../../components/core/auth/crypto";
+import toast from "react-hot-toast";
+import { courseAction } from "../../../store/courseSlice";
 const ViewCourse = () => {
   const { exploreAllCourses } = useSelector((store) => store.course);
   const { courseId } = useParams();
   const [openSections, setOpenSections] = useState({});
+  const { token } = useSelector((store) => store.auth);
   const [confirmationModal, openConfirmationModal] = useState(null);
   const { user } = useSelector((store) => store.profile);
+  const navigate=useNavigate()
+  const dispatch=useDispatch()
   const handleSetOpen = (sectionId) => {
     setOpenSections((prevState) => ({
       ...prevState,
@@ -22,7 +30,41 @@ const ViewCourse = () => {
     const seconds = totalSeconds % 60;
     return `${minutes}m ${seconds}s`;
   }
-  const eCourse = exploreAllCourses.find((item) => item._id === courseId);
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    } else {
+      const controller = new AbortController();
+      const signal = controller.signal;
+
+      const fetchData = async () => {
+        try {
+          const courseData = await getAllCourse(signal);
+          const text = encryptData(courseData);
+          localStorage.setItem(import.meta.env.VITE_ALL_C, text);
+          dispatch(courseAction.setExploreAllCourses(courseData));
+        } catch (error) {
+          if (!controller.signal.aborted) {
+            toast.error("Unable to fetch all courses");
+          }
+        }
+      };
+
+      if(!exploreAllCourses){
+        fetchData()
+      }
+     // Always fetch data on component mount
+
+      return () => {
+        controller.abort();
+      };
+    }
+  }, [token, dispatch, navigate]);
+
+
+
+  const eCourse = exploreAllCourses?.find((item) => item._id === courseId);
 
   const getTotalLectures = () => {
     let total = 0;
@@ -31,6 +73,10 @@ const ViewCourse = () => {
     }
     return total;
   };
+
+  if(!exploreAllCourses){
+    return <p>Loading...</p>
+  }
 
   return (
     <motion.div

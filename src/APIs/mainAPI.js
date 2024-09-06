@@ -294,7 +294,7 @@ export const getCourseDetail = async (courseId, signal) => {
     toast.error("No internet connection");
     throw new Error("No internet connection");
   }
-  const toastId = toast.loading("Loading");
+  const toastId = toast.loading("Loading...");
   let response;
 
   try {
@@ -813,6 +813,7 @@ export const PaymentComponent = async (data) => {
     );
 
     const res = response.data;
+
     if (res.success) {
       return new Promise((resolve, reject) => {
         const options = {
@@ -825,7 +826,10 @@ export const PaymentComponent = async (data) => {
           order_id: res.order_id,
           handler: function (response) {
             toast.success("Payment Succeeded");
-            resolve(response); // Resolve the promise with the response on success
+            resolve({
+              statusCode: 200,
+              data: response
+            });
           },
           prefill: {
             contact: res.contact,
@@ -861,44 +865,51 @@ export const PaymentComponent = async (data) => {
 };
 
 export const enrollCourse = async (
-  dispatch,
-  data,
+  dispatch, 
   enrollData = null,
+  data,
   navigate
 ) => {
   if (!navigator.onLine) {
     toast.error("No internet connection");
     throw new Error("No internet connection");
   }
+
   const toastId = toast.loading("Enrolling");
+  
   try {
     const response = await axios.post(
       `${BASE_URL}/api/beta/payment/enrollCourse`,
-      data,
-      {
-        withCredentials: true,
-      }
+      enrollData,
+      { withCredentials: true }
     );
+
     const userd = decryptData(response.data.ey);
     const updatedWishlist = userd.Wishlist;
-
-    const cartText = encryptData(updatedWishlist.reverse());
-
     dispatch(profileAction.setProfile(userd));
-    const text = encryptData(userd);
-    localStorage.setItem(import.meta.env.VITE_USER, text);
-    localStorage.setItem(import.meta.env.VITE_CART_D, cartText);
+    dispatch(cardAction.setWishlist(updatedWishlist));
+
+    const encryptedUser = encryptData(userd);
+
+    localStorage.setItem(import.meta.env.VITE_USER, encryptedUser);
+    const encryptedCart = encryptData(updatedWishlist.reverse());
+
+    localStorage.setItem(import.meta.env.VITE_CART_D, encryptedCart);
+
     const controller = new AbortController();
     const signal = controller.signal;
-    await fetchEnrollData(enrollData, dispatch, signal, true);
-    navigate(`/dashboard/enrolled-courses`);
-    toast.success("Enrolled");
+
+    await fetchEnrollData(data, dispatch, signal, true);
+    
+    // navigate(`/dashboard/enrolled-courses`);
+    toast.success("Enrolled successfully");
   } catch (error) {
-    toast.error(response.error);
+    toast.error("Enrollment failed");
   } finally {
     toast.dismiss(toastId);
   }
 };
+
 export const deleteInstructorCourse = async (dispatch, data) => {
   if (!navigator.onLine) {
     toast.error("No internet connection");

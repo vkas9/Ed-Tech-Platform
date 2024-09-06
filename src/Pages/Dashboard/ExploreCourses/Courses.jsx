@@ -72,14 +72,14 @@ const Courses = () => {
       <div className="flex gap-1 text-white/50 overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center">
         <Link
           to={"/"}
-          className="underline active:text-white sm:hover:text-white"
+          className="sm:hover:underline active:text-white sm:hover:text-white"
         >
           Home
         </Link>
         <span>/</span>
         <Link
           to={"/dashboard/my-profile"}
-          className="underline active:text-white sm:hover:text-white"
+          className="sm:hover:underline active:text-white sm:hover:text-white"
         >
           Dashboard
         </Link>

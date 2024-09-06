@@ -71,9 +71,9 @@ const Wishlist = () => {
       className="flex font-semibold flex-col text-lg pt-2 pl-5"
     >
       <div className="flex gap-1 text-white/50 overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center">
-      <Link to={"/"} className="underline active:text-white  sm:hover:text-white ">Home</Link>
+      <Link to={"/"} className="sm:hover:underline active:text-white  sm:hover:text-white ">Home</Link>
         <span>/</span>
-        <Link to={"/dashboard/my-profile"} className="underline active:text-white  sm:hover:text-white " >Dashboard</Link>
+        <Link to={"/dashboard/my-profile"} className="sm:hover:underline active:text-white  sm:hover:text-white " >Dashboard</Link>
         <span>/</span>
         <span className="text-yellow-500">Wishlist</span>
       </div>
