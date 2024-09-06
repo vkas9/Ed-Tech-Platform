@@ -1,1 +1,7 @@
-![master](https://github.com/vkas9/Ed-Tech-Platform/assets/81951052/bf15059d-b08f-497c-a7e5-718305f9dfd9)
+![screenshot-1724321505096](https://github.com/user-attachments/assets/574d8f03-49cd-4969-9bd2-0acb35dd9326)
+![screenshot-1724321483813](https://github.com/user-attachments/assets/a335e14f-d7d6-40b4-a03e-b66c13682115)
+![screenshot-1724321464301](https://github.com/user-attachments/assets/500b660e-9f08-47d5-b4d7-19b0e6de61b0)
+![screenshot-1724321444133](https://github.com/user-attachments/assets/afe608f5-d953-4cf3-924f-33331e7085b9)
+![screenshot-1724321410736](https://github.com/user-attachments/assets/769b248d-54d4-4cf4-8faa-c0b070cec254)
+![screenshot-1724321381569](https://github.com/user-attachments/assets/330e646b-2922-4eb2-88ee-b50dabf5708b)
+![screenshot-1724321366696](https://github.com/user-attachments/assets/5fa39b49-4ebd-4468-b52b-84da9bedd1e1)
