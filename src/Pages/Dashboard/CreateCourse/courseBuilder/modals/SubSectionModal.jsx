@@ -140,7 +140,6 @@ const SubSectionModal = ({
               <Upload
                 name="lectureVideo"
                 label="Lecture Video"
-                setValue={handleChange}
                 video={true}
                 viewData={view ? modalData.videoURL : null}
                 editData={edit ? modalData.videoURL : null}
@@ -197,7 +196,7 @@ const SubSectionModal = ({
                     }}
                     className={`flex cursor-pointer items-center rounded-md bg-blue-500 hover:bg-blue-600 active:bg-blue-600 text-xl transition-all duration-200 py-2 px-4 text-white font-bold`}
                   >
-                    {loading ? "Loading..." : edit ? "Save Changes" : "Upload"}
+                    {loading ? "Uploading..." : edit ? "Save Changes" : "Upload"}
                   </div>
                 </div>
               )}

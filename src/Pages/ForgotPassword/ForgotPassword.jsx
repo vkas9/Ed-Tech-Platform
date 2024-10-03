@@ -45,12 +45,12 @@ const ForgotPassword = () => {
             </div>
             <button
               disabled={loading}
-              className={`bg-yellow-500 active:bg-yellow-600 sm:hover:bg-yellow-600 text-yellow-950   transition-all duration-150 w-full font-bold text-2xl ${
+              className={`bg-blue-600 active:bg-blue-700 sm:hover:bg-blue-700 text-white   transition-all duration-150 w-full font-bold text-2xl ${
                 loading ? "opacity-50 cursor-not-allowed" : " "
-              } active:bg-yellow-600 p-2 rounded-md mt-3  `}
+              } active:bg-blue-700 p-2 rounded-md mt-3  `}
               type="submit"
             >
-              {loading ? "Sending..." : "Send Code"}
+              {loading ? "Sending..." : "Send OTP"}
             </button>
           </Form>
         </Formik>

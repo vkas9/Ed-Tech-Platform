@@ -124,7 +124,7 @@ const VerifyEmail = () => {
          
         }}
         disabled={loading}
-        className={`sm:text-md mt-10 px-[30px] md:px-[50px] py-[6px] text-2xl  transition-all outline-none duration-200 rounded-md bg-yellow-500 active:bg-yellow-600 sm:hover:bg-yellow-600 text-yellow-950 font-bold uppercase ${
+        className={`sm:text-md mt-10 px-[30px] md:px-[50px] py-[6px] text-2xl  transition-all outline-none duration-200 rounded-md bg-blue-600 active:bg-blue-700 sm:hover:bg-blue-700 text-white font-bold uppercase ${
           loading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >

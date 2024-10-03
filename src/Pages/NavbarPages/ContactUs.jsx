@@ -116,7 +116,7 @@ const ContactUs = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`mt-2 md:hover:bg-yellow-400 font-bold active:bg-yellow-400 ${loading ? "opacity-50 cursor-not-allowed" : " "} transition-all duration-200 bg-yellow-500 py-1 px-3 rounded-lg w-fit text-yellow-950 text-2xl`}
+            className={`mt-2 md:hover:bg-blue-700 font-bold active:bg-blue-700 ${loading ? "opacity-50 cursor-not-allowed" : " "} transition-all duration-200 bg-blue-600 py-1 px-3 rounded-lg w-fit text-white text-2xl`}
           >
             {loading ? "Submitting..." : "Submit"}
           </button>
