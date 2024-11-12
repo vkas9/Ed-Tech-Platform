@@ -18,14 +18,6 @@ const Wishlist = () => {
   const { wishlist } = useSelector((store) => store.card);
   const { user: data } = useSelector((store) => store.profile);
   const [Wishlist, setWishlist] = useState(wishlist);
-  useEffect(()=>{
-    if(user&&user.role!=="Instructor"&&wishlist?.length){
-      toast('You can buy these courses without spending real money', {
-        style: {
-          textAlign: 'center'
-    }})
-    }
-  },[])
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;

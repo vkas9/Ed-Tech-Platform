@@ -17,6 +17,22 @@ const Courses = () => {
   const { exploreAllCourses } = useSelector((store) => store.course);
   const { user } = useSelector((store) => store.profile);
   const [course, setCourses] = useState(exploreAllCourses);
+  const [search , setSearch] = useState('');
+
+  const matchScore = (description , term) => {
+    const listTerm = term.split(' ');
+    const listDescription = description.split(' ').map(e=>e.toLowerCase());
+    let score = 0;
+    listTerm.forEach((e)=>{
+      let v1 = e.toLowerCase();
+      if (listDescription.includes(v1))
+          score++;
+    })
+    console.log(listTerm , listDescription , score);
+
+    return score;
+  }
+
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -51,16 +67,7 @@ const Courses = () => {
   useEffect(() => {
     setCourses(exploreAllCourses);
   }, [exploreAllCourses]);
-
-  useEffect(() => {
-    if (user && user.role !== "Instructor") {
-      toast("You can buy these courses without spending real money", {
-        style: {
-          textAlign: "center",
-        },
-      });
-    }
-  }, [user]);
+  
 
   return (
     <motion.div
@@ -97,7 +104,7 @@ const Courses = () => {
         )}
       </h1>
       <div className="flex mr-5 rounded-lg overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center justify-start">
-        <CourseSwitch roll={expC} />
+        <CourseSwitch roll={expC}  search={search} setSearch={setSearch}/>
       </div>
 
       <div className="overflow-y-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full  mt-2 rounded-md pb-[12rem] h-[75vh]">
@@ -107,11 +114,12 @@ const Courses = () => {
           </div>
         ) : course.length ? (
           course.map(
-            (courseItem, index) =>
-              courseItem?.isActive&&courseItem.status == "Published" &&
-              courseItem.Catagory.titleCourse === expC && (
-                <ExploreCoursesCard course={courseItem} key={index} />
-              )
+            (courseItem, index) => {
+              if (courseItem?.isActive&&courseItem.status == "Published" &&
+              (expC === 'all' || courseItem.Catagory.titleCourse === expC  )) {
+                return  <ExploreCoursesCard course={courseItem} key={index} />;
+              };
+            }
           )
         ) : (
           <p className="relative text-center mr-3 top-1/3 sm:top-1/2 sm:left-[35%] text-2xl font-semibold sm:w-fit text-white/40">

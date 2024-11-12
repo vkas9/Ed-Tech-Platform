@@ -90,7 +90,7 @@ const ExploreCoursesCard = ({ course }) => {
       onClick={handleClick}
       className={`flex relative text-[1.1rem] justify-between overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
         !isButtonHovered ? "sm:hover:bg-gray-300/20" : ""
-      } bg-gray-300/10 max-w-[60rem] p-1`}
+      } bg-gray-300/10 max-w-[100rem] p-1`}
     >
       <div className="gap-1  p-2 sm:min-w-[351px] flex-col  pr-[2.2rem] overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full  vm:items-center flex">
         <div className="flex gap-3 flex-col  w-full vm:flex-row vm:items-center">
@@ -106,7 +106,7 @@ const ExploreCoursesCard = ({ course }) => {
               {course.CourseDescription}
             </p>
             <div className="flex gap-2  whitespace-nowrap overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center">
-              <span>3.9</span>
+              <span>{course.rating? course.rating: 3.9}</span>
               <span onClick={(e)=>e.stopPropagation()} onMouseEnter={(e) => {
               e.stopPropagation();
               setIsButtonHovered(true);
@@ -119,7 +119,7 @@ const ExploreCoursesCard = ({ course }) => {
               <StarRating
               
               flag={true}
-              starCount="4"
+              starCount={course.rating? course.rating.toString(): "3.9"}
               
               />
               </span>
@@ -140,7 +140,7 @@ const ExploreCoursesCard = ({ course }) => {
       <div className="h-[1px] bg-white/10 mx-3 my-1" />
 
       <div className="flex xs:items-center gap-1 vm:gap-5 justify-between">
-        <div className="vm:grid overflow-x-auto  items-center scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full xd:w-[320px] grid-flow-col  gap-2">
+        <div className="vm:grid overflow-x-auto  items-center scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full xd:w-[370px] grid-flow-col  gap-2">
           <div className=" flex flex-col  items-center mr-5">
 
           

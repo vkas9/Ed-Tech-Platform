@@ -672,24 +672,50 @@ export const getAllInstructorCourses = async (signal) => {
   }
 };
 
-export const getAllCourse = async (signal) => {
+export const getAllCourse = async (signal , search) => {
   if (!navigator.onLine) {
     toast.error("No internet connection");
     throw new Error("No internet connection");
   }
   const toastId = toast.loading("Loading");
   try {
-    const response = await axios.get(
+    const response_master = await axios.get(
       `${BASE_URL}/api/beta/course/getAllCourse`,
       {
         withCredentials: true,
         signal: signal,
       }
     );
-
-    // console.log("res", response.data.allCourse);
-    const coursed = decryptData(response.data.allCourse);
-    return coursed;
+    const response_udemy = await axios.get(
+      `https://paid-udemy-course-for-free.p.rapidapi.com/?page=1`,
+      {
+        headers:{
+          'x-rapidapi-key':'8dd33b23ebmshedea230c475177dp1f9f67jsnae03a31d4e90',
+          'Access-Control-Allow-Origin':'*'
+        },
+      }
+    )
+    const formattedData = response_udemy.data.map((item)=> {return {
+      CourseDescription: item.desc_text,
+      CourseName: item.title,
+      Price: parseFloat(parseFloat(item.org_price.slice(1)) * 80).toFixed(2),
+      Thumbnail: item.pic,
+      createdAt: item.savedtime,
+      updatedAt: item.savedtime,
+      status: 'Published',
+      isActive: true,
+      Section:[{subSection:[ {duration: item.duration * 60}]}],
+      Catagory: {
+        titleCourse: item.category,
+        description: item.title,
+      },
+      Instructor: {
+        FirstName: item.platform,
+      },
+      rating: item.rating
+    };})
+    const coursed = decryptData(response_master.data.allCourse);
+    return [...coursed , ...formattedData];
   } catch (error) {
     if (axios.isCancel(error)) {
       console.error("Request canceled", error.message);
