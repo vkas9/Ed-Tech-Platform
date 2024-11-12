@@ -88,7 +88,7 @@ const WishlistCard = ({ course }) => {
      }}
       className={`flex relative text-[1.1rem] overflow-x-auto  scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full justify-between flex-col sm:flex-row mr-5 rounded-xl mt-4 hover:cursor-pointer ${
         !isButtonHovered && course?.isActive ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20" : ""
-      } bg-gray-300/10 max-w-[60rem] p-1`}
+      } bg-gray-300/10 max-w-[100rem] p-1`}
     >
       <div className="gap-1 p-2 sm:min-w-[351px] flex-col   pr-[2.2rem] overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full vm:items-center flex">
         <div className="flex gap-3 flex-col  w-full vm:flex-row vm:items-center">
