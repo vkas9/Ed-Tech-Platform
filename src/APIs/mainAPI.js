@@ -8,6 +8,7 @@ import { courseAction } from "../store/courseSlice";
 import { decryptData } from "../components/core/auth/crypto";
 import { fetchEnrollData } from "../Pages/Dashboard/EnrolledCourse/fetchEnrollData";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+const UDEMY_API_KEY = import.meta.env.UDEMY_API_KEY
 
 export const login = (data, navigate) => {
   return async (dispatch) => {
@@ -690,7 +691,7 @@ export const getAllCourse = async (signal , search) => {
       `https://paid-udemy-course-for-free.p.rapidapi.com/?page=1`,
       {
         headers:{
-          'x-rapidapi-key':'8dd33b23ebmshedea230c475177dp1f9f67jsnae03a31d4e90',
+          'x-rapidapi-key': UDEMY_API_KEY,
           'Access-Control-Allow-Origin':'*'
         },
       }
