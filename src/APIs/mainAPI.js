@@ -8,7 +8,7 @@ import { courseAction } from "../store/courseSlice";
 import { decryptData } from "../components/core/auth/crypto";
 import { fetchEnrollData } from "../Pages/Dashboard/EnrolledCourse/fetchEnrollData";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-const UDEMY_API_KEY = import.meta.env.UDEMY_API_KEY
+const UDEMY_API_KEY = import.meta.env.VITE_UDEMY_API_KEY
 
 export const login = (data, navigate) => {
   return async (dispatch) => {
