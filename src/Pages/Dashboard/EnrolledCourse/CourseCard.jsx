@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FiMoreVertical } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ConfirmModal from "../ConfirmModal";
 import { deleteEnrolledCourse } from "../../../APIs/mainAPI";
@@ -23,7 +23,10 @@ const CourseCard = ({ course }) => {
   let time = CaluculateDuration(course);
 
   const handleClick = () => {
-    navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+    if (course._id)
+      navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+    else
+      window.open(course.url , '_blank' , 'noopener,noreferrer');
   };
 
   const handleIconClick = (courseId) => {

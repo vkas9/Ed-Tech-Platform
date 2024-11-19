@@ -67,7 +67,10 @@ const ExploreCoursesCard = ({ course }) => {
       if (user?.role === "Instructor") {
         navigate(`/dashboard/my-courses/${uuidv4()}/${course._id}`);
       } else {
-        navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+        if (course._id)
+          navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+        else
+          window.open(course.url , '_blank' , 'noopener,noreferrer');
       }
     } else {
       if (e.target.innerText === "Enroll Now") {
@@ -80,7 +83,10 @@ const ExploreCoursesCard = ({ course }) => {
           await getPurchaseHistory(dispatch);
         }
       } else {
-        navigate(`/dashboard/courses/${uuidv4()}/${course._id}`);
+        if (course._id)
+          navigate(`/dashboard/courses/${uuidv4()}/${course._id}`);
+        else
+          window.open(course.url , '_blank' , 'noopener,noreferrer');
       }
     }
   };
@@ -227,9 +233,11 @@ const ExploreCoursesCard = ({ course }) => {
               user?.role === "Instructor" && "hidden"
             } box-content p-2 whitespace-nowrap transition-all hover:cursor-pointer duration-150 rounded-full`}
           >
-            {user?.Wishlist?.includes(course._id)
+            {course.is_not_local ? '':
+              (user?.Wishlist?.includes(course._id)
               ? "Go to Wishlist"
-              : "Add to Wishlist"}
+              : "Add to Wishlist")
+            }
           </div>
         </div>
       </div>

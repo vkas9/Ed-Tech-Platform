@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCourse } from "../../../APIs/mainAPI";
+import { getAllCourse ,getUdemyCourse} from "../../../APIs/mainAPI";
 import { courseAction } from "../../../store/courseSlice";
 import ExploreCoursesCard from "./ExploreCoursesCard";
 import { encryptData } from "../../../components/core/auth/crypto";
@@ -16,6 +16,7 @@ const Courses = () => {
   const dispatch = useDispatch();
   const { exploreAllCourses } = useSelector((store) => store.course);
   const { user } = useSelector((store) => store.profile);
+  const [page,setPage] = useState(0);
   const [course, setCourses] = useState(exploreAllCourses);
   const [search , setSearch] = useState('');
 
@@ -39,13 +40,18 @@ const Courses = () => {
     } else {
       const controller = new AbortController();
       const signal = controller.signal;
-
-      const fetchData = async () => {
+      
+      const fetchData = async (page) => {
         try {
-          const courseData = await getAllCourse(signal);
-          const text = encryptData(courseData);
-          localStorage.setItem(import.meta.env.VITE_ALL_C, text);
-          dispatch(courseAction.setExploreAllCourses(courseData));
+        if (page == 0 ){
+            const courseData = await getAllCourse(signal);
+            const text = encryptData(courseData);
+            localStorage.setItem(import.meta.env.VITE_ALL_C, text);
+            dispatch(courseAction.setExploreAllCourses(courseData));
+          }else{
+            const courseData = await getUdemyCourse( page);
+            setCourses([...course , ...courseData]);
+          }
         } catch (error) {
           if (!controller.signal.aborted) {
             toast.error("Unable to fetch all courses");
@@ -53,16 +59,14 @@ const Courses = () => {
         }
       };
 
-      if(!course){
-        fetchData()
-      }
+        fetchData(page)
      // Always fetch data on component mount
 
       return () => {
         controller.abort();
       };
     }
-  }, [token, dispatch, navigate]);
+  }, [token, dispatch, navigate , page]);
 
   useEffect(() => {
     setCourses(exploreAllCourses);
@@ -120,12 +124,13 @@ const Courses = () => {
                 return  <ExploreCoursesCard course={courseItem} key={index} />;
               };
             }
-          )
+          ) 
         ) : (
           <p className="relative text-center mr-3 top-1/3 sm:top-1/2 sm:left-[35%] text-2xl font-semibold sm:w-fit text-white/40">
             Course is empty!
           </p>
         )}
+            <button className={`bg-blue-600 text-white font-bold p-2 w-fit text-center text-sm sm:text-xl whitespace-nowrap  rounded-lg `} onClick={(e)=>{setPage(page + 1); console.log("clickeds" , page)}}>More</button>
       </div>
     </motion.div>
   );
