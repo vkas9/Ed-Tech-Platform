@@ -31,6 +31,9 @@ import NotFound from "./components/core/Back/NotFound/NotFound";
 function App() {
   return (
     <>
+      <div className="h-[15px] fixed z-[100] top-0 w-screen bg-gradient-to-br from-yellow-500 to-yellow-800 flex items-center text-black justify-center font-semibold ">
+        Under Development!
+      </div>
       <div className="bg-gradient-to-br from-[#000435] via-gray-950/100 to-black   ">
         <div className="fixed bottom-5 md:hover:scale-110 transition-transform duration-200 right-5 z-[2000] bg-black rounded-full ">
           <a href="https://github.com/vkas9/Ed-Tech-Platform" target="_blank">
