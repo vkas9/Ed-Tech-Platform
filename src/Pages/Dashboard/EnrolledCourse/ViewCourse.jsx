@@ -121,7 +121,7 @@ const ViewCourse = () => {
                 } else throw new Error("Directory access not granted");
             }
 
-            const proxiedUrl = `http://localhost:8080/api/beta/course/proxy?url=${encodeURIComponent(
+            const proxiedUrl = `${import.meta.env.VITE_BASE_URL}/api/beta/course/proxy?url=${encodeURIComponent(
                 video_item.videoURL
             )}`;
             const response = await fetch(proxiedUrl);
