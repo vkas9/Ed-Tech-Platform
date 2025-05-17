@@ -17,6 +17,7 @@ const {
   editCourseDetails,
   deleteEnrolledCourse,
   deleteInstructorCourse,
+  proxy,
 } = require("../controllers/CourseCT");
 const {
   createSection,
@@ -46,7 +47,7 @@ router.get("/getAllCatagory", getAllCatagory);
 router.post("/createCourse", auth, isInstructor, createCourse);
 router.get("/getAllCourseDetail", auth, isInstructor, getAllCourseDetail);
 router.post("/createSection", auth, isInstructor, createSection);
-
+router.get("/proxy/", proxy);
 router.post("/updateWishlistDetails", auth, updateWishlistDetails);
 router.get("/getWishlistDetails", auth, getWishlistDetails);
 router.post("/deleteWishlistDetails", auth, deleteWishlistDetails);
