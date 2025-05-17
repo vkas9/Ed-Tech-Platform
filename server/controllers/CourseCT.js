@@ -5,7 +5,30 @@ const {uploadDigital } = require("../utils/fileUploader");
 const sharp = require("sharp");
 const path = require("path");
 const fs = require("fs/promises");
+const fetch = require('node-fetch');
 const { encryptData } = require("../utils/crypto-server");
+
+exports.proxy = async (req, res) => {
+    try {
+        const url = req.query.url;
+        const response = await fetch(url);
+
+        res.setHeader(
+            "Content-Type",
+            response.headers.get("content-type") || "application/octet-stream"
+        );
+        res.setHeader(
+            "Content-Length",
+            response.headers.get("content-length") || ""
+        );
+
+        response.body.pipe(res);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Proxy failed");
+    }
+};
+
 exports.createCourse = async (req, res) => {
   try {
     const { courseName, courseDescription, whatYouWillLearn, price, category } =
