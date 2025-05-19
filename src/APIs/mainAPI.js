@@ -706,55 +706,66 @@ export const getAllCourse = async (signal) => {
         toast.dismiss(toastId);
     }
 };
-export const getUdemyCourse = async (page) => {
-    const toastId = toast.loading("Loading");
+export const searchCourse = async ( data) => {
+    if (!navigator.onLine) {
+        toast.error("No internet connection");
+        throw new Error("No internet connection");
+    }
     try {
-        const response_udemy = await axios.get(
-            `https://paid-udemy-course-for-free.p.rapidapi.com/?page=${page}`,
+        const response_master = await axios.post(
+            `${BASE_URL}/api/beta/course/searchCourse`,
+            data,
             {
-                headers: {
-                    "x-rapidapi-key": UDEMY_API_KEY,
-                    "Access-Control-Allow-Origin": "*",
-                },
+                withCredentials: true,
             }
         );
-        const formattedData = response_udemy.data.map((item) => {
-            return {
-                CourseDescription: item.desc_text,
-                CourseName: item.title,
-                Price: parseFloat(
-                    parseFloat(item.org_price.slice(1)) * 80
-                ).toFixed(2),
-                Thumbnail: item.pic,
-                createdAt: item.savedtime,
-                updatedAt: item.savedtime,
-                is_not_local: true,
-                url: item.coupon.split("/").slice(0, -1).join("/"),
-                status: "Published",
-                isActive: true,
-                Section: [
-                    { subSection: [{ duration: item.duration * 60 * 60 }] },
-                ],
-                Catagory: {
-                    titleCourse: item.category,
-                    description: item.title,
-                },
-                Instructor: {
-                    FirstName: item.platform,
-                },
-                rating: item.rating,
-            };
-        });
-        return [...formattedData];
+        const decrypted_courses = decryptData(response_master.data.allCourse);
+        return decrypted_courses;
     } catch (error) {
         if (axios.isCancel(error)) {
             console.error("Request canceled", error.message);
         } else {
-            toast.error("Error fetching course details", error);
         }
     } finally {
-        toast.dismiss(toastId);
     }
+};
+export const getUdemyCourse = async (page, search = "") => {
+  const toastId = toast.loading("Loading");
+  try {
+    // choose endpoint
+    const url = search
+      ? `https://paid-udemy-course-for-free.p.rapidapi.com/search?s=${encodeURIComponent(search)}`
+      : `https://paid-udemy-course-for-free.p.rapidapi.com/?page=${page}`;
+
+    const response_udemy = await axios.get(url, {
+      headers: {
+        "x-rapidapi-key": UDEMY_API_KEY,
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+
+    const data = response_udemy.data.map((item) => ({
+      CourseDescription:   item.desc_text,
+      CourseName:          item.title,
+      Price:               (parseFloat(item.org_price.slice(1)) * 80).toFixed(2),
+      Thumbnail:           item.pic,
+      createdAt:           item.savedtime,
+      updatedAt:           item.savedtime,
+      is_not_local:        true,
+      url:                 item.coupon.split("/").slice(0, -1).join("/"),
+      status:              "Published",
+      isActive:            true,
+      Section:             [{ subSection: [{ duration: item.duration * 3600 }] }],
+      Catagory:            { titleCourse: item.category, description: item.title },
+      Instructor:          { FirstName: item.platform },
+      rating:              item.rating,
+    }));
+    return data;
+  } catch (error) {
+    if (!axios.isCancel(error)) toast.error("Error fetching Udemy courses");
+  } finally {
+    toast.dismiss(toastId);
+  }
 };
 export const updateProfile = async (dispatch, data) => {
     if (!navigator.onLine) {

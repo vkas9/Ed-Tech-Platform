@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCourse ,getUdemyCourse} from "../../../APIs/mainAPI";
+import { getAllCourse ,getUdemyCourse, searchCourse} from "../../../APIs/mainAPI";
 import { courseAction } from "../../../store/courseSlice";
 import ExploreCoursesCard from "./ExploreCoursesCard";
 import { encryptData } from "../../../components/core/auth/crypto";
@@ -33,6 +33,28 @@ const Courses = () => {
 
     return score;
   }
+  useEffect(() => {
+  if (!search || search.trim() === "") {
+    return; // don't run search if empty or whitespace
+  }
+
+  const fetchData = async () => {
+    try {
+      const courseData = await searchCourse({ search });
+      const searchData = await getUdemyCourse(page, search);
+      console.log(courseData);
+      setCourses([...courseData, ...searchData]);
+    } catch (err) {
+      console.error("Error during search fetch:", err);
+    }
+  };
+
+  fetchData();
+
+  return () => {
+    // optional cleanup if needed
+  };
+}, [search]);
 
   useEffect(() => {
     if (!token) {
@@ -59,7 +81,7 @@ const Courses = () => {
         }
       };
 
-        fetchData(page)
+      fetchData(page)
      // Always fetch data on component mount
 
       return () => {
