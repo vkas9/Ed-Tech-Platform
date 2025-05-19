@@ -354,6 +354,67 @@ exports.getWishlistDetails = async (req, res) => {
     });
   }
 };
+exports.searchCourse = async (req, res) => {
+  const { search } = req.body;
+
+  try {
+    const baseQuery = { status: "Published" };
+
+    if (search && search.trim() !== "") {
+      const regex = new RegExp(search.trim(), "i"); // Case-insensitive contains match
+
+      baseQuery.$or = [
+        { title: regex },
+        { description: regex },
+        { "Catagory.titleCourse": regex } // This will work if Catagory is populated
+      ];
+    }
+    const courseDetail = await Course.find(baseQuery)
+      .populate({
+        path: "Instructor",
+        populate: {
+          path: "Profile",
+        },
+      })
+      .populate({
+        path: "Rating_N_Reviews",
+        populate: {
+          path: "User",
+        },
+      })
+      .populate({
+        path: "Catagory",
+        populate: {
+          path: "Course",
+        },
+      })
+      .populate("StudentEntrolled")
+      .populate({
+        path: "Section",
+        populate: {
+          path: "subSection",
+        },
+      })
+      .exec();
+
+    courseDetail.reverse();
+    const encryptCourse = encryptData(courseDetail);
+
+    return res.status(200).json({
+      success: true,
+      message: "Successfully received search results",
+      allCourse: encryptCourse,
+    });
+  } catch (error) {
+    console.error("Search course error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while searching courses",
+    });
+  }
+};
+
+
 
 exports.deleteWishlistDetails = async (req, res) => {
   try {

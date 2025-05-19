@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCourse } from "../../../APIs/mainAPI";
+import { getAllCourse ,getUdemyCourse, searchCourse} from "../../../APIs/mainAPI";
 import { courseAction } from "../../../store/courseSlice";
 import ExploreCoursesCard from "./ExploreCoursesCard";
 import { encryptData } from "../../../components/core/auth/crypto";
@@ -16,20 +16,64 @@ const Courses = () => {
   const dispatch = useDispatch();
   const { exploreAllCourses } = useSelector((store) => store.course);
   const { user } = useSelector((store) => store.profile);
+  const [page,setPage] = useState(0);
   const [course, setCourses] = useState(exploreAllCourses);
+  const [search , setSearch] = useState('');
+
+  const matchScore = (description , term) => {
+    const listTerm = term.split(' ');
+    const listDescription = description.split(' ').map(e=>e.toLowerCase());
+    let score = 0;
+    listTerm.forEach((e)=>{
+      let v1 = e.toLowerCase();
+      if (listDescription.includes(v1))
+          score++;
+    })
+    console.log(listTerm , listDescription , score);
+
+    return score;
+  }
+  useEffect(() => {
+  if (!search || search.trim() === "") {
+    return; // don't run search if empty or whitespace
+  }
+
+  const fetchData = async () => {
+    try {
+      const courseData = await searchCourse({ search });
+      const searchData = await getUdemyCourse(page, search);
+      console.log(courseData);
+      setCourses([...courseData, ...searchData]);
+    } catch (err) {
+      console.error("Error during search fetch:", err);
+    }
+  };
+
+  fetchData();
+
+  return () => {
+    // optional cleanup if needed
+  };
+}, [search]);
+
   useEffect(() => {
     if (!token) {
       navigate("/login");
     } else {
       const controller = new AbortController();
       const signal = controller.signal;
-
-      const fetchData = async () => {
+      
+      const fetchData = async (page) => {
         try {
-          const courseData = await getAllCourse(signal);
-          const text = encryptData(courseData);
-          localStorage.setItem(import.meta.env.VITE_ALL_C, text);
-          dispatch(courseAction.setExploreAllCourses(courseData));
+        if (page == 0 ){
+            const courseData = await getAllCourse(signal);
+            const text = encryptData(courseData);
+            localStorage.setItem(import.meta.env.VITE_ALL_C, text);
+            dispatch(courseAction.setExploreAllCourses(courseData));
+          }else{
+            const courseData = await getUdemyCourse( page);
+            setCourses([...course , ...courseData]);
+          }
         } catch (error) {
           if (!controller.signal.aborted) {
             toast.error("Unable to fetch all courses");
@@ -37,30 +81,19 @@ const Courses = () => {
         }
       };
 
-      if(!course){
-        fetchData()
-      }
+      fetchData(page)
      // Always fetch data on component mount
 
       return () => {
         controller.abort();
       };
     }
-  }, [token, dispatch, navigate]);
+  }, [token, dispatch, navigate , page]);
 
   useEffect(() => {
     setCourses(exploreAllCourses);
   }, [exploreAllCourses]);
-
-  useEffect(() => {
-    if (user && user.role !== "Instructor") {
-      toast("You can buy these courses without spending real money", {
-        style: {
-          textAlign: "center",
-        },
-      });
-    }
-  }, [user]);
+  
 
   return (
     <motion.div
@@ -97,7 +130,7 @@ const Courses = () => {
         )}
       </h1>
       <div className="flex mr-5 rounded-lg overflow-x-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full items-center justify-start">
-        <CourseSwitch roll={expC} />
+        <CourseSwitch roll={expC}  search={search} setSearch={setSearch}/>
       </div>
 
       <div className="overflow-y-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full  mt-2 rounded-md pb-[12rem] h-[75vh]">
@@ -107,17 +140,19 @@ const Courses = () => {
           </div>
         ) : course.length ? (
           course.map(
-            (courseItem, index) =>
-              courseItem?.isActive&&courseItem.status == "Published" &&
-              courseItem.Catagory.titleCourse === expC && (
-                <ExploreCoursesCard course={courseItem} key={index} />
-              )
-          )
+            (courseItem, index) => {
+              if (courseItem?.isActive&&courseItem.status == "Published" &&
+              (expC === 'all' || courseItem.Catagory.titleCourse === expC  )) {
+                return  <ExploreCoursesCard course={courseItem} key={index} />;
+              };
+            }
+          ) 
         ) : (
           <p className="relative text-center mr-3 top-1/3 sm:top-1/2 sm:left-[35%] text-2xl font-semibold sm:w-fit text-white/40">
             Course is empty!
           </p>
         )}
+            <button className={`bg-blue-600 text-white font-bold p-2 w-fit text-center text-sm sm:text-xl whitespace-nowrap  rounded-lg `} onClick={(e)=>{setPage(page + 1); console.log("clickeds" , page)}}>More</button>
       </div>
     </motion.div>
   );

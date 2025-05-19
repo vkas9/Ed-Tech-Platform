@@ -17,6 +17,7 @@ const {
   editCourseDetails,
   deleteEnrolledCourse,
   deleteInstructorCourse,
+  searchCourse,
   proxy,
 } = require("../controllers/CourseCT");
 const {
@@ -61,4 +62,5 @@ router.post(
 router.post("/createRating", auth, isStudent, createRating);
 router.get("/getAverageRating", getAverageRating);
 router.get("/getAllRating", getAllRating);
+router.post("/searchCourse" , searchCourse)
 module.exports = router;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FiMoreVertical } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ConfirmModal from "../ConfirmModal";
 import { deleteEnrolledCourse } from "../../../APIs/mainAPI";
@@ -23,7 +23,10 @@ const CourseCard = ({ course }) => {
   let time = CaluculateDuration(course);
 
   const handleClick = () => {
-    navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+    if (course._id)
+      navigate(`/dashboard/enrolled-courses/${uuidv4()}/${course._id}`);
+    else
+      window.open(course.url , '_blank' , 'noopener,noreferrer');
   };
 
   const handleIconClick = (courseId) => {
@@ -78,7 +81,7 @@ const CourseCard = ({ course }) => {
           !isButtonHovered && course?.isActive
             ? "active:bg-gray-300/20 sm:hover:bg-gray-300/20"
             : ""
-        } bg-gray-300/10 max-w-[60rem] p-1`}
+        } bg-gray-300/10 max-w-[100rem] p-1`}
       >
         <div className="gap-1  p-2 sm:min-w-[351px] flex-col  pr-[2.2rem] overflow-auto scrollbar scrollbar-thumb-scrollbar-thumb scrollbar-track-scrollbar-bg scrollbar-thumb-rounded-full scrollbar-track-rounded-full  vm:items-center flex">
           <div className="flex gap-3 flex-col  w-full vm:flex-row vm:items-center">
